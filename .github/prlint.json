@@ -1,0 +1,8 @@
+{
+  "title": [
+    {
+      "pattern": "^(build|ci|docs|feat|fix|perf|refactor|style|test|chore|revert)((.+))?:\\s.+",
+      "message": "Your PR title doesn’t match our schema"
+    }
+  ]
+}

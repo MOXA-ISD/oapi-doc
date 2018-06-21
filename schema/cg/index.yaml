@@ -1,0 +1,83 @@
+---
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Edge RESTful API reference
+  description: |
+    Welcome to the ThingsPro Edge RESTful API reference. This is a live document of how you can use ThingsPro Edge APIs.
+    The ThingsPro Edge API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors. All requests are authenticated using an `mx-api-token` which can be obtained from ThingsPro Edge web.
+
+host: thingspro-oapi.moxa.com
+basePath: "/api/v1"
+
+schemes:
+- http
+- https
+
+produces:
+- application/json
+
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+- $ref: "./cellular/index.yaml#/tags"
+- $ref: "./datalogger/index.yaml#/tags"
+- $ref: "./dhcp/index.yaml#/tags"
+- $ref: "./dns/index.yaml#/tags"
+- $ref: "./ethernet/index.yaml#/tags"
+- $ref: "./import-export/index.yaml#/tags"
+- $ref: "./modbusslave/index.yaml#/tags"
+- $ref: "./openvpn/index.yaml#/tags"
+- $ref: "./program/index.yaml#/tags"
+- $ref: "./remotecontrol/index.yaml#/tags"
+- $ref: "./iptable/index.yaml#/tags"
+- $ref: "./serial/index.yaml#/tags"
+- $ref: "./service/index.yaml#/tags"
+- $ref: "./system/index.yaml#/tags"
+- $ref: "./time/index.yaml#/tags"
+- $ref: "./firmware/index.yaml#/tags"
+- $ref: "./wifi/index.yaml#/tags"
+
+paths:
+- $ref: "./cellular/index.yaml#/paths"
+- $ref: "./datalogger/index.yaml#/paths"
+- $ref: "./dhcp/index.yaml#/paths"
+- $ref: "./dns/index.yaml#/paths"
+- $ref: "./ethernet/index.yaml#/paths"
+- $ref: "./import-export/index.yaml#/paths"
+- $ref: "./modbusslave/index.yaml#/paths"
+- $ref: "./openvpn/index.yaml#/paths"
+- $ref: "./program/index.yaml#/paths"
+- $ref: "./remotecontrol/index.yaml#/paths"
+- $ref: "./iptable/index.yaml#/paths"
+- $ref: "./serial/index.yaml#/paths"
+- $ref: "./service/index.yaml#/paths"
+- $ref: "./system/index.yaml#/paths"
+- $ref: "./time/index.yaml#/paths"
+- $ref: "./firmware/index.yaml#/paths"
+- $ref: "./wifi/index.yaml#/paths"
+
+definitions:
+- $ref: "./cellular/index.yaml#/definitions"
+- $ref: "./datalogger/index.yaml#/definitions"
+- $ref: "./dhcp/index.yaml#/definitions"
+- $ref: "./dns/index.yaml#/definitions"
+- $ref: "./ethernet/index.yaml#/definitions"
+- $ref: "./import-export/index.yaml#/definitions"
+- $ref: "./modbusslave/index.yaml#/definitions"
+- $ref: "./openvpn/index.yaml#/definitions"
+- $ref: "./program/index.yaml#/definitions"
+- $ref: "./remotecontrol/index.yaml#/definitions"
+- $ref: "./iptable/index.yaml#/definitions"
+- $ref: "./serial/index.yaml#/definitions"
+- $ref: "./service/index.yaml#/definitions"
+- $ref: "./system/index.yaml#/definitions"
+- $ref: "./time/index.yaml#/definitions"
+- $ref: "./firmware/index.yaml#/definitions"
+- $ref: "./wifi/index.yaml#/definitions"

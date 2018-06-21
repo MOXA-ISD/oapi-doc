@@ -1,0 +1,106 @@
+---
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Edge RESTful API reference
+basePath: "/api/v1"
+schemes:
+- http
+- https
+produces:
+- application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+- name: dns
+  description: Handles the system DNS settings
+
+paths:
+  "/network/dns":
+    get:
+      summary: Information of Current DNS settings
+      description: 'List all current DNS and DNS source.'
+      responses:
+        '200':
+          description: DNS
+          schema:
+            "$ref": "#/definitions/DNS"
+            example:
+              enableFixed: false
+              fixedDns: []
+              source: eth0
+              dns:
+              - 8.8.8.8
+              - 8.8.4.4
+      tags:
+      - dns
+      security:
+      - mx-api-token: []
+    put:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/DNS"
+      summary: Update DNS settings
+      description: Update DNS settings by interface or using fixed DNS.
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/DNS"
+            example:
+              enableFixed: false
+              fixedDns: []
+              source: eth0
+              dns:
+              - 8.8.8.8
+              - 8.8.4.4
+      tags:
+      - dns
+      security:
+      - mx-api-token: []
+
+definitions:
+  DNS:
+    title: DNS
+    required:
+    - enableFixed
+    properties:
+      source:
+        type: string
+        readOnly: true
+        description: |
+          The current dns corresponging source, may be a network interface or
+          `fixed` for fixed DNS (readonly)
+      dns:
+        type: array
+        items:
+          type: string
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        readOnly: true
+        description: Current DNS setting(s) (readonly).
+      enableFixed:
+        type: boolean
+        description: 'Using fixed DNS (true) or by interface (false), false if not
+          given.'
+      fixedDns:
+        type: array
+        items:
+          type: string
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        description: 'DNS settings if enableFixed is `true`.'
+    example:
+      enableFixed: false
+      fixedDns: []
+      source: eth0
+      dns:
+      - 8.8.8.8
+      - 8.8.4.4

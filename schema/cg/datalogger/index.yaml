@@ -1,0 +1,17 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./custom-equipment.yaml#/tags"
+- $ref: "./logprofile.yaml#/tags"
+- $ref: "./modbus.yaml#/tags"
+
+paths:
+- $ref: "./custom-equipment.yaml#/paths"
+- $ref: "./logprofile.yaml#/paths"
+- $ref: "./modbus.yaml#/paths"
+
+definitions:
+- $ref: "./custom-equipment.yaml#/definitions"
+- $ref: "./logprofile.yaml#/definitions"
+- $ref: "./modbus.yaml#/definitions"

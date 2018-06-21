@@ -1,0 +1,145 @@
+---
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Edge RESTful API reference
+basePath: "/api/v1"
+schemes:
+- http
+- https
+produces:
+- application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+- name: serial
+  description: Provides the utility to set the serial mode
+
+paths:
+  "/system/serial":
+    get:
+      description: Get all of serial interfaces settings
+      responses:
+        '200':
+          description: success
+          schema:
+            "$ref": "#/definitions/Serials"
+            example:
+            - id: 1
+              dev: "/dev/ttyM0"
+              devDisplayName: PORT-1
+              mode: rs232
+            - id: 2
+              dev: "/dev/ttyM1"
+              devDisplayName: PORT-2
+              mode: rs485-2w
+            - id: 3
+              dev: "/dev/ttyM2"
+              devDisplayName: PORT 3
+              mode: rs422/rs485-4w
+      tags:
+      - serial
+      security:
+      - mx-api-token: []
+  "/system/serial/{id}":
+    parameters:
+    - name: id
+      in: path
+      type: integer
+      required: true
+    get:
+      description: Get a serial interface configuration
+      responses:
+        '200':
+          description: success
+          schema:
+            "$ref": "#/definitions/Serial"
+            example:
+              id: 1
+              dev: "/dev/ttyM0"
+              devDisplayName: PORT-1
+              mode: rs232
+      tags:
+      - serial
+      security:
+      - mx-api-token: []
+    put:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Serial"
+      description: Update a dhcp server configuration
+      responses:
+        '200':
+          description: success
+          schema:
+            "$ref": "#/definitions/Serial"
+            example:
+              id: 1
+              dev: "/dev/ttyM0"
+              devDisplayName: PORT-1
+              mode: rs232
+      tags:
+      - serial
+      security:
+      - mx-api-token: []
+
+definitions:
+  Serial:
+    description: Serial interface configuration
+    type: object
+    required:
+    - mode
+    properties:
+      id:
+        description: ID of serial interface
+        type: integer
+        readOnly: true
+      dev:
+        description: Serial interface physical path
+        type: string
+        readOnly: true
+        minLength: 1
+        maxLength: 1024
+      devDisplayName:
+        description: Display name of serial interface
+        readOnly: true
+        type: string
+      mode:
+        description: Mode of serial interface
+        type: string
+        enum:
+        - rs232
+        - rs485-2w
+        - rs422/rs485-4w
+    example:
+      id: 1
+      dev: "/dev/ttyM0"
+      devDisplayName: PORT-1
+      mode: rs232
+  Serials:
+    description: Collection of serial interfaces
+    type: array
+    items:
+      "$ref": "#/definitions/Serial"
+    example:
+    - id: 1
+      dev: "/dev/ttyM0"
+      devDisplayName: PORT-1
+      mode: rs232
+    - id: 2
+      dev: "/dev/ttyM1"
+      devDisplayName: PORT-2
+      mode: rs485-2w
+    - id: 3
+      dev: "/dev/ttyM2"
+      devDisplayName: PORT 3
+      mode: rs422/rs485-4w

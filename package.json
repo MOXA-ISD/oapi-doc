@@ -2,7 +2,6 @@
   "name": "oapi-doc",
   "version": "1.0.0",
   "description": "ThingsPro OAPI documentation",
-  "main": "index.js",
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Zack Yang <zack9433@gmail.com>",
   "license": "MIT",
@@ -18,7 +17,9 @@
     "lint:cg": "swagger-cli validate ./dist/cg/swagger.json",
     "lint:cs": "swagger-cli validate ./dist/cs/swagger.json",
     "prebuild": "rimraf dist",
-    "build": "mockserver -I ./schema/cg -O ./dist/cg && mockserver -I ./schema/cs -O ./dist/cs"
+    "build": "mockserver -I ./schema/cg -O ./dist/cg && mockserver -I ./schema/cs -O ./dist/cs",
+    "now-build": "echo 'Built on Travis CI'",
+    "start": "spectacle -d dist/cg/swagger.json"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
@@ -28,6 +29,7 @@
     "husky": "^0.14.3",
     "npm-run-all": "^4.1.3",
     "rimraf": "^2.6.2",
+    "spectacle": "^4.3.1",
     "swagger-cli": "^2.1.0"
   }
 }

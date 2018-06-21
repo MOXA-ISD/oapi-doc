@@ -13,12 +13,13 @@
   "scripts": {
     "commit": "git-cz",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "lint": "npm run build && run-p lint:cg lint:cs",
+    "lint": "npm run build:swagger && run-p lint:cg lint:cs",
     "lint:cg": "swagger-cli validate ./dist/cg/swagger.json",
     "lint:cs": "swagger-cli validate ./dist/cs/swagger.json",
-    "prebuild": "rimraf dist",
-    "build": "mockserver -I ./schema/cg -O ./dist/cg && mockserver -I ./schema/cs -O ./dist/cs",
-    "start": "spectacle -d dist/cg/swagger.json"
+    "prebuild": "rimraf dist && npm run build:swagger",
+    "build": "spectacle dist/cg/swagger.json",
+    "build:swagger": "mockserver -I ./schema/cg -O ./dist/cg && mockserver -I ./schema/cs -O ./dist/cs",
+    "start": "spectacle -s dist/cg/swagger.json"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",

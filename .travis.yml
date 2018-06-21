@@ -7,14 +7,8 @@ cache:
 script: npm run lint # Here you could also run the build step of your application
 before_deploy: npm install now --no-save # Install Now CLI on Travis
 deploy:
-  - provider: script # Run a custom deployment script which we will define below
-    script: now --token $NOW_TOKEN
-    skip_cleanup: true
-    on:
-      all_branches: true
-      master: false
   - provider: script
-    script: now --no-verify --token $NOW_TOKEN && now alias --token $NOW_TOKEN
+    script: now --no-verify --token $NOW_TOKEN
     skip_cleanup: true
     on:
       master: true

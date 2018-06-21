@@ -2,5 +2,5 @@
   "name": "thingspro-oapi-service",
   "alias": "thingspro-oapi",
   "public": true,
-  "files": ["public", "dist", "schema", "package.json", "package-lock.json"]
+  "files": ["public", "dist", "schema", "assets", "package.json", "package-lock.json"]
 }

@@ -19,7 +19,7 @@
     "prebuild": "rimraf dist",
     "build": "mockserver -I ./schema/cg -O ./dist/cg && mockserver -I ./schema/cs -O ./dist/cs",
     "now-build": "echo 'Built on Travis CI'",
-    "start": "spectacle -d dist/cg/swagger.json"
+    "start": "npx spectacle -d dist/cg/swagger.json"
   },
   "dependencies": {
     "spectacle": "^4.3.1"

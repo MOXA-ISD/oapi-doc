@@ -5,6 +5,9 @@
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Zack Yang <zack9433@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "npm run build:swagger && npm run lint:edge",
     "lint:edge": "swagger-cli validate ./dist/swagger.json",

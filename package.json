@@ -23,7 +23,9 @@
     "lint": "npm-run-all 'lerna:exec -- --scope @tp-x/{1}-oapi-doc -- npm run lint' --",
     "lerna:exec": "lerna exec",
     "postinstall": "lerna link",
-    "lerna:add": "lerna add"
+    "lerna:add": "lerna add",
+    "lerna:publish": "lerna publish",
+    "lerna:updated": "lerna updated"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",

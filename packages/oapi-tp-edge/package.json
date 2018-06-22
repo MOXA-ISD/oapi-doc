@@ -1,0 +1,21 @@
+{
+  "name": "@tp-x/edge-oapi-doc",
+  "version": "1.0.0",
+  "description": "ThingsPro Edge OAPI documentation",
+  "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
+  "author": "Zack Yang <zack9433@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "npm run build:swagger && npm run lint:edge",
+    "lint:edge": "swagger-cli validate ./dist/swagger.json",
+    "prebuild": "rimraf dist && npm run build:swagger",
+    "build": "npx spectacle-docs dist/swagger.json",
+    "build:swagger": "mockserver -I ./schema -O ./dist",
+    "start": "npx spectacle-docs -s dist/swagger.json"
+  },
+  "devDependencies": {
+    "@thingspro/oapi-server": "^1.2.1",
+    "rimraf": "^2.6.2",
+    "swagger-cli": "^2.1.0"
+  }
+}

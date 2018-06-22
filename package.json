@@ -1,10 +1,14 @@
 {
-  "name": "oapi-doc",
+  "name": "@tp-x/oapi-doc",
   "version": "1.0.0",
-  "description": "ThingsPro OAPI documentation",
+  "description": "ThingsPro Restful OAPI documentation",
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Zack Yang <zack9433@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
@@ -13,25 +17,20 @@
   "scripts": {
     "commit": "git-cz",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "lint": "npm run build:swagger && run-p lint:cg lint:cs",
-    "lint:cg": "swagger-cli validate ./dist/cg/swagger.json",
-    "lint:cs": "swagger-cli validate ./dist/cs/swagger.json",
-    "prebuild": "rimraf dist && npm run build:swagger",
-    "build": "spectacle dist/cg/swagger.json",
-    "build:swagger": "mockserver -I ./schema/cg -O ./dist/cg && mockserver -I ./schema/cs -O ./dist/cs",
-    "start": "spectacle -s dist/cg/swagger.json"
+    "clean": "lerna clean",
+    "start": "npm-run-all 'lerna:exec -- --scope @tp-x/{1}-oapi-doc -- npm start' --",
+    "build": "npm-run-all 'lerna:exec -- --scope @tp-x/{1}-oapi-doc -- npm run build' --",
+    "lint": "npm-run-all 'lerna:exec -- --scope @tp-x/{1}-oapi-doc -- npm run lint' --",
+    "lerna:exec": "lerna exec",
+    "postinstall": "lerna link",
+    "lerna:add": "lerna add"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
-    "@thingspro/oapi-server": "^1.2.1",
     "commitizen": "^2.10.1",
     "husky": "^0.14.3",
-    "npm-run-all": "^4.1.3",
-    "rimraf": "^2.6.2",
-    "swagger-cli": "^2.1.0"
-  },
-  "dependencies": {
-    "spectacle-docs": "^1.0.3"
+    "lerna": "^2.11.0",
+    "npm-run-all": "^4.1.3"
   }
 }

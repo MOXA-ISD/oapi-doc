@@ -9,13 +9,3 @@ env:
   - PACKAGE=edge
   - PACKAGE=server
 script: yarn lint $PACKAGE
-before_deploy:
-  - npm install netlify-cli -g
-  - yarn build $PACKAGE
-deploy:
-  - provider: script
-    script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p packages/oapi-tp-$PACKAGE/public
-    skip_cleanup: true
-    on:
-      master: true
-      condition: $PACKAGE=edge

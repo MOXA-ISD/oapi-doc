@@ -8,7 +8,7 @@ info:
     Welcome to the ThingsPro Edge RESTful API reference. This is a live document of how you can use ThingsPro Edge APIs.
     The ThingsPro Edge API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors. All requests are authenticated using an `mx-api-token` which can be obtained from ThingsPro Edge web.
 
-host: thingspro-oapi.moxa.com
+host: localhost
 basePath: "/api/v1"
 
 schemes:

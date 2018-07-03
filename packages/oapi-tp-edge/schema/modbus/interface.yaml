@@ -1,0 +1,597 @@
+---
+swagger: '2.0'
+
+info:
+  title: Modbus Management Interface/Modbus Device API
+  description: Modbus Management for Data acquisition
+  version: '0.0.1'
+
+schemes:
+- http
+- https
+
+produces:
+- application/json
+
+tags:
+- name: interface
+  description: Modbus Management for Data acquisition
+
+paths:
+  /mxc/modbus/interfaces:
+    get:
+      description: Get all interfaces
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Interface'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Interfaces'
+              }
+            }
+
+    post:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Interface'
+      description: Create a TCP interface (RTU interfaces are already built-in and can't be deleted)
+      responses:
+        200:
+          description: sucess
+          schema:
+            $ref: '#/definitions/Interface'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/TCPInterface'
+              }
+            }
+
+  /mxc/modbus/interfaces/{id}:
+    parameters:
+    - name: id
+      in: path
+      type: integer
+      required: true
+
+    get:
+      description: Get an interface by given ID
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Interface'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/RTUInterface'
+              }
+            }
+    put:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Interface'
+      description: Update an interface by given ID
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Interface'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/RTUInterface'
+              }
+            }
+
+    delete:
+      description: Delete an interface by Given ID (Can't delete built-in RTU interfaces)
+      responses:
+        200:
+          description: success
+
+  /mxc/modbus/equipments:
+    get:
+      description: Get all modbus equipments for Log Profile
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModbusListEquipment'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/ModbusEquipments'
+              }
+            }
+
+definitions:
+  Interface:
+    title: Interface
+    description: Interface which connects to modbus devices
+    type: object
+    required:
+    - name
+    - type
+    - pollingPeriodMs
+    - requestTimeoutMs
+    - deviceList
+    properties:
+      id:
+        description: ID of interface
+        type: integer
+        readOnly: true
+      name:
+        description: Name of interface
+        type: string
+        pattern: ''
+        minLength: 2
+        maxLength: 255
+      type:
+        description: Type of modbus device
+        type: string
+        enum:
+        - modbus-rtu
+        - modbus-tcp
+      pollingPeriodMs:
+        description: Polling period for this interface (ms)
+        type: integer
+        minimum: 100
+        maximum: 86400000
+      requestTimeoutMs:
+        description: Request timeout for each devices (ms)
+        type: integer
+        minimum: 100
+        maximum: 60000
+      deviceList:
+        type: array
+        items:
+          $ref: '#/definitions/Device'
+      config:
+        $ref: '#/definitions/ModbusConfig'
+    example:
+      $ref: '#/externalDocs/x-mocks/RTUInterface'
+
+  ModbusConfig:
+    title: Modbus Config
+    type: object
+    enum:
+    - $ref: '#/definitions/ModbusTCPConfig'
+    - $ref: '#/definitions/ModbusRTUConfig'
+
+  ModbusTCPConfig:
+    title: Modbus TCP config
+    description: Modbus TCP interface config
+    type: object
+    required:
+    - host
+    - port
+    properties:
+      host:
+        description: HOST of TCP modbus device
+        type: string
+      port:
+        description: PORT of TCP modbus device
+        type: integer
+      requestDelayMs:
+        description: request delay (ms)
+        type: integer
+        minimum: 0
+        maximum: 60000
+        default: 0
+
+  ModbusRTUConfig:
+    title: Modbus RTU config
+    description: Modbus RTU interface config
+    type: object
+    required:
+    - dev
+    - baudRate
+    - parity
+    - stopBits
+    - intercharTimeoutMs
+    properties:
+      dev:
+        description: Physical path of modbus rtu device
+        type: string
+        readOnly: true
+        minLength: 1
+        maxLength: 255
+      devDisplayName:
+        description: Display name of modbus rtu device
+        type: string
+      baudRate:
+        description: Baudrate of modbus rtu device
+        type: integer
+        enum:
+        - 115200
+        - 57600
+        - 38400
+        - 19200
+        - 9600
+        - 4800
+        - 2400
+        - 1200
+      parity:
+        description: Partiy of modbus rtu device
+        type: string
+        enum:
+        - odd
+        - even
+        - none
+      stopBits:
+        description: Stop bits of modbus rtu device
+        type: integer
+        enum:
+        - 0
+        - 1
+        - 2
+      intercharTimeoutMs:
+        description: Inter char timeout (ms)
+        type: integer
+        minimum: 0
+        maximum: 60000
+      interframeDelayMs:
+        description: Inter frame timeout (ms)
+        type: integer
+        minimum: 0
+        maximum: 60000
+        default: 0
+
+
+  Device:
+    title: Device
+    description: Modbus device profile
+    type: object
+    required:
+    - deviceId
+    - equipmentName
+    - equipmentTemplate
+    properties:
+      deviceId:
+        description: ID of device
+        type: integer
+        minimum: 0
+        maximum: 255
+      equipmentTemplate:
+        description: Name of modbus template
+        type: string
+        pattern: '^[A-Za-z0-9_-]+$'
+        minLength: 2
+        maxLength: 255
+      equipmentName:
+        description: Name of device
+        type: string
+        pattern: '^[A-Za-z0-9_-]+$'
+        minLength: 3
+        maxLength: 255
+      status:
+        $ref: '#/definitions/DeviceStatus'
+
+  DeviceStatus:
+    title: Device Status
+    description: Device current status
+    type: object
+    readOnly: true
+    properties:
+      connection:
+        description: Connection status.
+          If all tag request success, return true, others return false
+        type: boolean
+      totalRequestCount:
+        description: Total number of request count
+        type: integer
+      totalRequestSuccess:
+        description: Total numver of success request count
+        type: integer
+      totalReadingCount:
+        description: Total number of reading count
+        type: integer
+      lastPoll:
+        description: Last pulling status
+        type: object
+        properties:
+          at:
+            description: Pulling Timestamp
+            type: string
+          elapsedMs:
+            description: Pulling costs how many milliseconds
+            type: integer
+          requestCount:
+            description: Number of requests in this pulling
+            type: integer
+          requestSuccess:
+            description: Number of success requests in this pulling
+            type: integer
+          readingCount:
+            description: Number of reading in this pulling
+            type: integer
+
+  ModbusListEquipment:
+    title: Equipment
+    description: Modbus equipment object
+    type: object
+    required:
+    - equipmentName
+    - equipmentTags
+    properties:
+      equipmentName:
+        description: Name of equipment
+        type: string
+        minLength: 1
+        maxLength: 255
+      equipmentTags:
+        description: Tag List of equipment
+        type: array
+        items:
+          $ref: '#/definitions/ModbusListEquipmentTag'
+
+  ModbusListEquipmentTag:
+    title: Tag
+    description: Equipment's tag entry
+    type: object
+    required:
+    - name
+    - function
+    - address
+    - quantity
+    - type
+    - description
+    properties:
+      name:
+        description: Name of tag
+        type: string
+        pattern: '[A-Za-z0-9_-]+'
+        minLength: 2
+        maxLength: 255
+      unit:
+        description: Unit of tag
+        type: string
+      function:
+        description: Function to retrieve the tag value
+        type: string
+        enum:
+        - read-coils
+        - read-input-registers
+        - read-discrete-inputs
+        - read-holding-registers
+        - write-single-coil
+        - write-single-register
+        - write-multiple-coils
+        - write-multiple-registers
+      address:
+        description: Address of the tag 0x0000(0) <= value <= 0xFFFF(65535)
+        type: integer
+        minimum: 0
+        maximum: 655350
+      quantity:
+        description: Quantity of tag
+        type: integer
+        minimum: 1
+        maximum: 655350
+      type:
+        description: Data type of tag
+        type: string
+        enum:
+        - uint16
+        - uint32
+        - uint64
+        - int16
+        - int32
+        - int64
+        - float32
+        - float64
+        - string
+        - boolean
+      enableByteOrder:
+        description: Enable byte order function
+        type: boolean
+      byteOrder:
+        description: Switch input byte order
+        type: string
+        enum:
+        - BA
+        - CDAB
+        - DCBA
+        - GHEFCDAB
+        - HGFEDCBA
+      enableInvalidValue:
+        description: Enable invalid value function
+        type: boolean
+      invalidValue:
+        description: Array size is equals to quantity (if input == INVALID_VALUE, assume the value is not valid)
+        type: array
+        items:
+          type: integer
+      description:
+        description: User edited description of tag
+        type: string
+        minLength: 0
+        maxLength: 65535
+      enableAutoScaling:
+        description: Enable auto scaling function
+        type: boolean
+      autoScalingMode:
+        description: Mode of auto scaling function
+        type: string
+        enum:
+        - intercept
+        - point
+      autoScaling:
+        description: >
+          V = input * S + O
+          output = ((input-sourceMin) * (targetMax-targetMin) / (sourceMax-sourceMin)) + targetMin
+        type: object
+        properties:
+          slope:
+            type: number
+          offset:
+            type: number
+          sourceMin:
+            type: number
+          sourceMax:
+            type: number
+          targetMin:
+            type: number
+          targetMax:
+            type: number
+
+externalDocs:
+  url: '#'
+  x-mocks:
+    RTUInterface:
+      {
+        "id": 1,
+        "name": "Modbus_Gateway_1",
+        "type": "modbus-rtu",
+        "config": {
+          "dev": "/dev/ttyM0",
+          "devDisplayName": "PORT 1",
+          "baudRate": 115200,
+          "parity": "none",
+          "stopBits": 1,
+          "intercharTimeoutMs": 100,
+          "interframeDelayMs": 0
+        },
+        "requestTimeoutMs": 500,
+        "pollingPeriodMs": 5000,
+        "deviceList": []
+      }
+
+    TCPInterface:
+      {
+        "id": 1,
+        "name": "Modbus_Gateway_1",
+        "type": "modbus-rtu",
+        "config": {
+          "host": "192.168.1.1",
+          "port": 32556
+        },
+        "requestTimeoutMs": 500,
+        "pollingPeriodMs": 5000,
+        "deviceList": []
+      }
+
+    Interfaces:
+      [
+        {
+          "id": 1,
+          "name": "Modbus_Gateway_1",
+          "type": "modbus-rtu",
+          "config": {
+            "dev": "/dev/ttyM0",
+            "devDisplayName": "PORT 1",
+            "baudRate": 115200,
+            "parity": "none",
+            "stopBits": 1,
+            "intercharTimeoutMs": 100,
+            "interframeDelayMs": 0
+          },
+          "requestTimeoutMs": 500,
+          "pollingPeriodMs": 5000,
+          "deviceList": []
+        },
+        {
+          "id": 2,
+          "name": "Modbus_Gateway_2",
+          "type": "modbus-rtu",
+          "config": {
+            "dev": "/dev/ttyM1",
+            "devDisplayName": "PORT 2",
+            "baudRate": 115200,
+            "parity": "none",
+            "stopBits": 1,
+            "intercharTimeoutMs": 100,
+            "interframeDelayMs": 0
+          },
+          "requestTimeoutMs": 500,
+          "pollingPeriodMs": 5000,
+          "deviceList": []
+        }
+      ]
+
+    ModbusEquipments:
+      [
+        {
+          "equipmentName": "LIGHT",
+          "equipmentTags": [
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "type": "boolean",
+              "description": ""
+            }
+          ]
+        }
+      ]

@@ -1,0 +1,3165 @@
+---
+swagger: '2.0'
+
+info:
+  title: Modbus Management API
+  description: Modbus Management for Data acquisition
+  version: '0.0.1'
+
+schemes:
+- http
+- https
+
+produces:
+- application/json
+
+tags:
+- name: equipment-template
+  description: Modbus Management for Data Acquisition
+
+paths:
+  /mxc/modbus/equipment-templates:
+    get:
+      description: Get all equipment templates
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EquipmentTemplate'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
+              }
+            }
+
+    post:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/EquipmentTemplate'
+      description: Create a new equipment template
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/EquipmentTemplate'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+              }
+            }
+
+    delete:
+      description: Delete multiple equipment templates
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              description: Target equipment template IDs
+              type: integer
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
+              }
+            }
+
+  /mxc/modbus/equipment-templates/{id}:
+    parameters:
+    - name: id
+      in: path
+      type: integer
+      required: true
+
+    get:
+      description: Get equipment templates by ID
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/EquipmentTemplate'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+              }
+            }
+
+    put:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/EquipmentTemplate'
+      description: Update an equipment template by ID
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/EquipmentTemplate'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+              }
+            }
+
+    delete:
+      description: Delete an equipment templates by ID
+      responses:
+        200:
+          description: success
+
+definitions:
+  EquipmentTemplate:
+    title: Equipment Template
+    type: object
+    required:
+    - name
+    - tagList
+    properties:
+      id:
+        description: ID of equipment template
+        type: integer
+      name:
+        description: Name of equipment template
+        type: string
+        pattern: '[A-Za-z0-9_-]+'
+        minLength: 3
+        maxLength: 255
+      tagList:
+        description: Tag list of equipment template
+        type: array
+        items:
+          $ref: '#/definitions/EquipmentTag'
+    example:
+      $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+
+  EquipmentTag:
+    title: Equipment Tag
+    type: object
+    required:
+    - name
+    - function
+    - address
+    - quantity
+    - dataType
+    - description
+    properties:
+      name:
+        description: Name of tag
+        type: string
+        pattern: '[A-Za-z0-9_-]+'
+        minLength: 2
+        maxLength: 255
+      unit:
+        description: Unit of tag
+        type: string
+        pattern: '[A-Za-z0-9%_-]*'
+        minLength: 0
+        maxLength: 255
+      function:
+        description: Function to retrieve the tag value
+        type: string
+        enum:
+        - read-coils
+        - read-input-registers
+        - read-discrete-inputs
+        - read-holding-registers
+        - write-single-coil
+        - write-single-register
+        - write-multiple-coils
+        - write-multiple-registers
+      address:
+        description: Address of the tag 0x0000(0) <= value <= 0xFFFF(65535)
+        type: integer
+        minimum: 0
+        maximum: 655350
+      quantity:
+        description: Quantity of tag
+        type: integer
+        minimum: 1
+        maximum: 655350
+      dataType:
+        description: Data type of tag
+        type: string
+        enum:
+        - uint16
+        - uint32
+        - uint64
+        - int16
+        - int32
+        - int64
+        - float32
+        - float64
+        - string
+        - boolean
+        - bytearray
+      enableByteOrder:
+        description: Enable byte order function
+        type: boolean
+      byteOrder:
+        description: Switch input byte order
+        type: string
+        enum:
+        - BA
+        - CDAB
+        - DCBA
+        - GHEFCDAB
+        - HGFEDCBA
+      enableInvalidValue:
+        description: Enable invalid value function
+        type: boolean
+      invalidValue:
+        description: Array size is equals to quantity (if input == INVALID_VALUE, assume the value is not valid)
+        type: array
+        items:
+          type: integer
+      description:
+        description: User edited description of tag
+        type: string
+        minLength: 0
+        maxLength: 65535
+      enableAutoScaling:
+        description: Enable auto scaling function
+        type: boolean
+      autoScalingMode:
+        description: Mode of auto scaling function
+        type: string
+        enum:
+        - intercept
+        - point
+      autoScaling:
+        description: >
+          V = input * S + O
+          output = ((input-sourceMin) * (targetMax-targetMin) / (sourceMax-sourceMin)) + targetMin
+        type: object
+        properties:
+          slope:
+            type: number
+          offset:
+            type: number
+          sourceMin:
+            type: number
+          sourceMax:
+            type: number
+          targetMin:
+            type: number
+          targetMax:
+            type: number
+      access:
+        description: Access type of tag
+        type: string
+        enum:
+        - ro
+        - wo
+        - wr
+      size:
+        description: Size of tag in byte
+        type: integer
+
+externalDocs:
+  url: '#'
+  x-mocks:
+    EquipmentTemplate:
+      {
+        "id": 9,
+        "name": "ioLogik-E1260",
+        "tagList": [
+          {
+            "name": "rtdi0",
+            "function": "read-input-registers",
+            "address": 1536,
+            "quantity": 1,
+            "dataType": "uint16",
+            "enableAutoScaling": 1,
+            "autoScalingMode": "intercept",
+            "autoScaling": {
+              "slope": 0.1,
+              "offset": 0
+            },
+            "description": ""
+          },
+          {
+            "name": "rtdi1",
+            "function": "read-input-registers",
+            "address": 1537,
+            "quantity": 1,
+            "dataType": "uint16",
+            "enableAutoScaling": 1,
+            "autoScalingMode": "intercept",
+            "autoScaling": {
+              "slope": 0.1,
+              "offset": 0
+            },
+            "description": ""
+          },
+          {
+            "name": "rtdi2",
+            "function": "read-input-registers",
+            "address": 1538,
+            "quantity": 1,
+            "dataType": "uint16",
+            "enableAutoScaling": 1,
+            "autoScalingMode": "intercept",
+            "autoScaling": {
+              "slope": 0.1,
+              "offset": 0
+            },
+            "description": ""
+          },
+          {
+            "name": "rtdi3",
+            "function": "read-input-registers",
+            "address": 1539,
+            "quantity": 1,
+            "dataType": "uint16",
+            "enableAutoScaling": 1,
+            "autoScalingMode": "intercept",
+            "autoScaling": {
+              "slope": 0.1,
+              "offset": 0
+            },
+            "description": ""
+          },
+          {
+            "name": "rtdi4",
+            "function": "read-input-registers",
+            "address": 1540,
+            "quantity": 1,
+            "dataType": "uint16",
+            "enableAutoScaling": 1,
+            "autoScalingMode": "intercept",
+            "autoScaling": {
+              "slope": 0.1,
+              "offset": 0
+            },
+            "description": ""
+          },
+          {
+            "name": "rtdi5",
+            "function": "read-input-registers",
+            "address": 1541,
+            "quantity": 1,
+            "dataType": "uint16",
+            "enableAutoScaling": 1,
+            "autoScalingMode": "intercept",
+            "autoScaling": {
+              "slope": 0.1,
+              "offset": 0
+            },
+            "description": ""
+          }
+        ]
+      }
+
+    EquipmentTemplates:
+      [
+        {
+          "id": 1,
+          "name": "ioLogik-E1210",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-discrete-inputs",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-discrete-inputs",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-discrete-inputs",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-discrete-inputs",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di12",
+              "function": "read-discrete-inputs",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di13",
+              "function": "read-discrete-inputs",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di14",
+              "function": "read-discrete-inputs",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di15",
+              "function": "read-discrete-inputs",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "ioLogik-E1211",
+          "tagList": [
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-coils",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-coils",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do8",
+              "function": "read-coils",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do9",
+              "function": "read-coils",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do10",
+              "function": "read-coils",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do11",
+              "function": "read-coils",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do12",
+              "function": "read-coils",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do13",
+              "function": "read-coils",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do14",
+              "function": "read-coils",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do15",
+              "function": "read-coils",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "ioLogik-E1212",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-discrete-inputs",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-discrete-inputs",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-discrete-inputs",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-discrete-inputs",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di12",
+              "function": "read-discrete-inputs",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di13",
+              "function": "read-discrete-inputs",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di14",
+              "function": "read-discrete-inputs",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di15",
+              "function": "read-discrete-inputs",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-coils",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-coils",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "ioLogik-E1213",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-discrete-inputs",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-discrete-inputs",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-discrete-inputs",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-discrete-inputs",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-coils",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-coils",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "ioLogik-E1214",
+          "tagList":[
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "ioLogik-E1240",
+          "tagList": [
+            {
+              "name": "ai0",
+              "function": "read-input-registers",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai1",
+              "function": "read-input-registers",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai2",
+              "function": "read-input-registers",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai3",
+              "function": "read-input-registers",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai4",
+              "function": "read-input-registers",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai5",
+              "function": "read-input-registers",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai6",
+              "function": "read-input-registers",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai7",
+              "function": "read-input-registers",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "ioLogik-E1241",
+          "tagList": [
+            {
+              "name": "ao0",
+              "function": "read-holding-registers",
+              "address": 1024,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ao1",
+              "function": "read-holding-registers",
+              "address": 1025,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ao2",
+              "function": "read-holding-registers",
+              "address": 1026,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ao3",
+              "function": "read-holding-registers",
+              "address": 1027,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "ioLogik-E1242",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ai0",
+              "function": "read-input-registers",
+              "address": 512,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai1",
+              "function": "read-input-registers",
+              "address": 513,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai2",
+              "function": "read-input-registers",
+              "address": 514,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai3",
+              "function": "read-input-registers",
+              "address": 515,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "ioLogik-E1260",
+          "tagList": [
+            {
+              "name": "rtdi0",
+              "function": "read-input-registers",
+              "address": 1536,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi1",
+              "function": "read-input-registers",
+              "address": 1537,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi2",
+              "function": "read-input-registers",
+              "address": 1538,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi3",
+              "function": "read-input-registers",
+              "address": 1539,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi4",
+              "function": "read-input-registers",
+              "address": 1540,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi5",
+              "function": "read-input-registers",
+              "address": 1541,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "ioLogik-E1261H-T",
+          "tagList": [
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-coils",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-coils",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do8",
+              "function": "read-coils",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do9",
+              "function": "read-coils",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do10",
+              "function": "read-coils",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do11",
+              "function": "read-coils",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-discrete-inputs",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-discrete-inputs",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-discrete-inputs",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-discrete-inputs",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ai0",
+              "function": "read-input-registers",
+              "address": 512,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai1",
+              "function": "read-input-registers",
+              "address": 513,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai2",
+              "function": "read-input-registers",
+              "address": 514,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai3",
+              "function": "read-input-registers",
+              "address": 515,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai4",
+              "function": "read-input-registers",
+              "address": 516,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "rtdi0",
+              "function": "read-input-registers",
+              "address": 1536,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi1",
+              "function": "read-input-registers",
+              "address": 1537,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi2",
+              "function": "read-input-registers",
+              "address": 1538,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "ioLogik-E1261W-T",
+          "tagList": [
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-coils",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-coils",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do8",
+              "function": "read-coils",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do9",
+              "function": "read-coils",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do10",
+              "function": "read-coils",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do11",
+              "function": "read-coils",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-discrete-inputs",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-discrete-inputs",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-discrete-inputs",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-discrete-inputs",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ai0",
+              "function": "read-input-registers",
+              "address": 512,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai1",
+              "function": "read-input-registers",
+              "address": 513,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai2",
+              "function": "read-input-registers",
+              "address": 514,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai3",
+              "function": "read-input-registers",
+              "address": 515,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai4",
+              "function": "read-input-registers",
+              "address": 516,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "rtdi0",
+              "function": "read-input-registers",
+              "address": 1536,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi1",
+              "function": "read-input-registers",
+              "address": 1537,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi2",
+              "function": "read-input-registers",
+              "address": 1538,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "ioLogik-E1262",
+          "tagList": [
+            {
+              "name": "tci0",
+              "function": "read-input-registers",
+              "address": 2048,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci1",
+              "function": "read-input-registers",
+              "address": 2050,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci2",
+              "function": "read-input-registers",
+              "address": 2052,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci3",
+              "function": "read-input-registers",
+              "address": 2054,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci4",
+              "function": "read-input-registers",
+              "address": 2056,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci5",
+              "function": "read-input-registers",
+              "address": 2058,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci6",
+              "function": "read-input-registers",
+              "address": 2060,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "tci7",
+              "function": "read-input-registers",
+              "address": 2062,
+              "quantity": 2,
+              "dataType": "uint32",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "ioLogik-E1263H-T",
+          "tagList": [
+            {
+              "name": "do0",
+              "function": "read-coils",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-coils",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-coils",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-coils",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-coils",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-coils",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-coils",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-coils",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do8",
+              "function": "read-coils",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do9",
+              "function": "read-coils",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do10",
+              "function": "read-coils",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do11",
+              "function": "read-coils",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do12",
+              "function": "read-coils",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do13",
+              "function": "read-coils",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do14",
+              "function": "read-coils",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do15",
+              "function": "read-coils",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do16",
+              "function": "read-coils",
+              "address": 16,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do17",
+              "function": "read-coils",
+              "address": 17,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do18",
+              "function": "read-coils",
+              "address": 18,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do19",
+              "function": "read-coils",
+              "address": 19,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do20",
+              "function": "read-coils",
+              "address": 20,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do21",
+              "function": "read-coils",
+              "address": 21,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do22",
+              "function": "read-coils",
+              "address": 22,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do23",
+              "function": "read-coils",
+              "address": 23,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di0",
+              "function": "read-discrete-inputs",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-discrete-inputs",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-discrete-inputs",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-discrete-inputs",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-discrete-inputs",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-discrete-inputs",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-discrete-inputs",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-discrete-inputs",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-discrete-inputs",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-discrete-inputs",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-discrete-inputs",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-discrete-inputs",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di12",
+              "function": "read-discrete-inputs",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di13",
+              "function": "read-discrete-inputs",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di14",
+              "function": "read-discrete-inputs",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di15",
+              "function": "read-discrete-inputs",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di16",
+              "function": "read-discrete-inputs",
+              "address": 16,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di17",
+              "function": "read-discrete-inputs",
+              "address": 17,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di18",
+              "function": "read-discrete-inputs",
+              "address": 18,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di19",
+              "function": "read-discrete-inputs",
+              "address": 19,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di20",
+              "function": "read-discrete-inputs",
+              "address": 20,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di21",
+              "function": "read-discrete-inputs",
+              "address": 21,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di22",
+              "function": "read-discrete-inputs",
+              "address": 22,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di23",
+              "function": "read-discrete-inputs",
+              "address": 23,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ai0",
+              "function": "read-input-registers",
+              "address": 512,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai1",
+              "function": "read-input-registers",
+              "address": 513,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai2",
+              "function": "read-input-registers",
+              "address": 514,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai3",
+              "function": "read-input-registers",
+              "address": 515,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai4",
+              "function": "read-input-registers",
+              "address": 516,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai5",
+              "function": "read-input-registers",
+              "address": 517,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai6",
+              "function": "read-input-registers",
+              "address": 518,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai7",
+              "function": "read-input-registers",
+              "address": 519,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai8",
+              "function": "read-input-registers",
+              "address": 520,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai9",
+              "function": "read-input-registers",
+              "address": 521,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "rtdi0",
+              "function": "read-input-registers",
+              "address": 1536,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi1",
+              "function": "read-input-registers",
+              "address": 1537,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            },
+            {
+              "name": "rtdi2",
+              "function": "read-input-registers",
+              "address": 1538,
+              "quantity": 1,
+              "dataType": "uint16",
+              "enableAutoScaling": 1,
+              "autoScalingMode": "intercept",
+              "autoScaling": {
+                "slope": 0.1,
+                "offset": 0
+              },
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "ioLogik-R1210",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-input-registers",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-input-registers",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-input-registers",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-input-registers",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-input-registers",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-input-registers",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-input-registers",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-input-registers",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-input-registers",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-input-registers",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-input-registers",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-input-registers",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di12",
+              "function": "read-input-registers",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di13",
+              "function": "read-input-registers",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di14",
+              "function": "read-input-registers",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di15",
+              "function": "read-input-registers",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "ioLogik-R1212",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-input-registers",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-input-registers",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-input-registers",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-input-registers",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-input-registers",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-input-registers",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di6",
+              "function": "read-input-registers",
+              "address": 6,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di7",
+              "function": "read-input-registers",
+              "address": 7,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di8",
+              "function": "read-input-registers",
+              "address": 8,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di9",
+              "function": "read-input-registers",
+              "address": 9,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di10",
+              "function": "read-input-registers",
+              "address": 10,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di11",
+              "function": "read-input-registers",
+              "address": 11,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di12",
+              "function": "read-input-registers",
+              "address": 12,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di13",
+              "function": "read-input-registers",
+              "address": 13,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di14",
+              "function": "read-input-registers",
+              "address": 14,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di15",
+              "function": "read-input-registers",
+              "address": 15,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do0",
+              "function": "read-holding-registers",
+              "address": 320,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do1",
+              "function": "read-holding-registers",
+              "address": 321,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do2",
+              "function": "read-holding-registers",
+              "address": 322,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do3",
+              "function": "read-holding-registers",
+              "address": 323,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do4",
+              "function": "read-holding-registers",
+              "address": 324,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do5",
+              "function": "read-holding-registers",
+              "address": 325,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do6",
+              "function": "read-holding-registers",
+              "address": 326,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "do7",
+              "function": "read-holding-registers",
+              "address": 327,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "ioLogik-R1214",
+          "tagList": [
+            {
+              "name": "di0",
+              "function": "read-input-registers",
+              "address": 0,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di1",
+              "function": "read-input-registers",
+              "address": 1,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di2",
+              "function": "read-input-registers",
+              "address": 2,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di3",
+              "function": "read-input-registers",
+              "address": 3,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di4",
+              "function": "read-input-registers",
+              "address": 4,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "di5",
+              "function": "read-input-registers",
+              "address": 5,
+              "quantity": 1,
+              "dataType": "boolean",
+              "description": ""
+            },
+            {
+              "name": "ro0",
+              "function": "read-holding-registers",
+              "address": 320,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ro1",
+              "function": "read-holding-registers",
+              "address": 321,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ro2",
+              "function": "read-holding-registers",
+              "address": 322,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ro3",
+              "function": "read-holding-registers",
+              "address": 323,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ro4",
+              "function": "read-holding-registers",
+              "address": 324,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ro5",
+              "function": "read-holding-registers",
+              "address": 325,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "name": "ioLogik-R1240",
+          "tagList": [
+            {
+              "name": "ai0",
+              "function": "read-input-registers",
+              "address": 704,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai1",
+              "function": "read-input-registers",
+              "address": 705,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai2",
+              "function": "read-input-registers",
+              "address": 706,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai3",
+              "function": "read-input-registers",
+              "address": 707,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai4",
+              "function": "read-input-registers",
+              "address": 708,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai5",
+              "function": "read-input-registers",
+              "address": 709,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai6",
+              "function": "read-input-registers",
+              "address": 710,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ai7",
+              "function": "read-input-registers",
+              "address": 711,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "name": "ioLogik-R1241",
+          "tagList": [
+            {
+              "name": "ao0",
+              "function": "read-holding-registers",
+              "address": 1184,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ao1",
+              "function": "read-holding-registers",
+              "address": 1185,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ao2",
+              "function": "read-holding-registers",
+              "address": 1186,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            },
+            {
+              "name": "ao3",
+              "function": "read-holding-registers",
+              "address": 1187,
+              "quantity": 1,
+              "dataType": "uint16",
+              "description": ""
+            }
+          ]
+        }
+      ]

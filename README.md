@@ -4,8 +4,8 @@ ThingsPro OAPI document
 
 # OAPI URL
 
-- [ThingsPro Server](https://thingspro-edge-oapi.netlify.com)
-- [ThingsPro Edge](https://thingspro-server-oapi.netlify.com)
+- [ThingsPro Server](https://thingspro-server-oapi.netlify.com)
+- [ThingsPro Edge](https://thingspro-edge-oapi.netlify.com)
 
 # Development
 

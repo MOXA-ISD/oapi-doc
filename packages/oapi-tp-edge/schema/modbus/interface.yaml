@@ -5,17 +5,20 @@ info:
   title: Modbus Management Interface/Modbus Device API
   description: Modbus Management for Data acquisition
   version: '0.0.1'
-
 schemes:
 - http
 - https
-
 produces:
 - application/json
-
 tags:
 - name: interface
   description: Modbus Management for Data acquisition
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
 
 paths:
   /mxc/modbus/interfaces:
@@ -34,6 +37,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/Interfaces'
               }
             }
+      tags:
+      - interface
+      security:
+      - mx-api-token: []
 
     post:
       parameters:
@@ -54,6 +61,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/TCPInterface'
               }
             }
+      tags:
+      - interface
+      security:
+      - mx-api-token: []
 
   /mxc/modbus/interfaces/{id}:
     parameters:
@@ -75,6 +86,11 @@ paths:
                 $ref: '#/externalDocs/x-mocks/RTUInterface'
               }
             }
+      tags:
+      - interface
+      security:
+      - mx-api-token: []
+
     put:
       parameters:
       - name: body
@@ -94,12 +110,20 @@ paths:
                 $ref: '#/externalDocs/x-mocks/RTUInterface'
               }
             }
+      tags:
+      - interface
+      security:
+      - mx-api-token: []
 
     delete:
       description: Delete an interface by Given ID (Can't delete built-in RTU interfaces)
       responses:
         200:
           description: success
+      tags:
+      - interface
+      security:
+      - mx-api-token: []
 
   /mxc/modbus/equipments:
     get:
@@ -117,6 +141,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/ModbusEquipments'
               }
             }
+      tags:
+      - interface
+      security:
+      - mx-api-token: []
 
 definitions:
   Interface:

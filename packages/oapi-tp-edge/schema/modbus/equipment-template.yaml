@@ -5,13 +5,17 @@ info:
   title: Modbus Management API
   description: Modbus Management for Data acquisition
   version: '0.0.1'
-
 schemes:
 - http
 - https
-
 produces:
 - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
 - name: equipment-template
@@ -34,6 +38,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
               }
             }
+      tags:
+      - equipment-template
+      security:
+      - mx-api-token: []
 
     post:
       parameters:
@@ -54,6 +62,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
               }
             }
+      tags:
+      - equipment-template
+      security:
+      - mx-api-token: []
 
     delete:
       description: Delete multiple equipment templates
@@ -71,6 +83,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
               }
             }
+      tags:
+      - equipment-template
+      security:
+      - mx-api-token: []
 
   /mxc/modbus/equipment-templates/{id}:
     parameters:
@@ -92,6 +108,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
               }
             }
+      tags:
+      - equipment-template
+      security:
+      - mx-api-token: []
 
     put:
       parameters:
@@ -112,12 +132,20 @@ paths:
                 $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
               }
             }
+      tags:
+      - equipment-template
+      security:
+      - mx-api-token: []
 
     delete:
       description: Delete an equipment templates by ID
       responses:
         200:
           description: success
+      tags:
+      - equipment-template
+      security:
+      - mx-api-token: []
 
 definitions:
   EquipmentTemplate:

@@ -5,13 +5,17 @@ info:
   title: Modbus Tag Read/Write Access API
   description: Modbus Tag Access for Data acquisition
   version: '0.0.1'
-
 schemes:
 - http
 - https
-
 produces:
 - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
 - name: access
@@ -44,6 +48,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/ModbusReadEquTagRspExample'
               }
             }
+      tags:
+      - access
+      security:
+      - mx-api-token: []
 
     put:
       description: Write Modbus Tag of (Equipment,Tag)
@@ -66,6 +74,10 @@ paths:
                 $ref: '#/externalDocs/x-mocks/ModbusWriteEquTagRspExample'
               }
             }
+      tags:
+      - access
+      security:
+      - mx-api-token: []
 
 definitions:
   ModbusWriteEquTagReq:

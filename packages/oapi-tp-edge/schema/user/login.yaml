@@ -1,0 +1,114 @@
+---
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Edge RESTful API reference
+basePath: "/api/v1"
+schemes:
+- http
+- https
+produces:
+- application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+- name: login
+  description: Handles login/logout operation
+
+paths:
+  "/login":
+    post:
+      description: user login
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+              example: 'moxa'
+            password:
+              type: string
+              example: '12345678'
+      responses:
+        200:
+          description: Return user and token data
+          schema:
+            $ref: '#/definitions/LoginRes'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/LoginRes'
+              }
+            }
+      tags:
+      - login
+      security:
+      - mx-api-token: []
+  "/logout":
+    post:
+      description: user logout
+      responses:
+        200:
+          description: user logout
+      tags:
+      - logout
+      security:
+      - mx-api-token: []
+
+definitions:
+    LoginRes:
+      type: object
+      properties:
+        user:
+          type: object
+          items:
+          - $ref: '#/definitions/User'
+        role:
+          type: object
+          items:
+          - $ref: '#/definitions/Role'
+        token:
+          type: string
+          description: Granted authentication token.
+
+externalDocs:
+  url: '#'
+  x-mocks:
+    LoginRes:
+       {
+         user:
+          {
+            "id": 1,
+            "name": "Moxa",
+            "role": {
+              "id": 1,
+              "name": "root",
+              "permissions": [
+                {
+                  "id": 1,
+                  "value": 2,
+                  "name": "DM",
+                  "description": "xxxxx"
+                },
+                {
+                  "id": 2,
+                  "value": 2,
+                  "name": "account",
+                  "description": "xxxxx"
+                }
+              ]
+            },  
+            "company": "moxa",
+            "email": "moxa@moxa.com"
+          },
+        token: "USER_TOKEN"
+       }

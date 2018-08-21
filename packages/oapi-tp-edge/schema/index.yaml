@@ -1,0 +1,27 @@
+swagger: '2.0'
+
+info:
+  version: 1.0.0
+  title: ThingsPro Edge RESTful API Reference
+  description: |
+    Welcome to the ThingsPro Edge RESTful API reference. This is a live document of how you can use ThingsPro Edge APIs.
+    The ThingsPro Edge API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
+
+host: localhost
+basePath: '/api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+tags:
+  - $ref: './tag/index.yaml#/tags'
+
+paths:
+  - $ref: './tag/index.yaml#/paths'
+
+definitions:
+  - $ref: './tag/index.yaml#/definitions'

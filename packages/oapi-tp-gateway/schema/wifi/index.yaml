@@ -1,0 +1,693 @@
+swagger: '2.0'
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: wifi
+    description: Provides the WiFi network(s) configuration interface
+
+paths:
+  '/network/wifi':
+    get:
+      summary: WiFi Interface(s)
+      description: |
+        The system returns information about the settings of all
+        *WiFi interface(s)*.
+      responses:
+        '200':
+          description: An array of WiFi interface(s)
+          schema:
+            type: array
+            items:
+              '$ref': '#/definitions/WiFiIface'
+            example:
+              - id: 1
+                name: wlan0
+                product: WPEQ-353ACNI
+                capabilities:
+                  - client
+                  - ap
+                mode: client
+                enable: true
+                status: true
+                client:
+                  enableDhcp: true
+                  networks:
+                    - ssid: test-none
+                      security: none
+                    - ssid: test-wpa
+                      security: wpa
+                      password: '12345678'
+                      priority: 5
+                    - ssid: test-eap
+                      security: eap
+                      username: moxa
+                      password: moxa
+                      priority: 10
+                    - ssid: test-wep
+                      security: wep
+                      password: '12345'
+                      priority: 1
+                  signal: 100
+                  ip: 111.70.146.125
+                  netmask: 255.255.255.252
+                  gateway: 111.70.146.126
+                  dns:
+                    - 168.95.1.1
+                    - 168.95.192.1
+                  usage:
+                    txkbyte: 40023
+                    rxkbyte: 3493
+                  checkalive:
+                    enable: true
+                    targetHost: 8.8.8.8
+                    intervalSec: 60
+                ap:
+                  mode: bg
+                  ssid: moxa-test
+                  channel: 11
+                  security:
+                    mode: none
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+  '/network/wifi/{id}':
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+    get:
+      description: 'Get settings of indicated WiFi interface.'
+      responses:
+        '200':
+          description: An WiFi interface settings.
+          schema:
+            '$ref': '#/definitions/WiFiIface'
+            example:
+              id: 1
+              name: wlan0
+              product: WPEQ-353ACNI
+              capabilities:
+                - client
+                - ap
+              mode: client
+              enable: true
+              status: true
+              client:
+                enableDhcp: true
+                networks:
+                  - ssid: test-none
+                    security: none
+                  - ssid: test-wpa
+                    security: wpa
+                    password: '12345678'
+                    priority: 5
+                  - ssid: test-eap
+                    security: eap
+                    username: moxa
+                    password: moxa
+                    priority: 10
+                  - ssid: test-wep
+                    security: wep
+                    password: '12345'
+                    priority: 1
+                signal: 100
+                ip: 111.70.146.125
+                netmask: 255.255.255.252
+                gateway: 111.70.146.126
+                dns:
+                  - 168.95.1.1
+                  - 168.95.192.1
+                usage:
+                  txkbyte: 40023
+                  rxkbyte: 3493
+                checkalive:
+                  enable: true
+                  targetHost: 8.8.8.8
+                  intervalSec: 60
+              ap:
+                mode: bg
+                ssid: moxa-test
+                channel: 11
+                security:
+                  mode: none
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    put:
+      summary: WiFi Interface
+      description: Update an WiFi interface settings.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            '$ref': '#/definitions/WiFiIface'
+      responses:
+        '200':
+          description: OK
+          schema:
+            '$ref': '#/definitions/WiFiIface'
+            example:
+              id: 1
+              name: wlan0
+              product: WPEQ-353ACNI
+              capabilities:
+                - client
+                - ap
+              mode: client
+              enable: true
+              status: true
+              client:
+                enableDhcp: true
+                networks:
+                  - ssid: test-none
+                    security: none
+                  - ssid: test-wpa
+                    security: wpa
+                    password: '12345678'
+                    priority: 5
+                  - ssid: test-eap
+                    security: eap
+                    username: moxa
+                    password: moxa
+                    priority: 10
+                  - ssid: test-wep
+                    security: wep
+                    password: '12345'
+                    priority: 1
+                signal: 100
+                ip: 111.70.146.125
+                netmask: 255.255.255.252
+                gateway: 111.70.146.126
+                dns:
+                  - 168.95.1.1
+                  - 168.95.192.1
+                usage:
+                  txkbyte: 40023
+                  rxkbyte: 3493
+                checkalive:
+                  enable: true
+                  targetHost: 8.8.8.8
+                  intervalSec: 60
+              ap:
+                mode: bg
+                ssid: moxa-test
+                channel: 11
+                security:
+                  mode: none
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+  '/network/wifi/{id}/blacklist':
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+    post:
+      description: 'Add a MAC into blacklist of an indicated WiFi interface.'
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            '$ref': '#/definitions/WiFiIfaceBlacklist'
+      responses:
+        '200':
+          description: OK
+          schema:
+            '$ref': '#/definitions/WiFiIfaceBlacklist'
+            example:
+              id: 1
+              mac: 01:23:45:67:89:0a
+              description: test1
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    get:
+      description: 'Get blacklist of an indicated WiFi AP interface.'
+      responses:
+        '200':
+          description: A blacklist of an indicated WiFi AP interface.
+          schema:
+            type: array
+            items:
+              '$ref': '#/definitions/WiFiIfaceBlacklist'
+            example:
+              - id: 1
+                mac: 01:23:45:67:89:0a
+                description: test1
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    put:
+      summary: WiFi Blacklist for AP
+      description: Update blacklist of an indicated WiFi AP interface.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            type: array
+            items:
+              '$ref': '#/definitions/WiFiIfaceBlacklist'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              '$ref': '#/definitions/WiFiIfaceBlacklist'
+            example:
+              - id: 1
+                mac: 01:23:45:67:89:0a
+                description: test1
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    delete:
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              description: MAC ID of a blacklist
+              type: integer
+      description: Delete multiple MACs
+      responses:
+        '200':
+          description: success
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+  '/network/wifi/{id}/blacklist/{mac_id}':
+    parameters:
+      - name: id
+        in: path
+        description: A WiFi interface ID
+        type: integer
+        required: true
+      - name: mac_id
+        in: path
+        description: A MAC ID in a blacklist of the WiFi AP interface
+        type: integer
+        required: true
+    get:
+      description: 'Get a MAC item from blacklist of an indicated WiFi AP interface.'
+      responses:
+        '200':
+          description: 'A MAC item in a blacklist of an indicated WiFi AP interface.'
+          schema:
+            '$ref': '#/definitions/WiFiIfaceBlacklist'
+            example:
+              id: 1
+              mac: 01:23:45:67:89:0a
+              description: test1
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    put:
+      summary: WiFi Blacklist item for AP
+      description: 'Update a MAC item in blacklist of an indicated WiFi AP interface.'
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            '$ref': '#/definitions/WiFiIfaceBlacklist'
+      responses:
+        '200':
+          description: OK
+          schema:
+            '$ref': '#/definitions/WiFiIfaceBlacklist'
+            example:
+              id: 1
+              mac: 01:23:45:67:89:0a
+              description: test1
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    delete:
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            description: MAC ID of a blacklist
+            type: integer
+      description: Delete a MACs
+      responses:
+        '200':
+          description: success
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+  '/network/wifi/{id}/scan-networks':
+    parameters:
+      - name: id
+        in: path
+        description: A WiFi interface ID
+        type: integer
+        required: true
+    get:
+      description: 'Get a list of WiFi stations arounded.'
+      responses:
+        '200':
+          description: 'A list of WiFi stations.'
+          schema:
+            type: array
+            items:
+              '$ref': '#/definitions/WiFiAP'
+            example:
+              - ssid: test
+                bssid: 01:23:45:67:89:0a
+                signal: -43
+                frequency: 2462
+                security: wpa2
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+
+definitions:
+  WiFiIface:
+    title: WiFi Interface
+    required:
+      - id
+      - enable
+      - mode
+    properties:
+      id:
+        type: integer
+        description: Identifier for an WiFi interface.
+      name:
+        type: string
+        description: Interface name.
+      product:
+        type: string
+        description: Product model of the WiFi module.
+      mode:
+        type: string
+        description: Given WiFi interface mode. Could be one of `"ap"`, `"client"`.
+      capabilities:
+        type: array
+        description: Indicate current capability that module supports.
+        items:
+          type: string
+          enum:
+            - ap
+            - client
+      enable:
+        type: boolean
+        description: Enable WiFi Networking.
+      ap:
+        type: object
+        description: Configuration of WiFi AP mode.
+        required:
+          - mode
+          - ssid
+          - channel
+          - security
+        properties:
+          enableBlacklist:
+            type: boolean
+            description: Using blacklist or not.
+          mode:
+            type: string
+            enum:
+              - bg
+              - bgn
+              - ac
+          ssid:
+            type: string
+            description: SSID of a WiFi AP.
+          channel:
+            type: integer
+          security:
+            type: object
+            required:
+              - mode
+            properties:
+              mode:
+                type: string
+                enum:
+                  - none
+                  - wpa
+                  - wpa2
+                  - wpa/wpa2
+                  - eap
+              encryption:
+                type: string
+                enum:
+                  - tkip
+                  - aes
+                  - tkip/aes
+              password:
+                type: string
+                description: ASCII passphrase (8 ~ 63) or HEX pre-shared key (64)
+                  for WPA-Personal, or password for Radius.
+              radiusServerIp:
+                type: string
+                pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+              radiusServerPort:
+                type: integer
+                minimum: 1
+                maximum: 65535
+              radiusSharedSecret:
+                type: string
+          broadcastSsid:
+            type: boolean
+          shortPreamble:
+            type: boolean
+          beacon:
+            type: integer
+          ip:
+            type: string
+            pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+            description: IP address.
+          netmask:
+            type: string
+            pattern: "^(254|252|248|240|224|192|128)\\.0\\.0\\.0|255\\.(254|252|248|240|224|192|128|0)\\.0\\.0|255\\.255\\.(254|252|248|240|224|192|128|0)\\.0|255\\.255\\.255\\.(254|252|248|240|224|192|128|0)"
+            description: Subnet mask.
+      client:
+        type: object
+        description: Configuration of WiFi client mode
+        required:
+          - enableDhcp
+          - networks
+          - checkalive
+        properties:
+          enableDhcp:
+            type: boolean
+            description: 'Enable (`true`) the dhcp client or using the static IP (`false`).'
+          networks:
+            type: array
+            description: List of networks for WiFi client to connect.
+            items:
+              type: object
+              description: A WiFi AP configuration.
+              required:
+                - ssid
+              properties:
+                priority:
+                  description: "This field can be used to give higher priority for
+                    credentials\t(and similarly in struct wpa_ssid for network blocks)
+                    to change the\tInterworking automatic networking selection behavior.
+                    Default is `0`."
+                  type: integer
+                ssid:
+                  type: string
+                  description: SSID of a WiFi AP.
+                bssid:
+                  type: string
+                  description: BSSID (MAC) of a WiFi AP.
+                security:
+                  description: Security of the WiFi AP.
+                  type: string
+                  enum:
+                    - none
+                    - wep
+                    - wpa
+                    - wpa2
+                    - wpa/wpa2
+                    - eap
+                password:
+                  type: string
+                  description: Password of access point, Could be one of 1. WEP key.
+                    Length 5, 13, 16, 29 for ASCII keys or 10, 26, 32, 58 for HEX
+                    keys. 2. WPA-PSK key. ASCII passphrase (8 ~ 63) or HEX pre-shared
+                    key (64). 3. EAP key. Max length 64
+                username:
+                  type: string
+                  description: Username for EAP (Enterprise Access Point).
+                  maxLength: 64
+          ip:
+            type: string
+            pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+            description: IP address. `""` when not connected.
+          netmask:
+            type: string
+            pattern: "^(254|252|248|240|224|192|128)\\.0\\.0\\.0|255\\.(254|252|248|240|224|192|128|0)\\.0\\.0|255\\.255\\.(254|252|248|240|224|192|128|0)\\.0|255\\.255\\.255\\.(254|252|248|240|224|192|128|0)"
+            description: Subnet mask. `""` when not connected.
+          gateway:
+            type: string
+            pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+            description: Gateway IP address. `""` when not connected.
+          dns:
+            type: array
+            description: A list of DNS IP addresses. `[]` when not connected.
+            items:
+              type: string
+              pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          usage:
+            type: object
+            description: Data usage.
+            required:
+              - txkbyte
+              - rxkbyte
+            properties:
+              txkbyte:
+                type: integer
+                description: Amount of data transmitted, in Kbytes.
+              rxkbyte:
+                type: integer
+                description: Amount of data received, in Kbytes.
+          checkalive:
+            type: object
+            description: Keep-alive configuration.
+            required:
+              - enable
+            properties:
+              enable:
+                type: boolean
+                description: Enable/disable WiFi connection keep-alive by ping.
+              targetHost:
+                type: string
+                description: IP address to ping.
+              intervalSec:
+                type: integer
+                description: Check alive interval.
+    example:
+      id: 1
+      name: wlan0
+      product: WPEQ-353ACNI
+      capabilities:
+        - client
+        - ap
+      mode: client
+      enable: true
+      status: true
+      client:
+        enableDhcp: true
+        networks:
+          - ssid: test-none
+            security: none
+          - ssid: test-wpa
+            security: wpa
+            password: '12345678'
+            priority: 5
+          - ssid: test-eap
+            security: eap
+            username: moxa
+            password: moxa
+            priority: 10
+          - ssid: test-wep
+            security: wep
+            password: '12345'
+            priority: 1
+        signal: 100
+        ip: 111.70.146.125
+        netmask: 255.255.255.252
+        gateway: 111.70.146.126
+        dns:
+          - 168.95.1.1
+          - 168.95.192.1
+        usage:
+          txkbyte: 40023
+          rxkbyte: 3493
+        checkalive:
+          enable: true
+          targetHost: 8.8.8.8
+          intervalSec: 60
+      ap:
+        mode: bg
+        ssid: moxa-test
+        channel: 11
+        security:
+          mode: none
+  WiFiIfaceBlacklist:
+    title: Blacklist Item for WiFi AP Interface
+    required:
+      - id
+      - mac
+    properties:
+      id:
+        type: integer
+        description: Identifier for an WiFi AP blacklist MAC.
+      mac:
+        type: string
+        description: A MAC address.
+      description:
+        type: string
+        description: Description of the MAC address.
+  WiFiAP:
+    title: WiFi AP Information
+    required:
+      - bssid
+      - ssid
+    properties:
+      bssid:
+        type: string
+        description: BSSID (MAC) of a WiFi AP
+      ssid:
+        type: string
+        description: SSID of a WiFi AP.
+      frequency:
+        type: string
+        description: Frequency of a WiFi AP.
+        readOnly: true
+      signal:
+        type: integer
+        description: Signal of a WiFi AP (in dBm).
+        readOnly: true
+      security:
+        type: integer
+        description: Security mode of a WiFi AP (in dBm).
+        enum:
+          - none
+          - wpa
+          - wpa2
+          - wpa/wpa2
+          - eap
+        readOnly: true

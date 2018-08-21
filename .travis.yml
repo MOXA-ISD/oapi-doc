@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - "node"
+  - 'node'
 cache:
   yarn: true
   directories:
     - node_modules
 env:
-  - PACKAGE=edge
+  - PACKAGE=gateway
   - PACKAGE=server
 script: yarn lint $PACKAGE

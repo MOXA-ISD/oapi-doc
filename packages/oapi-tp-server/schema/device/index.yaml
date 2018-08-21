@@ -1,15 +1,14 @@
----
 swagger: '2.0'
 
 info:
   version: 2.1.0
-  title: ThingsPro Edge RESTful API reference
-basePath: "/api/v1"
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
 schemes:
-- http
-- https
+  - http
+  - https
 produces:
-- application/json
+  - application/json
 securityDefinitions:
   mx-api-token:
     type: apiKey
@@ -18,8 +17,8 @@ securityDefinitions:
     description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
-- name: device
-  description: Cloud Gateway management
+  - name: device
+    description: Cloud Gateway management
 
 paths:
   /devices:

@@ -1,0 +1,411 @@
+swagger: '2.0'
+
+info:
+  title: Tag APIs
+  description: ThingsPro APIs for tag operation
+host: localhost
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: tag
+    description: Tag operation
+
+paths:
+  /tags/{type}:
+    parameters:
+      - name: type
+        enum: [fieldbus, system, virtual]
+        in: path
+        type: string
+        required: true
+    get:
+      tags:
+        - tag
+      description: |
+        Gets all tags with given type.
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TagList'
+  /tags/{type}/templates:
+    parameters:
+      - name: type
+        enum: [fieldbus, EthernetIP, modbus]
+        in: path
+        type: string
+        required: true
+    get:
+      tags:
+        - tag
+      description: |
+        Gets template list by given fieldbus protocol
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TemplateList'
+    delete:
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTemplateList'
+      tags:
+        - tag
+      description: |
+        Deletes template list by given fieldbus protocol
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeleteTemplateList'
+  /tags/{type}/templates/{name}:
+    parameters:
+      - name: type
+        enum: [EthernetIP, modbus]
+        in: path
+        type: string
+        required: true
+      - name: name
+        in: path
+        type: string
+        required: true
+    get:
+      tags:
+        - tag
+      description: |
+        Gets `fieldbus tag settings` by the given protocol and template name.
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/Template'
+    post:
+      tags:
+        - tag
+      description: |
+        Adds a new `IO template` by the given protocol and template name.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Template'
+      responses:
+        200:
+          description: Successful response.
+    put:
+      tags:
+        - tag
+      description: |
+        Updates an `IO template` by the given protocol and template name.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Template'
+      responses:
+        200:
+          description: Successful response.
+    delete:
+      tags:
+        - tag
+      description: |
+        Removes an `IO template` by the given protocol and template name.
+      responses:
+        200:
+          description: Successful removing the template.
+  /tags/{type}/devices:
+    parameters:
+      - name: type
+        enum: [fieldbus, EthernetIP, modbus]
+        in: path
+        type: string
+        required: true
+      - name: template
+        in: query
+        type: string
+    get:
+      tags:
+        - tag
+      description: |
+        Gets all devices that refer to the given template, |
+        otherwise remove all devices of the type
+      responses:
+        200:
+          description: Succeed to get device list
+          schema:
+            $ref: '#/definitions/DeviceList'
+    delete:
+      tags:
+        - tag
+      description: |
+        Removes all devices that refer to the given template
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceList'
+      responses:
+        200:
+          description: Succeed to remove devices
+  /tags/{type}/devices/{name}:
+    parameters:
+      - name: type
+        enum: [EthernetIP, modbus]
+        in: path
+        type: string
+        required: true
+      - name: name
+        in: path
+        type: string
+        required: true
+    post:
+      tags:
+        - tag
+      description: |
+        Adds an device config by given protocol and device name.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        200:
+          description: Ok.
+    put:
+      tags:
+        - tag
+      description: |
+        Updates an device config by given protocol and device name.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        200:
+          description: Ok.
+    delete:
+      tags:
+        - tag
+      description: |
+        Removes an device config by given protocol and device name.
+      responses:
+        200:
+          description: OK.
+  /tags/{type}/configs:
+    parameters:
+      - name: type
+        enum: [fieldbus]
+        in: path
+        type: string
+        required: true
+    get:
+      tags:
+        - tag
+      description: Export all io configuration from fieldbus folders
+      responses:
+        200:
+          description: Successful export IO configuration.
+          schema:
+            $ref: '#/definitions/Export'
+    put:
+      tags:
+        - tag
+      description: Import all io configuration to fieldbus folders
+      responses:
+        200:
+          description: Successful import `IO` configuration.
+          schema:
+            $ref: '#/definitions/Import'
+          examples:
+            fieldbus:
+              - name: 'modbus'
+                status: 'OK'
+              - name: 'EthernetIP'
+                status: 'OK'
+
+definitions:
+  DeleteTemplateList:
+    type: 'object'
+    properties:
+      list:
+        type: 'array'
+        items:
+          type: 'object'
+          properties:
+            template_name:
+              type: 'string'
+              example: 'temp1'
+            protocol_name:
+              type: 'string'
+              example: 'EthernetIP'
+  TemplateList:
+    type: 'object'
+    properties:
+      list:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Template'
+  Template:
+    type: 'object'
+    properties:
+      template_name:
+        type: 'string'
+      tag_list:
+        type: 'array'
+        items:
+          $ref: '#/definitions/ModbusTag'
+    example:
+      template_name: 'temp1'
+      protocol_name: 'EthernetIP'
+      tag_list:
+        - op: 'write'
+          polling_period_ms: 100
+          request_timeout_ms: 10
+          address: 0
+          type: 'uint16'
+          id: 'do0'
+          quantity: 2
+        - op: 'write'
+          polling_period_ms: 100
+          request_timeout_ms: 10
+          address: 2
+          type: 'uint16'
+          id: 'do1'
+          quantity: 2
+  Tag:
+    type: 'object'
+    properties:
+      srcName:
+        type: 'string'
+      tagName:
+        type: 'string'
+      dataType:
+        type: 'string'
+        enum: [uint8, uint16, uint32, uint64, int16, int32, int64, float32, float64, string, boolean, bytearray]
+      duration:
+        type: 'integer'
+        format: 'int32'
+      dataUnit:
+        type: 'string'
+      access:
+        type: 'string'
+        enum: [ro, wo, rw]
+  TagList:
+    type: 'object'
+    required:
+      - tag_list
+    properties:
+      tag_list:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Tag'
+    example:
+      tag_list:
+        - srcName: 'device0'
+          tagName: 'di0'
+          dataType: 'uint16'
+          duration: 100
+          dataUnit: ''
+          access: 'ro'
+        - srcName: 'device0'
+          tagName: 'di1'
+          dataType: 'uint16'
+          duration: 100
+          dataUnit: ''
+          access: 'ro'
+  ModbusTag:
+    type: 'object'
+    properties:
+      op:
+        type: 'string'
+      polling_period_ms:
+        type: 'integer'
+      request_timeout_ms:
+        type: 'integer'
+      address:
+        type: 'integer'
+      type:
+        type: 'string'
+      id:
+        type: 'string'
+      quantity:
+        type: 'integer'
+  Device:
+    type: 'object'
+    required:
+      - name
+      - interface
+      - template_name
+    properties:
+      name:
+        type: string
+      interface:
+        type: string
+      template_name:
+        type: string
+    example:
+      name: adapter_device0
+      interface: eth0
+      template_name: temp4
+      total_tags: 20
+      success_tags: 16
+      t_to_o_packet_rate: 100
+      o_to_t_data_size: 496
+      connection_type: 0
+      o_to_t_real_time_format: 1
+      o_to_t_instance: 100
+      encapsulation_timeout: 0
+      configuration_instance: 1
+      adapter_port: 44818
+      t_to_o_data_size: 496
+      adapter_ip: 10.144.33.155
+      t_to_o_real_time_format: 0
+      o_to_t_packet_rate: 100
+      timeout_multiplier: 2
+      t_to_o_instance: 200
+  DeviceList:
+    type: 'object'
+    required:
+      - device_list
+    properties:
+      device_list:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Device'
+
+  Export:
+    type: 'object'
+    properties:
+      url:
+        type: 'string'
+    example:
+      url: '/run/shm/tag-io-configs.tar.gz'
+  Import:
+    type: 'object'
+    properties:
+      fieldbus:
+        type: 'array'
+        items:
+          type: 'object'
+          required:
+            - name
+            - status
+          properties:
+            name:
+              type: string
+            status:
+              type: string

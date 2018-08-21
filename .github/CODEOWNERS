@@ -2,20 +2,20 @@
 
 *       @zack9433
 
-../packages/oapi-tp-edge/schema/dhcp @fcwu @FrankSHLi
-../packages/oapi-tp-edge/schema/dns @fcwu @FrankSHLi
-../packages/oapi-tp-edge/schema/ethernet @fcwu @FrankSHLi
-../packages/oapi-tp-edge/schema/wifi @fcwu @FrankSHLi
-../packages/oapi-tp-edge/schema/serial @fcwu @GaryHsu77
-../packages/oapi-tp-edge/schema/system @fcwu @GaryHsu77
-../packages/oapi-tp-edge/schema/time @fcwu @GaryHsu77
-../packages/oapi-tp-edge/schema/cellular @fcwu @GaryHsu77
-../packages/oapi-tp-edge/schema/iptable @fcwu @StuartChenMoxa
-../packages/oapi-tp-edge/schema/openvpn @fcwu @StuartChenMoxa
-../packages/oapi-tp-edge/schema/datalogger @fcwu @CPtung
-../packages/oapi-tp-edge/schema/modbusslave @fcwu @CPtung
-../packages/oapi-tp-edge/schema/firmware @fcwu
-../packages/oapi-tp-edge/schema/remotecontrol @fcwu
-../packages/oapi-tp-edge/schema/program @fcwu
-../packages/oapi-tp-edge/schema/import-export @fcwu
+../packages/oapi-tp-gateway/schema/dhcp @fcwu @FrankSHLi
+../packages/oapi-tp-gateway/schema/dns @fcwu @FrankSHLi
+../packages/oapi-tp-gateway/schema/ethernet @fcwu @FrankSHLi
+../packages/oapi-tp-gateway/schema/wifi @fcwu @FrankSHLi
+../packages/oapi-tp-gateway/schema/serial @fcwu @GaryHsu77
+../packages/oapi-tp-gateway/schema/system @fcwu @GaryHsu77
+../packages/oapi-tp-gateway/schema/time @fcwu @GaryHsu77
+../packages/oapi-tp-gateway/schema/cellular @fcwu @GaryHsu77
+../packages/oapi-tp-gateway/schema/iptable @fcwu @StuartChenMoxa
+../packages/oapi-tp-gateway/schema/openvpn @fcwu @StuartChenMoxa
+../packages/oapi-tp-gateway/schema/datalogger @fcwu @CPtung
+../packages/oapi-tp-gateway/schema/modbusslave @fcwu @CPtung
+../packages/oapi-tp-gateway/schema/firmware @fcwu
+../packages/oapi-tp-gateway/schema/remotecontrol @fcwu
+../packages/oapi-tp-gateway/schema/program @fcwu
+../packages/oapi-tp-gateway/schema/import-export @fcwu
 ../packages/oapi-tp-server/schema @cain19811028 @owenkao

@@ -1,0 +1,145 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: remotecontrol
+    description: Remote control settings
+
+paths:
+  '/system/remotecontrol':
+    get:
+      description: Get current settings of remote control
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/RemoteControl'
+            example:
+              enable: true
+              deviceUUID: f71b4639-d7bb-4fc3-9ee6-c8d08d47f227
+              keepalive: 60
+              remoteHost: moxa.thingspro.local
+              remotePort: 8080
+              remoteProtocol: mqtt
+              psk: 123sdlkfjasldkfjoasdfjioawjerioqwejrasdfjoi2345klscv
+      tags:
+        - remotecontrol
+      security:
+        - mx-api-token: []
+    put:
+      description: Update settings of remote control
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/RemoteControl'
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/RemoteControl'
+            example:
+              enable: true
+              deviceUUID: f71b4639-d7bb-4fc3-9ee6-c8d08d47f227
+              keepalive: 60
+              remoteHost: moxa.thingspro.local
+              remotePort: 8080
+              remoteProtocol: mqtt
+              psk: 123sdlkfjasldkfjoasdfjioawjerioqwejrasdfjoi2345klscv
+      tags:
+        - remotecontrol
+      security:
+        - mx-api-token: []
+  '/system/remotecontrol/test':
+    post:
+      description: Test settings of remote control
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/RemoteControl'
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/TestResult'
+            example:
+              status: success
+              log: connected to xxxx
+      tags:
+        - remotecontrol
+      security:
+        - mx-api-token: []
+
+definitions:
+  RemoteControl:
+    description: Remote control configuration
+    type: object
+    required:
+      - remoteHost
+      - remotePort
+      - psk
+      - enable
+    properties:
+      deviceUUID:
+        description: A unique id given by ThingsPro Cloud Server (format in UUIDv4)
+        type: string
+      keepalive:
+        description: Keepalive interval for remote connection, each heartbeat packet
+          costs 2 bytes
+      remoteHost:
+        description: ThingsPro Cloud Server Host / IP address
+        type: string
+      remotePort:
+        description: ThingsPro Cloud Server Port
+        type: number
+        minLength: 1
+        maxLength: 65535
+      remoteProtocol:
+        description: This is a reversed key.
+        type: string
+        readOnly: true
+      psk:
+        description: Pre-shared key for remote control service
+        type: string
+      enable:
+        description: Enable remote control or not
+        type: boolean
+    example:
+      enable: true
+      deviceUUID: f71b4639-d7bb-4fc3-9ee6-c8d08d47f227
+      keepalive: 60
+      remoteHost: moxa.thingspro.local
+      remotePort: 8080
+      remoteProtocol: mqtt
+      psk: 123sdlkfjasldkfjoasdfjioawjerioqwejrasdfjoi2345klscv
+  TestResult:
+    description: Remote control test result
+    type: object
+    properties:
+      status:
+        description: success or error
+        type: string
+      log:
+        description: Detail of testing log
+        type: string
+    example:
+      status: success
+      log: connected to xxxx

@@ -1,0 +1,11 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./tenant.yaml#/tags"
+
+paths:
+- $ref: "./tenant.yaml#/paths"
+
+definitions:
+- $ref: "./tenant.yaml#/definitions"

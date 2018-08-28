@@ -1,0 +1,238 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/tenant-api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: device
+    description: Handles tenants data
+
+paths:
+  '/tenants/{tenantId}/devices':
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Get all devices field data
+      responses:
+        200:
+          description: An array of devices
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceList' } }
+      tags:
+        - device
+      security:
+        - mx-api-token: []
+    post:
+      description: Create a new device.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceReq'
+      responses:
+        201:
+          description: Create device successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+      tags:
+        - device
+      security:
+        - mx-api-token: []
+        
+  /tenants/{tenantId}/devices/{uuid}:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: uuid
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return device data with given ID
+      tags:
+        - device
+      security:
+        - mx-api-token: []
+      responses:
+        200:
+          description: An Object of the device
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+    delete:
+      description: Delete device with given ID
+      tags:
+        - device
+      security:
+        - mx-api-token: []
+      responses:
+        204:
+          description: success
+
+definitions:
+  Device:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      uuid:
+        type: string
+        description: Unique identifier representing a specific device.
+      name:
+        type: string
+        description: Name of device.
+      reportedProperties:
+        type: object
+        description: Reported properties of device.
+      desiredProperties:
+        type: object
+        description: Desired properties of device.
+      connectionStatus:
+        type: string
+        description: Connection status of device.
+      reportedLastUpdatedAt:
+        type: string
+        description: Device reported properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      desiredLastUpdatedAt:
+        type: string
+        description: Device desired properties updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      createdAt:
+        type: string
+        description: Device created time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      updatedAt:
+        type: string
+        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
+   
+  DeviceReq:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Model name of device.
+        
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Device:
+      {
+        'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
+        'uuid': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        'name': 'moxa',
+        'reportedProperties': {
+          "systemTime": {
+              "date": "",
+              "timeZone": "",
+              "ntpEnable": "",
+              "timeServer": "",
+              "poolInterval": ""
+          }
+        },
+        'desiredProperties': {
+          "general": {
+              "deviceName": "my Name",
+              "firmwareVersion": "my Version",
+              "edgeVersion": "my Version",
+              "configVersion": "my Version"
+          }
+        },
+        'connectionStatus': 'online',
+        'reportedLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+        'desiredLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+        'createdAt': '2018-08-12T20:17:46.384Z',
+        'updatedAt': '2018-08-12T20:17:46.384Z',
+      }
+    DeviceList:
+      [
+        {
+          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
+          'uuid': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          'name': 'moxa',
+          'reportedProperties': {
+            "systemTime": {
+                "date": "",
+                "timeZone": "",
+                "ntpEnable": "",
+                "timeServer": "",
+                "poolInterval": ""
+            }
+          },
+          'desiredProperties': {
+            "general": {
+                "deviceName": "my Name",
+                "firmwareVersion": "my Version",
+                "edgeVersion": "my Version",
+                "configVersion": "my Version"
+            }
+          },
+          'connectionStatus': 'online',
+          'reportedLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+          'desiredLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+          'createdAt': '2018-08-12T20:17:46.384Z',
+          'updatedAt': '2018-08-12T20:17:46.384Z',
+        },
+        {
+          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
+          'uuid': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          'name': 'moxa',
+          'reportedProperties': {
+            "systemTime": {
+                "date": "",
+                "timeZone": "",
+                "ntpEnable": "",
+                "timeServer": "",
+                "poolInterval": ""
+            }
+          },
+          'desiredProperties': {
+            "general": {
+                "deviceName": "my Name",
+                "firmwareVersion": "my Version",
+                "edgeVersion": "my Version",
+                "configVersion": "my Version"
+            }
+          },
+          'connectionStatus': 'online',
+          'reportedLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+          'desiredLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+          'createdAt': '2018-08-12T20:17:46.384Z',
+          'updatedAt': '2018-08-12T20:17:46.384Z',
+          },
+      ]
+    DeviceReq:
+      {
+        'modelName': 'moxa',
+      }   
+
+    

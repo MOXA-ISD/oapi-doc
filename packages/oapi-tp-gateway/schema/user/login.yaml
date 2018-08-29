@@ -65,11 +65,7 @@ definitions:
       user:
         type: object
         items:
-          - $ref: '#/definitions/User'
-      role:
-        type: object
-        items:
-          - $ref: '#/definitions/Role'
+          - $ref: '#/definitions/UserLogin'
       token:
         type: string
         description: Granted authentication token.

@@ -26,7 +26,7 @@ paths:
       description: Get all users field data
       responses:
         200:
-          description: An array of tokens
+          description: An array of users
           schema:
             type: array
             items:

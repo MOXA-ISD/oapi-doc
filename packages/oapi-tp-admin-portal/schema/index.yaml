@@ -1,0 +1,37 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Admin Portal RESTful API reference
+  description: |
+    Welcome to the ThingsPro Admin Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
+    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors. All requests are authenticated using an `mx-api-token` which can be obtained from ThingsPro gateway web.
+
+host: localhost
+basePath: '/admin-api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - $ref: './user/index.yaml#/tags'
+  - $ref: './tenant/index.yaml#/tags'
+
+paths:
+  - $ref: './user/index.yaml#/paths'
+  - $ref: './tenant/index.yaml#/paths'
+
+definitions:
+  - $ref: './user/index.yaml#/definitions'
+  - $ref: './tenant/index.yaml#/definitions'

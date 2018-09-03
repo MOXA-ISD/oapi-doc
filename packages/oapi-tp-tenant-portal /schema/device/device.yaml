@@ -135,6 +135,31 @@ paths:
               $ref: '#/definitions/DesiredProperties'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
 
+  /tenants/{tenantId}/devices/{deviceId}/directMethodList:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return direct methods data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the direct methods
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DirectMethodList'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DirectMethodList' } }
+
 definitions:
   Device:
     type: object
@@ -193,6 +218,15 @@ definitions:
           type: object
         description: Device desired properties.
         
+  DirectMethodList:
+    type: object
+    properties:
+      directMethodList:
+        type: array
+        items:
+          type: object
+        description: Device direct method list.
+
   ReportedProperties:
     type: object
     properties:
@@ -204,7 +238,7 @@ definitions:
         items:
           type: object
         description: Device reported properties.
-     
+
   DeviceReq:
     type: object
     properties:
@@ -421,3 +455,27 @@ externalDocs:
           }          
         ]
       }    
+    DirectMethodList:
+      {    
+        "directMethodList": [
+          {
+            "methodName": "reboot",
+            "displayName": "Reboot",
+            "description": "Reboot IoT Device immediately",
+            "userInput": []
+          },
+          {
+            "methodName": "rebootAt",
+            "displayName": "Reboot At",
+            "description": "Reboot IoT Device at a specific date time",
+            "userInput": [
+              {
+                "parameter": "executeAt",
+                "value": "",
+                "dataType": "datetime",
+                "description": "UTC time with ISO 8601 format"
+              }
+            ]
+          }
+        ]      
+      }

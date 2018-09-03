@@ -9,13 +9,6 @@ schemes:
   - https
 produces:
   - application/json
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: mx-api-token
-    in: header
-    description: ThingsPro RESTful API token, The token should be created on web console.
-
 tags:
   - name: device
     description: Handles tenants data
@@ -40,8 +33,6 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceList' } }
       tags:
         - device
-      security:
-        - mx-api-token: []
     post:
       description: Create a new device.
       parameters:
@@ -61,17 +52,15 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
       tags:
         - device
-      security:
-        - mx-api-token: []
-        
-  /tenants/{tenantId}/devices/{uuid}:
+ 
+  /tenants/{tenantId}/devices/{deviceId}:
     parameters:
       - name: tenantId
         in: path
         description: tenant unique identifier
         required: true
         type: string
-      - name: uuid
+      - name: deviceId
         in: path
         description: device unique identifier
         required: true
@@ -80,8 +69,6 @@ paths:
       description: Return device data with given ID
       tags:
         - device
-      security:
-        - mx-api-token: []
       responses:
         200:
           description: An Object of the device
@@ -94,11 +81,59 @@ paths:
       description: Delete device with given ID
       tags:
         - device
-      security:
-        - mx-api-token: []
       responses:
         204:
           description: success
+
+  /tenants/{tenantId}/devices/{deviceId}/reportedProperties:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return reported properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the reported properties
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ReportedProperties'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/ReportedProperties' } }
+
+  /tenants/{tenantId}/devices/{deviceId}/desiredProperties:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return desired properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the desired properties
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DesiredProperties'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
 
 definitions:
   Device:
@@ -107,34 +142,69 @@ definitions:
       tenantId:
         type: string
         description: Unique identifier representing a specific tenant.
-      uuid:
+      deviceId:
         type: string
         description: Unique identifier representing a specific device.
-      name:
+      deviceGroup:
+        type: array
+        items:
+          type: string
+        description: Groups of device.
+      modelName:
         type: string
-        description: Name of device.
-      reportedProperties:
-        type: object
-        description: Reported properties of device.
-      desiredProperties:
-        type: object
-        description: Desired properties of device.
+        description: Model name of device.
+      deviceType:
+        type: string
+        description: Type of device.  
+      imageUrl:
+        type: string
+        description: Image URL of device.  
+      logoUrl:
+        type: string
+        description: Logo URL of device.  
+      allowConnection:
+        type: boolean
+        description: The device can connect to service or not.
       connectionStatus:
         type: string
         description: Connection status of device.
-      reportedLastUpdatedAt:
+      lastRebootAt:
         type: string
-        description: Device reported properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
-      desiredLastUpdatedAt:
+        description: Device last reboot time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      lastRebootReason:
         type: string
-        description: Device desired properties updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
+        description: Device last reboot reason.   
       createdAt:
         type: string
         description: Device created time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
       updatedAt:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
-   
+  
+  DesiredProperties:
+    type: object
+    properties:
+      desiredLastUpdatedAt:
+        type: string
+        description: Device desired properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      desiredProperties:
+        type: array
+        items:
+          type: object
+        description: Device desired properties.
+        
+  ReportedProperties:
+    type: object
+    properties:
+      reportedLastUpdatedAt:
+        type: string
+        description: Device reported properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      reportedProperties:
+        type: array
+        items:
+          type: object
+        description: Device reported properties.
+     
   DeviceReq:
     type: object
     properties:
@@ -148,28 +218,17 @@ externalDocs:
     Device:
       {
         'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-        'uuid': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        'name': 'moxa',
-        'reportedProperties': {
-          "systemTime": {
-              "date": "",
-              "timeZone": "",
-              "ntpEnable": "",
-              "timeServer": "",
-              "poolInterval": ""
-          }
-        },
-        'desiredProperties': {
-          "general": {
-              "deviceName": "my Name",
-              "firmwareVersion": "my Version",
-              "edgeVersion": "my Version",
-              "configVersion": "my Version"
-          }
-        },
+        'deviceId': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        'deviceName': 'moxa',
+        'deviceGroup': ["Group A", "Group B"],
+        'modelName': 'UC-8112-LX-CG"',
+        'deviceType': 'IIoT Gateway',
+        'allowConnection': true,
+        'imageURL': 'http://123.456.net/xxx/xxx.jpg',
+        'logoURL': 'http://123.456.net/xxx/xxx.jpg',
         'connectionStatus': 'online',
-        'reportedLastUpdatedAt': '2018-08-12T20:17:46.384Z',
-        'desiredLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+        "lastRebootAt": "2018-08-12T20:17:46.384Z",
+        "lastRebootReason": "Remote Reboot on ThingsPro Server by XXX",   
         'createdAt': '2018-08-12T20:17:46.384Z',
         'updatedAt': '2018-08-12T20:17:46.384Z',
       }
@@ -177,62 +236,188 @@ externalDocs:
       [
         {
           'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'uuid': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-          'name': 'moxa',
-          'reportedProperties': {
-            "systemTime": {
-                "date": "",
-                "timeZone": "",
-                "ntpEnable": "",
-                "timeServer": "",
-                "poolInterval": ""
-            }
-          },
-          'desiredProperties': {
-            "general": {
-                "deviceName": "my Name",
-                "firmwareVersion": "my Version",
-                "edgeVersion": "my Version",
-                "configVersion": "my Version"
-            }
-          },
+          'deviceId': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          'deviceName': 'moxa1',
+          'deviceGroup': ["Group A", "Group B"],
+          'modelName': 'UC-8112-LX-CG"',
+          'deviceType': 'IIoT Gateway',
+          'allowConnection': true,
+          'imageURL': 'http://123.456.net/xxx/xxx.jpg',
+          'logoURL': 'http://123.456.net/xxx/xxx.jpg',
           'connectionStatus': 'online',
-          'reportedLastUpdatedAt': '2018-08-12T20:17:46.384Z',
-          'desiredLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+          "lastRebootAt": "2018-08-12T20:17:46.384Z",
+          "lastRebootReason": "Remote Reboot on ThingsPro Server by XXX",   
           'createdAt': '2018-08-12T20:17:46.384Z',
           'updatedAt': '2018-08-12T20:17:46.384Z',
         },
         {
           'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'uuid': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-          'name': 'moxa',
-          'reportedProperties': {
-            "systemTime": {
-                "date": "",
-                "timeZone": "",
-                "ntpEnable": "",
-                "timeServer": "",
-                "poolInterval": ""
-            }
-          },
-          'desiredProperties': {
-            "general": {
-                "deviceName": "my Name",
-                "firmwareVersion": "my Version",
-                "edgeVersion": "my Version",
-                "configVersion": "my Version"
-            }
-          },
+          'deviceId': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          'deviceName': 'moxa2',
+          'deviceGroup': ["Group A", "Group B"],
+          'modelName': 'UC-8112-LX-CG"',
+          'deviceType': 'IIoT Gateway',
+          'allowConnection': true,
+          'imageURL': 'http://123.456.net/xxx/xxx.jpg',
+          'logoURL': 'http://123.456.net/xxx/xxx.jpg',
           'connectionStatus': 'online',
-          'reportedLastUpdatedAt': '2018-08-12T20:17:46.384Z',
-          'desiredLastUpdatedAt': '2018-08-12T20:17:46.384Z',
+          "lastRebootAt": "2018-08-12T20:17:46.384Z",
+          "lastRebootReason": "Remote Reboot on ThingsPro Server by XXX",   
           'createdAt': '2018-08-12T20:17:46.384Z',
           'updatedAt': '2018-08-12T20:17:46.384Z',
-          },
+        },
       ]
     DeviceReq:
       {
         'modelName': 'moxa',
       }   
-
-    
+    ReportedProperties:
+      {    
+        "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+        "reportedProperties": [      
+          {
+            "id": 1,
+            "type": "general",
+            "name": "deviceName",
+            "description": "Device Name",
+            "value": "Demo Device 01"
+          },
+          {
+            "id": 2,
+            "type": "general",
+            "name": "firmwareVersion",
+            "description": "Firmware Version",
+            "value": "1.8.1"
+          },      
+          {
+            "id": 3,
+            "type": "general",
+            "name": "configVersion",
+            "description": "Config Version",
+            "value": "3.1.2"
+          },
+          {
+            "id": 4,
+            "type": "general",
+            "name": "memoryTotalSize",
+            "description": "Memory Total Size",
+            "value": "128",
+            "unit": "GB"
+          },
+          {
+            "id": 5,
+            "type": "network",
+            "name": "eth0",
+            "description": "Ethernet 0",
+            "value": [
+              {
+                "id": 1,
+                "name": "ipAddress",
+                "description": "IP Address",
+                "value": "192.168.3.21"
+              },
+              {
+                "id": 2,
+                "name": "mask",
+                "description": "Subnet Mask",
+                "value": "255.255.255.0"
+              },
+              {
+                "id": 3,
+                "name": "gateway",
+                "description": "Default Gateway",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 4,
+                "name": "dhcp",
+                "description": "DHCP",
+                "value": true
+              },
+              {
+                "id": 5,
+                "name": "primaryDns",
+                "description": "Primary DNS",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 6,
+                "name": "secondaryDns",
+                "description": "Secondary DNS",
+                "vaule": "10.29.11.121"
+              }
+            ]
+          }
+        ]    
+      }
+    DesiredProperties:
+      { 
+        "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+        "desiredProperties": [        
+          {
+            "id": 1,
+            "type": "general",
+            "name": "deviceName",
+            "description": "Device Name",
+            "value": "Demo Device 01"
+          },
+          {
+            "id": 2,
+            "type": "general",
+            "name": "firmwareVersion",
+            "description": "Firmware Version",
+            "value": "1.8.1"
+          },      
+          {
+            "id": 3,
+            "type": "general",
+            "name": "configVersion",
+            "description": "Config Version",
+            "value": "3.1.2"
+          },
+          {
+            "id": 4,
+            "type": "network",
+            "name": "eth0",
+            "description": "Ethernet 0",
+            "value": [
+              {
+                "id": 1,
+                "name": "ipAddress",
+                "description": "IP Address",
+                "value": "192.168.3.21"
+              },
+              {
+                "id": 2,
+                "name": "mask",
+                "description": "Subnet Mask",
+                "value": "255.255.255.0"
+              },
+              {
+                "id": 3,
+                "name": "gateway",
+                "description": "Default Gateway",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 4,
+                "name": "dhcp",
+                "description": "DHCP",
+                "value": true
+              },
+              {
+                "id": 5,
+                "name": "primaryDns",
+                "description": "Primary DNS",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 6,
+                "name": "secondaryDns",
+                "description": "Secondary DNS",
+                "vaule": "10.29.11.121"
+              }
+            ]
+          }          
+        ]
+      }    

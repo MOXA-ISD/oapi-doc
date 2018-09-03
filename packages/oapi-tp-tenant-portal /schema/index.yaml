@@ -5,7 +5,7 @@ info:
   title: ThingsPro Tenant Portal RESTful API reference
   description: |
     Welcome to the ThingsPro Tenant Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
-    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors. All requests are authenticated using an `mx-api-token` which can be obtained from ThingsPro gateway web.
+    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
 
 host: localhost
 basePath: '/tenant-api/v1'
@@ -16,13 +16,6 @@ schemes:
 
 produces:
   - application/json
-
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: mx-api-token
-    in: header
-    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
   - $ref: './user/index.yaml#/tags'

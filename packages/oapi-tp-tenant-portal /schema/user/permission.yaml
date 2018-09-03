@@ -9,12 +9,6 @@ schemes:
   - https
 produces:
   - application/json
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: mx-api-token
-    in: header
-    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
   - name: permission
@@ -34,8 +28,6 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
       tags:
         - permission
-      security:
-        - mx-api-token: []
 
 definitions:
   Permission:

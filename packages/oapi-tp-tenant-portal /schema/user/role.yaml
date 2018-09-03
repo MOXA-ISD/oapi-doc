@@ -9,12 +9,6 @@ schemes:
   - https
 produces:
   - application/json
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: mx-api-token
-    in: header
-    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
   - name: role
@@ -40,8 +34,7 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleList' } }
       tags:
         - role
-      security:
-        - mx-api-token: []
+
     post:
       description: Create a new role.
       parameters:
@@ -56,8 +49,6 @@ paths:
           description: Create role successfully
       tags:
         - role
-      security:
-        - mx-api-token: []
 
   /tenants/{tenantId}/roles/{id}:
     parameters:
@@ -83,8 +74,6 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
       tags:
         - role
-      security:
-        - mx-api-token: []
     put:
       description: Return updated user data with given ID
       parameters:
@@ -104,8 +93,6 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
       tags:
         - role
-      security:
-        - mx-api-token: []
     delete:
       description: Delete role with given ID
       responses:
@@ -113,8 +100,6 @@ paths:
           description: success
       tags:
         - role
-      security:
-        - mx-api-token: []
 
 definitions:
   Role:

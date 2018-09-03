@@ -9,12 +9,6 @@ schemes:
   - https
 produces:
   - application/json
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: mx-api-token
-    in: header
-    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
   - name: login
@@ -45,8 +39,7 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/LoginRes' } }
       tags:
         - login
-      security:
-        - mx-api-token: []
+
   '/logout':
     post:
       description: user logout
@@ -55,8 +48,6 @@ paths:
           description: user logout
       tags:
         - logout
-      security:
-        - mx-api-token: []
 
 definitions:
   LoginRes:

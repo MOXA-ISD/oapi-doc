@@ -9,12 +9,6 @@ schemes:
   - https
 produces:
   - application/json
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: mx-api-token
-    in: header
-    description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
   - name: user
@@ -40,8 +34,7 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
       tags:
         - user
-      security:
-        - mx-api-token: []
+
     post:
       description: Create a new user.
       parameters:
@@ -66,8 +59,7 @@ paths:
               description: Granted authentication token.
       tags:
         - user
-      security:
-        - mx-api-token: []
+
   /tenants/{tenantId}/users/{userId}:
     parameters:
       - name: tenantId
@@ -84,8 +76,6 @@ paths:
       description: Return user data with given ID
       tags:
         - user
-      security:
-        - mx-api-token: []
       responses:
         200:
           description: An Object of the user
@@ -115,8 +105,6 @@ paths:
       description: Delete User with given ID
       tags:
         - user
-      security:
-        - mx-api-token: []
       responses:
         204:
           description: success

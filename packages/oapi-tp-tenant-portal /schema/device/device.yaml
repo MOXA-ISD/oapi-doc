@@ -193,12 +193,6 @@ definitions:
       connectionStatus:
         type: string
         description: Connection status of device.
-      lastRebootAt:
-        type: string
-        description: Device last reboot time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
-      lastRebootReason:
-        type: string
-        description: Device last reboot reason.   
       createdAt:
         type: string
         description: Device created time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
@@ -261,8 +255,6 @@ externalDocs:
         'imageURL': 'http://123.456.net/xxx/xxx.jpg',
         'logoURL': 'http://123.456.net/xxx/xxx.jpg',
         'connectionStatus': 'online',
-        "lastRebootAt": "2018-08-12T20:17:46.384Z",
-        "lastRebootReason": "Remote Reboot on ThingsPro Server by XXX",   
         'createdAt': '2018-08-12T20:17:46.384Z',
         'updatedAt': '2018-08-12T20:17:46.384Z',
       }
@@ -278,9 +270,7 @@ externalDocs:
           'allowConnection': true,
           'imageURL': 'http://123.456.net/xxx/xxx.jpg',
           'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-          'connectionStatus': 'online',
-          "lastRebootAt": "2018-08-12T20:17:46.384Z",
-          "lastRebootReason": "Remote Reboot on ThingsPro Server by XXX",   
+          'connectionStatus': 'online', 
           'createdAt': '2018-08-12T20:17:46.384Z',
           'updatedAt': '2018-08-12T20:17:46.384Z',
         },
@@ -295,8 +285,6 @@ externalDocs:
           'imageURL': 'http://123.456.net/xxx/xxx.jpg',
           'logoURL': 'http://123.456.net/xxx/xxx.jpg',
           'connectionStatus': 'online',
-          "lastRebootAt": "2018-08-12T20:17:46.384Z",
-          "lastRebootReason": "Remote Reboot on ThingsPro Server by XXX",   
           'createdAt': '2018-08-12T20:17:46.384Z',
           'updatedAt': '2018-08-12T20:17:46.384Z',
         },

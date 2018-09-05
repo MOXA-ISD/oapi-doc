@@ -265,8 +265,57 @@ externalDocs:
         'allowConnection': true,
         'imageURL': 'http://123.456.net/xxx/xxx.jpg',
         'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-        "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-        "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+        'ReportedProperties': {    
+          "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+          "reportedProperties": [      
+            {
+              "id": 1,
+              "type": "general",
+              "name": "deviceName",
+              "description": "Device Name",
+              "value": "Demo Device 01"
+            },
+            {
+              "id": 2,
+              "type": "general",
+              "name": "firmwareVersion",
+              "description": "Firmware Version",
+              "value": "1.8.1"
+            }
+          ]    
+        }
+        'DesiredProperties': { 
+          "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+          "desiredProperties": [        
+            {
+              "id": 1,
+              "type": "general",
+              "name": "deviceName",
+              "description": "Device Name",
+              "value": "Demo Device 01"
+            }
+            {
+              "id": 4,
+              "type": "network",
+              "name": "eth0",
+              "description": "Ethernet 0",
+              "value": [
+                {
+                  "id": 1,
+                  "name": "ipAddress",
+                  "description": "IP Address",
+                  "value": "192.168.3.21"
+                },
+                {
+                  "id": 2,
+                  "name": "mask",
+                  "description": "Subnet Mask",
+                  "value": "255.255.255.0"
+                }
+              ]
+            }          
+          ]
+        },
         'connectionStatus': 'online',
         'createdAt': '2018-08-12T20:17:46.384Z',
         'updatedAt': '2018-08-12T20:17:46.384Z',
@@ -294,8 +343,57 @@ externalDocs:
           'allowConnection': true,
           'imageURL': 'http://123.456.net/xxx/xxx.jpg',
           'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-          "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-          "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+          'ReportedProperties': {    
+            "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+            "reportedProperties": [      
+              {
+                "id": 1,
+                "type": "general",
+                "name": "deviceName",
+                "description": "Device Name",
+                "value": "Demo Device 01"
+              },
+              {
+                "id": 2,
+                "type": "general",
+                "name": "firmwareVersion",
+                "description": "Firmware Version",
+                "value": "1.8.1"
+              }
+            ]    
+          }
+          'DesiredProperties': { 
+            "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+            "desiredProperties": [        
+              {
+                "id": 1,
+                "type": "general",
+                "name": "deviceName",
+                "description": "Device Name",
+                "value": "Demo Device 01"
+              }
+              {
+                "id": 4,
+                "type": "network",
+                "name": "eth0",
+                "description": "Ethernet 0",
+                "value": [
+                  {
+                    "id": 1,
+                    "name": "ipAddress",
+                    "description": "IP Address",
+                    "value": "192.168.3.21"
+                  },
+                  {
+                    "id": 2,
+                    "name": "mask",
+                    "description": "Subnet Mask",
+                    "value": "255.255.255.0"
+                  }
+                ]
+              }          
+            ]
+          },
           'connectionStatus': 'online', 
           'createdAt': '2018-08-12T20:17:46.384Z',
           'updatedAt': '2018-08-12T20:17:46.384Z',
@@ -321,8 +419,57 @@ externalDocs:
           'allowConnection': true,
           'imageURL': 'http://123.456.net/xxx/xxx.jpg',
           'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-          "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-          "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+          'ReportedProperties': {    
+            "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+            "reportedProperties": [      
+              {
+                "id": 1,
+                "type": "general",
+                "name": "deviceName",
+                "description": "Device Name",
+                "value": "Demo Device 01"
+              },
+              {
+                "id": 2,
+                "type": "general",
+                "name": "firmwareVersion",
+                "description": "Firmware Version",
+                "value": "1.8.1"
+              }
+            ]    
+          }
+          'DesiredProperties': { 
+            "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+            "desiredProperties": [        
+              {
+                "id": 1,
+                "type": "general",
+                "name": "deviceName",
+                "description": "Device Name",
+                "value": "Demo Device 01"
+              }
+              {
+                "id": 4,
+                "type": "network",
+                "name": "eth0",
+                "description": "Ethernet 0",
+                "value": [
+                  {
+                    "id": 1,
+                    "name": "ipAddress",
+                    "description": "IP Address",
+                    "value": "192.168.3.21"
+                  },
+                  {
+                    "id": 2,
+                    "name": "mask",
+                    "description": "Subnet Mask",
+                    "value": "255.255.255.0"
+                  }
+                ]
+              }          
+            ]
+          },
           'connectionStatus': 'online',
           'createdAt': '2018-08-12T20:17:46.384Z',
           'updatedAt': '2018-08-12T20:17:46.384Z',

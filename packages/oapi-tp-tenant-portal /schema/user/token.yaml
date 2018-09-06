@@ -133,24 +133,24 @@ externalDocs:
   x-mocks:
     Token:
       {
-        'id': 1,
-        'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-        'name': 'TOKEN_NAME',
-        'content': 'YOUR_TOKEN',
-        'role':
+        "id": 1,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "name": "TOKEN_NAME",
+        "content": "YOUR_TOKEN",
+        "role":
           {
-            'id': 1,
-            'name': 'root',
-            'permissions':
+            "id": 1,
+            "name": "root",
+            "permissions":
               [
-                { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
+                { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
+                { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
               ],
           },
       }
     TokenList:
       [
-        { 'id': 1, 'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b', 'name': 'TOKEN_NAME_1', 'content': 'YOUR_TOKEN_2', 'roleId': 1 },
-        { 'id': 2, 'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b', 'name': 'TOKEN_NAME_2', 'content': 'YOUR_TOKEN_2', 'roleId': 3 },
+        { "id": 1, "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b", "name": "TOKEN_NAME_1", "content": "YOUR_TOKEN_2", "roleId": 1 },
+        { "id": 2, "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b", "name": "TOKEN_NAME_2", "content": "YOUR_TOKEN_2", "roleId": 3 },
       ]
-    TokenReq: { 'name': 'TOKEN_NAME', 'roleId': 1 }
+    TokenReq: { "name": "TOKEN_NAME", "roleId": 1 }

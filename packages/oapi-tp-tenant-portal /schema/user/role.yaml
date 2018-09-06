@@ -138,31 +138,31 @@ externalDocs:
   x-mocks:
     Role:
       {
-        'id': 1,
-        'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-        'name': 'root',
-        'permissions':
+        "id": 1,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "name": "root",
+        "permissions":
           [
-            { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-            { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
+            { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
+            { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
           ],
       }
-    RoleReq: { 'name': 'new role', 'permissions': [{ 'id': 1, 'value': 2 }, { 'id': 2, 'value': 2 }] }
+    RoleReq: { "name": "new role", "permissions": [{ "id": 1, "value": 2 }, { "id": 2, "value": 2 }] }
     RoleList:
       [
         {
-          'id': 1,
-          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'name': 'root',
-          'permissions':
+          "id": 1,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "name": "root",
+          "permissions":
             [
-              { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-              { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
+              { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
+              { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
             ],
         },
         {
-          'id': 2,
-          'name': 'admin',
-          'permissions': [{ 'id': 1, 'value': 0, 'name': 'user management', 'description': 'xxxxx' }],
+          "id": 2,
+          "name": "admin",
+          "permissions": [{ "id": 1, "value": 0, "name": "user management", "description": "xxxxx" }],
         },
       ]

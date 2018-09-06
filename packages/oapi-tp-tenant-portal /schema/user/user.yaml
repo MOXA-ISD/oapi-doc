@@ -180,66 +180,66 @@ externalDocs:
   x-mocks:
     User:
       {
-        'userId': 1,
-        'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-        'username': 'username',
-        'firstName': 'firstName',
-        'lastName': 'lastName',
-        'email': 'moxa@moxa.com',
-        'roleId': 0,
-        'phone': '1234567890',        
-        'loginAt': '2018-08-12T20:17:46.384Z',
-        'data': 
+        "userId": 1,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "username": "username",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "moxa@moxa.com",
+        "roleId": 0,
+        "phone": "1234567890",        
+        "loginAt": "2018-08-12T20:17:46.384Z",
+        "data": 
           {
-            'CUSTOM_FIELD': 'CUSTOM_VALUE'
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
       }
 
     UserList:
       [
         {
-          'userId': 1,
-          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'username': 'username',
-          'firstName': 'firstName',
-          'lastName': 'lastName',
-          'email': 'moxa@moxa.com',
-          'roleId': 0,
-          'phone': '1234567890',        
-          'loginAt': '2018-08-12T20:17:46.384Z',
-          'data': 
+          "userId": 1,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "username": "username",
+          "firstName": "firstName",
+          "lastName": "lastName",
+          "email": "moxa@moxa.com",
+          "roleId": 0,
+          "phone": "1234567890",        
+          "loginAt": "2018-08-12T20:17:46.384Z",
+          "data": 
             {
-              'CUSTOM_FIELD': 'CUSTOM_VALUE'
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
             },
         },
         {
-          'userId': 2,
-          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'username': 'username',
-          'firstName': 'firstName',
-          'lastName': 'lastName',
-          'email': 'moxa@moxa.com',
-          'roleId': 0,
-          'phone': '1234567890',        
-          'loginAt': '2018-08-12T20:17:46.384Z',
-          'data': 
+          "userId": 2,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "username": "username",
+          "firstName": "firstName",
+          "lastName": "lastName",
+          "email": "moxa@moxa.com",
+          "roleId": 0,
+          "phone": "1234567890",        
+          "loginAt": "2018-08-12T20:17:46.384Z",
+          "data": 
             {
-              'CUSTOM_FIELD': 'CUSTOM_VALUE'
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
             },
         },
       ]
     UserReq:
       { 
-        'username': 'username',
-        'firstName': 'firstName',
-        'lastName': 'lastName',
-        'email': 'moxa@moxa.com',
-        'password': '12345678',
-        'roleId': 0,
-        'phone': '1234567890',
-        'data': 
+        "username": "username",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "moxa@moxa.com",
+        "password": "12345678",
+        "roleId": 0,
+        "phone": "1234567890",
+        "data": 
           {
-            'CUSTOM_FIELD': 'CUSTOM_VALUE'
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
       }
 

@@ -72,28 +72,28 @@ externalDocs:
       {
         user:
           {
-            'userId': 1,
-            'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-            'username': 'username',
-            'firstName': 'firstName',
-            'lastName': 'lastName',
-            'email': 'moxa@moxa.com',
-            'role':
+            "userId": 1,
+            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "username": "username",
+            "firstName": "firstName",
+            "lastName": "lastName",
+            "email": "moxa@moxa.com",
+            "role":
               {
-                'id': 1,
-                'name': 'root',
-                'permissions':
+                "id": 1,
+                "name": "root",
+                "permissions":
                   [
-                    { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                    { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
+                    { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
+                    { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
                   ],
               },
-            'phone': '1234567890',        
-            'loginAt': '2018-08-12T20:17:46.384Z',
-            'data': 
+            "phone": "1234567890",        
+            "loginAt": "2018-08-12T20:17:46.384Z",
+            "data": 
               {
-                'CUSTOM_FIELD': 'CUSTOM_VALUE'
+                "CUSTOM_FIELD": "CUSTOM_VALUE"
               },
           },
-        token: 'USER_TOKEN',
+        token: "USER_TOKEN",
       }

@@ -160,50 +160,50 @@ externalDocs:
   x-mocks:
     User:
       {
-        'id': 1,
-        'name': 'Moxa',
-        'company': 'moxa',
-        'email': 'moxa@moxa.com',
-        'adminRole': 0,
-        'data': 
+        "id": 1,
+        "name": "Moxa",
+        "company": "moxa",
+        "email": "moxa@moxa.com",
+        "adminRole": 0,
+        "data": 
           {
-            'CUSTOM_FIELD': 'CUSTOM_VALUE'
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
       }
     UserList:
       [
         {
-          'id': 1,
-          'name': 'Moxa',
-          'company': 'moxa',
-          'email': 'moxa@moxa.com',
-          'adminRole': 0,
-          'data': 
+          "id": 1,
+          "name": "Moxa",
+          "company": "moxa",
+          "email": "moxa@moxa.com",
+          "adminRole": 0,
+          "data": 
             {
               "CUSTOM_FIELD": "CUSTOM VALUE"
             },
         },
         {
-          'id': 2,
-          'name': 'Moxa2',
-          'company': 'moxa',
-          'email': 'moxa2@moxa.com',
-          'adminRole': 0,
-          'data': 
+          "id": 2,
+          "name": "Moxa2",
+          "company": "moxa",
+          "email": "moxa2@moxa.com",
+          "adminRole": 0,
+          "data": 
             {
-              'CUSTOM_FIELD': 'CUSTOM_VALUE'
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
             },
         },
       ]
     UserReq:
       { 
-        'name': 'Moxa', 
-        'password': '12345678', 
-        'company': 'moxa', 
-        'email': 'moxa@moxa.com',
-        'adminRole': 0,
-        'data': 
+        "name": "Moxa", 
+        "password": "12345678", 
+        "company": "moxa", 
+        "email": "moxa@moxa.com",
+        "adminRole": 0,
+        "data": 
           {
-            'CUSTOM_FIELD': 'CUSTOM_VALUE'
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
       }

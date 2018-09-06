@@ -245,27 +245,27 @@ externalDocs:
   x-mocks:
     Device:
       {
-        'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-        'deviceId': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        'deviceName': 'moxa',
-        'deviceGroup': [
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "deviceName": "moxa",
+        "deviceGroup": [
           {
-            'groupId': '1',
-            'name': 'group A',
-            'description': 'group A'
+            "groupId": 1,
+            "name": "group A",
+            "description": "group A"
           },
           {
-            'groupId': '2',
-            'name': 'group B',
-            'description': 'group B'
+            "groupId": 2,
+            "name": "group B",
+            "description": "group B"
           }
         ],
-        'modelName': 'UC-8112-LX-CG"',
-        'deviceType': 'IIoT Gateway',
-        'allowConnection': true,
-        'imageURL': 'http://123.456.net/xxx/xxx.jpg',
-        'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-        'ReportedProperties': {    
+        "modelName": "UC-8112-LX-CG"",
+        "deviceType": "IIoT Gateway",
+        "allowConnection": true,
+        "imageURL": "http://123.456.net/xxx/xxx.jpg",
+        "logoURL": "http://123.456.net/xxx/xxx.jpg",
+        "reportedProperties": {    
           "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
           "reportedProperties": [      
             {
@@ -284,7 +284,7 @@ externalDocs:
             }
           ]    
         }
-        'DesiredProperties': { 
+        "desiredProperties": { 
           "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
           "desiredProperties": [        
             {
@@ -316,39 +316,39 @@ externalDocs:
             }          
           ]
         },
-        'connectionStatus': 'online',
-        'createdAt': '2018-08-12T20:17:46.384Z',
-        'updatedAt': '2018-08-12T20:17:46.384Z',
+        "connectionStatus": "online",
+        "createdAt": "2018-08-12T20:17:46.384Z",
+        "updatedAt": "2018-08-12T20:17:46.384Z",
       }
     DeviceList:
       {
-        'count': 5,
-        'offset': 10,
-        'limit': 10,
-        'data':
+        "count": 5,
+        "offset": 0,
+        "limit": 100,
+        "data":
           [
             {
-              'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-              'deviceId': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              'deviceName': 'moxa1',
-              'deviceGroup': [
+              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "deviceName": "moxa1",
+              "deviceGroup": [
                 {
-                  'groupId': '1',
-                  'name': 'group A',
-                  'description': 'group A'
+                  "groupId": 1,
+                  "name": "group A",
+                  "description": "group A"
                 },
                 {
-                  'groupId': '2',
-                  'name': 'group B',
-                  'description': 'group B'
+                  "groupId": 2,
+                  "name": "group B",
+                  "description": "group B"
                 }
               ],
-              'modelName': 'UC-8112-LX-CG"',
-              'deviceType': 'IIoT Gateway',
-              'allowConnection': true,
-              'imageURL': 'http://123.456.net/xxx/xxx.jpg',
-              'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-              'ReportedProperties': {    
+              "modelName": "UC-8112-LX-CG"",
+              "deviceType": "IIoT Gateway",
+              "allowConnection": true,
+              "imageURL": "http://123.456.net/xxx/xxx.jpg",
+              "logoURL": "http://123.456.net/xxx/xxx.jpg",
+              "reportedProperties": {    
                 "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "reportedProperties": [      
                   {
@@ -367,7 +367,7 @@ externalDocs:
                   }
                 ]    
               }
-              'DesiredProperties': { 
+              "desiredProperties": { 
                 "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "desiredProperties": [        
                   {
@@ -399,32 +399,32 @@ externalDocs:
                   }          
                 ]
               },
-              'connectionStatus': 'online', 
-              'createdAt': '2018-08-12T20:17:46.384Z',
-              'updatedAt': '2018-08-12T20:17:46.384Z',
+              "connectionStatus": "online", 
+              "createdAt": "2018-08-12T20:17:46.384Z",
+              "updatedAt": "2018-08-12T20:17:46.384Z",
             },
             {
-              'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-              'deviceId': "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              'deviceName': 'moxa2',
-              'deviceGroup': [
+              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "deviceName": "moxa2",
+              "deviceGroup": [
                 {
-                  'groupId': '1',
-                  'name': 'group A',
-                  'description': 'group A'
+                  "groupId": 1,
+                  "name": "group A",
+                  "description": "group A"
                 },
                 {
-                  'groupId': '2',
-                  'name': 'group B',
-                  'description': 'group B'
+                  "groupId": 2,
+                  "name": "group B",
+                  "description": "group B"
                 }
               ],
-              'modelName': 'UC-8112-LX-CG"',
-              'deviceType': 'IIoT Gateway',
-              'allowConnection': true,
-              'imageURL': 'http://123.456.net/xxx/xxx.jpg',
-              'logoURL': 'http://123.456.net/xxx/xxx.jpg',
-              'ReportedProperties': {    
+              "modelName": "UC-8112-LX-CG"",
+              "deviceType": "IIoT Gateway",
+              "allowConnection": true,
+              "imageURL": "http://123.456.net/xxx/xxx.jpg",
+              "logoURL": "http://123.456.net/xxx/xxx.jpg",
+              "reportedProperties": {    
                 "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "reportedProperties": [      
                   {
@@ -443,7 +443,7 @@ externalDocs:
                   }
                 ]    
               }
-              'DesiredProperties': { 
+              "desiredProperties": { 
                 "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "desiredProperties": [        
                   {
@@ -475,15 +475,15 @@ externalDocs:
                   }          
                 ]
               },
-              'connectionStatus': 'online',
-              'createdAt': '2018-08-12T20:17:46.384Z',
-              'updatedAt': '2018-08-12T20:17:46.384Z',
+              "connectionStatus": "online",
+              "createdAt": "2018-08-12T20:17:46.384Z",
+              "updatedAt": "2018-08-12T20:17:46.384Z",
             },
           ]
       }  
     DeviceReq:
       {
-        'modelName': 'moxa',
+        "modelName": "moxa",
       }   
     ReportedProperties:
       {    

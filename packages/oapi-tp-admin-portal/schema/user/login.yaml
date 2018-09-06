@@ -77,15 +77,15 @@ externalDocs:
       {
         user:
           {
-            'id': 1,
-            'name': 'Moxa',
-            'company': 'moxa',
-            'email': 'moxa@moxa.com',
-            'adminRole': 0,
-            'data': 
+            "id": 1,
+            "name": "Moxa",
+            "company": "moxa",
+            "email": "moxa@moxa.com",
+            "adminRole": 0,
+            "data": 
               {
-                'CUSTOM_FIELD': 'CUSTOM_VALUE'
+                "CUSTOM_FIELD": "CUSTOM_VALUE"
               }
           },
-        token: 'USER_TOKEN',
+        token: "USER_TOKEN",
       }

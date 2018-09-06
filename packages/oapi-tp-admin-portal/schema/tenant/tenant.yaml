@@ -250,75 +250,75 @@ externalDocs:
   x-mocks:
     Tenant:
       {
-        'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-        'email': 'moxa@moxa.com',
-        'domainName': 'moxa',
-        'username': 'username',
-        'firstName': 'firstName',
-        'lastName': 'lastName',
-        'activate': true,
-        'company': 'moxa',
-        'phone': '1234567890',                      
-        'culture': 'Taiwan',
-        'industry': 'Telecom',
-        'customer': true,
-        'provisionStatus': 'ok',
-        'deviceHlr': 'https://preview.thingspro.io',
-        'activatedAt': '2018-08-12T20:17:46.384Z',
-        'deactivatedAt': '2018-08-12T20:17:46.384Z',
-        'createdAt': '2018-08-12T20:17:46.384Z',
-        'updatedAt': '2018-08-12T20:17:46.384Z',
-        'data': 
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "email": "moxa@moxa.com",
+        "domainName": "moxa",
+        "username": "username",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "activate": true,
+        "company": "moxa",
+        "phone": "1234567890",                      
+        "culture": "Taiwan",
+        "industry": "Telecom",
+        "customer": true,
+        "provisionStatus": "ok",
+        "deviceHlr": "https://preview.thingspro.io",
+        "activatedAt": "2018-08-12T20:17:46.384Z",
+        "deactivatedAt": "2018-08-12T20:17:46.384Z",
+        "createdAt": "2018-08-12T20:17:46.384Z",
+        "updatedAt": "2018-08-12T20:17:46.384Z",
+        "data": 
           {
-            'CUSTOM_FIELD': 'CUSTOM_VALUE'
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
           }
       }
     TenantList:
       [
         {
-          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'email': 'moxa@moxa.com',
-          'domainName': 'moxa',
-          'username': 'username',
-          'firstName': 'firstName',
-          'lastName': 'lastName',
-          'activate': true,
-          'company': 'moxa',
-          'phone': '1234567890',                      
-          'culture': 'Taiwan',
-          'industry': 'Telecom',
-          'customer': true,
-          'provisionStatus': 'ok',
-          'deviceHlr': 'https://preview.thingspro.io',
-          'activatedAt': '2018-08-12T20:17:46.384Z',
-          'deactivatedAt': '2018-08-12T20:17:46.384Z',
-          'createdAt': '2018-08-12T20:17:46.384Z',
-          'updatedAt': '2018-08-12T20:17:46.384Z',
-          'data': 
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "email": "moxa@moxa.com",
+          "domainName": "moxa",
+          "username": "username",
+          "firstName": "firstName",
+          "lastName": "lastName",
+          "activate": true,
+          "company": "moxa",
+          "phone": "1234567890",                      
+          "culture": "Taiwan",
+          "industry": "Telecom",
+          "customer": true,
+          "provisionStatus": "ok",
+          "deviceHlr": "https://preview.thingspro.io",
+          "activatedAt": "2018-08-12T20:17:46.384Z",
+          "deactivatedAt": "2018-08-12T20:17:46.384Z",
+          "createdAt": "2018-08-12T20:17:46.384Z",
+          "updatedAt": "2018-08-12T20:17:46.384Z",
+          "data": 
             {
-              'CUSTOM_FIELD': 'CUSTOM_VALUE'
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
             }
         },
         {
-          'tenantId': '65af94c4-07e4-43d7-abad-3cb5f295550b',
-          'email': 'moxa@moxa.com',
-          'domainName': 'moxa',
-          'username': 'username',
-          'firstName': 'firstName',
-          'lastName': 'lastName',
-          'activate': true,
-          'company': 'moxa',
-          'phone': '1234567890',                      
-          'culture': 'Taiwan',
-          'industry': 'Telecom',
-          'customer': true,
-          'provisionStatus': 'ok',
-          'deviceHlr': 'https://preview.thingspro.io',
-          'activatedAt': '2018-08-12T20:17:46.384Z',
-          'deactivatedAt': '2018-08-12T20:17:46.384Z',
-          'createdAt': '2018-08-12T20:17:46.384Z',
-          'updatedAt': '2018-08-12T20:17:46.384Z',
-          'data': 
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "email": "moxa@moxa.com",
+          "domainName": "moxa",
+          "username": "username",
+          "firstName": "firstName",
+          "lastName": "lastName",
+          "activate": true,
+          "company": "moxa",
+          "phone": "1234567890",                      
+          "culture": "Taiwan",
+          "industry": "Telecom",
+          "customer": true,
+          "provisionStatus": "ok",
+          "deviceHlr": "https://preview.thingspro.io",
+          "activatedAt": "2018-08-12T20:17:46.384Z",
+          "deactivatedAt": "2018-08-12T20:17:46.384Z",
+          "createdAt": "2018-08-12T20:17:46.384Z",
+          "updatedAt": "2018-08-12T20:17:46.384Z",
+          "data": 
             {
               "CUSTOM_FIELD": "CUSTOM VALUE"
             }
@@ -326,19 +326,19 @@ externalDocs:
       ]
     TenantReq: 
       {
-        'email': 'moxa@moxa.com',
-        'domainName': 'moxa',
-        'username': 'username',
-        'firstName': 'firstName',
-        'lastName': 'lastName',
-        'company': 'moxa',
-        'phone': '1234567890',                      
-        'culture': 'Taiwan',
-        'industry': 'Telecom',
-        'customer': true,
-        'data': 
+        "email": "moxa@moxa.com",
+        "domainName": "moxa",
+        "username": "username",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "company": "moxa",
+        "phone": "1234567890",                      
+        "culture": "Taiwan",
+        "industry": "Telecom",
+        "customer": true,
+        "data": 
           {
-            'CUSTOM_FIELD': 'CUSTOM_VALUE'
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
           }
       } 
     

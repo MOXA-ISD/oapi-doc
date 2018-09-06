@@ -87,5 +87,5 @@ externalDocs:
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
               }
           },
-        token: "USER_TOKEN",
+        token: "USER_TOKEN"
       }

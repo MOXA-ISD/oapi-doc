@@ -170,10 +170,10 @@ definitions:
       deviceId:
         type: string
         description: Unique identifier representing a specific device.
-      deviceGroup:
+      group:
         type: array
         items:
-          type: string
+          $ref: '#/definitions/Group'
         description: Groups of device.
       modelName:
         type: string
@@ -205,13 +205,13 @@ definitions:
     properties:
       groupId:
         type: integer
-        description: Unique identifier representing a specific tenant.
+        description: Unique identifier representing a specific group.
       name:
         type: string
-        description: Unique identifier representing a specific tenant.
+        description: Name of group.
       description:
         type: string
-        description: Unique identifier representing a specific tenant.  
+        description: Description of group.  
 
   DesiredProperties:
     type: object

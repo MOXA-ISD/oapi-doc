@@ -56,5 +56,5 @@ externalDocs:
     PermissionList:
       [
         { "id": 1, "value": 0, "name": "Device Management", "description": "xxxxx" },
-        { "id": 2, "value": 0, "name": "User Management", "description": "xxxxx" },
+        { "id": 2, "value": 0, "name": "User Management", "description": "xxxxx" }
       ]

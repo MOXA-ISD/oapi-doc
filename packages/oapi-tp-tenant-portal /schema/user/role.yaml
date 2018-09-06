@@ -144,10 +144,16 @@ externalDocs:
         "permissions":
           [
             { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
-            { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
-          ],
+            { "id": 2, "value": 2, "name": "account", "description": "xxxxx" }
+          ]
       }
-    RoleReq: { "name": "new role", "permissions": [{ "id": 1, "value": 2 }, { "id": 2, "value": 2 }] }
+    RoleReq: { 
+      "name": "new role", 
+      "permissions": [
+          { "id": 1, "value": 2 }, 
+          { "id": 2, "value": 2 }
+        ] 
+      }
     RoleList:
       [
         {
@@ -157,12 +163,13 @@ externalDocs:
           "permissions":
             [
               { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
-              { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
-            ],
+              { "id": 2, "value": 2, "name": "account", "description": "xxxxx" }
+            ]
         },
         {
           "id": 2,
           "name": "admin",
-          "permissions": [{ "id": 1, "value": 0, "name": "user management", "description": "xxxxx" }],
-        },
+          "permissions": [{ "id": 1, "value": 0, "name": "user management", "description": "xxxxx" }]
+        }
       ]
+

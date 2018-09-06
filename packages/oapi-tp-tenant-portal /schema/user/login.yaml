@@ -85,15 +85,15 @@ externalDocs:
                 "permissions":
                   [
                     { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
-                    { "id": 2, "value": 2, "name": "account", "description": "xxxxx" },
-                  ],
+                    { "id": 2, "value": 2, "name": "account", "description": "xxxxx" }
+                  ]
               },
             "phone": "1234567890",        
             "loginAt": "2018-08-12T20:17:46.384Z",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
-              },
+              }
           },
-        token: "USER_TOKEN",
+        token: "USER_TOKEN"
       }

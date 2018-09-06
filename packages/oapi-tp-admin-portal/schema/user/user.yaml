@@ -168,7 +168,7 @@ externalDocs:
         "data": 
           {
             "CUSTOM_FIELD": "CUSTOM_VALUE"
-          },
+          }
       }
     UserList:
       [
@@ -181,7 +181,7 @@ externalDocs:
           "data": 
             {
               "CUSTOM_FIELD": "CUSTOM VALUE"
-            },
+            }
         },
         {
           "id": 2,
@@ -192,8 +192,8 @@ externalDocs:
           "data": 
             {
               "CUSTOM_FIELD": "CUSTOM_VALUE"
-            },
-        },
+            }
+        }
       ]
     UserReq:
       { 
@@ -205,5 +205,5 @@ externalDocs:
         "data": 
           {
             "CUSTOM_FIELD": "CUSTOM_VALUE"
-          },
+          }
       }

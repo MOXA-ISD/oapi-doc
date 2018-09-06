@@ -322,7 +322,7 @@ externalDocs:
             {
               "CUSTOM_FIELD": "CUSTOM VALUE"
             }
-        },
+        }
       ]
     TenantReq: 
       {

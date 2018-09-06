@@ -200,6 +200,19 @@ definitions:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
   
+  Group:
+    type: object
+    properties:
+      groupId:
+        type: integer
+        description: Unique identifier representing a specific tenant.
+      name:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      description:
+        type: string
+        description: Unique identifier representing a specific tenant.  
+
   DesiredProperties:
     type: object
     properties:
@@ -260,7 +273,7 @@ externalDocs:
             "description": "group B"
           }
         ],
-        "modelName": "UC-8112-LX-CG"",
+        "modelName": "UC-8112-LX-CG",
         "deviceType": "IIoT Gateway",
         "allowConnection": true,
         "imageURL": "http://123.456.net/xxx/xxx.jpg",
@@ -283,7 +296,7 @@ externalDocs:
               "value": "1.8.1"
             }
           ]    
-        }
+        },
         "desiredProperties": { 
           "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
           "desiredProperties": [        
@@ -293,7 +306,7 @@ externalDocs:
               "name": "deviceName",
               "description": "Device Name",
               "value": "Demo Device 01"
-            }
+            },
             {
               "id": 4,
               "type": "network",
@@ -318,7 +331,7 @@ externalDocs:
         },
         "connectionStatus": "online",
         "createdAt": "2018-08-12T20:17:46.384Z",
-        "updatedAt": "2018-08-12T20:17:46.384Z",
+        "updatedAt": "2018-08-12T20:17:46.384Z"
       }
     DeviceList:
       {
@@ -343,7 +356,7 @@ externalDocs:
                   "description": "group B"
                 }
               ],
-              "modelName": "UC-8112-LX-CG"",
+              "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,
               "imageURL": "http://123.456.net/xxx/xxx.jpg",
@@ -366,7 +379,7 @@ externalDocs:
                     "value": "1.8.1"
                   }
                 ]    
-              }
+              },
               "desiredProperties": { 
                 "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "desiredProperties": [        
@@ -376,7 +389,7 @@ externalDocs:
                     "name": "deviceName",
                     "description": "Device Name",
                     "value": "Demo Device 01"
-                  }
+                  },
                   {
                     "id": 4,
                     "type": "network",
@@ -401,7 +414,7 @@ externalDocs:
               },
               "connectionStatus": "online", 
               "createdAt": "2018-08-12T20:17:46.384Z",
-              "updatedAt": "2018-08-12T20:17:46.384Z",
+              "updatedAt": "2018-08-12T20:17:46.384Z"
             },
             {
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
@@ -419,7 +432,7 @@ externalDocs:
                   "description": "group B"
                 }
               ],
-              "modelName": "UC-8112-LX-CG"",
+              "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,
               "imageURL": "http://123.456.net/xxx/xxx.jpg",
@@ -442,7 +455,7 @@ externalDocs:
                     "value": "1.8.1"
                   }
                 ]    
-              }
+              },
               "desiredProperties": { 
                 "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "desiredProperties": [        
@@ -452,7 +465,7 @@ externalDocs:
                     "name": "deviceName",
                     "description": "Device Name",
                     "value": "Demo Device 01"
-                  }
+                  },
                   {
                     "id": 4,
                     "type": "network",
@@ -477,14 +490,14 @@ externalDocs:
               },
               "connectionStatus": "online",
               "createdAt": "2018-08-12T20:17:46.384Z",
-              "updatedAt": "2018-08-12T20:17:46.384Z",
-            },
+              "updatedAt": "2018-08-12T20:17:46.384Z"
+            }
           ]
-      }  
+      }
     DeviceReq:
       {
-        "modelName": "moxa",
-      }   
+        "modelName": "moxa"
+      }
     ReportedProperties:
       {    
         "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
@@ -634,7 +647,7 @@ externalDocs:
             ]
           }          
         ]
-      }    
+      }
     DirectMethodList:
       {    
         "directMethodList": [

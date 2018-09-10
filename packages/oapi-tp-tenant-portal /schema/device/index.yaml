@@ -3,9 +3,12 @@ swagger: '2.0'
 
 tags:
 - $ref: "./device.yaml#/tags"
+- $ref: "./group.yaml#/tags"
 
 paths:
 - $ref: "./device.yaml#/paths"
+- $ref: "./group.yaml#/paths"
 
 definitions:
 - $ref: "./device.yaml#/definitions"
+- $ref: "./group.yaml#/definitions"

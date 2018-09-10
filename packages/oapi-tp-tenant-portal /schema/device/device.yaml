@@ -206,7 +206,7 @@ definitions:
       groupId:
         type: integer
         description: Unique identifier representing a specific group.
-      name:
+      groupName:
         type: string
         description: Name of group.
       description:
@@ -264,12 +264,12 @@ externalDocs:
         "deviceGroup": [
           {
             "groupId": 1,
-            "name": "group A",
+            "groupName": "group A",
             "description": "group A"
           },
           {
             "groupId": 2,
-            "name": "group B",
+            "groupName": "group B",
             "description": "group B"
           }
         ],
@@ -347,12 +347,12 @@ externalDocs:
               "deviceGroup": [
                 {
                   "groupId": 1,
-                  "name": "group A",
+                  "groupName": "group A",
                   "description": "group A"
                 },
                 {
                   "groupId": 2,
-                  "name": "group B",
+                  "groupName": "group B",
                   "description": "group B"
                 }
               ],
@@ -423,12 +423,12 @@ externalDocs:
               "deviceGroup": [
                 {
                   "groupId": 1,
-                  "name": "group A",
+                  "groupName": "group A",
                   "description": "group A"
                 },
                 {
                   "groupId": 2,
-                  "name": "group B",
+                  "groupName": "group B",
                   "description": "group B"
                 }
               ],

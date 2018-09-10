@@ -1,0 +1,147 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/tenant-api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: group
+    description: Handles tenant groups data
+
+paths:
+  '/tenants/{tenantId}/group':
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Get all groups field data
+      responses:
+        200:
+          description: An array of group
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/GroupList' } }
+      tags:
+        - group
+    post:
+      description: Create a new group.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/GroupReq'
+      responses:
+        201:
+          description: Create group successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Group'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Group' } }
+      tags:
+        - group
+ 
+  /tenants/{tenantId}/groups/{groupId}:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: groupId
+        in: path
+        description: group unique identifier
+        required: true
+        type: string
+    get:
+      description: Return group data with given ID
+      tags:
+        - group
+      responses:
+        200:
+          description: An Object of the group
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Group'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Group' } }
+    delete:
+      description: Delete group with given ID
+      tags:
+        - group
+      responses:
+        204:
+          description: success
+
+definitions:
+  Group:
+    type: object
+    properties:
+      groupId:
+        type: integer
+        description: Unique identifier representing a specific tenant group.
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      groupName:
+        type: string
+        description: Name of group.
+      description:
+        type: string
+        description: Description of group.  
+
+  GroupReq:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Model name of device.
+        
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Group:
+      {
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "groupId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "groupName": "moxa",
+        "description": "moxa group",
+        "createdAt": "2018-08-12T20:17:46.384Z",
+        "updatedAt": "2018-08-12T20:17:46.384Z"
+      }
+    GroupList:
+      [
+        {
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "groupId": 1,
+          "groupName": "moxa",
+          "description": "moxa group",
+          "createdAt": "2018-08-12T20:17:46.384Z",
+          "updatedAt": "2018-08-12T20:17:46.384Z"
+        },
+        {
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "groupId": 2,
+          "groupName": "moxa2",
+          "description": "moxa group2",
+          "createdAt": "2018-08-12T20:17:46.384Z",
+          "updatedAt": "2018-08-12T20:17:46.384Z"
+        }
+      ]
+    GroupReq:
+      {
+        "groupName": "moxa3",
+        "description": "moxa group3"
+      }

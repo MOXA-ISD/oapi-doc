@@ -1,0 +1,361 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/tenant-api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: message
+    description: Handles tenant message data
+
+paths:
+  /tenants/{tenantId}/messages:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Get all message field data
+      responses:
+        200:
+          description: An array of message
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Message'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageList' } }
+      tags:
+        - message
+    post:
+      description: Create a new message.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/MessageReq'
+      responses:
+        201:
+          description: Create message successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Message'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Message' } }
+      tags:
+        - message
+    
+  /tenants/{tenantId}/messages/{messageId}:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: messageId
+        in: path
+        description: message unique identifier
+        required: true
+        type: string
+    get:
+      description: Return message data with given ID
+      tags:
+        - message
+      responses:
+        200:
+          description: An Object of the message
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Message'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Message' } }
+    put:
+      description: Update message.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/MessageReq'
+      responses:
+        200:
+          description: Update message successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Message'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Message' } }
+      tags:
+        - message
+    delete:
+      description: Delete message with given ID
+      tags:
+        - message
+      responses:
+        204:
+          description: success
+
+  /tenants/{tenantId}/messages/{messageId}/messagetags:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: messageId
+        in: path
+        description: message unique identifier
+        required: true
+        type: string
+    get:
+      description: Return messagetag data with given ID
+      tags:
+        - message
+      responses:
+        200:
+          description: An Object of the messagetag
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MessageTag'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageTagList' } }
+
+  /tenants/{tenantId}/devices/{deviceId}/tags:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return tags data with given devicdId
+      tags:
+        - message
+      responses:
+        200:
+          description: An Object of the tag
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tag'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
+
+  /tenants/{tenantId}/messagetags:
+    parameters:
+      - name: tenantId
+        in: path
+        description: tenant unique identifier
+        required: true
+        type: string
+    post:
+      description: Create a new messagetag.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MessageTagReq'
+      responses:
+        201:
+          description: Create messagetag successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MessageTag'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageTag' } }
+      tags:
+        - message
+
+      
+definitions:
+  Message:
+    type: object
+    properties:
+      messageId:
+        type: integer
+        description: Unique identifier representing a specific tenant group.
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.  
+      name:
+        type: string
+        description: Name of message.
+      uploadPolicySizeInByte:
+        type: integer
+        description: Description of upload size.  
+      uploadPolicyIntervalInSecond:
+        type: integer
+        description: Description of upload interval.  
+      uploadPolicySeverity:
+        type: integer
+        description: Description of upload severity.      
+
+  Tag:
+    type: object
+    properties:
+      tagId:
+        type: integer
+        description: Unique identifier representing a specific tenant group.
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.  
+      name:
+        type: string
+        description: Name of message.
+      dataType:
+        type: string
+        enum:
+        - numeric
+        - string
+        - boolean
+        description: Description of tag data type.  
+      group:
+        type: string
+        description: Description of tag group.  
+
+  MessageTag:
+    type: object
+    properties:
+      messageTagId:
+        type: integer
+        description: Unique identifier representing a specific messageTag.
+      messageId:
+        type: integer
+        description: Unique identifier representing a specific message.
+      tagId:
+        type: integer
+        description: Unique identifier representing a specific tag.  
+
+  MessageReq:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.  
+      uploadPolicySizeInByte:
+        type: integer
+        description: Description of upload size.  
+      uploadPolicyIntervalInSecond:
+        type: integer
+        description: Description of upload interval.  
+
+  MessageTagReq:
+    type: object
+    properties:
+      messageId:
+        type: integer
+        description: Unique identifier representing a specific message.
+      tagId:
+        type: integer
+        description: Unique identifier representing a specific tag.  
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Message:
+      {
+        "messageId": 0,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "name": "systemTag",
+        "uploadPolicySizeInByte": 4,
+        "uploadPolicyIntervalInSecond": 60,
+        "uploadPolicySeverity": 0
+      }
+    MessageList:
+      [
+        {
+          "messageId": 0,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "name": "systemTag",
+          "uploadPolicySizeInByte": 4,
+          "uploadPolicyIntervalInSecond": 60,
+          "uploadPolicySeverity": 0
+        },
+        {
+          "messageId": 1,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "name": "systemTag",
+          "uploadPolicySizeInByte": 4,
+          "uploadPolicyIntervalInSecond": 60,
+          "uploadPolicySeverity": 0
+        }
+      ]
+    Tag:
+      {
+        "tagId": 0,
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "name": "isCellularActivated",
+        "dataType": boolean,
+        "group": 'system'
+      }
+    TagList:
+      [
+        {
+          "tagId": 0,
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "name": "isCellularActivated",
+          "dataType": boolean,
+          "group": 'system'
+        },
+        {
+          "tagId": 1,          
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "name": "memoryUsage",
+          "dataType": numeric,
+          "group": 'system'
+        }
+      ]  
+    MessageTag:
+      {
+        "messageTagId": 1,
+        "messageId": 1,
+        "tagId": 4
+      }
+    MessageTagList:
+      [
+        {
+          "messageTagId": 1,
+          "messageId": 1,
+          "tagId": 4
+        },
+        {
+          "messageTagId": 2,
+          "messageId": 2,
+          "tagId": 4
+        }
+      ]    
+    MessageReq:
+      {
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "uploadPolicySizeInByte": 4,
+        "uploadPolicyIntervalInSecond": 60
+      }
+    MessageTagReq:
+      {
+        "messageId": 1,
+        "tagId": 4
+      }
+

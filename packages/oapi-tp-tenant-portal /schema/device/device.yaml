@@ -192,6 +192,10 @@ definitions:
         description: The device can connect to service or not.
       connectionStatus:
         type: string
+        enum:
+        - online
+        - offline
+        - unknown
         description: Connection status of device.
       createdAt:
         type: string

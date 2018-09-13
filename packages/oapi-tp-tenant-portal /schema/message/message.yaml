@@ -255,7 +255,7 @@ externalDocs:
         "tagId": 0,
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "name": "isCellularActivated",
-        "dataType": boolean,
+        "dataType": "boolean",
         "group": 'system'
       }
     TagList:
@@ -264,14 +264,14 @@ externalDocs:
           "tagId": 0,
           "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
           "name": "isCellularActivated",
-          "dataType": boolean,
+          "dataType": "boolean",
           "group": 'system'
         },
         {
           "tagId": 1,          
           "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
           "name": "memoryUsage",
-          "dataType": numeric,
+          "dataType": "numeric",
           "group": 'system'
         }
       ]   

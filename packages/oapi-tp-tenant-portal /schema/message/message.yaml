@@ -14,7 +14,7 @@ tags:
     description: Handles tenant message data
 
 paths:
-  /tenants/{tenantId}/messages:
+  /tenants/{tenantId}/messageSchemas:
     parameters:
       - name: tenantId
         in: path
@@ -22,112 +22,112 @@ paths:
         required: true
         type: string
     get:
-      description: Get all message field data
+      description: Get all message schema field data
       responses:
         200:
-          description: An array of message
+          description: An array of message schema
           schema:
             type: array
             items:
-              $ref: '#/definitions/Message'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageList' } }
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchemaList' } }
       tags:
-        - message
+        - messageSchema
     post:
-      description: Create a new message.
+      description: Create a new message schema.
       parameters:
         - name: body
           in: body
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/MessageReq'
+            $ref: '#/definitions/MessageSchemaReq'
       responses:
         201:
           description: Create message successfully
           schema:
             type: object
             items:
-              $ref: '#/definitions/Message'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Message' } }
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
       tags:
-        - message
+        - messageSchema
     
-  /tenants/{tenantId}/messages/{messageId}:
+  /tenants/{tenantId}/messageSchemas/{messageSchemaId}:
     parameters:
       - name: tenantId
         in: path
         description: tenant unique identifier
         required: true
         type: string
-      - name: messageId
+      - name: messageSchemaId
         in: path
-        description: message unique identifier
+        description: message schema unique identifier
         required: true
         type: string
     get:
-      description: Return message data with given ID
+      description: Return message schema data with given ID
       tags:
-        - message
+        - messageSchema
       responses:
         200:
-          description: An Object of the message
+          description: An Object of the message schema
           schema:
             type: object
             items:
-              $ref: '#/definitions/Message'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Message' } }
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
     put:
-      description: Update message.
+      description: Update message schema.
       parameters:
         - name: body
           in: body
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/MessageReq'
+            $ref: '#/definitions/MessageSchemaReq'
       responses:
         200:
-          description: Update message successfully
+          description: Update message schema successfully
           schema:
             type: object
             items:
-              $ref: '#/definitions/Message'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Message' } }
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
       tags:
-        - message
+        - messageSchema
     delete:
-      description: Delete message with given ID
+      description: Delete message schema with given ID
       tags:
-        - message
+        - messageSchema
       responses:
         204:
           description: success
 
-  /tenants/{tenantId}/messages/{messageId}/messagetags:
+  /tenants/{tenantId}/messageSchemas/{messageSchemaId}/tags:
     parameters:
       - name: tenantId
         in: path
         description: tenant unique identifier
         required: true
         type: string
-      - name: messageId
+      - name: messageSchemaId
         in: path
-        description: message unique identifier
+        description: message schema unique identifier
         required: true
         type: string
     get:
-      description: Return messagetag data with given ID
+      description: Return tags data with given ID
       tags:
-        - message
+        - messageSchema
       responses:
         200:
-          description: An Object of the messagetag
+          description: An Object of the tags
           schema:
             type: array
             items:
-              $ref: '#/definitions/MessageTag'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageTagList' } }
+              $ref: '#/definitions/Tag'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
 
   /tenants/{tenantId}/devices/{deviceId}/tags:
     parameters:
@@ -144,7 +144,7 @@ paths:
     get:
       description: Return tags data with given devicdId
       tags:
-        - message
+        - messageSchema
       responses:
         200:
           description: An Object of the tag
@@ -154,43 +154,13 @@ paths:
               $ref: '#/definitions/Tag'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
 
-  /tenants/{tenantId}/messagetags:
-    parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
-    post:
-      description: Create a new messagetag.
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/MessageTagReq'
-      responses:
-        201:
-          description: Create messagetag successfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/MessageTag'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageTag' } }
-      tags:
-        - message
-
-      
 definitions:
-  Message:
+  MessageSchema:
     type: object
     properties:
-      messageId:
+      messageSchemaId:
         type: integer
-        description: Unique identifier representing a specific tenant group.
+        description: Unique identifier representing a specific message schema.
       tenantId:
         type: string
         description: Unique identifier representing a specific tenant.
@@ -233,20 +203,7 @@ definitions:
         type: string
         description: Description of tag group.  
 
-  MessageTag:
-    type: object
-    properties:
-      messageTagId:
-        type: integer
-        description: Unique identifier representing a specific messageTag.
-      messageId:
-        type: integer
-        description: Unique identifier representing a specific message.
-      tagId:
-        type: integer
-        description: Unique identifier representing a specific tag.  
-
-  MessageReq:
+  MessageSchemaReq:
     type: object
     properties:
       deviceId:
@@ -259,20 +216,10 @@ definitions:
         type: integer
         description: Description of upload interval.  
 
-  MessageTagReq:
-    type: object
-    properties:
-      messageId:
-        type: integer
-        description: Unique identifier representing a specific message.
-      tagId:
-        type: integer
-        description: Unique identifier representing a specific tag.  
-
 externalDocs:
   url: 'http://#'
   x-mocks:
-    Message:
+    MessageSchema:
       {
         "messageId": 0,
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
@@ -282,7 +229,7 @@ externalDocs:
         "uploadPolicyIntervalInSecond": 60,
         "uploadPolicySeverity": 0
       }
-    MessageList:
+    MessageSchemaList:
       [
         {
           "messageId": 0,
@@ -327,35 +274,12 @@ externalDocs:
           "dataType": numeric,
           "group": 'system'
         }
-      ]  
-    MessageTag:
-      {
-        "messageTagId": 1,
-        "messageId": 1,
-        "tagId": 4
-      }
-    MessageTagList:
-      [
-        {
-          "messageTagId": 1,
-          "messageId": 1,
-          "tagId": 4
-        },
-        {
-          "messageTagId": 2,
-          "messageId": 2,
-          "tagId": 4
-        }
-      ]    
-    MessageReq:
+      ]   
+    MessageSchemaReq:
       {
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "uploadPolicySizeInByte": 4,
         "uploadPolicyIntervalInSecond": 60
       }
-    MessageTagReq:
-      {
-        "messageId": 1,
-        "tagId": 4
-      }
+
 

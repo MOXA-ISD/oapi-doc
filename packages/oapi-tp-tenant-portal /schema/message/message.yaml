@@ -178,7 +178,12 @@ definitions:
         description: Description of upload interval.  
       uploadPolicySeverity:
         type: integer
-        description: Description of upload severity.      
+        description: Description of upload severity.   
+      tagList:
+        description: Tag List of message schmea
+        type: array
+        items:
+          '$ref': '#/definitions/Tag'   
 
   Tag:
     type: object
@@ -215,6 +220,11 @@ definitions:
       uploadPolicyIntervalInSecond:
         type: integer
         description: Description of upload interval.  
+      tagList:
+        description: Tag List of message schmea
+        type: array
+        items:
+          '$ref': '#/definitions/Tag'  
 
 externalDocs:
   url: 'http://#'
@@ -227,7 +237,23 @@ externalDocs:
         "name": "systemTag",
         "uploadPolicySizeInByte": 4,
         "uploadPolicyIntervalInSecond": 60,
-        "uploadPolicySeverity": 0
+        "uploadPolicySeverity": 0,
+        "tagList": [
+          {
+            "tagId": 0,
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "name": "isCellularActivated",
+            "dataType": "boolean",
+            "group": 'system'
+          },
+          {
+            "tagId": 1,          
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "name": "memoryUsage",
+            "dataType": "numeric",
+            "group": 'system'
+          }
+        ]
       }
     MessageSchemaList:
       [
@@ -238,7 +264,23 @@ externalDocs:
           "name": "systemTag",
           "uploadPolicySizeInByte": 4,
           "uploadPolicyIntervalInSecond": 60,
-          "uploadPolicySeverity": 0
+          "uploadPolicySeverity": 0,
+          "tagList": [
+            {
+              "tagId": 0,
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "name": "isCellularActivated",
+              "dataType": "boolean",
+              "group": 'system'
+            },
+            {
+              "tagId": 1,          
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "name": "memoryUsage",
+              "dataType": "numeric",
+              "group": 'system'
+            }
+          ]
         },
         {
           "messageId": 1,
@@ -247,7 +289,23 @@ externalDocs:
           "name": "systemTag",
           "uploadPolicySizeInByte": 4,
           "uploadPolicyIntervalInSecond": 60,
-          "uploadPolicySeverity": 0
+          "uploadPolicySeverity": 0,
+          "tagList": [
+            {
+              "tagId": 0,
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "name": "isCellularActivated",
+              "dataType": "boolean",
+              "group": 'system'
+            },
+            {
+              "tagId": 1,          
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "name": "memoryUsage",
+              "dataType": "numeric",
+              "group": 'system'
+            }
+          ]
         }
       ]
     Tag:
@@ -279,7 +337,23 @@ externalDocs:
       {
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "uploadPolicySizeInByte": 4,
-        "uploadPolicyIntervalInSecond": 60
+        "uploadPolicyIntervalInSecond": 60,
+        "tagList": [
+          {
+            "tagId": 0,
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "name": "isCellularActivated",
+            "dataType": "boolean",
+            "group": 'system'
+          },
+          {
+            "tagId": 1,          
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "name": "memoryUsage",
+            "dataType": "numeric",
+            "group": 'system'
+          }
+        ]
       }
 
 

@@ -676,3 +676,50 @@ externalDocs:
           }
         ]      
       }
+    DesiredPropertiesReq:
+      {
+        "task": "job operation",
+        "action": "create job – update properties ",
+        "content": 
+          {
+            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "deviceId": ["A0001", "B0001", "C0001"],
+            "isScheduleJob": False,
+            "isRepeatableJob": false,
+            "RepeatedPattern": "",
+            "ScheduleAt": "2018-08-12T20:17:46.384Z",
+            "properties1": {
+              "desiredProperties": [
+                  {
+                      "type": "general",
+                      "name": "deviceName",
+                      "value": "Test-123"
+                  },
+                  {
+                      "type": "general",
+                      "name": "modelName",
+                      "value": "UC-8112-LX"
+                  }
+                ]
+            },
+            "requesterId": 2 
+        }
+    }
+    DirectMethodReq:
+      {
+        "task": "job operation",
+        "action": "create job – call method",
+        "content": {
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": ["4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59", "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd6"],
+          "isScheduleJob": false,
+          "isRepeatableJob": false,
+          "RepeatedPattern": "",
+          "ScheduleAt": "",
+          "methodName": "reboot",
+          "inputs": {
+            "name":"kevin", "age": 12
+          },
+          "requesterId": 2 
+        }
+      }  

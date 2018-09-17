@@ -684,7 +684,7 @@ externalDocs:
           {
             "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
             "deviceId": ["A0001", "B0001", "C0001"],
-            "isScheduleJob": False,
+            "isScheduleJob": false,
             "isRepeatableJob": false,
             "RepeatedPattern": "",
             "ScheduleAt": "2018-08-12T20:17:46.384Z",

@@ -122,6 +122,20 @@ paths:
         description: device unique identifier
         required: true
         type: string
+    post:
+      description: update properties
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DesiredPropertiesReq'
+      responses:
+        200:
+          description: Updated command sends
+      tags:
+        - device    
     get:
       description: Return desired properties data with given ID device
       tags:
@@ -147,6 +161,20 @@ paths:
         description: device unique identifier
         required: true
         type: string
+    post:
+      description: Send direct command to device
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DirectMethodReq'
+      responses:
+        200:
+          description: Direct command sends
+      tags:
+        - device      
     get:
       description: Return direct methods data with given ID device
       tags:
@@ -256,7 +284,21 @@ definitions:
       modelName:
         type: string
         description: Model name of device.
-        
+  
+  DesiredPropertiesReq:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Model name of device.
+  
+  DirectMethodReq:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Model name of device.      
+  
 externalDocs:
   url: 'http://#'
   x-mocks:

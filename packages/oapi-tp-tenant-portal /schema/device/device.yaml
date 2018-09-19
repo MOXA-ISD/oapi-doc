@@ -679,47 +679,42 @@ externalDocs:
     DesiredPropertiesReq:
       {
         "task": "job operation",
-        "action": "create job – update properties ",
+        "action": "create job-properties",
         "content": 
           {
             "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "deviceId": ["A0001", "B0001", "C0001"],
+            "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
             "isScheduleJob": false,
             "isRepeatableJob": false,
-            "RepeatedPattern": "",
-            "ScheduleAt": "2018-08-12T20:17:46.384Z",
+            "repeatedPattern": "",
+            "scheduleAt": "2018-08-12T20:17:46.384Z",
             "properties1": {
               "desiredProperties": [
                   {
                       "type": "general",
                       "name": "deviceName",
                       "value": "Test-123"
-                  },
-                  {
-                      "type": "general",
-                      "name": "modelName",
-                      "value": "UC-8112-LX"
                   }
                 ]
             },
-            "requesterId": 2 
-        }
-    }
+            "requesterId": "abc8ee0d-a260-4a72-87df-ae504b5ac867"
+          }
+      }
     DirectMethodReq:
       {
         "task": "job operation",
-        "action": "create job – call method",
+        "action": "create job-method",
         "content": {
-          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "deviceId": ["4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59", "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd6"],
+          "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
+          "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
           "isScheduleJob": false,
           "isRepeatableJob": false,
-          "RepeatedPattern": "",
-          "ScheduleAt": "",
+          "sepeatedPattern": "",
+          "scheduleAt": "",
           "methodName": "reboot",
           "inputs": {
-            "name":"kevin", "age": 12
+            "rebootId": "45464564313.325442"
           },
-          "requesterId": 2 
+          "requesterId": "abc8ee0d-a260-4a72-87df-ae504b5ac867"
         }
-      }  
+      }

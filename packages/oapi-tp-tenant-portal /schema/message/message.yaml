@@ -234,7 +234,7 @@ externalDocs:
         "messageId": 0,
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        "name": "systemTag",
+        "messageName": "systemTag",
         "uploadPolicySizeInByte": 4,
         "uploadPolicyIntervalInSecond": 60,
         "uploadPolicySeverity": 0,
@@ -242,14 +242,14 @@ externalDocs:
           {
             "tagId": 0,
             "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-            "name": "isCellularActivated",
+            "tagName": "isCellularActivated",
             "dataType": "boolean",
             "group": 'system'
           },
           {
             "tagId": 1,          
             "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-            "name": "memoryUsage",
+            "tagName": "memoryUsage",
             "dataType": "numeric",
             "group": 'system'
           }
@@ -261,7 +261,7 @@ externalDocs:
           "messageId": 0,
           "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
           "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-          "name": "systemTag",
+          "messageName": "systemTag",
           "uploadPolicySizeInByte": 4,
           "uploadPolicyIntervalInSecond": 60,
           "uploadPolicySeverity": 0,
@@ -269,14 +269,14 @@ externalDocs:
             {
               "tagId": 0,
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "name": "isCellularActivated",
+              "tagName": "isCellularActivated",
               "dataType": "boolean",
               "group": 'system'
             },
             {
               "tagId": 1,          
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "name": "memoryUsage",
+              "tagName": "memoryUsage",
               "dataType": "numeric",
               "group": 'system'
             }
@@ -286,7 +286,7 @@ externalDocs:
           "messageId": 1,
           "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
           "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-          "name": "systemTag",
+          "messageName": "systemTag",
           "uploadPolicySizeInByte": 4,
           "uploadPolicyIntervalInSecond": 60,
           "uploadPolicySeverity": 0,
@@ -294,14 +294,14 @@ externalDocs:
             {
               "tagId": 0,
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "name": "isCellularActivated",
+              "tagName": "isCellularActivated",
               "dataType": "boolean",
               "group": 'system'
             },
             {
               "tagId": 1,          
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "name": "memoryUsage",
+              "tagName": "memoryUsage",
               "dataType": "numeric",
               "group": 'system'
             }
@@ -312,7 +312,7 @@ externalDocs:
       {
         "tagId": 0,
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        "name": "isCellularActivated",
+        "tagName": "isCellularActivated",
         "dataType": "boolean",
         "group": 'system'
       }
@@ -321,14 +321,14 @@ externalDocs:
         {
           "tagId": 0,
           "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-          "name": "isCellularActivated",
+          "tagName": "isCellularActivated",
           "dataType": "boolean",
           "group": 'system'
         },
         {
           "tagId": 1,          
           "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-          "name": "memoryUsage",
+          "tagName": "memoryUsage",
           "dataType": "numeric",
           "group": 'system'
         }
@@ -342,14 +342,14 @@ externalDocs:
           {
             "tagId": 0,
             "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-            "name": "isCellularActivated",
+            "tagName": "isCellularActivated",
             "dataType": "boolean",
             "group": 'system'
           },
           {
             "tagId": 1,          
             "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-            "name": "memoryUsage",
+            "tagName": "memoryUsage",
             "dataType": "numeric",
             "group": 'system'
           }

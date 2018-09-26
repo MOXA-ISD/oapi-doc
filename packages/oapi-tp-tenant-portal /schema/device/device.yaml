@@ -22,6 +22,53 @@ paths:
         required: true
         type: string
     get:
+      parameters:
+        - name: deviceName
+          in: query
+          description: Filter the device list by deviceName
+          required: false
+          type: string
+        - name: group
+          in: query
+          description: Filter the device list by group
+          required: false
+          type: string
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          type: string
+        - name: deviceType
+          in: query
+          description: Filter the device list by deviceType
+          required: false
+          type: string
+        - name: sort
+          in: query
+          description: Sort the device list by specific ordering, \
+            the sort string is case insensitive and default is sort by 'lastUpdatedAt' in 'asc' ordering, \
+            you can omit 'asc', like sort=deviceName \
+            for ordering by 'desc', please append the 'comma' and 'desc' in the string, \
+            like sort=deviceName,asc or sort=group,desc
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - group
+          - modelName
+          - deviceType
+          - lastUpdatedAt
+          - connectionStatus
+        - name: limit
+          in: query
+          description: max return devices count (default is 1000)
+          required: false
+          type: integer  
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer             
       description: Get all devices field data
       responses:
         200:
@@ -285,19 +332,85 @@ definitions:
         type: string
         description: Model name of device.
   
-  DesiredPropertiesReq:
+  PropertyReq:
     type: object
     properties:
-      modelName:
+      type:
         type: string
-        description: Model name of device.
+      name:
+        type: string
+      value:
+        type: string
+
+  DesiredPropertiesReq:
+    type: object
+    required:
+      - deviceId
+      - properties
+    properties:
+      deviceId:
+        type: array
+        description: List of deviceId.
+        items:
+          type: string     
+      properties:
+        type: object
+        description: Properties data. 
+        properties:
+          desiredProperties:
+            type: array
+            items:
+              $ref: '#/definitions/PropertyReq'
+      isScheduleJob:
+        type: boolean
+        description: Is job schedule.
+      scheduleAt:
+        type: string
+        description: If job is scheduleable, scheduleAt should be ISO format time, like 2017-02-19T15:46:02.2935009Z".    
+      isRepeatableJob:
+        type: boolean
+        description: Is job repeatable.
+      repeatedPattern:
+        type: string
+        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
+  
   
   DirectMethodReq:
     type: object
+    required:
+      - deviceId
+      - methodName
     properties:
-      modelName:
+      deviceId:
+        type: array
+        description: List of deviceId.
+        items:
+          type: string
+      methodName:
         type: string
-        description: Model name of device.      
+        description: Method name.       
+      input:
+        type: object
+        description: Method optoinal parameters. 
+        properties:
+          name:
+            type: string
+            description: Name of parameter.
+          value:
+            type: string
+            description: Vaule of parameter.
+      isScheduleJob:
+        type: boolean
+        description: Is job schedule.
+      scheduleAt:
+        type: string
+        description: If job is scheduleable, scheduleAt should be ISO format time, like 2017-02-19T15:46:02.2935009Z".    
+      isRepeatableJob:
+        type: boolean
+        description: Is job repeatable.
+      repeatedPattern:
+        type: string
+        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
   
 externalDocs:
   url: 'http://#'
@@ -307,7 +420,7 @@ externalDocs:
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "deviceName": "moxa",
-        "deviceGroup": [
+        "group": [
           {
             "groupId": 1,
             "groupName": "group A",
@@ -390,7 +503,7 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa1",
-              "deviceGroup": [
+              "group": [
                 {
                   "groupId": 1,
                   "groupName": "group A",
@@ -466,7 +579,7 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa2",
-              "deviceGroup": [
+              "group": [
                 {
                   "groupId": 1,
                   "groupName": "group A",
@@ -720,43 +833,31 @@ externalDocs:
       }
     DesiredPropertiesReq:
       {
-        "task": "job operation",
-        "action": "create job-properties",
-        "content": 
-          {
-            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
-            "isScheduleJob": false,
-            "isRepeatableJob": false,
-            "repeatedPattern": "",
-            "scheduleAt": "2018-08-12T20:17:46.384Z",
-            "properties1": {
-              "desiredProperties": [
-                  {
-                      "type": "general",
-                      "name": "deviceName",
-                      "value": "Test-123"
-                  }
-                ]
-            },
-            "requesterId": "abc8ee0d-a260-4a72-87df-ae504b5ac867"
-          }
-      }
+        "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
+        "isScheduleJob": false,
+        "isRepeatableJob": false,
+        "repeatedPattern": "",
+        "scheduleAt": "",
+        "properties": {
+          "desiredProperties": [
+            {
+                "type": "general",
+                "name": "deviceName",
+                "value": "Test-123"
+            }
+          ]
+        }
+      }  
     DirectMethodReq:
       {
-        "task": "job operation",
-        "action": "create job-method",
-        "content": {
-          "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
-          "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
-          "isScheduleJob": false,
-          "isRepeatableJob": false,
-          "sepeatedPattern": "",
-          "scheduleAt": "",
-          "methodName": "reboot",
-          "inputs": {
-            "rebootId": "45464564313.325442"
-          },
-          "requesterId": "abc8ee0d-a260-4a72-87df-ae504b5ac867"
+        "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
+        "methodName": "reboot",
+        "isScheduleJob": false,
+        "isRepeatableJob": false,
+        "repeatedPattern": "",
+        "scheduleAt": "",
+        "input": {
+            "name": "rebootId",
+            "value": "45464564313.325442"
         }
       }

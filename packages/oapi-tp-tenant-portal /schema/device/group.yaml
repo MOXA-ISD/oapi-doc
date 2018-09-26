@@ -74,17 +74,17 @@ paths:
         204:
           description: success
 
-  /devices/{deviceId}/desiredProperties:
+  /groups/{groupId}/desiredProperties:
     parameters:
-      - name: deviceId
+      - name: groupId
         in: path
-        description: device unique identifier
+        description: group unique identifier
         required: true
         type: string
     get:
-      description: Return desired properties data with given ID device
+      description: Return common desired properties data with given ID group
       tags:
-        - device
+        - group
       responses:
         200:
           description: An Object of the desired properties
@@ -93,6 +93,26 @@ paths:
             items:
               $ref: '#/definitions/DesiredProperties'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+
+  /groups/{groupId}/directMethodList:
+    parameters:
+      - name: groupId
+        in: path
+        description: group unique identifier
+        required: true
+        type: string
+    get:
+      description: Return direct methods data with given ID group
+      tags:
+        - group
+      responses:
+        200:
+          description: An Object of the direct methods
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DirectMethodList'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DirectMethodList' } }
 
 definitions:
   Group:
@@ -118,7 +138,19 @@ definitions:
         type: string
         description: Model name of device.
 
-  GroupDirectMethodList:
+  DesiredProperties:
+    type: object
+    properties:
+      desiredLastUpdatedAt:
+        type: string
+        description: Device desired properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      desiredProperties:
+        type: array
+        items:
+          type: object
+        description: Device desired properties.
+        
+  DirectMethodList:
     type: object
     properties:
       directMethodList:
@@ -126,16 +158,7 @@ definitions:
         items:
           type: object
         description: Device direct method list.
-
-  GroupDesiredProperties:
-    type: object
-    properties:
-      reportedProperties:
-        type: array
-        items:
-          type: object
-        description: Device reported properties.
-
+        
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -176,7 +199,78 @@ externalDocs:
         "description": "moxa group3",
         "devicdIdList": ["1", "2"]
       }
-    GroupDirectMethodList:
+    DesiredProperties:
+      { 
+        "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+        "desiredProperties": [        
+          {
+            "id": 1,
+            "type": "general",
+            "name": "deviceName",
+            "description": "Device Name",
+            "value": "Demo Device 01"
+          },
+          {
+            "id": 2,
+            "type": "general",
+            "name": "firmwareVersion",
+            "description": "Firmware Version",
+            "value": "1.8.1"
+          },      
+          {
+            "id": 3,
+            "type": "general",
+            "name": "configVersion",
+            "description": "Config Version",
+            "value": "3.1.2"
+          },
+          {
+            "id": 4,
+            "type": "network",
+            "name": "eth0",
+            "description": "Ethernet 0",
+            "value": [
+              {
+                "id": 1,
+                "name": "ipAddress",
+                "description": "IP Address",
+                "value": "192.168.3.21"
+              },
+              {
+                "id": 2,
+                "name": "mask",
+                "description": "Subnet Mask",
+                "value": "255.255.255.0"
+              },
+              {
+                "id": 3,
+                "name": "gateway",
+                "description": "Default Gateway",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 4,
+                "name": "dhcp",
+                "description": "DHCP",
+                "value": true
+              },
+              {
+                "id": 5,
+                "name": "primaryDns",
+                "description": "Primary DNS",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 6,
+                "name": "secondaryDns",
+                "description": "Secondary DNS",
+                "vaule": "10.29.11.121"
+              }
+            ]
+          }          
+        ]
+      }
+    DirectMethodList:
       {    
         "directMethodList": [
           {
@@ -200,35 +294,3 @@ externalDocs:
           }
         ]      
       }
-    GroupDesiredProperties: 
-      { 
-        "desiredProperties": [        
-          {
-            "id": 1,
-            "type": "general",
-            "name": "deviceName",
-            "description": "Device Name",
-            "value": "Demo Device 01"
-          },
-          {
-            "id": 4,
-            "type": "network",
-            "name": "eth0",
-            "description": "Ethernet 0",
-            "value": [
-              {
-                "id": 1,
-                "name": "ipAddress",
-                "description": "IP Address",
-                "value": "192.168.3.21"
-              },
-              {
-                "id": 2,
-                "name": "mask",
-                "description": "Subnet Mask",
-                "value": "255.255.255.0"
-              }
-            ]
-          }          
-        ]
-      }  

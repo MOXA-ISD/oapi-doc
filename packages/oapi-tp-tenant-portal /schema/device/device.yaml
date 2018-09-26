@@ -374,12 +374,13 @@ definitions:
         type: array
         description: Method optoinal parameters. 
         items:
-          parameter:
-            type: string
-            description: Parameter name of parameter.
-          value:
-            type: string
-            description: Vaule of parameter.
+          properties:
+            parameter:
+              type: string
+              description: Parameter name of parameter.
+            value:
+              type: string
+              description: Vaule of parameter.
       isScheduleJob:
         type: boolean
         description: Is job schedule.

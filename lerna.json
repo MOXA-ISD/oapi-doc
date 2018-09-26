@@ -4,11 +4,11 @@
   "useWorkspaces": true,
   "packages": ["packages/*"],
   "version": "1.0.0",
-  "commands": {
+  "command": {
     "publish": {
       "message": "chore(release): publish",
-      "allowBranch": "master",
-      "ignore": [".*", "public/*", "node_modules/*"]
+      "allowBranch": ["master", "develop"],
+      "ignoreChanges": [".*", "public/*", "node_modules/*"]
     }
   }
 }

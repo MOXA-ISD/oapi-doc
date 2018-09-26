@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 0.0.1
-  title: ThingsPro Admin Portal RESTful API reference
+  title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/tenant-api/v1'
 schemes:
   - http
@@ -15,13 +15,7 @@ tags:
     description: Handles token field data
 
 paths:
-  '/tenants/{tenantId}/tokens':
-    parameters:
-      - name: tenantId
-        in: path
-        description: Tenant unique identifier
-        required: true
-        type: string
+  /tokens:
     get:
       description: Get all tokens field data
       responses:
@@ -49,13 +43,8 @@ paths:
       tags:
         - token
 
-  /tenants/{tenantId}/tokens/{id}:
+  /tokens/{id}:
     parameters:
-      - name: tenantId
-        in: path
-        description: Tenant unique identifier
-        required: true
-        type: string
       - name: id
         in: path
         description: Token unique identifier

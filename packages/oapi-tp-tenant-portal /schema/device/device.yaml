@@ -14,13 +14,7 @@ tags:
     description: Handles tenants data
 
 paths:
-  '/tenants/{tenantId}/devices':
-    parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
+  /devices:
     get:
       parameters:
         - name: deviceName
@@ -43,13 +37,17 @@ paths:
           description: Filter the device list by deviceType
           required: false
           type: string
+        - name: order
+          in: query
+          description: Ordering the filter device list, default is desc
+          required: false
+          type: string  
+          enum:
+          - desc
+          - asc
         - name: sort
           in: query
-          description: Sort the device list by specific ordering, \
-            the sort string is case insensitive and default is sort by 'lastUpdatedAt' in 'asc' ordering, \
-            you can omit 'asc', like sort=deviceName \
-            for ordering by 'desc', please append the 'comma' and 'desc' in the string, \
-            like sort=deviceName,asc or sort=group,desc
+          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
           required: false
           type: string
           enum:
@@ -61,7 +59,7 @@ paths:
           - connectionStatus
         - name: limit
           in: query
-          description: max return devices count (default is 1000)
+          description: max return devices count (default is 100 and max is 1000)
           required: false
           type: integer  
         - name: offset
@@ -100,13 +98,8 @@ paths:
       tags:
         - device
  
-  /tenants/{tenantId}/devices/{deviceId}:
+  /devices/{deviceId}:
     parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
       - name: deviceId
         in: path
         description: device unique identifier
@@ -132,13 +125,8 @@ paths:
         204:
           description: success
 
-  /tenants/{tenantId}/devices/{deviceId}/reportedProperties:
+  /devices/{deviceId}/reportedProperties:
     parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
       - name: deviceId
         in: path
         description: device unique identifier
@@ -157,18 +145,7 @@ paths:
               $ref: '#/definitions/ReportedProperties'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/ReportedProperties' } }
 
-  /tenants/{tenantId}/devices/{deviceId}/desiredProperties:
-    parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
-      - name: deviceId
-        in: path
-        description: device unique identifier
-        required: true
-        type: string
+  /desiredProperties:
     post:
       description: update properties
       parameters:
@@ -183,31 +160,8 @@ paths:
           description: Updated command sends
       tags:
         - device    
-    get:
-      description: Return desired properties data with given ID device
-      tags:
-        - device
-      responses:
-        200:
-          description: An Object of the desired properties
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/DesiredProperties'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
 
-  /tenants/{tenantId}/devices/{deviceId}/directMethodList:
-    parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
-      - name: deviceId
-        in: path
-        description: device unique identifier
-        required: true
-        type: string
+  /directMethodList:
     post:
       description: Send direct command to device
       parameters:
@@ -222,6 +176,34 @@ paths:
           description: Direct command sends
       tags:
         - device      
+
+  /devices/{deviceId}/desiredProperties:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return desired properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the desired properties
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DesiredProperties'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+
+  /devices/{deviceId}/directMethodList:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
     get:
       description: Return direct methods data with given ID device
       tags:
@@ -374,7 +356,6 @@ definitions:
         type: string
         description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
   
-  
   DirectMethodReq:
     type: object
     required:
@@ -389,13 +370,13 @@ definitions:
       methodName:
         type: string
         description: Method name.       
-      input:
-        type: object
+      userInput:
+        type: array
         description: Method optoinal parameters. 
-        properties:
-          name:
+        items:
+          parameter:
             type: string
-            description: Name of parameter.
+            description: Parameter name of parameter.
           value:
             type: string
             description: Vaule of parameter.
@@ -856,8 +837,10 @@ externalDocs:
         "isRepeatableJob": false,
         "repeatedPattern": "",
         "scheduleAt": "",
-        "input": {
-            "name": "rebootId",
-            "value": "45464564313.325442"
-        }
+        "userInput": [
+          {
+            "parameter": "rebootId",
+            "value": "1"
+          }
+        ]
       }

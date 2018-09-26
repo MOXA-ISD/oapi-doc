@@ -14,13 +14,7 @@ tags:
     description: Handles tenant message data
 
 paths:
-  /tenants/{tenantId}/messageSchemas:
-    parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
+  /messageSchemas:
     get:
       description: Get all message schema field data
       responses:
@@ -53,13 +47,8 @@ paths:
       tags:
         - messageSchema
     
-  /tenants/{tenantId}/messageSchemas/{messageSchemaId}:
+  /messageSchemas/{messageSchemaId}:
     parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
       - name: messageSchemaId
         in: path
         description: message schema unique identifier
@@ -104,13 +93,8 @@ paths:
         204:
           description: success
 
-  /tenants/{tenantId}/messageSchemas/{messageSchemaId}/tags:
+  /messageSchemas/{messageSchemaId}/tags:
     parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
       - name: messageSchemaId
         in: path
         description: message schema unique identifier
@@ -129,13 +113,8 @@ paths:
               $ref: '#/definitions/Tag'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
 
-  /tenants/{tenantId}/devices/{deviceId}/tags:
+  /devices/{deviceId}/tags:
     parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
       - name: deviceId
         in: path
         description: device unique identifier

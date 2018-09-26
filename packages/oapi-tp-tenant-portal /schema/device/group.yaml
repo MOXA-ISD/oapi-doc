@@ -14,13 +14,7 @@ tags:
     description: Handles tenant groups data
 
 paths:
-  '/tenants/{tenantId}/group':
-    parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
+  /groups:
     get:
       description: Get all groups field data
       responses:
@@ -53,13 +47,8 @@ paths:
       tags:
         - group
  
-  /tenants/{tenantId}/groups/{groupId}:
+  /groups/{groupId}:
     parameters:
-      - name: tenantId
-        in: path
-        description: tenant unique identifier
-        required: true
-        type: string
       - name: groupId
         in: path
         description: group unique identifier
@@ -85,6 +74,26 @@ paths:
         204:
           description: success
 
+  /devices/{deviceId}/desiredProperties:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return desired properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the desired properties
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DesiredProperties'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+
 definitions:
   Group:
     type: object
@@ -108,7 +117,25 @@ definitions:
       modelName:
         type: string
         description: Model name of device.
-        
+
+  GroupDirectMethodList:
+    type: object
+    properties:
+      directMethodList:
+        type: array
+        items:
+          type: object
+        description: Device direct method list.
+
+  GroupDesiredProperties:
+    type: object
+    properties:
+      reportedProperties:
+        type: array
+        items:
+          type: object
+        description: Device reported properties.
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -149,3 +176,59 @@ externalDocs:
         "description": "moxa group3",
         "devicdIdList": ["1", "2"]
       }
+    GroupDirectMethodList:
+      {    
+        "directMethodList": [
+          {
+            "methodName": "reboot",
+            "displayName": "Reboot",
+            "description": "Reboot IoT Device immediately",
+            "userInput": []
+          },
+          {
+            "methodName": "rebootAt",
+            "displayName": "Reboot At",
+            "description": "Reboot IoT Device at a specific date time",
+            "userInput": [
+              {
+                "parameter": "executeAt",
+                "value": "",
+                "dataType": "datetime",
+                "description": "UTC time with ISO 8601 format"
+              }
+            ]
+          }
+        ]      
+      }
+    GroupDesiredProperties: 
+      { 
+        "desiredProperties": [        
+          {
+            "id": 1,
+            "type": "general",
+            "name": "deviceName",
+            "description": "Device Name",
+            "value": "Demo Device 01"
+          },
+          {
+            "id": 4,
+            "type": "network",
+            "name": "eth0",
+            "description": "Ethernet 0",
+            "value": [
+              {
+                "id": 1,
+                "name": "ipAddress",
+                "description": "IP Address",
+                "value": "192.168.3.21"
+              },
+              {
+                "id": 2,
+                "name": "mask",
+                "description": "Subnet Mask",
+                "value": "255.255.255.0"
+              }
+            ]
+          }          
+        ]
+      }  

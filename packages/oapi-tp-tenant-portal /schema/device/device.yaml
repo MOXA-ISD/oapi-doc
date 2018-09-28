@@ -22,9 +22,9 @@ paths:
           description: Filter the device list by deviceName
           required: false
           type: string
-        - name: group
+        - name: tag
           in: query
-          description: Filter the device list by group
+          description: Filter the device list by tag
           required: false
           type: string
         - name: modelName
@@ -52,7 +52,7 @@ paths:
           type: string
           enum:
           - deviceName
-          - group
+          - tag
           - modelName
           - deviceType
           - lastUpdatedAt
@@ -227,11 +227,11 @@ definitions:
       deviceId:
         type: string
         description: Unique identifier representing a specific device.
-      group:
+      tag:
         type: array
         items:
-          $ref: '#/definitions/Group'
-        description: Groups of device.
+          type: string
+        description: Tags of device.
       modelName:
         type: string
         description: Model name of device.
@@ -402,18 +402,7 @@ externalDocs:
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "deviceName": "moxa",
-        "group": [
-          {
-            "groupId": 1,
-            "groupName": "group A",
-            "description": "group A"
-          },
-          {
-            "groupId": 2,
-            "groupName": "group B",
-            "description": "group B"
-          }
-        ],
+        "tag": ["A", "B"],
         "modelName": "UC-8112-LX-CG",
         "deviceType": "IIoT Gateway",
         "allowConnection": true,
@@ -485,18 +474,7 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa1",
-              "group": [
-                {
-                  "groupId": 1,
-                  "groupName": "group A",
-                  "description": "group A"
-                },
-                {
-                  "groupId": 2,
-                  "groupName": "group B",
-                  "description": "group B"
-                }
-              ],
+              "tag": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,
@@ -561,18 +539,7 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa2",
-              "group": [
-                {
-                  "groupId": 1,
-                  "groupName": "group A",
-                  "description": "group A"
-                },
-                {
-                  "groupId": 2,
-                  "groupName": "group B",
-                  "description": "group B"
-                }
-              ],
+              "tag": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,

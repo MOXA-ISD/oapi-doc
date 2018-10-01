@@ -10,12 +10,18 @@ schemes:
 - https
 - ws
 
+tags:
+  - name: logging
+    description: ThingdPro Log/Event operation
+
 produces:
 - application/json
 
 paths:
   /logs:
     post:
+      tags:
+        - logging
       description: Create new logs.
       parameters:
       - name: body
@@ -28,6 +34,8 @@ paths:
           description: success
 
     get:
+      tags:
+        - logging
       description: Get logs for the specified criteria.
       parameters:
       - in: query

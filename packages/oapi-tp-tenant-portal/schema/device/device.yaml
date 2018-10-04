@@ -125,6 +125,36 @@ paths:
         204:
           description: success
 
+  /devices/{deviceId}/telemetry:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+      - name: startTime
+        in: query
+        description: query start time(UNIX epoch time, like 1538671238)
+        required: false
+        type: string
+      - name: endTime
+        in: query
+        description: query end time(UNIX epoch time, like 1538671238)
+        required: false
+        type: string  
+    get:
+      description: Return telemetry data with given ID device of query time
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the reported properties
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Telemetry'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TelemetryList' } }
+
   /devices/{deviceId}/reportedProperties:
     parameters:
       - name: deviceId
@@ -356,6 +386,26 @@ definitions:
         type: string
         description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
   
+  Telemetry:
+    type: object
+    required:
+      - deviceId
+      - dataSource
+      - messageTimeStamp
+    properties:
+      deviceId:
+        type: string
+        description: Device unique id.
+      dataSource:
+        type: string
+        description: Data source of telemetry.
+      messageTimeStamp:
+        type: string
+        description: Message timestamp of telemetry.
+      cpuUsage:
+        type: object
+        description: Model name of device.      
+
   DirectMethodReq:
     type: object
     required:
@@ -812,3 +862,69 @@ externalDocs:
           }
         ]
       }
+    TelemetryList:
+      [
+        {
+          "deviceId": "7dc73055-2ad9-4fdc-96d6-c9d18582ce01",
+          "dataSource": "systemTag",
+          "messageTimeStamp": "2018-10-01T08:25:35.4222994+00:00",
+          "cpuUsage": {
+              "unit": "%",
+              "values": [
+                  {
+                      "value": 9,
+                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
+                  },
+                  {
+                      "value": 16,
+                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
+                  },
+                  {
+                      "value": 2,
+                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
+                  }
+              ]
+          },
+          "memoryUsage": {
+              "unit": "%",
+              "values": [
+                  {
+                      "value": 39,
+                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
+                  },
+                  {
+                      "value": 39,
+                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
+                  },
+                  {
+                      "value": 49,
+                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
+                  }
+              ]
+          },
+          "timestamp": 1538471993
+        },
+        {
+          "deviceId": "7dc73055-2ad9-4fdc-96d6-c9d18582ce01",
+          "dataSource": "systemTag",
+          "messageTimeStamp": "2018-10-01T08:25:35.4222994+00:00",
+          "cpuUsage": {
+              "unit": "%",
+              "values": [
+                  {
+                      "value": 9,
+                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
+                  },
+                  {
+                      "value": 16,
+                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
+                  },
+                  {
+                      "value": 2,
+                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
+                  }
+              ]
+          },
+          "timestamp": 1538471994
+        }
+      ]  

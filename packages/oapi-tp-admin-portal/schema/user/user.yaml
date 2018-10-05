@@ -3,7 +3,7 @@ swagger: '2.0'
 info:
   version: 0.0.1
   title: ThingsPro Admin Portal RESTful API reference
-basePath: '/admin-api/v1'
+basePath: '/api/v1'
 schemes:
   - http
   - https

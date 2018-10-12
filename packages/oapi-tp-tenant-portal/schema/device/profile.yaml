@@ -27,7 +27,7 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/ProfileList' } }
       tags:
         - profile
- 
+
   /profiles/{profileId}:
     parameters:
       - name: profileId
@@ -104,9 +104,6 @@ definitions:
             description: Direct method list.
             items:
               type: object
-              
-  # ProfileProperties:
-    
 
   DeviceModel:
     type: object
@@ -132,7 +129,7 @@ definitions:
               type: string
               description: app icon path
         description: All device model list.
-        
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -237,4 +234,12 @@ externalDocs:
           "path": "http://thingspro9dev4system.blob.core.windows.net/images/device/moxa/MB-3660/90x90.jpg",
           "support": false
         }
-    ]
+      ]
+    DeviceModel:
+      {
+        "architecture": "armhf",
+        "id": 1,
+        "name": "MB-3660",
+        "path": "http://thingspro9dev4system.blob.core.windows.net/images/device/moxa/MB-3660/90x90.jpg",
+        "support": false
+      }

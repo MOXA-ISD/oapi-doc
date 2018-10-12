@@ -20,12 +20,8 @@ produces:
 tags:
   - $ref: './tag/index.yaml#/tags'
 
-logging:
-  - $ref: './logging/index.yaml#/logging'
-
 paths:
   - $ref: './tag/index.yaml#/paths'
 
 definitions:
   - $ref: './tag/index.yaml#/definitions'
-  

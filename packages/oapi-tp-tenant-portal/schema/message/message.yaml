@@ -1,0 +1,338 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: message
+    description: Handles tenant message data
+
+paths:
+  /messageSchemas:
+    get:
+      description: Get all message schema field data
+      responses:
+        200:
+          description: An array of message schema
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchemaList' } }
+      tags:
+        - messageSchema
+    post:
+      description: Create a new message schema.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/MessageSchemaReq'
+      responses:
+        201:
+          description: Create message successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
+      tags:
+        - messageSchema
+    
+  /messageSchemas/{messageSchemaId}:
+    parameters:
+      - name: messageSchemaId
+        in: path
+        description: message schema unique identifier
+        required: true
+        type: string
+    get:
+      description: Return message schema data with given ID
+      tags:
+        - messageSchema
+      responses:
+        200:
+          description: An Object of the message schema
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
+    put:
+      description: Update message schema.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/MessageSchemaReq'
+      responses:
+        200:
+          description: Update message schema successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/MessageSchema'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
+      tags:
+        - messageSchema
+    delete:
+      description: Delete message schema with given ID
+      tags:
+        - messageSchema
+      responses:
+        204:
+          description: success
+
+  /messageSchemas/{messageSchemaId}/tags:
+    parameters:
+      - name: messageSchemaId
+        in: path
+        description: message schema unique identifier
+        required: true
+        type: string
+    get:
+      description: Return tags data with given ID
+      tags:
+        - messageSchema
+      responses:
+        200:
+          description: An Object of the tags
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tag'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
+
+  /devices/{deviceId}/tags:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return tags data with given devicdId
+      tags:
+        - messageSchema
+      responses:
+        200:
+          description: An Object of the tag
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tag'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
+
+definitions:
+  MessageSchema:
+    type: object
+    properties:
+      messageSchemaId:
+        type: integer
+        description: Unique identifier representing a specific message schema.
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.  
+      name:
+        type: string
+        description: Name of message.
+      uploadPolicySizeInByte:
+        type: integer
+        description: Description of upload size.  
+      uploadPolicyIntervalInSecond:
+        type: integer
+        description: Description of upload interval.  
+      uploadPolicySeverity:
+        type: integer
+        description: Description of upload severity.   
+      tagList:
+        description: Tag List of message schmea
+        type: array
+        items:
+          '$ref': '#/definitions/Tag'   
+
+  Tag:
+    type: object
+    properties:
+      tagId:
+        type: integer
+        description: Unique identifier representing a specific tenant group.
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.  
+      name:
+        type: string
+        description: Name of message.
+      dataType:
+        type: string
+        enum:
+        - numeric
+        - string
+        - boolean
+        description: Description of tag data type.  
+      group:
+        type: string
+        description: Description of tag group.  
+
+  MessageSchemaReq:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.  
+      uploadPolicySizeInByte:
+        type: integer
+        description: Description of upload size.  
+      uploadPolicyIntervalInSecond:
+        type: integer
+        description: Description of upload interval.  
+      tagList:
+        description: Tag List of message schmea
+        type: array
+        items:
+          '$ref': '#/definitions/Tag'  
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    MessageSchema:
+      {
+        "messageId": 0,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "messageName": "systemTag",
+        "uploadPolicySizeInByte": 4,
+        "uploadPolicyIntervalInSecond": 60,
+        "uploadPolicySeverity": 0,
+        "tagList": [
+          {
+            "tagId": 0,
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "tagName": "isCellularActivated",
+            "dataType": "boolean",
+            "group": 'system'
+          },
+          {
+            "tagId": 1,          
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "tagName": "memoryUsage",
+            "dataType": "numeric",
+            "group": 'system'
+          }
+        ]
+      }
+    MessageSchemaList:
+      [
+        {
+          "messageId": 0,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "messageName": "systemTag",
+          "uploadPolicySizeInByte": 4,
+          "uploadPolicyIntervalInSecond": 60,
+          "uploadPolicySeverity": 0,
+          "tagList": [
+            {
+              "tagId": 0,
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "tagName": "isCellularActivated",
+              "dataType": "boolean",
+              "group": 'system'
+            },
+            {
+              "tagId": 1,          
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "tagName": "memoryUsage",
+              "dataType": "numeric",
+              "group": 'system'
+            }
+          ]
+        },
+        {
+          "messageId": 1,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "messageName": "systemTag",
+          "uploadPolicySizeInByte": 4,
+          "uploadPolicyIntervalInSecond": 60,
+          "uploadPolicySeverity": 0,
+          "tagList": [
+            {
+              "tagId": 0,
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "tagName": "isCellularActivated",
+              "dataType": "boolean",
+              "group": 'system'
+            },
+            {
+              "tagId": 1,          
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "tagName": "memoryUsage",
+              "dataType": "numeric",
+              "group": 'system'
+            }
+          ]
+        }
+      ]
+    Tag:
+      {
+        "tagId": 0,
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "tagName": "isCellularActivated",
+        "dataType": "boolean",
+        "group": 'system'
+      }
+    TagList:
+      [
+        {
+          "tagId": 0,
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "tagName": "isCellularActivated",
+          "dataType": "boolean",
+          "group": 'system'
+        },
+        {
+          "tagId": 1,          
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "tagName": "memoryUsage",
+          "dataType": "numeric",
+          "group": 'system'
+        }
+      ]   
+    MessageSchemaReq:
+      {
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "uploadPolicySizeInByte": 4,
+        "uploadPolicyIntervalInSecond": 60,
+        "tagList": [
+          {
+            "tagId": 0,
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "tagName": "isCellularActivated",
+            "dataType": "boolean",
+            "group": 'system'
+          },
+          {
+            "tagId": 1,          
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "tagName": "memoryUsage",
+            "dataType": "numeric",
+            "group": 'system'
+          }
+        ]
+      }
+
+

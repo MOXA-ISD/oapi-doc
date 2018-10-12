@@ -19,3 +19,6 @@
 ../packages/oapi-tp-gateway/schema/program @fcwu
 ../packages/oapi-tp-gateway/schema/import-export @fcwu
 ../packages/oapi-tp-server/schema @cain19811028 @owenkao
+../packages/oapi-tp-edge/schema @fcwu @GaryHsu77
+../packages/oapi-tp-admin-portal/schema @cain19811028 @owenkao
+../packages/oapi-tp-tenant-portal/schema @cain19811028 @owenkao

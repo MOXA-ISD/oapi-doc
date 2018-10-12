@@ -26,7 +26,7 @@ paths:
       description: Get all users field data
       responses:
         200:
-          description: An array of tokens
+          description: An array of users
           schema:
             type: array
             items:
@@ -142,6 +142,25 @@ definitions:
       email:
         type: string
         description: Email of user.
+      roleId:
+        type: integer
+        description: Role Id associated by user.
+
+  UserLogin:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      name:
+        type: string
+        description: Name of user.
+      company:
+        type: string
+        description: Company of user.
+      email:
+        type: string
+        description: Email of user.
       role:
         type: object
         items:
@@ -182,16 +201,15 @@ externalDocs:
         'name': 'Moxa',
         'company': 'moxa',
         'email': 'moxa@moxa.com',
-        'role':
-          {
-            'id': 1,
-            'name': 'root',
-            'permissions':
-              [
-                { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-              ],
-          },
+        'roleId': 1
+      }
+    UserLogin:
+      {
+        'id': 1,
+        'name': 'Moxa',
+        'company': 'moxa',
+        'email': 'moxa@moxa.com',
+        'roleId': 1
       }
     UserList:
       [
@@ -200,32 +218,14 @@ externalDocs:
           'name': 'Moxa',
           'company': 'moxa',
           'email': 'moxa@moxa.com',
-          'role':
-            {
-              'id': 1,
-              'name': 'root',
-              'permissions':
-                [
-                  { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                  { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-                ],
-            },
+          'roleId': 1
         },
         {
           'id': 2,
           'name': 'Moxa2',
           'company': 'moxa',
           'email': 'moxa2@moxa.com',
-          'role':
-            {
-              'id': 1,
-              'name': 'root',
-              'permissions':
-                [
-                  { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                  { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-                ],
-            },
+          'roleId': 0
         },
       ]
     UserReq: { 'name': 'Moxa', 'password': '12345678', 'company': 'moxa', 'email': 'moxa@moxa.com', 'roleId': 2 }

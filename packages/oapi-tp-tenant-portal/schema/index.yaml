@@ -1,0 +1,33 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+  description: |
+    Welcome to the ThingsPro Tenant Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
+    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
+
+host: localhost
+basePath: '/api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+tags:
+  - $ref: './user/index.yaml#/tags'
+  - $ref: './device/index.yaml#/tags'
+  - $ref: './message/index.yaml#/tags'
+
+paths:
+  - $ref: './user/index.yaml#/paths'
+  - $ref: './device/index.yaml#/paths'
+  - $ref: './message/index.yaml#/paths'
+
+definitions:
+  - $ref: './user/index.yaml#/definitions'
+  - $ref: './device/index.yaml#/definitions'
+  - $ref: './message/index.yaml#/definitions'

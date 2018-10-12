@@ -16,7 +16,6 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
     "clean": "lerna clean",
     "start": "npm-run-all 'lerna:exec -- --scope @tp-x/{1}-oapi-doc -- npm start' --",
     "build": "npm-run-all 'lerna:exec -- --scope @tp-x/{1}-oapi-doc -- npm run build' --",
@@ -28,11 +27,16 @@
     "lerna:updated": "lerna updated"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.0.0",
-    "@commitlint/config-conventional": "^7.0.1",
+    "@commitlint/cli": "^7.1.2",
+    "@commitlint/config-conventional": "^7.1.2",
     "commitizen": "^2.10.1",
-    "husky": "^0.14.3",
-    "lerna": "^3.1.2",
+    "husky": "^1.0.0",
+    "lerna": "^3.4.0",
     "npm-run-all": "^4.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
   }
 }

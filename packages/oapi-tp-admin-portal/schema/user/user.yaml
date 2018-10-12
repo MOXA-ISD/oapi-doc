@@ -1,8 +1,8 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
-  title: ThingsPro Gateway RESTful API reference
+  version: 0.0.1
+  title: ThingsPro Admin Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
   - http
@@ -58,22 +58,6 @@ paths:
             token:
               type: string
               description: Granted authentication token.
-      tags:
-        - user
-      security:
-        - mx-api-token: []
-    delete:
-      description: Delete multiple users.
-      parameters:
-        - name: body
-          in: body
-          description: Delete user ids
-          required: true
-          schema:
-            $ref: '#/definitions/ObjectIDs'
-      responses:
-        204:
-          description: success
       tags:
         - user
       security:
@@ -142,10 +126,12 @@ definitions:
       email:
         type: string
         description: Email of user.
-      role:
+      adminRole:
+        type: integer
+        description: Role of user, 0 is super admin, 1 is admin, 2 is user.
+      data:
         type: object
-        items:
-          - $ref: '#/definitions/Role'
+        description: metadata of user.  
 
   UserReq:
     type: object
@@ -162,70 +148,62 @@ definitions:
       email:
         type: string
         description: Email of user.
-      roleId:
+      adminRole:
         type: integer
-        description: Role Id associated by user.
-
-  ObjectIDs:
-    type: array
-    items:
-      type: string
-      description: ID of object
-      example: ["1", "2"]
+        description: AdminRole of user.
+      data:
+        type: object
+        description: metadata of user.    
 
 externalDocs:
   url: 'http://#'
   x-mocks:
     User:
       {
-        'id': 1,
-        'name': 'Moxa',
-        'company': 'moxa',
-        'email': 'moxa@moxa.com',
-        'role':
+        "id": 1,
+        "name": "Moxa",
+        "company": "moxa",
+        "email": "moxa@moxa.com",
+        "adminRole": 0,
+        "data": 
           {
-            'id': 1,
-            'name': 'root',
-            'permissions':
-              [
-                { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-              ],
-          },
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
+          }
       }
     UserList:
       [
         {
-          'id': 1,
-          'name': 'Moxa',
-          'company': 'moxa',
-          'email': 'moxa@moxa.com',
-          'role':
+          "id": 1,
+          "name": "Moxa",
+          "company": "moxa",
+          "email": "moxa@moxa.com",
+          "adminRole": 0,
+          "data": 
             {
-              'id': 1,
-              'name': 'root',
-              'permissions':
-                [
-                  { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                  { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-                ],
-            },
+              "CUSTOM_FIELD": "CUSTOM VALUE"
+            }
         },
         {
-          'id': 2,
-          'name': 'Moxa2',
-          'company': 'moxa',
-          'email': 'moxa2@moxa.com',
-          'role':
+          "id": 2,
+          "name": "Moxa2",
+          "company": "moxa",
+          "email": "moxa2@moxa.com",
+          "adminRole": 0,
+          "data": 
             {
-              'id': 1,
-              'name': 'root',
-              'permissions':
-                [
-                  { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                  { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-                ],
-            },
-        },
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
+            }
+        }
       ]
-    UserReq: { 'name': 'Moxa', 'password': '12345678', 'company': 'moxa', 'email': 'moxa@moxa.com', 'roleId': 2 }
+    UserReq:
+      { 
+        "name": "Moxa", 
+        "password": "12345678", 
+        "company": "moxa", 
+        "email": "moxa@moxa.com",
+        "adminRole": 0,
+        "data": 
+          {
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
+          }
+      }

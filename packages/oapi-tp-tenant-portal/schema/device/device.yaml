@@ -1,0 +1,930 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: device
+    description: Handles tenants data
+
+paths:
+  /devices:
+    get:
+      parameters:
+        - name: deviceName
+          in: query
+          description: Filter the device list by deviceName
+          required: false
+          type: string
+        - name: tag
+          in: query
+          description: Filter the device list by tag
+          required: false
+          type: string
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          type: string
+        - name: deviceType
+          in: query
+          description: Filter the device list by deviceType
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: Ordering the filter device list, default is desc
+          required: false
+          type: string  
+          enum:
+          - desc
+          - asc
+        - name: sort
+          in: query
+          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - tag
+          - modelName
+          - deviceType
+          - lastUpdatedAt
+          - connectionStatus
+        - name: limit
+          in: query
+          description: max return devices count (default is 100 and max is 1000)
+          required: false
+          type: integer  
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer             
+      description: Get all devices field data
+      responses:
+        200:
+          description: An array of devices
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceList' } }
+      tags:
+        - device
+    post:
+      description: Create a new device.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceReq'
+      responses:
+        201:
+          description: Create device successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+      tags:
+        - device
+ 
+  /devices/{deviceId}:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return device data with given ID
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the device
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+    delete:
+      description: Delete device with given ID
+      tags:
+        - device
+      responses:
+        204:
+          description: success
+
+  /devices/{deviceId}/telemetry:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+      - name: startTime
+        in: query
+        description: query start time(UNIX epoch time, like 1538671238)
+        required: false
+        type: string
+      - name: endTime
+        in: query
+        description: query end time(UNIX epoch time, like 1538671238)
+        required: false
+        type: string  
+    get:
+      description: Return telemetry data with given ID device of query time
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the reported properties
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Telemetry'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TelemetryList' } }
+
+  /devices/{deviceId}/reportedProperties:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return reported properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the reported properties
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ReportedProperties'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/ReportedProperties' } }
+
+  /desiredProperties:
+    post:
+      description: update properties
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DesiredPropertiesReq'
+      responses:
+        200:
+          description: Updated command sends
+      tags:
+        - device    
+
+  /directMethodList:
+    post:
+      description: Send direct command to device
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DirectMethodReq'
+      responses:
+        200:
+          description: Direct command sends
+      tags:
+        - device      
+
+  /devices/{deviceId}/desiredProperties:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return desired properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the desired properties
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DesiredProperties'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+
+  /devices/{deviceId}/directMethodList:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    get:
+      description: Return direct methods data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the direct methods
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DirectMethodList'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DirectMethodList' } }
+
+definitions:
+  Device:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.
+      tag:
+        type: array
+        items:
+          type: string
+        description: Tags of device.
+      modelName:
+        type: string
+        description: Model name of device.
+      deviceType:
+        type: string
+        description: Type of device.  
+      imageUrl:
+        type: string
+        description: Image URL of device.  
+      logoUrl:
+        type: string
+        description: Logo URL of device.  
+      allowConnection:
+        type: boolean
+        description: The device can connect to service or not.
+      connectionStatus:
+        type: string
+        enum:
+        - online
+        - offline
+        - unknown
+        description: Connection status of device.
+      createdAt:
+        type: string
+        description: Device created time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      updatedAt:
+        type: string
+        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
+  
+  Group:
+    type: object
+    properties:
+      groupId:
+        type: integer
+        description: Unique identifier representing a specific group.
+      groupName:
+        type: string
+        description: Name of group.
+      description:
+        type: string
+        description: Description of group.  
+
+  DesiredProperties:
+    type: object
+    properties:
+      desiredLastUpdatedAt:
+        type: string
+        description: Device desired properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      desiredProperties:
+        type: array
+        items:
+          type: object
+        description: Device desired properties.
+        
+  DirectMethodList:
+    type: object
+    properties:
+      directMethodList:
+        type: array
+        items:
+          type: object
+        description: Device direct method list.
+
+  ReportedProperties:
+    type: object
+    properties:
+      reportedLastUpdatedAt:
+        type: string
+        description: Device reported properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
+      reportedProperties:
+        type: array
+        items:
+          type: object
+        description: Device reported properties.
+
+  DeviceReq:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Model name of device.
+  
+  PropertyReq:
+    type: object
+    properties:
+      type:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+
+  DesiredPropertiesReq:
+    type: object
+    required:
+      - deviceId
+      - properties
+    properties:
+      deviceId:
+        type: array
+        description: List of deviceId.
+        items:
+          type: string     
+      properties:
+        type: object
+        description: Properties data. 
+        properties:
+          desiredProperties:
+            type: array
+            items:
+              $ref: '#/definitions/PropertyReq'
+      isScheduleJob:
+        type: boolean
+        description: Is job schedule.
+      scheduleAt:
+        type: string
+        description: If job is scheduleable, scheduleAt should be ISO format time, like 2017-02-19T15:46:02.2935009Z".    
+      isRepeatableJob:
+        type: boolean
+        description: Is job repeatable.
+      repeatedPattern:
+        type: string
+        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
+  
+  Telemetry:
+    type: object
+    required:
+      - deviceId
+      - dataSource
+      - messageTimeStamp
+    properties:
+      deviceId:
+        type: string
+        description: Device unique id.
+      dataSource:
+        type: string
+        description: Data source of telemetry.
+      messageTimeStamp:
+        type: string
+        description: Message timestamp of telemetry.
+      cpuUsage:
+        type: object
+        description: Model name of device.      
+
+  DirectMethodReq:
+    type: object
+    required:
+      - deviceId
+      - methodName
+    properties:
+      deviceId:
+        type: array
+        description: List of deviceId.
+        items:
+          type: string
+      methodName:
+        type: string
+        description: Method name.       
+      userInput:
+        type: array
+        description: Method optoinal parameters. 
+        items:
+          properties:
+            parameter:
+              type: string
+              description: Parameter name of parameter.
+            value:
+              type: string
+              description: Vaule of parameter.
+      isScheduleJob:
+        type: boolean
+        description: Is job schedule.
+      scheduleAt:
+        type: string
+        description: If job is scheduleable, scheduleAt should be ISO format time, like 2017-02-19T15:46:02.2935009Z".    
+      isRepeatableJob:
+        type: boolean
+        description: Is job repeatable.
+      repeatedPattern:
+        type: string
+        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
+  
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Device:
+      {
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "deviceName": "moxa",
+        "tag": ["A", "B"],
+        "modelName": "UC-8112-LX-CG",
+        "deviceType": "IIoT Gateway",
+        "allowConnection": true,
+        "imageURL": "http://123.456.net/xxx/xxx.jpg",
+        "logoURL": "http://123.456.net/xxx/xxx.jpg",
+        "reportedProperties": {    
+          "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+          "reportedProperties": [      
+            {
+              "id": 1,
+              "type": "general",
+              "name": "deviceName",
+              "description": "Device Name",
+              "value": "Demo Device 01"
+            },
+            {
+              "id": 2,
+              "type": "general",
+              "name": "firmwareVersion",
+              "description": "Firmware Version",
+              "value": "1.8.1"
+            }
+          ]    
+        },
+        "desiredProperties": { 
+          "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+          "desiredProperties": [        
+            {
+              "id": 1,
+              "type": "general",
+              "name": "deviceName",
+              "description": "Device Name",
+              "value": "Demo Device 01"
+            },
+            {
+              "id": 4,
+              "type": "network",
+              "name": "eth0",
+              "description": "Ethernet 0",
+              "value": [
+                {
+                  "id": 1,
+                  "name": "ipAddress",
+                  "description": "IP Address",
+                  "value": "192.168.3.21"
+                },
+                {
+                  "id": 2,
+                  "name": "mask",
+                  "description": "Subnet Mask",
+                  "value": "255.255.255.0"
+                }
+              ]
+            }          
+          ]
+        },
+        "connectionStatus": "online",
+        "createdAt": "2018-08-12T20:17:46.384Z",
+        "updatedAt": "2018-08-12T20:17:46.384Z"
+      }
+    DeviceList:
+      {
+        "count": 5,
+        "offset": 0,
+        "limit": 100,
+        "data":
+          [
+            {
+              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "deviceName": "moxa1",
+              "tag": ["A", "B"],
+              "modelName": "UC-8112-LX-CG",
+              "deviceType": "IIoT Gateway",
+              "allowConnection": true,
+              "imageURL": "http://123.456.net/xxx/xxx.jpg",
+              "logoURL": "http://123.456.net/xxx/xxx.jpg",
+              "reportedProperties": {    
+                "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+                "reportedProperties": [      
+                  {
+                    "id": 1,
+                    "type": "general",
+                    "name": "deviceName",
+                    "description": "Device Name",
+                    "value": "Demo Device 01"
+                  },
+                  {
+                    "id": 2,
+                    "type": "general",
+                    "name": "firmwareVersion",
+                    "description": "Firmware Version",
+                    "value": "1.8.1"
+                  }
+                ]    
+              },
+              "desiredProperties": { 
+                "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+                "desiredProperties": [        
+                  {
+                    "id": 1,
+                    "type": "general",
+                    "name": "deviceName",
+                    "description": "Device Name",
+                    "value": "Demo Device 01"
+                  },
+                  {
+                    "id": 4,
+                    "type": "network",
+                    "name": "eth0",
+                    "description": "Ethernet 0",
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "ipAddress",
+                        "description": "IP Address",
+                        "value": "192.168.3.21"
+                      },
+                      {
+                        "id": 2,
+                        "name": "mask",
+                        "description": "Subnet Mask",
+                        "value": "255.255.255.0"
+                      }
+                    ]
+                  }          
+                ]
+              },
+              "connectionStatus": "online", 
+              "createdAt": "2018-08-12T20:17:46.384Z",
+              "updatedAt": "2018-08-12T20:17:46.384Z"
+            },
+            {
+              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+              "deviceName": "moxa2",
+              "tag": ["A", "B"],
+              "modelName": "UC-8112-LX-CG",
+              "deviceType": "IIoT Gateway",
+              "allowConnection": true,
+              "imageURL": "http://123.456.net/xxx/xxx.jpg",
+              "logoURL": "http://123.456.net/xxx/xxx.jpg",
+              "reportedProperties": {    
+                "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+                "reportedProperties": [      
+                  {
+                    "id": 1,
+                    "type": "general",
+                    "name": "deviceName",
+                    "description": "Device Name",
+                    "value": "Demo Device 01"
+                  },
+                  {
+                    "id": 2,
+                    "type": "general",
+                    "name": "firmwareVersion",
+                    "description": "Firmware Version",
+                    "value": "1.8.1"
+                  }
+                ]    
+              },
+              "desiredProperties": { 
+                "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+                "desiredProperties": [        
+                  {
+                    "id": 1,
+                    "type": "general",
+                    "name": "deviceName",
+                    "description": "Device Name",
+                    "value": "Demo Device 01"
+                  },
+                  {
+                    "id": 4,
+                    "type": "network",
+                    "name": "eth0",
+                    "description": "Ethernet 0",
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "ipAddress",
+                        "description": "IP Address",
+                        "value": "192.168.3.21"
+                      },
+                      {
+                        "id": 2,
+                        "name": "mask",
+                        "description": "Subnet Mask",
+                        "value": "255.255.255.0"
+                      }
+                    ]
+                  }          
+                ]
+              },
+              "connectionStatus": "online",
+              "createdAt": "2018-08-12T20:17:46.384Z",
+              "updatedAt": "2018-08-12T20:17:46.384Z"
+            }
+          ]
+      }
+    DeviceReq:
+      {
+        "modelName": "moxa"
+      }
+    ReportedProperties:
+      {    
+        "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+        "reportedProperties": [      
+          {
+            "id": 1,
+            "type": "general",
+            "name": "deviceName",
+            "description": "Device Name",
+            "value": "Demo Device 01"
+          },
+          {
+            "id": 2,
+            "type": "general",
+            "name": "firmwareVersion",
+            "description": "Firmware Version",
+            "value": "1.8.1"
+          },      
+          {
+            "id": 3,
+            "type": "general",
+            "name": "configVersion",
+            "description": "Config Version",
+            "value": "3.1.2"
+          },
+          {
+            "id": 4,
+            "type": "general",
+            "name": "memoryTotalSize",
+            "description": "Memory Total Size",
+            "value": "128",
+            "unit": "GB"
+          },
+          {
+            "id": 5,
+            "type": "network",
+            "name": "eth0",
+            "description": "Ethernet 0",
+            "value": [
+              {
+                "id": 1,
+                "name": "ipAddress",
+                "description": "IP Address",
+                "value": "192.168.3.21"
+              },
+              {
+                "id": 2,
+                "name": "mask",
+                "description": "Subnet Mask",
+                "value": "255.255.255.0"
+              },
+              {
+                "id": 3,
+                "name": "gateway",
+                "description": "Default Gateway",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 4,
+                "name": "dhcp",
+                "description": "DHCP",
+                "value": true
+              },
+              {
+                "id": 5,
+                "name": "primaryDns",
+                "description": "Primary DNS",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 6,
+                "name": "secondaryDns",
+                "description": "Secondary DNS",
+                "vaule": "10.29.11.121"
+              }
+            ]
+          }
+        ]    
+      }
+    DesiredProperties:
+      { 
+        "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
+        "desiredProperties": [        
+          {
+            "id": 1,
+            "type": "general",
+            "name": "deviceName",
+            "description": "Device Name",
+            "value": "Demo Device 01"
+          },
+          {
+            "id": 2,
+            "type": "general",
+            "name": "firmwareVersion",
+            "description": "Firmware Version",
+            "value": "1.8.1"
+          },      
+          {
+            "id": 3,
+            "type": "general",
+            "name": "configVersion",
+            "description": "Config Version",
+            "value": "3.1.2"
+          },
+          {
+            "id": 4,
+            "type": "network",
+            "name": "eth0",
+            "description": "Ethernet 0",
+            "value": [
+              {
+                "id": 1,
+                "name": "ipAddress",
+                "description": "IP Address",
+                "value": "192.168.3.21"
+              },
+              {
+                "id": 2,
+                "name": "mask",
+                "description": "Subnet Mask",
+                "value": "255.255.255.0"
+              },
+              {
+                "id": 3,
+                "name": "gateway",
+                "description": "Default Gateway",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 4,
+                "name": "dhcp",
+                "description": "DHCP",
+                "value": true
+              },
+              {
+                "id": 5,
+                "name": "primaryDns",
+                "description": "Primary DNS",
+                "value": "192.168.3.254"
+              },
+              {
+                "id": 6,
+                "name": "secondaryDns",
+                "description": "Secondary DNS",
+                "vaule": "10.29.11.121"
+              }
+            ]
+          }          
+        ]
+      }
+    DirectMethodList:
+      {    
+        "directMethodList": [
+          {
+            "methodName": "reboot",
+            "displayName": "Reboot",
+            "description": "Reboot IoT Device immediately",
+            "userInput": []
+          },
+          {
+            "methodName": "rebootAt",
+            "displayName": "Reboot At",
+            "description": "Reboot IoT Device at a specific date time",
+            "userInput": [
+              {
+                "parameter": "executeAt",
+                "value": "",
+                "dataType": "datetime",
+                "description": "UTC time with ISO 8601 format"
+              }
+            ]
+          }
+        ]      
+      }
+    DesiredPropertiesReq:
+      {
+        "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
+        "isScheduleJob": false,
+        "isRepeatableJob": false,
+        "repeatedPattern": "",
+        "scheduleAt": "",
+        "properties": {
+          "desiredProperties": [
+            {
+                "type": "general",
+                "name": "deviceName",
+                "value": "Test-123"
+            }
+          ]
+        }
+      }  
+    DirectMethodReq:
+      {
+        "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
+        "methodName": "reboot",
+        "isScheduleJob": false,
+        "isRepeatableJob": false,
+        "repeatedPattern": "",
+        "scheduleAt": "",
+        "userInput": [
+          {
+            "parameter": "rebootId",
+            "value": "1"
+          }
+        ]
+      }
+    TelemetryList:
+      [
+        {
+          "deviceId": "7dc73055-2ad9-4fdc-96d6-c9d18582ce01",
+          "dataSource": "systemTag",
+          "messageTimeStamp": "2018-10-01T08:25:35.4222994+00:00",
+          "cpuUsage": {
+              "unit": "%",
+              "values": [
+                  {
+                      "value": 9,
+                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
+                  },
+                  {
+                      "value": 16,
+                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
+                  },
+                  {
+                      "value": 2,
+                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
+                  }
+              ]
+          },
+          "memoryUsage": {
+              "unit": "%",
+              "values": [
+                  {
+                      "value": 39,
+                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
+                  },
+                  {
+                      "value": 39,
+                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
+                  },
+                  {
+                      "value": 49,
+                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
+                  }
+              ]
+          },
+          "timestamp": 1538471993
+        },
+        {
+          "deviceId": "7dc73055-2ad9-4fdc-96d6-c9d18582ce01",
+          "dataSource": "systemTag",
+          "messageTimeStamp": "2018-10-01T08:25:35.4222994+00:00",
+          "cpuUsage": {
+              "unit": "%",
+              "values": [
+                  {
+                      "value": 9,
+                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
+                  },
+                  {
+                      "value": 16,
+                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
+                  },
+                  {
+                      "value": 2,
+                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
+                  }
+              ]
+          },
+          "timestamp": 1538471994
+        }
+      ]  

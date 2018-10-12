@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
+  version: 0.0.1
   title: ThingsPro Gateway RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -65,7 +65,7 @@ definitions:
       user:
         type: object
         items:
-          - $ref: '#/definitions/UserLogin'
+          - $ref: '#/definitions/User'
       token:
         type: string
         description: Granted authentication token.
@@ -77,20 +77,15 @@ externalDocs:
       {
         user:
           {
-            'id': 1,
-            'name': 'Moxa',
-            'role':
+            "id": 1,
+            "name": "Moxa",
+            "company": "moxa",
+            "email": "moxa@moxa.com",
+            "adminRole": 0,
+            "data": 
               {
-                'id': 1,
-                'name': 'root',
-                'permissions':
-                  [
-                    { 'id': 1, 'value': 2, 'name': 'DM', 'description': 'xxxxx' },
-                    { 'id': 2, 'value': 2, 'name': 'account', 'description': 'xxxxx' },
-                  ],
-              },
-            'company': 'moxa',
-            'email': 'moxa@moxa.com',
+                "CUSTOM_FIELD": "CUSTOM_VALUE"
+              }
           },
-        token: 'USER_TOKEN',
+        token: "USER_TOKEN"
       }

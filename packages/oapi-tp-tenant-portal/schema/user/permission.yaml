@@ -1,0 +1,60 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: permission
+    description: Handles permission field data
+
+paths:
+  '/permissions':
+    get:
+      description: Get all permissions field data
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Permission'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
+      tags:
+        - permission
+
+definitions:
+  Permission:
+    title: Permission
+    required:
+      - id
+      - value
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      value:
+        type: integer
+        description: Attribute of Permission, 0 is cannot view/edit, 1 is can view but cannot edit, 2 is can view and edit
+      name:
+        type: string
+        description: Name of permission.
+      description:
+        type: string
+        description: Description of permission.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    PermissionList:
+      [
+        { "id": 1, "value": 0, "name": "Device Management", "description": "xxxxx" },
+        { "id": 2, "value": 0, "name": "User Management", "description": "xxxxx" }
+      ]

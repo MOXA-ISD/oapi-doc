@@ -1,0 +1,233 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: user
+    description: Handles user field data
+
+paths:
+  /users:
+    get:
+      description: Get all users field data
+      responses:
+        200:
+          description: An array of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
+      tags:
+        - user
+    post:
+      description: Create a new user.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/UserReq'
+      responses:
+        201:
+          description: Create user successfully
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: Granted authentication token.
+          examples:
+            token:
+              type: string
+              description: Granted authentication token.
+      tags:
+        - user
+
+  /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
+    get:
+      description: Return user data with given ID
+      tags:
+        - user
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+    put:
+      description: Return updated user data with given ID
+      parameters:
+        - name: body
+          in: body
+          description: Information of User
+          required: true
+          schema:
+            $ref: '#/definitions/UserReq'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+    delete:
+      description: Delete User with given ID
+      tags:
+        - user
+      responses:
+        204:
+          description: success
+
+definitions:
+  User:
+    type: object
+    properties:
+      userId:
+        type: integer
+        description: Unique identifier representing a specific user.
+      tenantId:
+        type: integer
+        description: Unique identifier representing a specific tenant.  
+      username:
+        type: string
+        description: Username of user.
+      firstName:
+        type: string
+        description: First name of user.
+      lastName:
+        type: string
+        description: Last name of user.
+      email:
+        type: string
+        description: Email of user.  
+      password:
+        type: string
+        description: Password of user.
+      phone:
+        type: string
+        description: Phone of user.
+      roleId:
+        type: integer
+        description: Associate role id of user.
+      loginAt:
+        type: string
+        description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.     
+      data:
+        type: object
+        description: metadata of user.
+
+  UserReq:
+    type: object
+    properties:
+      username:
+        type: string
+        description: Username of user.
+      firstName:
+        type: string
+        description: First name of user.
+      lastName:
+        type: string
+        description: Last name of user.
+      email:
+        type: string
+        description: Email of user.  
+      password:
+        type: string
+        description: Password of user.
+      phone:
+        type: string
+        description: Phone of user.
+      roleId:
+        type: integer
+        description: Associate role id of user.
+      data:
+        type: object
+        description: metadata of user.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    User:
+      {
+        "userId": 1,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "username": "username",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "moxa@moxa.com",
+        "roleId": 0,
+        "phone": "1234567890",        
+        "loginAt": "2018-08-12T20:17:46.384Z",
+        "data": 
+          {
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
+          }
+      }
+    UserList:
+      [
+        {
+          "userId": 1,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "username": "username",
+          "firstName": "firstName",
+          "lastName": "lastName",
+          "email": "moxa@moxa.com",
+          "roleId": 0,
+          "phone": "1234567890",        
+          "loginAt": "2018-08-12T20:17:46.384Z",
+          "data": 
+            {
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
+            }
+        },
+        {
+          "userId": 2,
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "username": "username",
+          "firstName": "firstName",
+          "lastName": "lastName",
+          "email": "moxa@moxa.com",
+          "roleId": 0,
+          "phone": "1234567890",        
+          "loginAt": "2018-08-12T20:17:46.384Z",
+          "data": 
+            {
+              "CUSTOM_FIELD": "CUSTOM_VALUE"
+            }
+        }
+      ]
+    UserReq:
+      { 
+        "username": "username",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "moxa@moxa.com",
+        "password": "12345678",
+        "roleId": 0,
+        "phone": "1234567890",
+        "data": 
+          {
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
+          }
+      }
+
+

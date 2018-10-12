@@ -2,13 +2,22 @@
   "lerna": "3.4.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "packages": ["packages/*"],
-  "version": "1.0.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "1.1.0",
   "command": {
     "publish": {
       "message": "chore(release): publish",
-      "allowBranch": ["master", "develop"],
-      "ignoreChanges": [".*", "public/*", "node_modules/*"]
+      "allowBranch": [
+        "master",
+        "develop"
+      ],
+      "ignoreChanges": [
+        ".*",
+        "public/*",
+        "node_modules/*"
+      ]
     }
   }
 }

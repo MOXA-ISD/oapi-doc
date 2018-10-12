@@ -1,6 +1,6 @@
 {
   "name": "@tp-x/admin-portal-oapi-doc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ThingsPro Admin Portal OAPI documentation",
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Owen YC Kao <owenyc_kao@moxa.com>",

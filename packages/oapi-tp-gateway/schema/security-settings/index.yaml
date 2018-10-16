@@ -1,0 +1,81 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: security
+    description: fail2ban
+
+paths:
+  '/system/curate':
+    put:
+      tags:
+        - security
+      security:
+        - mx-api-token: []
+      description: Modify server security setting
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/Curate'
+      responses:
+        '200':
+          description: Response of put security setting
+
+    get:
+      tags:
+        - security
+      security:
+        - mx-api-token: []
+      description: Get server security setting
+      responses:
+        '200':
+          description: An Object of the security setting
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Curate'
+            example:
+              maxRetry: 5
+              findTime: 600
+              banTime: 1200
+
+definitions:
+  Curate:
+    type: object
+    required:
+      - maxRetry
+      - findTime
+      - banTime
+    properties:
+      maxRetry:
+        description: Retry count, it should between 1-10
+        type: number
+      findTime:
+        description: detection time interval, it should between 60-3600
+        type: number
+      banTime:
+        description: ban time, it should between 60-3600
+        type: number
+    example:
+      maxRetry: 5
+      findTime: 600
+      banTime: 1200
+

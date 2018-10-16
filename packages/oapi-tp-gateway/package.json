@@ -1,6 +1,6 @@
 {
   "name": "@tp-x/gateway-oapi-doc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ThingsPro Gateway OAPI documentation",
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Zack Yang <zack9433@gmail.com>",

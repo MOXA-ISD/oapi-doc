@@ -44,6 +44,7 @@ tags:
   - $ref: './firmware/index.yaml#/tags'
   - $ref: './wifi/index.yaml#/tags'
   - $ref: './user/index.yaml#/tags'
+  - $ref: './security-settings/index.yaml#/tags'
 
 paths:
   - $ref: './cellular/index.yaml#/paths'
@@ -65,6 +66,7 @@ paths:
   - $ref: './firmware/index.yaml#/paths'
   - $ref: './wifi/index.yaml#/paths'
   - $ref: './user/index.yaml#/paths'
+  - $ref: './security-settings/index.yaml#/paths'
 
 definitions:
   - $ref: './cellular/index.yaml#/definitions'
@@ -86,3 +88,4 @@ definitions:
   - $ref: './firmware/index.yaml#/definitions'
   - $ref: './wifi/index.yaml#/definitions'
   - $ref: './user/index.yaml#/definitions'
+  - $ref: './security-settings/index.yaml#/definitions'

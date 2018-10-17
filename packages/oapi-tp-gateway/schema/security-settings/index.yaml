@@ -21,8 +21,8 @@ tags:
     description: fail2ban
 
 paths:
-  '/system/curate':
-    put:
+  '/system/configuration':
+    patch:
       tags:
         - security
       security:
@@ -31,51 +31,64 @@ paths:
       parameters:
         - name: body
           in: body
-          description: ''
           required: true
           schema:
-            $ref: '#/definitions/Curate'
+            $ref: "#/definitions/Configuration"
+
       responses:
-        '200':
-          description: Response of put security setting
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Configuration'
 
     get:
       tags:
         - security
-      security:
-        - mx-api-token: []
       description: Get server security setting
+      parameters:
+      - in: query
+        name: q
+        type: string
+        description: key prefix to query
+
       responses:
-        '200':
-          description: An Object of the security setting
+        200:
+          description: success
           schema:
-            type: object
-            items:
-              $ref: '#/definitions/Curate'
-            example:
-              maxRetry: 5
-              findTime: 600
-              banTime: 1200
+            $ref: '#/definitions/Configuration'
 
 definitions:
-  Curate:
-    type: object
-    required:
-      - maxRetry
-      - findTime
-      - banTime
-    properties:
-      maxRetry:
-        description: Retry count, it should between 1-10
-        type: number
-      findTime:
-        description: detection time interval, it should between 60-3600
-        type: number
-      banTime:
-        description: ban time, it should between 60-3600
-        type: number
-    example:
-      maxRetry: 5
-      findTime: 600
-      banTime: 1200
+  Configuration:
+      properties:
+        httpserverMode:
+          description: http server operating mode
+          type: string
+          enum:
+          - HTTP_ONLY
+          - HTTPS_ONLY
+          - BOTH
+          - REDIRECT_TO_HTTPS
+        httpserverHttpPort:
+          description: listen port for http
+          type: integer
+        httpserverHttpsPort:
+          description: listen port for https
+          type: integer
+        fail2banMaxRetry:
+          type: integer
+          description: Number of matches (i.e. value of the counter) which triggers ban action on the IP.
+        fail2banFindTime:
+          type: integer
+          description: The counter is set to zero if no match is found within "findtime" seconds.
+        fail2banBanTime:
+          type: integer
+          description: Duration (in seconds) for IP to be banned for. Negative number for "permanent" ban.
+      example:
+        httpserverMode: REDIRECT_TO_HTTPS
+        httpserverHttpPort: 80
+        httpserverHttpsPort: 443
+        fail2banMaxRetry: 10
+        fail2banFindTime: 600
+        fail2banBanTime: 600
+
 

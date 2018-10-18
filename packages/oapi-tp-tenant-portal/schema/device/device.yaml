@@ -145,16 +145,16 @@ paths:
         type: string
       - name: startTime
         in: query
-        description: query start time(UNIX epoch time, like 1538671238)
+        description: query start time(UNIX epoch time, like 1538671238 in the unit of second)
         required: false
         type: string
       - name: endTime
         in: query
-        description: query end time(UNIX epoch time, like 1538671238)
+        description: query end time(UNIX epoch time, like 1538671238 in the unit of second)
         required: false
         type: string  
     get:
-      description: Return telemetry data with given ID device of query time
+      description: Return telemetry data with given ID device of query time, the max time interval is one hour and max limit is 500, if the startTime-endTime interval over one hour, servce will use endTime cut one hour as startTime
       tags:
         - device
       responses:

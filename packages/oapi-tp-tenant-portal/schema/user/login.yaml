@@ -81,7 +81,7 @@ externalDocs:
             "role":
               {
                 "id": 1,
-                "name": "root",
+                "roleName": "root",
                 "permissions":
                   [
                     { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },

@@ -43,7 +43,6 @@ tags:
   - $ref: './time/index.yaml#/tags'
   - $ref: './firmware/index.yaml#/tags'
   - $ref: './wifi/index.yaml#/tags'
-  - $ref: './user/index.yaml#/tags'
   - $ref: './security-settings/index.yaml#/tags'
 
 paths:
@@ -65,7 +64,6 @@ paths:
   - $ref: './time/index.yaml#/paths'
   - $ref: './firmware/index.yaml#/paths'
   - $ref: './wifi/index.yaml#/paths'
-  - $ref: './user/index.yaml#/paths'
   - $ref: './security-settings/index.yaml#/paths'
 
 definitions:
@@ -87,5 +85,4 @@ definitions:
   - $ref: './time/index.yaml#/definitions'
   - $ref: './firmware/index.yaml#/definitions'
   - $ref: './wifi/index.yaml#/definitions'
-  - $ref: './user/index.yaml#/definitions'
   - $ref: './security-settings/index.yaml#/definitions'

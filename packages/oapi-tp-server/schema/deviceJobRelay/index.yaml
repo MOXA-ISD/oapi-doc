@@ -1,7 +1,6 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
   title: ThingsPro Gateway RESTful API reference
 basePath: '/api/v1'
 schemes:

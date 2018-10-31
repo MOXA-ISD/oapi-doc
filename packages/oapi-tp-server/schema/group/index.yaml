@@ -1,7 +1,6 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
   title: ThingsPro Server RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -18,12 +17,13 @@ securityDefinitions:
 
 tags:
   - name: group
-    description: Cloud Gateway management
 
 paths:
   /groups:
     get:
       description: The Group endpoint returns information about the device groups.
+      tags:
+      - group
       parameters:
       - name: offset
         in: query
@@ -52,6 +52,8 @@ paths:
 
     post:
       description: Create a new group.
+      tags:
+      - group
       parameters:
       - name: body
         in: body
@@ -75,6 +77,8 @@ paths:
 
     delete:
       description: Delete groups.
+      tags:
+      - group
       parameters:
       - name: body
         in: body
@@ -96,6 +100,8 @@ paths:
 
     get:
       description: Return Group with given ID
+      tags:
+      - group
       responses:
         200:
           description: An Object of the group
@@ -111,6 +117,8 @@ paths:
             }
     put:
       description: Update Group with given ID
+      tags:
+      - group
       parameters:
       - name: body
         in: body
@@ -134,11 +142,15 @@ paths:
 
     delete:
       description: Delete Group with given ID
+      tags:
+      - group
       responses:
         200:
           description: success
 
   /groups/{id}/devices:
+    tags:
+    - group
     parameters:
     - name: id
       in: path
@@ -161,6 +173,8 @@ paths:
             }
     post:
       description: Add devices to group
+      tags:
+      - group
       parameters:
       - name: body
         in: body
@@ -182,6 +196,8 @@ paths:
 
     delete:
       description: Remove devices from group
+      tags:
+      - group
       parameters:
       - name: body
         in: body

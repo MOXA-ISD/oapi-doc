@@ -1,7 +1,6 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
   title: ThingsPro Server RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -24,6 +23,8 @@ paths:
   /groupTasks:
     post:
       description: Create a new group task.
+      tags:
+      - groupTasks
       parameters:
       - name: body
         in: body

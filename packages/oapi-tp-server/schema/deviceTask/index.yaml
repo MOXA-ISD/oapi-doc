@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 2.1.0
-  title: ThingsPro Gateway RESTful API reference
+  title: ThingsPro Server RESTful API reference
 basePath: '/api/v1'
 schemes:
   - http
@@ -74,39 +74,7 @@ paths:
             $ref: '#/definitions/DeviceTaskResp'
             example:
               $ref: '#/externalDocs/x-mocks/DeviceTaskResp'
-  /system/curate:
-    put:
-      tags:
-        - system
-      security:
-        - mx-api-token: []
-      description: Modify server security setting
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            $ref: '#/definitions/Curate'
-      responses:
-        '200':
-          description: Response of put security setting
-    get:
-      tags:
-        - system
-      security:
-        - mx-api-token: []
-      description: Get server security setting
-      responses:
-        '200':
-          description: An Object of the security setting
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Curate'
-            example:
-              $ref: '#/externalDocs/x-mocks/Curate'
-
+              
 definitions:
   DeviceTaskCreate:
     type: object
@@ -148,14 +116,7 @@ definitions:
                 description: object data
     example:
       $ref: '#/externalDocs/x-mocks/DeviceTaskCreate'
-  DeviceTaskCreateForm:
-    type: object
-    properties:
-      jsonData:
-        description: Payload of request
-        type: string
-    example:
-      $ref: '#/externalDocs/x-mocks/DeviceTaskCreate'
+
   DeviceTaskResp:
     type: object
     required:
@@ -193,31 +154,10 @@ definitions:
         type: object
     example:
       $ref: '#/externalDocs/x-mocks/DeviceTaskResp'
-  Curate:
-    type: object
-    required:
-      - maxRetry
-      - findTime
-      - banTime
-    properties:
-      maxRetry:
-        description: Retry count, it should between 1-10
-        type: number
-      findTime:
-        description: detection time interval, it should between 60-3600
-        type: number
-      banTime:
-        description: ban time, it should between 60-3600
-        type: number
-    example:
-      $ref: '#/externalDocs/x-mocks/Curate'
+
 externalDocs:
   url: 'http://#'
   x-mocks:
-    Connection:
-      deviceUUID: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
-      status: online
-      createdAt: '2020-05-03T17:30:08+08:00'
     DeviceTaskCreate:
       deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
       payload:
@@ -244,7 +184,3 @@ externalDocs:
       resource: /system/services
       sign:
         - service
-    Curate:
-      maxRetry: 5
-      findTime: 600
-      banTime: 1200

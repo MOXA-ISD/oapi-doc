@@ -28,11 +28,20 @@ securityDefinitions:
 tags:
 - $ref: "./device/index.yaml#/tags"
 - $ref: "./deviceTask/index.yaml#/tags"
+- $ref: "./group/index.yaml#/tags"
+- $ref: "./groupTask/index.yaml#/tags"
+- $ref: "./system/index.yaml#/tags"
 
 paths:
 - $ref: "./device/index.yaml#/paths"
 - $ref: "./deviceTask/index.yaml#/paths"
+- $ref: "./group/index.yaml#/paths"
+- $ref: "./groupTask/index.yaml#/paths"
+- $ref: "./system/index.yaml#/paths"
 
 definitions:
 - $ref: "./device/index.yaml#/definitions"
 - $ref: "./deviceTask/index.yaml#/definitions"
+- $ref: "./group/index.yaml#/definitions"
+- $ref: "./groupTask/index.yaml#/definitions"
+- $ref: "./system/index.yaml#/definitions"

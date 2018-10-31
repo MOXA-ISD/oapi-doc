@@ -1,0 +1,159 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: deviceJobRelay
+    description: Non-Blocking IO Model
+
+paths:
+  /deviceJobRelay:
+    post:
+      tags:
+        - deviceJobRelay
+      security:
+        - mx-api-token: []
+      description: Create a device task by non-blocking io model
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Parameters of device task
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceJobRelayCreate'
+      responses:
+        '200':
+          description: Response of device task
+          schema:
+            $ref: '#/definitions/DeviceJobRelayResponse'
+            example:
+              $ref: '#/externalDocs/x-mocks/DeviceJobRelayResponse'
+  
+  /deviceJobRelay/{id}':
+    parameters:
+      - name: id
+        in: path
+        description: Device task unique identifier
+        required: true
+        type: string
+    get:
+      security:
+        - mx-api-token: []
+      tags:
+        - deviceJobRelay
+      description: Return Device task data with given id
+      responses:
+        '200':
+          description: An Object of the device task
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DeviceJobRelay'
+            example:
+              $ref: '#/externalDocs/x-mocks/DeviceJobRelay'
+
+definitions:
+  DeviceJobRelayCreate:
+    type: object
+    required:
+      - deviceUUID
+      - payload
+    properties:
+      deviceUUID:
+        description: Target device's uuid
+        type: string
+      payload:
+        type: object
+        description: >-
+          RESTful Message, for more detail please refer to ThingsPro Gateway
+          RESTful Reference
+        required:
+          - method
+          - resource
+        properties:
+          method:
+            description: method of this request message
+            type: string
+            enum:
+              - get
+              - post
+              - put
+              - delete
+          resource:
+            type: string
+            description: resource of this request message
+          data:
+            description: Body
+            allOf:
+              - type: array
+                description: array data
+                items:
+                  - type: string
+              - type: object
+                description: object data
+    example:
+      $ref: '#/externalDocs/x-mocks/DeviceJobRelayCreate'
+  DeviceJobRelayResponse:
+    type: object
+    required:
+      - deviceUUID
+      - messageId
+      - taskId
+    properties:
+      deviceUUID:
+        description: Target device's uuid
+        type: string
+      messageId:
+        description: Message ID
+        type: string
+      taskID:
+        description: Task ID
+        type: string
+    example:
+      $ref: '#/externalDocs/x-mocks/DeviceJobRelayResponse'
+  DeviceJobRelay:
+    type: object
+    required:
+      - deviceUUID
+      - reason
+    properties:
+      deviceUUID:
+        description: Target device's uuid
+        type: string
+      reason:
+        description: A reason
+        type: string
+    example:
+      $ref: '#/externalDocs/x-mocks/DeviceJobRelay'
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    DeviceJobRelayCreate:
+      deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
+      payload:
+        method: get
+        resource: /system/serial
+    DeviceJobRelayResponse:
+      deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
+      messageId: 23af6a26-76a5-47ff-9341-f5da3c80d15e
+      taskId: 1
+    DeviceJobRelay:
+      deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
+      reason: Task Published to MQTT Broker

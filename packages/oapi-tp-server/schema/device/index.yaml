@@ -218,6 +218,20 @@ definitions:
       type: string
       description: UUID of deivce
       example: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
+  FilterDevice:
+    type: object
+    properties:
+      limit:
+        type: number
+        description: query limit number
+      offset:
+        type: number
+        description: query offset number
+      keys:
+        type: object
+        description: query keyword
+    example:
+      $ref: '#/externalDocs/x-mocks/FilterDevice'
 
 externalDocs:
   url: 'http://#'

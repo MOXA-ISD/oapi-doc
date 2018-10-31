@@ -47,8 +47,13 @@ paths:
         - name: query
           in: query
           description: |
-            filter device by keyword, query object is JSON object, please refer definition of **FilterDevice**,
-            query object should encode with base64, and append in query parameter
+            Query and filter device by keyword, 
+            please encode query json object by urlencode, and append it on query parameter
+            please refer definition of FilterDevice to get query object json format
+            limit default is 20 and max is 1000
+            The search key now support 'uuid, mac, displayName, serialNumber, defaultRoute, softwareVersion' 
+            Each search value is wildcard, can just input partial value only
+
           required: false
           type: string
           format: integer  
@@ -269,15 +274,26 @@ externalDocs:
       offset: 0
     FilterDevice:
       {
-        offset: 0,
-        limit: 100,
-        keys: 
-        {
-            serialNumber: 'MOXA00000003',
-            uuid: '6292ca47-f69b-4399-8bdc-3011dc5142df',
-            mac: '223344FF8F54',
-            displayName: 'DEVICE_NAME',
-            defaultRoute: 'eth0',
-            softwareVersion: '2.1'
+        "offset": 0,
+        "limit": 100,
+        "keys": {
+          "serialNumber": {
+            "filter": "MOXA00000003"
+          },
+          "uuid": {
+            "filter": "6292ca47-f69b-4399-8bdc-3011dc5142df"
+          },
+          "mac": {
+            "filter": "223344FF8F54"
+          },
+          "displayName": {
+            "filter": "DEVICE_NAME"
+          },
+          "defaultRoute": {
+            "filter": "eth0"
+          },
+          "softwareVersion": {
+            "filter": "2.1"
+          }
         }
-      }  
+      }

@@ -126,15 +126,29 @@ definitions:
   DeviceJobRelay:
     type: object
     required:
-      - deviceUUID
-      - reason
+      - taskId
+      - status
+      - createdAt
+      - result
     properties:
-      deviceUUID:
-        description: Target device's uuid
+      taskId:
+        description: Task ID
         type: string
-      reason:
-        description: A reason
+      status:
+        description: response status
         type: string
+      createdAt:
+        description: created time
+        type: string
+      updatedAt:
+        description: updated time
+        type: string
+      code:
+        description: http status code
+        type: number
+      result:
+        description: result
+        type: object
     example:
       $ref: '#/externalDocs/x-mocks/DeviceJobRelay'
 
@@ -150,5 +164,22 @@ externalDocs:
       deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
       taskId: 1
     DeviceJobRelay:
-      deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
-      reason: Task Published to MQTT Broker
+      taskId: 4
+      status: Success from CG
+      createdAt: 2018-10-02T10:02:33Z
+      updatedAt: 2018-10-02T10:02:36Z
+      code: 200
+      result: 
+        id: 190760
+        taskId: 4
+        deviceUUID: 19c487dc-27c1-405b-bfce-000000000001
+        code: 200
+        method: get
+        resource: /system/serial
+        sign:
+          - serial
+        data:
+          - id: 1
+            devDisplayName: PORT 1
+            dev: /dev/ttyM0
+            mode: rs232

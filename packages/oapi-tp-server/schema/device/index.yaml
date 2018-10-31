@@ -44,6 +44,14 @@ paths:
           required: false
           type: number
           format: integer
+        - name: query
+          in: query
+          description: |
+            filter device by keyword, query object is JSON object, please refer definition of **FilterDevice**,
+            query object should encode with base64, and append in query parameter
+          required: false
+          type: string
+          format: integer  
       responses:
         '200':
           description: An array of gateways
@@ -259,3 +267,17 @@ externalDocs:
           uuid: 6292ca47-f69b-4399-8bdc-3011dc5142df
       limit: 20
       offset: 0
+    FilterDevice:
+      {
+        offset: 0,
+        limit: 100,
+        keys: 
+        {
+            serialNumber: 'MOXA00000003',
+            uuid: '6292ca47-f69b-4399-8bdc-3011dc5142df',
+            mac: '223344FF8F54',
+            displayName: 'DEVICE_NAME',
+            defaultRoute: 'eth0',
+            softwareVersion: '2.1'
+        }
+      }  

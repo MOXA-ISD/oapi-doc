@@ -48,7 +48,7 @@ paths:
           in: query
           description: |
             Query and filter device by keyword, 
-            please encode query json object with base64, and append it on query parameter
+            please encode query json object by urlencode, and append it on query parameter
             please refer definition of FilterDevice to get query object json format
             limit default is 20 and max is 1000
             The search key now support 'uuid, mac, displayName, serialNumber, defaultRoute, softwareVersion' 

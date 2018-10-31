@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
+  version: 2.5.0
   title: ThingsPro Gateway RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -38,7 +38,7 @@ paths:
           schema:
             $ref: '#/definitions/DeviceJobRelayCreate'
       responses:
-        '200':
+        '201':
           description: Response of device task
           schema:
             $ref: '#/definitions/DeviceJobRelayResponse'
@@ -113,14 +113,10 @@ definitions:
     type: object
     required:
       - deviceUUID
-      - messageId
       - taskId
     properties:
       deviceUUID:
         description: Target device's uuid
-        type: string
-      messageId:
-        description: Message ID
         type: string
       taskID:
         description: Task ID
@@ -152,7 +148,6 @@ externalDocs:
         resource: /system/serial
     DeviceJobRelayResponse:
       deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
-      messageId: 23af6a26-76a5-47ff-9341-f5da3c80d15e
       taskId: 1
     DeviceJobRelay:
       deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd

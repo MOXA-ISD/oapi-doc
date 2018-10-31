@@ -2,7 +2,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
+  version: 2.5.0
   title: ThingsPro Cloud Server RESTful API Reference
   description: |
     Welcome to the ThingsPro Cloud Server RESTful API reference. This is a live document of how you can use ThingsPro Cloud Server APIs.
@@ -27,15 +27,24 @@ securityDefinitions:
 
 tags:
 - $ref: "./device/index.yaml#/tags"
+- $ref: "./deviceJobRelay/index.yaml#/tags"
 - $ref: "./deviceTask/index.yaml#/tags"
-- $ref: "./user/index.yaml#/tags"
+- $ref: "./group/index.yaml#/tags"
+- $ref: "./groupTask/index.yaml#/tags"
+- $ref: "./system/index.yaml#/tags"
 
 paths:
 - $ref: "./device/index.yaml#/paths"
+- $ref: "./deviceJobRelay/index.yaml#/paths"
 - $ref: "./deviceTask/index.yaml#/paths"
-- $ref: "./user/index.yaml#/paths"
+- $ref: "./group/index.yaml#/paths"
+- $ref: "./groupTask/index.yaml#/paths"
+- $ref: "./system/index.yaml#/paths"
 
 definitions:
 - $ref: "./device/index.yaml#/definitions"
+- $ref: "./deviceJobRelay/index.yaml#/definitions"
 - $ref: "./deviceTask/index.yaml#/definitions"
-- $ref: "./user/index.yaml#/definitions"
+- $ref: "./group/index.yaml#/definitions"
+- $ref: "./groupTask/index.yaml#/definitions"
+- $ref: "./system/index.yaml#/definitions"

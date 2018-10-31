@@ -66,7 +66,18 @@ paths:
           in: query
           description: offset
           required: false
-          type: integer             
+          type: integer      
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - modelName
+          - deviceType
+          - group
+          - connectionStatus        
       description: Get all devices field data
       responses:
         200:
@@ -134,16 +145,16 @@ paths:
         type: string
       - name: startTime
         in: query
-        description: query start time(UNIX epoch time, like 1538671238)
+        description: query start time(UNIX epoch time, like 1538671238 in the unit of second)
         required: false
         type: string
       - name: endTime
         in: query
-        description: query end time(UNIX epoch time, like 1538671238)
+        description: query end time(UNIX epoch time, like 1538671238 in the unit of second)
         required: false
         type: string  
     get:
-      description: Return telemetry data with given ID device of query time
+      description: Return telemetry data with given ID device of query time, the max time interval is one hour and max limit is 500, if the startTime-endTime interval over one hour, servce will use endTime cut one hour as startTime
       tags:
         - device
       responses:
@@ -257,7 +268,7 @@ definitions:
       deviceId:
         type: string
         description: Unique identifier representing a specific device.
-      tag:
+      group:
         type: array
         items:
           type: string
@@ -452,7 +463,7 @@ externalDocs:
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "deviceName": "moxa",
-        "tag": ["A", "B"],
+        "group": ["A", "B"],
         "modelName": "UC-8112-LX-CG",
         "deviceType": "IIoT Gateway",
         "allowConnection": true,
@@ -524,7 +535,7 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa1",
-              "tag": ["A", "B"],
+              "group": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,
@@ -589,7 +600,7 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa2",
-              "tag": ["A", "B"],
+              "group": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,

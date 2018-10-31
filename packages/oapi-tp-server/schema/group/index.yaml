@@ -1,0 +1,447 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Server RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: group
+    description: Cloud Gateway management
+
+paths:
+  /groups:
+    get:
+      description: The Group endpoint returns information about the device groups.
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        type: number
+        format: integer
+      - name: limit
+        in: query
+        description: |
+          max return group count (default: 20)
+        required: false
+        type: number
+        format: integer
+      responses:
+        200:
+          description: An array of groups
+          schema:
+            $ref: '#/definitions/GroupList'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/GroupList'
+              }
+            }
+
+    post:
+      description: Create a new group.
+      parameters:
+      - name: body
+        in: body
+        description: New Group object. A device can only be attached to one group.
+        required: true
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        200:
+          description: An array of groups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Group'
+              }
+            }
+
+    delete:
+      description: Delete groups.
+      parameters:
+      - name: body
+        in: body
+        description: IDs of groups. (You can't delete group which has incomplete tasks.)
+        required: true
+        schema:
+          $ref: '#/definitions/GroupIDs'
+      responses:
+        200:
+          description: success
+
+  /groups/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: Group unique identifier
+      required: true
+      type: string
+
+    get:
+      description: Return Group with given ID
+      responses:
+        200:
+          description: An Object of the group
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Group'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Group'
+              }
+            }
+    put:
+      description: Update Group with given ID
+      parameters:
+      - name: body
+        in: body
+        description: Updated information of group.
+        required: true
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        200:
+          description: An Object of the group
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Group'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Group'
+              }
+            }
+
+    delete:
+      description: Delete Group with given ID
+      responses:
+        200:
+          description: success
+
+  /groups/{id}/devices:
+    parameters:
+    - name: id
+      in: path
+      description: Group unique identifier
+      required: true
+      type: string
+
+    get:
+      description: Return device uuid in this group
+      responses:
+        200:
+          description: An array of the device uuid
+          schema:
+            $ref: '#/definitions/DeviceUUIDs'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+              }
+            }
+    post:
+      description: Add devices to group
+      parameters:
+      - name: body
+        in: body
+        description: Array of device uuids
+        required: true
+        schema:
+          $ref: '#/definitions/DeviceUUIDs'
+      responses:
+        200:
+          description: An array of the device uuid in this group
+          schema:
+            $ref: '#/definitions/DeviceUUIDs'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+              }
+            }
+
+    delete:
+      description: Remove devices from group
+      parameters:
+      - name: body
+        in: body
+        description: Array of device uuids
+        required: true
+        schema:
+          $ref: '#/definitions/DeviceUUIDs'
+      responses:
+        200:
+          description: An array of the device uuid in this group
+          schema:
+            $ref: '#/definitions/DeviceUUIDs'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+              }
+            }
+
+definitions:
+  DeviceUUIDs:
+    type: array
+    items:
+      type: string
+      description: UUID of deivce
+      example: ['ded6dd9e-49d9-485b-bac1-da0ca0ae9d70']
+  Group:
+    type: object
+    required:
+    - name
+    properties:
+      id:
+        type: number
+        readOnly: true
+        description: Unique identifier representing a specific group.
+      name:
+        type: string
+        description: Name of group.
+      description:
+        type: string
+        description: Description of group.
+      devices:
+        type: array
+        description: Array of device objects belong to this group.
+        items:
+          $ref: '#/definitions/Device'
+      deviceStatus:
+        type: object
+        description: Device status
+        properties:
+          onlineCount:
+            type: number
+            description: Number of online devices of this group.
+          offlineCount:
+            type: number
+            description: Number of offline devices of this group.
+          createdCount:
+            type: number
+            description: Number of created devices of this group.
+          totalCount:
+            type: number
+            description: Number of devices of this group.
+      tasks:
+        type: array
+        description: Array of GroupTask objects belong to this group.
+        items:
+          $ref: '#/definitions/GroupTask'
+      taskStatus:
+        type: object
+        description: Task status
+        properties:
+          activeCount:
+            type: number
+            description: Number of active tasks of this group.
+          completedCount:
+            type: number
+            description: Number of completed tasks of this group.
+          revokedCount:
+            type: number
+            description: Number of revoked tasks of this group.
+          totalCount:
+            type: number
+            description: Number of tasks of this group.
+      createdAt:
+        type: string
+        format: date-time
+        readOnly: true
+        description: created time.
+      updatedAt:
+        type: string
+        format: date-time
+        readOnly: true
+        description: updated time.
+    example:
+      $ref: '#/externalDocs/x-mocks/Group'
+  GroupList:
+    type: object
+    properties:
+      count:
+        type: number
+        description: Total count of groups
+      limit:
+        type: number
+        description: query limit number
+      offset:
+        type: number
+        description: query offset number
+      data:
+        type: array
+        items:
+        - $ref: '#/definitions/Group'
+    example:
+      $ref: '#/externalDocs/x-mocks/GroupList'
+  GroupIDs:
+    type: array
+    items:
+      type: number
+      description: ID of Group
+      example: 1
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    DeviceUUIDs:
+      ["6292ca47-f69b-4399-8bdc-3011dc5142df", "2730e69e-8d5a-4642-a7cf-966365f991fd"]
+    Group:
+      {
+        "id": 1,
+        "name": "Group Name Here",
+        "description": "Group Description",
+        "deviceStatus": {
+          "created": 1,
+          "offline": 0,
+          "online": 0
+        },
+        "devices": [
+          {
+            "connection": {
+              "createdAt": "2016-12-22T10:07:56",
+              "deviceUUID": "17dbee9c-696c-4598-b1d9-547e740d94fa",
+              "status": "created"
+            },
+            "createdAt": "2016-12-22T10:07:56",
+            "description": "Device",
+            "displayName": "MOXA HQ Sensor 4",
+            "mac": "223344FF8F12",
+            "serialNumber": "TAFLB1003683",
+            "properties": {},
+            "psk": "efe8d947a9a97792e67de8d9137b9a398a40367f30fecb8cdfde9685677dd134",
+            "updatedAt": "2016-12-22T10:07:56",
+            "uuid": "17dbee9c-696c-4598-b1d9-547e740d94fa"
+          }
+        ],
+        "taskStatus": {
+          "completedCount": 1,
+          "activeCount": 0,
+          "revokedCount": 1,
+          "totalCount": 1
+        },
+        "tasks": [
+          {
+            "applyPolicy": "none",
+            "createdAt": "2017-02-23T08:05:22.003420",
+            "deviceUUID": "17dbee9c-696c-4598-b1d9-547e740d94fa",
+            "groupTaskUUID": "b801b523-2900-493e-927e-70724c6ed162",
+            "meta": {
+              "description": "GROUPLIST_TABLE_ACTION_UPGRADE",
+              "icon": "system_update_alt"
+            },
+            "retryTimes": 0,
+            "revoked": false,
+            "scheduledDateTime": null,
+            "state": "SUCCESS",
+            "success": true,
+            "updatedAt": "2017-02-23T08:05:22.003420",
+            "uuid": "c3d4e60e-3519-4819-9051-8efbc1d700f1"
+          }
+        ],
+        "createdAt": "2016-12-22T10:08:18",
+        "updatedAt": "2016-12-22T10:08:18"
+      }
+    GroupList:
+      {
+        "count": 1,
+        "data": [
+          {
+            "createdAt": "2017-03-22T06:14:32.656242",
+            "description": "",
+            "deviceStatus": {
+              "created": 1,
+              "offline": 1,
+              "online": 0
+            },
+            "devices": [
+              {
+                "connection": {
+                  "createdAt": "2017-03-22T08:15:01.359380",
+                  "deviceUUID": "2ad0fbb8-6f53-46ea-a10a-00b7b75145d3",
+                  "status": "offline"
+                },
+                "createdAt": "2017-03-21T03:01:10.175584",
+                "description": "Device",
+                "displayName": "ThingsPro-changed",
+                "mac": "223344FF8F51",
+                "serialNumber": "TAFLB1003683",
+                "properties": {
+                  "aliasName": "ThingsPro-changed",
+                  "createdAt": "2017-03-22T06:41:33.195046",
+                  "deviceUUID": "2ad0fbb8-6f53-46ea-a10a-00b7b75145d3",
+                  "gps": {
+                    "lat": 0,
+                    "lng": 0
+                  }
+                },
+                "updatedAt": "2017-03-22T06:19:58.475876",
+                "uuid": "2ad0fbb8-6f53-46ea-a10a-00b7b75145d3"
+              },
+              {
+                "connection": {
+                  "createdAt": "2017-03-08T15:54:59.782570",
+                  "deviceUUID": "6292ca47-f69b-4399-8bdc-3011dc5142df",
+                  "status": "created"
+                },
+                "createdAt": "2017-03-08T15:54:59.782570",
+                "description": "Device",
+                "displayName": "Dummy device",
+                "mac": "223344FF8F54",
+                "serialNumber": "TAFLB1003684",
+                "properties": {},
+                "updatedAt": "2017-03-08T15:54:59.782570",
+                "uuid": "6292ca47-f69b-4399-8bdc-3011dc5142df"
+              }
+            ],
+            "id": 121,
+            "name": "test",
+            "taskStatus": {
+              "activeCount": 0,
+              "completedCount": 1,
+              "revokedCount": 0,
+              "totalCount": 1
+            },
+            "taskUUID": "72fe59aa-b06a-4ba9-b2cc-373a0dc39b5b",
+            "tasks": [
+              {
+                "applyPolicy": "none",
+                "createdAt": "2017-03-22T06:19:58.475876",
+                "deviceUUID": "2ad0fbb8-6f53-46ea-a10a-00b7b75145d3",
+                "groupTaskUUID": "72fe59aa-b06a-4ba9-b2cc-373a0dc39b5b",
+                "retryTimes": 0,
+                "revoked": false,
+                "scheduledDateTime": null,
+                "state": "SUCCESS",
+                "success": true,
+                "updatedAt": "2017-03-22T06:20:58.689765",
+                "uuid": "ea2ef1b9-6c6d-428c-8eb6-c4140fc8a21a"
+              }
+            ],
+            "updatedAt": "2017-03-22T06:14:32.656242"
+          }
+        ],
+        "limit": 20,
+        "offset": 0
+      }

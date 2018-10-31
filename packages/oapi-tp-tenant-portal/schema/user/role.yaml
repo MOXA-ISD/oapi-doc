@@ -98,7 +98,7 @@ definitions:
       id:
         type: integer
         description: Unique identifier representing a specific user.
-      name:
+      roleName:
         type: string
         description: Name of role.
       permissions:
@@ -112,7 +112,7 @@ definitions:
     title: Role
     type: object
     properties:
-      name:
+      roleName:
         type: string
         description: Name of role.
       permissions:
@@ -129,7 +129,7 @@ externalDocs:
       {
         "id": 1,
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "name": "root",
+        "roleName": "root",
         "permissions":
           [
             { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
@@ -137,7 +137,7 @@ externalDocs:
           ]
       }
     RoleReq: { 
-      "name": "new role", 
+      "roleName": "new role", 
       "permissions": [
           { "id": 1, "value": 2 }, 
           { "id": 2, "value": 2 }
@@ -148,7 +148,7 @@ externalDocs:
         {
           "id": 1,
           "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "name": "root",
+          "roleName": "root",
           "permissions":
             [
               { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
@@ -157,8 +157,11 @@ externalDocs:
         },
         {
           "id": 2,
-          "name": "admin",
-          "permissions": [{ "id": 1, "value": 0, "name": "user management", "description": "xxxxx" }]
+          "roleName": "admin",
+          "permissions": 
+            [
+              { "id": 1, "value": 0, "name": "user management", "description": "xxxxx" }
+            ]
         }
       ]
 

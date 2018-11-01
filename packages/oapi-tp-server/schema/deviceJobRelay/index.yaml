@@ -113,7 +113,6 @@ definitions:
     type: object
     required:
       - deviceUUID
-      - taskId
     properties:
       deviceUUID:
         description: Target device's uuid

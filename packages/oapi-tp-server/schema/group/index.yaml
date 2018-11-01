@@ -150,8 +150,6 @@ paths:
           description: success
 
   /groups/{id}/devices:
-    tags:
-    - group
     parameters:
     - name: id
       in: path
@@ -161,6 +159,8 @@ paths:
 
     get:
       description: Return device uuid in this group
+      tags:
+      - group
       responses:
         200:
           description: An array of the device uuid

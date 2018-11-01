@@ -50,12 +50,6 @@ paths:
             get uuid exactly match device
           required: false
           type: string
-                - name: uuid
-          in: query
-          description: |
-            get uuid exactly match device
-          required: false
-          type: string
         - name: mac
           in: query
           description: |

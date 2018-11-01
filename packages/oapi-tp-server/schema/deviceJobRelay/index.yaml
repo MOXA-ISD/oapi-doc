@@ -118,7 +118,7 @@ definitions:
       deviceUUID:
         description: Target device's uuid
         type: string
-      taskID:
+      taskId:
         description: Task ID
         type: string
     example:

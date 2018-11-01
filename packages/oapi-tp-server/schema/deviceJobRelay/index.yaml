@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.5.0
+  version: 0.0.0
   title: ThingsPro Gateway RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -113,12 +113,11 @@ definitions:
     type: object
     required:
       - deviceUUID
-      - taskId
     properties:
       deviceUUID:
         description: Target device's uuid
         type: string
-      taskID:
+      taskId:
         description: Task ID
         type: string
     example:

@@ -50,7 +50,13 @@ paths:
 
   /profiles/deviceModelList:
     get:
-      description: Return all device model data
+      parameters:
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          type: string
+      description: Get all device model data
       tags:
         - profile
       responses:
@@ -108,27 +114,21 @@ definitions:
   DeviceModel:
     type: object
     properties:
-      deviceModelList:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: integer
-              description: device model id
-            name:
-              type: string
-              description: device model name
-            architecture:
-              type: string
-              description: CPU architecture
-            support:
-              type: boolean
-              description: whether to allow app to be installed
-            path:
-              type: string
-              description: app icon path
-        description: All device model list.
+      id:
+        type: integer
+        description: device model id
+      name:
+        type: string
+        description: device model name
+      architecture:
+        type: string
+        description: CPU architecture
+      support:
+        type: boolean
+        description: whether to allow app to be installed
+      path:
+        type: string
+        description: app icon path
 
 externalDocs:
   url: 'http://#'

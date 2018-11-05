@@ -17,6 +17,10 @@ paths:
   /groups:
     get:
       description: Get all groups field data
+      parameters:
+        - name: deviceId
+          in: query
+          description: 'Get group device belongs to'
       responses:
         200:
           description: An array of group

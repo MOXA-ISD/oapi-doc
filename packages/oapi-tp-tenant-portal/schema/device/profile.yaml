@@ -48,19 +48,19 @@ paths:
               $ref: '#/definitions/Profile'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Profile' } }
 
-  /profiles/getDeviceModelList:
+  /profiles/deviceModelList:
     get:
       description: Return all device model data
       tags:
         - profile
       responses:
         200:
-          description: An Object of the device model
+          description: An array of device model
           schema:
-            type: object
+            type: array
             items:
               $ref: '#/definitions/DeviceModel'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceModel' } }
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceModelList' } }
 
 definitions:
   Profile:
@@ -108,7 +108,7 @@ definitions:
   DeviceModel:
     type: object
     properties:
-      directMethodList:
+      deviceModelList:
         type: array
         items:
           type: object

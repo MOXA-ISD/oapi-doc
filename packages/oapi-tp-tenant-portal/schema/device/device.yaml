@@ -268,11 +268,6 @@ definitions:
       deviceId:
         type: string
         description: Unique identifier representing a specific device.
-      group:
-        type: array
-        items:
-          type: string
-        description: Tags of device.
       modelName:
         type: string
         description: Model name of device.
@@ -301,19 +296,6 @@ definitions:
       updatedAt:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
-  
-  Group:
-    type: object
-    properties:
-      groupId:
-        type: integer
-        description: Unique identifier representing a specific group.
-      groupName:
-        type: string
-        description: Name of group.
-      description:
-        type: string
-        description: Description of group.  
 
   DesiredProperties:
     type: object
@@ -463,7 +445,6 @@ externalDocs:
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "deviceName": "moxa",
-        "group": ["A", "B"],
         "modelName": "UC-8112-LX-CG",
         "deviceType": "IIoT Gateway",
         "allowConnection": true,
@@ -535,7 +516,6 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa1",
-              "group": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,
@@ -600,7 +580,6 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa2",
-              "group": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
               "allowConnection": true,

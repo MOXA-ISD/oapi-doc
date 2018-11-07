@@ -41,7 +41,7 @@ paths:
           in: query
           description: Ordering the filter device list, default is desc
           required: false
-          type: string  
+          type: string
           enum:
           - desc
           - asc
@@ -61,12 +61,12 @@ paths:
           in: query
           description: max return devices count (default is 100 and max is 1000)
           required: false
-          type: integer  
+          type: integer
         - name: offset
           in: query
           description: offset
           required: false
-          type: integer      
+          type: integer
         - name: distinct
           in: query
           description: Get distict value of speific field, this query parameter will return string array only
@@ -106,6 +106,65 @@ paths:
             items:
               $ref: '#/definitions/Device'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+      tags:
+        - device
+
+  /devices/poc:
+    get:
+      parameters:
+        - name: deviceName
+          in: query
+          description: Filter the device list by deviceName
+          required: false
+          type: string
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: Ordering the filter device list, default is desc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: sort
+          in: query
+          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - modelName
+        - name: limit
+          in: query
+          description: max return devices count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - modelName
+      description: Get all poc devices field data
+      responses:
+        200:
+          description: An array of poc devices
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DevicePoc'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DevicePocList' } }
       tags:
         - device
  
@@ -296,6 +355,22 @@ definitions:
       updatedAt:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
+
+  DevicePoc:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.
+      deviceName:
+        type: string
+        description: Device name.
+      modelName:
+        type: string
+        description: Model name of device.
+      mac:
+        type: string
+        description: MAC address of device.
 
   DesiredProperties:
     type: object
@@ -641,6 +716,32 @@ externalDocs:
               "updatedAt": "2018-08-12T20:17:46.384Z"
             }
           ]
+      }
+    DevicePocList:
+      {
+        "count": 3,
+        "offset": 0,
+        "limit": 100,
+        "data": [
+          {
+            "deviceId": "a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b",
+            "deviceName": "UC-8112-LX",
+            "mac": "81-CF-1C-14-3E-4C",
+            "modelName": "UC-8112-LX"
+          },
+          {
+            "deviceId": "91cc56a9-1159-4913-b5f2-ac482cd68ee6",
+            "deviceName": "UC-8112-LX",
+            "mac": "67-88-DE-3C-F1-54",
+            "modelName": "UC-8112-LX"
+          },
+          {
+            "deviceId": "47c03400-3e45-466d-abd4-4e01199cd67a",
+            "deviceName": "UC-8112-LX",
+            "mac": "DF-FE-F1-9E-FF-76",
+            "modelName": "UC-8112-LX"
+          }
+        ]
       }
     DeviceReq:
       {

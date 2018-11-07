@@ -1,0 +1,120 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Tenant Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: order
+    description: Handles poc order data
+
+paths:
+  /orders/{orderId}:
+    parameters:
+      - name: orderId
+        in: path
+        description: order unique identifier
+        required: true
+        type: string
+    get:
+      description: Return order data with given ID
+      tags:
+        - order
+      responses:
+        200:
+          description: An Object of the order
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Order'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
+
+definitions:
+  Order:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      tenantUserId:
+        type: string
+        description: Unique identifier representing a specific tenant user.
+      orderId:
+        type: string
+        description: POC order ID.
+      orderName:
+        type: string
+        description: POC order name. (default = IIoT Application Suite)
+      orderNo:
+        type: string
+        description: POC order number.
+      description:
+        type: string
+        description: Description of order.
+      appPackDownloadUrl:
+        type: string
+        description: App download link for this order.
+      deviceList:
+        type: array
+        items:
+          type: object
+        description: device list for this order.
+      edgeAppList:
+        type: array
+        items:
+          type: object
+        description: edge app list for this order.
+      createdAt:
+        type: string
+        description: create time for this order.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Order:
+      {
+        "orderId": 17,
+        "orderName": "IIoT Application Suite",
+        "orderNo": "O20181107150754",
+        "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
+        "tenantUserId": "8a849228-b3fd-41f6-bfd6-84574580e40b",
+        "appPackDownloadUrl": "http://thingspro9dev4system.blob.core.windows.net/pocorder/a163dd88-d0a6-45a6-b042-e89a0bf31fbd/17.tar",
+        "createdAt": "2018-11-07T07:07:54.087862+00:00Z",
+        "description": "test poc order",
+        "deviceList": [
+          {
+            "deviceId": "2f606359-6939-490d-8114-4a2b3e104c9a",
+            "deviceName": "2f606359-6939-490d-8114-4a2b3e104c9a",
+            "mac": "DB-00-E7-ED-AF-3D",
+            "modelName": "UC-8112-LX"
+          },
+          {
+            "deviceId": "346d9463-a60a-4d6a-b419-f59f11e07ff5",
+            "deviceName": "name",
+            "mac": null,
+            "modelName": "UC-8112-LX"
+          }
+        ],
+        "edgeAppList": [
+          {
+            "appId": 1,
+            "appName": "app-azure",
+            "version": "0.5.0-24"
+          },
+          {
+            "appId": 4,
+            "appName": "linuxdesktop",
+            "version": "0.3.0-12"
+          },
+          {
+            "appId": 1,
+            "appName": "app-azure",
+            "version": "0.6.0-30"
+          }
+        ]
+      }

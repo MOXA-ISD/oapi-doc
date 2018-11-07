@@ -20,14 +20,20 @@ produces:
 tags:
   - $ref: './user/index.yaml#/tags'
   - $ref: './device/index.yaml#/tags'
+  - $ref: './edgeapp/index.yaml#/tags'
   - $ref: './message/index.yaml#/tags'
+  - $ref: './order/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
   - $ref: './device/index.yaml#/paths'
+  - $ref: './edgeapp/index.yaml#/paths'
   - $ref: './message/index.yaml#/paths'
+  - $ref: './order/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
   - $ref: './device/index.yaml#/definitions'
+  - $ref: './edgeapp/index.yaml#/definitions'
   - $ref: './message/index.yaml#/definitions'
+  - $ref: './order/index.yaml#/definitions'

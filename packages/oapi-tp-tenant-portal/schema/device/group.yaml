@@ -20,6 +20,7 @@ paths:
       parameters:
         - name: deviceId
           in: query
+          type: string
           description: 'Get group device belongs to'
       responses:
         200:

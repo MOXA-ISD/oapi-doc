@@ -77,7 +77,27 @@ paths:
       tags:
         - edgeapp
 
-  /edgeapp/{appId}:
+  /edgeapp/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: edge app version id
+        required: true
+        type: string
+    get:
+      description: Return edge app data & version info with given ID
+      tags:
+        - edgeapp
+      responses:
+        200:
+          description: An Object of the edge app
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/EdgeApp'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeApp' } }
+
+  /edgeapp/appId/{appId}:
     parameters:
       - name: appId
         in: path
@@ -121,16 +141,6 @@ definitions:
       appName:
         type: string
         description: Name of edge app.
-      categoryId:
-        type: array
-        items:
-          type: string
-        description: Category ID.
-      categoryName:
-        type: array
-        items:
-          type: string
-        description: Category Name.
       cpuArch:
         type: string
         description: CPU Architecture.  
@@ -142,7 +152,10 @@ definitions:
         description: Display Name of edge app.
       iconUrl:
         type: string
-        description: The Icon URL of edge app.
+        description: The icon URL of edge app.
+      downloadUrl:
+        type: string
+        description: The download URL of edge app.
       isTrialLicense:
         type: boolean
         description: Is trial license ?
@@ -167,6 +180,11 @@ definitions:
       version:
         type: string
         description: Edge app versoin.
+      categoryList:
+        type: array
+        items:
+          type: object
+        description: Category ID.
 
   EdgeAppCategory:
     type: object
@@ -187,19 +205,20 @@ externalDocs:
     EdgeApp:
       {
         "appId": 1,
+        "appVersionId": 21,
         "appName": "app-azure",
-        "categoryId": [
-          "1",
-          "2"
-        ],
-        "categoryName": [
-          "Cloud Connectivity",
-          "Protocol"
+        "categoryList": [
+          {
+            "categoryId": 3,
+            "categoryName": "Edge Intelligence",
+            "description": "Edge Intelligence"
+          }
         ],
         "cpuArch": "armhf",
         "description": "app-azure",
         "displayName": "app-azure",
         "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/app-azure/0.3.0-18/logo.png",
+        "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-azure/18/app-azure_0.3.0-18_armhf.mpkg",
         "isTrialLicense": true,
         "licenseStatement": "Trial - 30 days",
         "publishAt": "2018-09-27T06:54:14.203998+00:00Z",
@@ -216,49 +235,55 @@ externalDocs:
         "limit": 100,
         "data": [
           {
-            "appId": 2,
-            "appName": "modbusmaster",
-            "categoryId": [
-                "1"
+            "appId": 1,
+            "appName": "app-azure",
+            "appVersionId": 1,
+            "categoryList": [
+              {
+                "categoryId": 2,
+                "categoryName": "Cloud Connectivity",
+                "description": "Cloud Connectivity"
+              }
             ],
-            "categoryName": [
-                "Protocol"
-            ],
-            "cpuArch": "armhf",
-            "description": "modbusmaster",
-            "displayName": "modbusmaster",
-            "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/modbusmaster/3.5.6-19/logo.png",
+            "cpuArch": "amd64",
+            "description": "MOXA Azure client",
+            "displayName": "Azure Client",
+            "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-azure/24/app-azure_0.5.0-24_amd64.mpkg",
+            "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/app-azure/0.5.0-24/logo.png",
             "isTrialLicense": true,
             "licenseStatement": "Trial - 30 days",
-            "publishAt": "2018-09-27T06:54:40.125695+00:00Z",
+            "publishAt": "2018-09-27T06:53:51.719756+00:00Z",
             "publisher": "Moxa-ISD",
             "trialPeriodInDay": null,
             "unitPrice": null,
-            "validAt": "2018-09-27T06:54:40.125695+00:00Z",
-            "version": "3.5.6-19"
+            "validAt": "2018-09-27T06:53:51.719756+00:00Z",
+            "version": "0.5.0-24"
           },
           {
-            "appId": 3,
-            "appName": "nodered",
-            "categoryId": [
-                "3"
+            "appId": 4,
+            "appName": "linuxdesktop",
+            "appVersionId": 21,
+            "categoryList": [
+              {
+                "categoryId": 3,
+                "categoryName": "Edge Intelligence",
+                "description": "Edge Intelligence"
+              }
             ],
-            "categoryName": [
-                "Edge Intelligence"
-            ],
-            "cpuArch": "armhf",
-            "description": "nodered",
-            "displayName": "nodered",
-            "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/nodered/0.3.0-1/logo.png",
-            "isTrialLicense": true,
+            "cpuArch": "amd64",
+            "description": "Linux Desktop",
+            "displayName": "Linux Desktop",
+            "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-linuxdesktop/12/linuxdesktop_0.3.0-12_amd64.mpkg",
+            "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/linuxdesktop/0.3.0-12/logo.png",
+            "isTrialLicense": null,
             "licenseStatement": "Trial - 30 days",
-            "publishAt": "2018-09-27T06:55:15.844222+00:00Z",
+            "publishAt": "2018-10-16T06:22:04.373362+00:00Z",
             "publisher": "Moxa-ISD",
             "trialPeriodInDay": null,
             "unitPrice": null,
-            "validAt": "2018-09-27T06:55:15.844222+00:00Z",
-            "version": "0.3.0-1"
-          }
+            "validAt": "2018-10-16T06:22:04.373362+00:00Z",
+            "version": "0.3.0-12"
+          },
         ]
       }
     EdgeAppCategoryList:

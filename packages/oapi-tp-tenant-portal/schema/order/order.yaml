@@ -14,7 +14,7 @@ tags:
     description: Handles poc order data
 
 paths:
-  /devices:
+  /orders:
     get:
       parameters:
         - name: orderId
@@ -30,6 +30,16 @@ paths:
         - name: creator
           in: query
           description: Filter the order list by creator
+          required: false
+          type: string
+        - name: startDate
+          in: query
+          description: Filter the order list by start date
+          required: false
+          type: string
+        - name: endDate
+          in: query
+          description: Filter the order list by end date
           required: false
           type: string
         - name: order

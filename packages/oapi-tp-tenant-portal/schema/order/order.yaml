@@ -71,6 +71,51 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/OrderList' } }
       tags:
         - order
+    post:
+      description: Create a new poc order.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOrder'
+      responses:
+        201:
+          description: Create a new poc order successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Order'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
+      tags:
+        - order
+    put:
+      description: Update POC order data with given ID
+      tags:
+        - order
+      parameters:
+        - name: body
+          in: body
+          description: POC order info
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateOrder'
+      responses:
+        200:
+          description: An Object of POC order
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Order'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
+    delete:
+      description: Delete order with given ID
+      tags:
+        - order
+      responses:
+        204:
+          description: success
 
   /orders/{orderId}:
     parameters:
@@ -138,6 +183,36 @@ definitions:
       createdAt:
         type: string
         description: POC order created time.
+
+  CreateOrder:
+    type: object
+    properties:
+      deviceProfileId:
+        type: number
+        description: Device Profile ID.
+      description:
+        type: string
+        description: POC order description.
+      deviceId:
+        type: array
+        items:
+          type: string
+        description: device uuid list.
+      appVersionId:
+        type: array
+        items:
+          type: number
+        description: edge app version id list.
+
+  UpdateOrder:
+    type: object
+    properties:
+      orderName:
+        type: string
+        description: POC order name.
+      description:
+        type: string
+        description: POC order description.
 
 externalDocs:
   url: 'http://#'

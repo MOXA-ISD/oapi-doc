@@ -74,7 +74,15 @@ paths:
           in: query
           description: offset
           required: false
-          type: integer     
+          type: integer
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          type: string
+          enum:
+          - modelName
+          - creator
       description: Get all orders field data
       responses:
         200:

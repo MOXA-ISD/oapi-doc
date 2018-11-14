@@ -22,6 +22,11 @@ paths:
           description: Filter the order list by orderId
           required: false
           type: number
+        - name: orderNo
+          in: query
+          description: Filter the order list by orderNo
+          required: false
+          type: string
         - name: modelName
           in: query
           description: Filter the order list by modelName

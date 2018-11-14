@@ -100,6 +100,26 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
       tags:
         - order
+
+  /orders/{orderId}:
+    parameters:
+      - name: orderId
+        in: path
+        description: order unique identifier
+        required: true
+        type: number
+    get:
+      description: Return order data with given ID
+      tags:
+        - order
+      responses:
+        200:
+          description: An Object of the order
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Order'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
     put:
       description: Update POC order data with given ID
       tags:
@@ -127,26 +147,6 @@ paths:
         204:
           description: success
 
-  /orders/{orderId}:
-    parameters:
-      - name: orderId
-        in: path
-        description: order unique identifier
-        required: true
-        type: number
-    get:
-      description: Return order data with given ID
-      tags:
-        - order
-      responses:
-        200:
-          description: An Object of the order
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Order'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
-
   /orders/{orderId}/deploy:
     parameters:
       - name: orderId
@@ -156,10 +156,6 @@ paths:
         type: number
     post:
       description: deploy app to device.
-      parameters:
-        - name: body
-          in: body
-          description: ''
       responses:
         201:
           description: deploy app to device successfully

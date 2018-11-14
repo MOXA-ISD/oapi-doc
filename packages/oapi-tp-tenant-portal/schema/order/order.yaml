@@ -39,12 +39,12 @@ paths:
           type: string
         - name: startDate
           in: query
-          description: Filter the order list by start date
+          description: Filter the order list by start date (format YYYY-MM-DD)
           required: false
           type: string
         - name: endDate
           in: query
-          description: Filter the order list by end date
+          description: Filter the order list by end date (format YYYY-MM-DD)
           required: false
           type: string
         - name: order

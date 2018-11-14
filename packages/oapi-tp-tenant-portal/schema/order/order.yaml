@@ -147,6 +147,30 @@ paths:
               $ref: '#/definitions/Order'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
 
+  /orders/{orderId}/deploy:
+    parameters:
+      - name: orderId
+        in: path
+        description: order unique identifier
+        required: true
+        type: number
+    post:
+      description: deploy app to device.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+      responses:
+        201:
+          description: deploy app to device successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/DeployOrder'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeployOrder' } }
+      tags:
+        - order
+
 definitions:
   Order:
     type: object
@@ -223,6 +247,19 @@ definitions:
       description:
         type: string
         description: POC order description.
+
+  DeployOrder:
+    type: object
+    properties:
+      task:
+        type: string
+        description: default "job operation"
+      action:
+        type: string
+        description: default "create job–install application"
+      content:
+        type: object
+        description: payload content
 
 externalDocs:
   url: 'http://#'
@@ -494,4 +531,29 @@ externalDocs:
               "tenantUserId": "8a849228-b3fd-41f6-bfd6-84574580e40b"
             }
           ]
+      }
+    DeployOrder:
+      {
+        "action": "create job–install application",
+        "content": {
+          "deviceId": [
+            "346d9463-a60a-4d6a-b419-f59f11e07ff5",
+            "2f606359-6939-490d-8114-4a2b3e104c9a"
+          ],
+          "isScheduleJob": false,
+          "properties": {
+            "desiredProperties": [
+              {
+                "id": 120,
+                "name": "tobeInstall",
+                "type": "application",
+                "value": "http://thingspro9dev4system.blob.core.windows.net/pocorder/a163dd88d0a645a6b042e89a0bf31fbd/120.pack"
+              }
+            ]
+          },
+          "requesterId": "8a849228-b3fd-41f6-bfd6-84574580e40b",
+          "scheduleAt": "",
+          "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd"
+        },
+        "task": "job operation"
       }

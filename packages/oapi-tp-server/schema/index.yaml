@@ -40,6 +40,7 @@ paths:
 - $ref: "./group/index.yaml#/paths"
 - $ref: "./groupTask/index.yaml#/paths"
 - $ref: "./system/index.yaml#/paths"
+- $ref: "./notification/index.yaml#/paths"
 
 definitions:
 - $ref: "./device/index.yaml#/definitions"
@@ -48,3 +49,4 @@ definitions:
 - $ref: "./group/index.yaml#/definitions"
 - $ref: "./groupTask/index.yaml#/definitions"
 - $ref: "./system/index.yaml#/definitions"
+- $ref: "./notification/index.yaml#/definitions"

@@ -78,29 +78,27 @@ paths:
       responses:
         204:
           description: success
-          
-    put:
-      description: Update tenant activate status
+    patch:
+      description: Update group settings
       parameters:
-        - name: body
-          in: body
-          description: Activate status
-          required: true
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/GroupUpdate'
-      tags:
-        - group          
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/GroupUpdate'
       responses:
         200:
-          description: An Object of the update group
+          description: success
           schema:
-            type: object
-            items:
-              $ref: '#/definitions/Group'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Group' } }
-  
+            $ref: '#/definitions/Group'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Group'
+              }
+            } 
   /groups/{groupId}/unassignDevices:
     parameters:
       - name: groupId
@@ -111,6 +109,14 @@ paths:
     get:
       description: Return all devies don't belong to this group
       parameters:
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - modelName
         - name: order
           in: query
           description: Ordering the filter device list, default is desc
@@ -137,7 +143,6 @@ paths:
           description: offset
           required: false
           type: integer
-
       tags:
         - group
       responses:

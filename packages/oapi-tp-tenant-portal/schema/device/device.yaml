@@ -76,7 +76,6 @@ paths:
           - deviceName
           - modelName
           - deviceType
-          - group
           - connectionStatus        
       description: Get all devices field data
       responses:

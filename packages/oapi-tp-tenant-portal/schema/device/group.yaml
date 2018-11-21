@@ -61,6 +61,12 @@ paths:
         type: string
     get:
       description: Return group data with given ID
+      parameters:
+        - name: groupName
+          in: query
+          description: Filter the group list by groupName
+          required: false
+          type: string
       tags:
         - group
       responses:

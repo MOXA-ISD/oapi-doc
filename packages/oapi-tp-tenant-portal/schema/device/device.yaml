@@ -22,11 +22,6 @@ paths:
           description: Filter the device list by deviceName
           required: false
           type: string
-        - name: tag
-          in: query
-          description: Filter the device list by tag
-          required: false
-          type: string
         - name: modelName
           in: query
           description: Filter the device list by modelName
@@ -52,7 +47,6 @@ paths:
           type: string
           enum:
           - deviceName
-          - tag
           - modelName
           - deviceType
           - lastUpdatedAt
@@ -370,6 +364,16 @@ definitions:
       mac:
         type: string
         description: MAC address of device.
+      connectionStatus:
+        type: string
+        enum:
+        - online
+        - offline
+        - unknown
+        description: Connection status of device.
+      lastupdatedat:
+        type: string
+        description: Device last updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
 
   DesiredProperties:
     type: object
@@ -726,19 +730,25 @@ externalDocs:
             "deviceId": "a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b",
             "deviceName": "UC-8112-LX",
             "mac": "81-CF-1C-14-3E-4C",
-            "modelName": "UC-8112-LX"
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"
           },
           {
             "deviceId": "91cc56a9-1159-4913-b5f2-ac482cd68ee6",
             "deviceName": "UC-8112-LX",
             "mac": "67-88-DE-3C-F1-54",
-            "modelName": "UC-8112-LX"
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
           },
           {
             "deviceId": "47c03400-3e45-466d-abd4-4e01199cd67a",
             "deviceName": "UC-8112-LX",
             "mac": "DF-FE-F1-9E-FF-76",
-            "modelName": "UC-8112-LX"
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
           }
         ]
       }

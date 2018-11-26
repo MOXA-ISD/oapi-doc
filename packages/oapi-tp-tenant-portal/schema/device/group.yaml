@@ -298,14 +298,11 @@ definitions:
         description: Device desired properties.
         
   DirectMethodList:
-    type: object
-    properties:
-      directMethodList:
-        type: array
-        items:
-          type: object
-        description: Device direct method list.
-  
+    type: array
+    items:
+      type: object
+    description: Device direct method list.
+
   DevicePoc:
     type: object
     properties:
@@ -460,8 +457,7 @@ externalDocs:
         ]
       }
     DirectMethodList:
-      {    
-        "directMethodList": [
+        [
           {
             "methodName": "reboot",
             "displayName": "Reboot",
@@ -482,7 +478,6 @@ externalDocs:
             ]
           }
         ]      
-      }
     DevicePocList:
       {
         "count": 3,

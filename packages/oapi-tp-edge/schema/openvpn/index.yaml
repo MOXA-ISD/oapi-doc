@@ -1,0 +1,201 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: openvpn
+    description: Handles the configuration of the OpenVPN client service
+
+paths:
+  '/network/openvpn':
+    get:
+      description: Get OpenVPN service setting.
+      responses:
+        '200':
+          description: Get OpenVPN setting success.
+          schema:
+            '$ref': '#/definitions/OpenVPN'
+            example:
+              enable: true
+              ovpnFileExist: true
+              connection: true
+              vpnRemoteIp: 10.9.8.1
+              vpnLocalIp: 10.9.8.2
+      tags:
+        - openvpn
+      security:
+        - mx-api-token: []
+    put:
+      description: Update OpenVPN service setting.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/OpenVPN'
+      responses:
+        '200':
+          description: Update OpenVPN setting success.
+          schema:
+            '$ref': '#/definitions/OpenVPN'
+            example:
+              enable: true
+              ovpnFileExist: true
+              connection: true
+              vpnRemoteIp: 10.9.8.1
+              vpnLocalIp: 10.9.8.2
+      tags:
+        - openvpn
+      security:
+        - mx-api-token: []
+  '/network/openvpn/config':
+    post:
+      description: Upload OpenVPN configuration file to File server.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/OpenVPNPostConfig'
+      responses:
+        '200':
+          description: Upload success.
+          schema:
+            '$ref': '#/definitions/OpenVPNConfigURL'
+            example:
+              url: http://192.168.31.113:18080/url
+      tags:
+        - openvpn
+      security:
+        - mx-api-token: []
+    put:
+      description: Provide OpenVPN configuration file path to bundle.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/OpenVPNConfig'
+      responses:
+        '200':
+          description: Provide success.
+      tags:
+        - openvpn
+      security:
+        - mx-api-token: []
+    delete:
+      responses:
+        '200':
+          description: Delete OpenVPN configuration file success.
+      tags:
+        - openvpn
+      security:
+        - mx-api-token: []
+  '/network/openvpn/sample':
+    post:
+      description: Upload OpenVPN sample configuration file to File server.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/OpenVPNPostConfig'
+      responses:
+        '200':
+          description: Upload success.
+          schema:
+            '$ref': '#/definitions/OpenVPNConfigURL'
+            example:
+              url: http://192.168.31.113:18080/url
+      tags:
+        - openvpn
+      security:
+        - mx-api-token: []
+
+definitions:
+  OpenVPN:
+    title: OpenVPN
+    required:
+      - enable
+    properties:
+      enable:
+        type: boolean
+        description: Enable OpenVPN service.
+      ovpnFileExist:
+        type: boolean
+        description: When OpenVPN configuration file is uploaded, set true.
+        readOnly: true
+      connection:
+        type: boolean
+        description: When OpenVPN client is connected to server, set true.
+        readOnly: true
+      vpnRemoteIp:
+        type: string
+        description: IP of OpenVPN server.
+        readOnly: true
+      vpnLocalIp:
+        type: string
+        description: IP of OpenVPN client.
+        readOnly: true
+    example:
+      enable: true
+      ovpnFileExist: true
+      connection: true
+      vpnRemoteIp: 10.9.8.1
+      vpnLocalIp: 10.9.8.2
+  OpenVPNConfig:
+    title: OpenVPNConfig
+    required:
+      - file
+    properties:
+      file:
+        required:
+          - url
+          - headers
+        properties:
+          url:
+            type: string
+          headers:
+            type: object
+    example:
+      file:
+        url: http://192.168.31.113:18080/url
+        headers:
+          X-Mx-AccessToken: MOXAMOXA-TEST-SYSTEM
+  OpenVPNPostConfig:
+    title: OpenVPNPostConfig
+    required:
+      - url
+      - headers
+    properties:
+      url:
+        type: string
+      headers:
+        type: object
+    example:
+      url: http://192.168.31.113:18080/url
+      headers:
+        X-Mx-AccessToken: MOXAMOXA-TEST-SYSTEM
+  OpenVPNConfigURL:
+    title: OpenVPNConfigURL
+    required:
+      - url
+    properties:
+      url:
+        type: string
+    example:
+      url: http://192.168.31.113:18080/url

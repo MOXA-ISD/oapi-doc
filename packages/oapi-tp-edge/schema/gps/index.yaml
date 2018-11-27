@@ -1,0 +1,133 @@
+
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: GPS API
+  description: Provides the GPS configuration interface
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: gps
+    description: Provides the GPS configuration interface
+
+paths:
+  "/system/gps/interfaces":
+    get:
+      summary: Supported GPS Interface list.
+      description:
+        The system returns a list of GPS interface.
+      responses:
+        200:
+          description: An array of GPS interface(s)
+          schema:
+            type: array
+            items:
+              type: string
+
+      tags:
+        - gps
+      security:
+        - mx-api-token: []
+
+  "/system/gps/settings":
+    get:
+      description:
+        Get GPS settings.
+      responses:
+        200:
+          description: GPS settings.
+          schema:
+            $ref: '#/definitions/GPSSettings'
+          example:
+            interface: "/dev/ttyUSB2"
+            enable: true
+            interval: 60
+            location:
+              lat: 23.5
+              lng: 121.2
+
+      tags:
+        - gps
+      security:
+        - mx-api-token: []
+
+    put:
+      summary: GPS Settings
+      description:
+        Update the GPS settings. GPS Updater will update GPS location into
+        system properties if enabled.
+      parameters:
+      - name: body
+        in: body
+        description: ''
+        required: true
+        schema:
+          $ref: '#/definitions/GPSSettings'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GPSSettings'
+          example:
+            interface: "/dev/ttyUSB2"
+            enable: true
+            interval: 60
+            location:
+              lat: 23.5
+              lng: 121.2
+      tags:
+        - gps
+      security:
+        - mx-api-token: []
+
+definitions:
+  GPSSettings:
+    title: GPS Settings
+    required:
+    - enable
+    - interface
+    - location
+    properties:
+      interface:
+        type: string
+        description: Interface node.
+      enable:
+        type: boolean
+        description:
+          Enable GPS Updater to update GPS location into system properties.
+      interval:
+        type: integer
+        minimum: 0
+        maximum: 86400
+        description:
+          Update frequency, `0` indicates only to update after system boot.
+      location:
+        type: object
+        description:
+          Location information, with `latitude` and `longitude` data.
+        required:
+        - lat
+        - lng
+        properties:
+          lat:
+            type: number
+            format: float
+            description: latitude
+            default: 0
+          lng:
+            type: number
+            format: float
+            description: longitude
+            default: 0

@@ -1,0 +1,218 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: time
+    description: Provides the system-time management function
+
+paths:
+  '/system/time':
+    get:
+      description: Get current time settings
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/Time'
+            example:
+              time: '2015-03-26T16:27:48.611441Z'
+              timezone: Asia/Taipei
+              ntp:
+                enable: true
+                server: pool.ntp.org
+                interval: 86400
+      tags:
+        - time
+      security:
+        - mx-api-token: []
+    put:
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/Time'
+      description: Update time settings
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/Time'
+            example:
+              time: '2015-03-26T16:27:48.611441Z'
+              timezone: Asia/Taipei
+              ntp:
+                enable: true
+                server: pool.ntp.org
+                interval: 86400
+      tags:
+        - time
+      security:
+        - mx-api-token: []
+  '/system/zoneinfo':
+    get:
+      description: Get current timezone information
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/Timezone'
+            example:
+              zone:
+                - cca2: AD
+                  name: Europe/Andorra
+                  offset: '+0100'
+                - cca2: AE
+                  name: Asia/Dubai
+                  offset: '+0400'
+                - cca2: AF
+                  name: Asia/Kabul
+                  offset: '+0430'
+              iso3166:
+                - cca2: AD
+                  name: Andorra
+                - cca2: AE
+                  name: United Arab Emirates
+                - cca2: AF
+                  name: Afghanistan
+      tags:
+        - time
+      security:
+        - mx-api-token: []
+    post:
+      description: Update timezone information from internet
+      responses:
+        '200':
+          description: success
+      tags:
+        - time
+      security:
+        - mx-api-token: []
+
+definitions:
+  Time:
+    description: Time configuration
+    type: object
+    properties:
+      time:
+        description: 'Current system time (format: iso 8601)'
+        type: string
+      timezone:
+        description: Current timezone
+        type: string
+      ntp:
+        '$ref': '#/definitions/NTP'
+    example:
+      time: '2015-03-26T16:27:48.611441Z'
+      timezone: Asia/Taipei
+      ntp:
+        enable: true
+        server: pool.ntp.org
+        interval: 86400
+  NTP:
+    description: NTP configuration
+    type: object
+    required:
+      - enable
+      - server
+      - interval
+    properties:
+      enable:
+        description: Enable NTP client
+        type: boolean
+      server:
+        description: Target NTP server
+        type: string
+        minLength: 1
+        maxLength: 2048
+      interval:
+        description: 'Time sync interval in seconds (at least: 60 seconds.)'
+        type: integer
+        minimum: 60
+        maximum: 2592000
+    example:
+      enable: false
+      server: pool.ntp.org
+      interval: 86400
+  Timezone:
+    description: Timezone information
+    type: object
+    required:
+      - zone
+      - iso3166
+    properties:
+      zone:
+        description: TZ zone list with cca2 and TZ
+        type: array
+        items:
+          '$ref': '#/definitions/TimezoneZone'
+      iso3166:
+        description: ISO 3166 alpha-2 country codes
+        type: array
+        items:
+          '$ref': '#/definitions/TimezoneIso3166'
+    example:
+      zone:
+        - cca2: AD
+          name: Europe/Andorra
+          offset: '+0100'
+        - cca2: AE
+          name: Asia/Dubai
+          offset: '+0400'
+        - cca2: AF
+          name: Asia/Kabul
+          offset: '+0430'
+      iso3166:
+        - cca2: AD
+          name: Andorra
+        - cca2: AE
+          name: United Arab Emirates
+        - cca2: AF
+          name: Afghanistan
+  TimezoneZone:
+    description: ISO 3166 alpha-2 country code and zone name
+    type: object
+    required:
+      - cca2
+      - name
+      - offset
+    properties:
+      cca2:
+        description: ISO 3166 alpha-2 country code
+        type: string
+        pattern: '[A-Z]{2}'
+      name:
+        description: zone name
+        type: string
+      offset:
+        description: zone offset (format should be "+0800", etc)
+        type: string
+  TimezoneIso3166:
+    description: ISO 3166 alpha-2 country code and country name
+    type: object
+    required:
+      - cca2
+      - name
+    properties:
+      cca2:
+        description: ISO 3166 alpha-2 country code
+        type: string
+        pattern: '[A-Z]{2}'
+      name:
+        description: The usual English name for the coded region
+        type: string

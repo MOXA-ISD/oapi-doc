@@ -1,0 +1,14 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./default-route.yaml#/tags"
+- $ref: "./firewall.yaml#/tags"
+
+paths:
+- $ref: "./default-route.yaml#/paths"
+- $ref: "./firewall.yaml#/paths"
+
+definitions:
+- $ref: "./default-route.yaml#/definitions"
+- $ref: "./firewall.yaml#/definitions"

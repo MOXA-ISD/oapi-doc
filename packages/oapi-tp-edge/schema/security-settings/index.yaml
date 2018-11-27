@@ -1,0 +1,94 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.0
+  title: ThingsPro Gateway RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: security
+    description: fail2ban
+
+paths:
+  '/system/configuration':
+    patch:
+      tags:
+        - security
+      security:
+        - mx-api-token: []
+      description: Modify server security setting
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Configuration"
+
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Configuration'
+
+    get:
+      tags:
+        - security
+      description: Get server security setting
+      parameters:
+      - in: query
+        name: q
+        type: string
+        description: key prefix to query
+
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Configuration'
+
+definitions:
+  Configuration:
+      properties:
+        httpserverMode:
+          description: http server operating mode
+          type: string
+          enum:
+          - HTTP_ONLY
+          - HTTPS_ONLY
+          - BOTH
+          - REDIRECT_TO_HTTPS
+        httpserverHttpPort:
+          description: listen port for http
+          type: integer
+        httpserverHttpsPort:
+          description: listen port for https
+          type: integer
+        fail2banMaxRetry:
+          type: integer
+          description: Number of matches (i.e. value of the counter) which triggers ban action on the IP.
+        fail2banFindTime:
+          type: integer
+          description: The counter is set to zero if no match is found within "findtime" seconds.
+        fail2banBanTime:
+          type: integer
+          description: Duration (in seconds) for IP to be banned for. Negative number for "permanent" ban.
+      example:
+        httpserverMode: REDIRECT_TO_HTTPS
+        httpserverHttpPort: 80
+        httpserverHttpsPort: 443
+        fail2banMaxRetry: 10
+        fail2banFindTime: 600
+        fail2banBanTime: 600
+
+

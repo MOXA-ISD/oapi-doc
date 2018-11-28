@@ -1,0 +1,224 @@
+swagger: '2.0'
+
+info:
+  version: 2.1.01
+  title: ThingsPro v3.0 Edge RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: appman
+    description: App Manager API
+
+paths:
+  '/apps':
+    get:
+      summary: List APPs
+      tags:
+        - appman
+      parameters:
+      - in: query
+        name: name
+        description: APP internal name
+        schema:
+          type: string
+      - in: query
+        name: fields
+        schema:
+          type: string
+          enum:
+            - runtime
+            - metadata
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Apps'
+
+    post:
+      summary: Create an APP
+      description: Create an APP by uploading MPKG or URL.
+      tags:
+        - appman
+      parameters:
+        - name: body
+          in: body
+        required: true
+        content:
+          schema:
+            $ref: '#/definitions/UploadedURL'
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/App'
+
+  '/apps/{appname}':
+    get:
+      summary: Get an APP
+      tags:
+      - appman
+      parameters:
+        - name: "appname"
+          in: "path"
+          description: name of APP
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: fields
+          schema:
+            type: string
+            enum:
+              - runtime
+              - metadata
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/App'
+
+
+  '/apps/{appname}/{action}':
+    patch:
+      summary: Manage an installed APP or APP in market
+      tags:
+      - appman
+      parameters:
+        - name: "appname"
+          in: "path"
+          description: name of APP
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: action
+          required: true
+          schema:
+            type: string
+            enum:
+              - "start"
+              - "stop"
+              - "install"
+              - "uninstall"
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/App'
+
+
+    '/tasks':
+    get:
+      summary: Get all tasks
+      tags:
+        - Tasks
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/Tasks'
+
+
+definitions:
+  Apps:
+    type: array
+    items:
+      $ref: '#/definitions/App'
+    example:
+      [{
+        "arch": "armhf",
+        "attributes": null,
+        "availableVersions": [],
+        "description": "Web console",
+        "desiredState": "ready",
+        "displayName": "Console",
+        "hardware": null,
+        "health": "wait",
+        "icon": "",
+        "imageSize": 125750784,
+        "name": "console",
+        "state": "init",
+        "version": "0.3.0-5"
+      }]
+
+  App:
+    properties:
+      arch:
+        type: string
+        enum:
+        - armhf
+        - amd64
+      attributes:
+        type: array
+        items:
+          type: string
+          enum:
+          - started
+          - installed
+          - hide
+          - openInNewTab
+          - openInSameTab
+      availableVersions:
+        type: array
+        items:
+          type: string
+      description:
+        type: string
+      displayName:
+        type: string
+      error:
+        type: string
+        description: this field is appear if error happened
+      hardware:
+        type: array
+        items:
+          type: string
+      health:
+        type: string
+        enum:
+        - wait
+        - good
+        - running
+        - error
+      icon:
+        type: string
+        description: URL of the icon
+      imageSize:
+        type: integer
+      name:
+        type: string
+        description: internal and unique APP name
+      state:
+        type: string
+        enum:
+        - init
+        - uninstalled
+        - installing
+        - stopped
+        - starting
+        - ready
+        - restarting
+        - stopping
+        - uninstalling
+        - recovering
+      version:
+        type: string
+      progress:
+        type: object
+        description: this field is appear if progress is available
+        properties:
+          currentTask:
+            description: current running subtask number starting from 1
+            type: integer
+          totalTask:
+            description: total subtask
+            type: integer
+          percentage:
+            description: current subtask finish percentage from 0 to 100
+            type: integer
+          message:
+            type: string

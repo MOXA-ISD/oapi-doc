@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 1.0.0
-  title: ThingsPro Edge RESTful API Reference
+  title: ThingsPro V3.0 Edge RESTful API Reference
   description: |
     Welcome to the ThingsPro Edge RESTful API reference. This is a live document of how you can use ThingsPro Edge APIs.
     The ThingsPro Edge API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
@@ -38,6 +38,7 @@ tags:
   - $ref: './firmware/index.yaml#/tags'
   - $ref: './wifi/index.yaml#/tags'
   - $ref: './security-settings/index.yaml#/tags'
+  - $ref: './appman/index.yaml#/tags'
 
 paths:
   - $ref: './tag/index.yaml#/paths'
@@ -60,6 +61,7 @@ paths:
   - $ref: './firmware/index.yaml#/paths'
   - $ref: './wifi/index.yaml#/paths'
   - $ref: './security-settings/index.yaml#/paths'
+  - $ref: './appman/index.yaml#/paths'
 
 definitions:
   - $ref: './cellular/index.yaml#/definitions'
@@ -82,3 +84,4 @@ definitions:
   - $ref: './wifi/index.yaml#/definitions'
   - $ref: './security-settings/index.yaml#/definitions'
   - $ref: './tag/index.yaml#/definitions'
+  - $ref: './appman/index.yaml#/definitions'

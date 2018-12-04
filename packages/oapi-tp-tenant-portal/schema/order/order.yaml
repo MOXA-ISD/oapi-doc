@@ -236,6 +236,7 @@ definitions:
       description:
         type: string
         description: POC order description.
+        maxLength: 500
       deviceId:
         type: array
         items:
@@ -253,9 +254,11 @@ definitions:
       orderName:
         type: string
         description: POC order name.
+        maxLength: 30
       description:
         type: string
         description: POC order description.
+        maxLength: 500
 
   DeployOrder:
     type: object

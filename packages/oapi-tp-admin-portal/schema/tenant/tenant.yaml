@@ -214,29 +214,37 @@ definitions:
       domainName:
         type: string
         description: domainName of tenant.
+        maxLength: 50
       company:
         type: string
         description: Company of tenant admin user.
+        maxLength: 50
       email:
         type: string
         description: Email of tenant admin user.
+        maxLength: 254
       username:
         type: string
         description: Username of tenant admin user.
+        maxLength: 50
       firstName:
         type: string
         description: First name of tenant admin user.
+        maxLength: 50
       lastName:
         type: string
         description: Last name of tenant admin user.
+        maxLength: 50
       phone:
         type: string
         description: Phone of tenant admin user.
+        maxLength: 30
       culture:
         type: string
         description: Culture of tenant.
+        maxLength: 10
       industry:
-        type: string
+        type: number
         description: Industry of tenant.
       customer:
         type: boolean
@@ -334,7 +342,7 @@ externalDocs:
         "company": "moxa",
         "phone": "1234567890",                      
         "culture": "Taiwan",
-        "industry": "Telecom",
+        "industry": 1,
         "customer": true,
         "data": 
           {

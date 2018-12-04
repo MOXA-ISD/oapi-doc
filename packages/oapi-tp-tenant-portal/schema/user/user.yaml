@@ -141,21 +141,27 @@ definitions:
       username:
         type: string
         description: Username of user.
+        maxLength: 50
       firstName:
         type: string
         description: First name of user.
+        maxLength: 50
       lastName:
         type: string
         description: Last name of user.
+        maxLength: 50
       email:
         type: string
-        description: Email of user.  
+        description: Email of user.
+        maxLength: 254
       password:
         type: string
         description: Password of user.
+        maxLength: 255
       phone:
         type: string
         description: Phone of user.
+        maxLength: 20
       roleId:
         type: integer
         description: Associate role id of user.

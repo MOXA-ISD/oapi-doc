@@ -113,6 +113,7 @@ definitions:
       name:
         type: string
         description: Name of token.
+        maxLength: 50
       roleId:
         type: integer
         description: Unique identifier associated with a role.

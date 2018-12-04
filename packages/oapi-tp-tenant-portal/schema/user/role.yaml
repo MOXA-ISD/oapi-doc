@@ -115,6 +115,7 @@ definitions:
       roleName:
         type: string
         description: Name of role.
+        maxLength: 30
       permissions:
         type: array
         items:

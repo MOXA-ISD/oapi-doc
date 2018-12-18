@@ -27,21 +27,21 @@ paths:
         - notification
       security:
         - mx-api-token: []
-      description: >-
-        return all subscribe notifications
+      description: return all subscribe notifications
       responses:
         '200':
           description: An array of all subscribe notifications
           schema:
-            $ref: '#/definitions/Notification'
-            example:
-              $ref: '#/externalDocs/x-mocks/Notification'
+            type: array
+            items:
+              $ref: '#/definitions/Notification'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/NotificationList' } }
     post:
       tags:
         - notification
       security:
         - mx-api-token: []
-      description: Create (register) a new notification to ThingsPro Cloud Server.
+      description: Create (register) a new notification to ThingsPro Cloud Server, be notice, you must setup endpoint before you call this api, becasue Cloud server will trigger endpoint when you register immediately. If everything is ready, the subscriptions status will be ready or you will receive Pending Confirmation, once you got Pending Confirmation, you need call this api and try to send the same data again
       parameters:
         - name: body
           in: body
@@ -121,30 +121,27 @@ definitions:
         type: string
         description: Description of event type.
         enum:
-        - device_online
-        - device_offline
-        - job_update
-        - property_update
+          - device_online
+          - device_offline
+          - job_update
+          - property_update
       status:
         type: string
         description: Description of status.
         enum:
-        - Ready
-        - Pending Confirmation
+          - Ready
+          - Pending Confirmation
       protocol:
         type: string
         description: Description of supported protocol.
         enum:
-        - email
-        - http
-        - https
-        - sms
+          - http
+          - https
       endpoint:
         type: string
-        description: Description of notification recevier, for protocol is email, this should be email, for protocol is sms, this should be phone, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
+        description: Description of notification recevier, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
     example:
       $ref: '#/externalDocs/x-mocks/Notification'
-
   NotificationCreated:
     type: object
     properties:
@@ -160,28 +157,52 @@ definitions:
         type: string
         description: Description of supported protocol.
         enum:
-        - email
         - http
         - https
-        - sms
       endpoint:
         type: string
-        description: Description of notification recevier, for protocol is email, this should be email, for protocol is sms, this should be phone, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
+        description: Description of notification recevier, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
     example:
       $ref: '#/externalDocs/x-mocks/NotificationCreated'
-
+  Event:
+    type: object
+    properties:
+      eventType:
+        type: string
+        enum:
+          - device_online
+          - device_offline
+          - job_update
+          - property_update
+        description: Describe support event type,
+      displayName:
+        type: string
+        description: Describe event display name  
+  Protocol:
+    type: object
+    properties:
+      id:
+        type: string
+        enum:
+          - http
+          - https
+        description: Describe the unique id of protocol
+      displayName:
+        type: string
+        description: Describe protocol display name  
   SupportList:
     type: object
     properties:
       event:
-        type: object
-        description: Description of suport event.
+        type: array
+        items:
+          $ref: '#/definitions/Event'
       protocol:
-        type: object
-        description: Description of suport protocol.
+        type: array
+        items:
+          $ref: '#/definitions/Protocol'    
     example:
       $ref: '#/externalDocs/x-mocks/SupportList'
-
   NotificationUUIDs:
     type: array
     items:
@@ -194,24 +215,24 @@ externalDocs:
   x-mocks:
     Notification:
       {
-          "endpoint": "test@moxa.com",
+          "endpoint": "https://8.8.8.8/receive",
           "eventType": "device_online",
-          "protocol": "email",
+          "protocol": "https",
           "status": "Ready",
           "uuid": "3d444fc4-6c80-48b7-a129-79ead8c2cdab"
       }
     NotificationCreated:
       {
-          "endpoint": "test@moxa.com",
+          "endpoint": "http://8.8.8.8/receive",
           "eventType": "device_online",
-          "protocol": "email"
+          "protocol": "http"
       }
     NotificationList:
       [
         {
-          "endpoint": "test@moxa.com",
+          "endpoint": "http://8.8.8.8/receive",
           "eventType": "device_online",
-          "protocol": "email",
+          "protocol": "http",
           "status": "Ready",
           "uuid": "3d444fc4-6c80-48b7-a129-79ead8c2cdab"
         },
@@ -242,12 +263,8 @@ externalDocs:
             "displayName": "Property update",
             "eventType": "property_update"
           }
-          ],
+        ],
         "protocol":[
-          {
-            "displayName": "EMAIL",
-            "id": "email"
-          },
           {
             "displayName": "HTTP",
             "id": "http"
@@ -255,10 +272,6 @@ externalDocs:
           {
             "displayName": "HTTPS",
             "id": "https"
-          },
-          {
-            "displayName": "SMS",
-            "id": "sms"
           }
         ]
       }  

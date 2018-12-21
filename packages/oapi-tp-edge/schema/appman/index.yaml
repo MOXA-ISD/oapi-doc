@@ -1,0 +1,1706 @@
+openapi: '3.0.0'
+
+info:
+  title: APP Management
+  description: ThingsPro Edge v3 APP Management
+  version: "0.10.0"
+
+servers:
+  - url: https://127.0.0.1/api/v1
+  - url: http://core-appman:8082/api/v1
+    description: Authentication free
+  - url: http://core-appman:59000/api/v1
+    description: Log service without authentication
+
+tags:
+  - name: "Authentication"
+  - name: "APPs"
+  - name: "Sources"
+  - name: "Users"
+  - name: "Tokens"
+  - name: "Tasks"
+  - name: "Installations"
+  - name: "Systems"
+  - name: "Resources"
+  - name: "Logs"
+
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+  schemas:
+    AppsName:
+      type: array
+      items:
+        type: string
+      example:
+        ['app1', 'app2', 'app3']
+
+    Apps:
+      type: array
+      items:
+        $ref: '#/components/schemas/App'
+
+    App:
+      properties:
+        arch:
+          type: string
+          enum:
+          - armhf
+          - amd64
+        attributes:
+          type: array
+          items:
+            type: string
+            enum:
+            - started
+            - installed
+            - hide
+            - openInNewTab
+            - openInSameTab
+        availableVersions:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        displayName:
+          type: string
+        error:
+          type: string
+          description: this field is appear if error happened
+        hardware:
+          type: array
+          items:
+            type: string
+        health:
+          type: string
+          enum:
+          - wait
+          - good
+          - running
+          - error
+        icon:
+          type: string
+          description: URL of the icon
+        imageSize:
+          type: integer
+        name:
+          type: string
+          description: internal and unique APP name
+        state:
+          type: string
+          enum:
+          - init
+          - uninstalled
+          - installing
+          - stopped
+          - starting
+          - ready
+          - restarting
+          - stopping
+          - uninstalling
+          - recovering
+        version:
+          type: string
+        progress:
+          type: object
+          description: this field is appear if progress is available
+          properties:
+            currentTask:
+              description: current running subtask number starting from 1
+              type: integer
+            totalTask:
+              description: total subtask
+              type: integer
+            percentage:
+              description: current subtask finish percentage from 0 to 100
+              type: integer
+            message:
+              type: string
+
+      example:
+        {
+          "arch": "armhf",
+          "attributes": null,
+          "availableVersions": [],
+          "description": "Web console",
+          "desiredState": "ready",
+          "displayName": "Console",
+          "hardware": null,
+          "health": "wait",
+          "icon": "",
+          "imageSize": 125750784,
+          "name": "console",
+          "state": "init",
+          "version": "0.3.0-5"
+        }
+
+    Sources:
+      type: array
+      items:
+        $ref: '#/components/schemas/Source'
+
+    Source:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        weight:
+          type: integer
+          description: use when APP is conflict
+        lastModified:
+          type: string
+      example:
+        {
+          "name": "stable",
+          "url": "http://repo.isd.moxa.com/static/v3/edge/dists/v0.3.0/apps",
+          "weight": 500,
+          "lastModified": "Wed, 15 Aug 2018 09:37:22 GMT"
+        }
+
+    SourceNew:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        weight:
+          type: integer
+          default: 500
+          description: use when APP is conflict
+      example:
+        {
+          "name": "stable",
+          "url": "http://repo.isd.moxa.com/static/v3/edge/dists/v0.3.0/apps"
+        }
+
+    UploadedURL:
+      properties:
+        url:
+          type: string
+      example:
+        {
+          "url": "https://repo.moxa.online/static/v3/apps/hello_0.1.0_armhf.mpkg"
+        }
+
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+
+    User:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        company:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          default: user
+        provider:
+          type: string
+          default: local
+        createdAt:
+          type: string
+      example:
+        {
+          "id": 1,
+          "createdAt": "2018-09-19T06:34:49.73027684Z",
+          "name": "user",
+          "company": "moxa",
+          "email": "user@moxa.com",
+          "role": "user",
+          "provider": "local"
+        }
+
+    UserNew:
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        company:
+          type: string
+        role:
+          type: string
+          default: user
+          enum:
+            - user
+            - admin
+      required:
+        - name
+        - email
+        - password
+      example:
+        {
+          "name": "user",
+          "password": "123456",
+          "company": "moxa",
+          "email": "user@moxa.com",
+          "role": "user"
+        }
+
+    UserPassword:
+      properties:
+        password:
+          type: string
+      required:
+        - name
+        - email
+        - password
+      example:
+        {
+          "password": "123456"
+        }
+
+    AuthLogin:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+      example:
+        {
+          "password": "123456",
+          "email": "user@moxa.com"
+        }
+
+    AuthToken:
+      properties:
+        token:
+          type: string
+      example:
+        {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6NCwiUm9sZSI6InVzZXIiLCJleHAiOjE1Mzc1ODAxNTB9.g0qzobxeCelZ1LqWuureY6gYPOIbCJCqre0yhWkOrwA"}
+
+    Tokens:
+      type: array
+      items:
+        $ref: '#/components/schemas/Token'
+
+    Token:
+      properties:
+        id:
+          type: integer
+        token:
+          type: string
+        createdAt:
+          type: string
+        description:
+          type: string
+      example:
+        {
+          "id": 1,
+          "createdAt": "2018-09-26T01:32:04.169280945Z",
+          "token": "WHzNZyIOmlhKeUEEQXCIWjWQHoDBxQXLeWgEUIFINgteDsjztRdtwkqUULFmaIYk",
+          "description": "desc"
+        }
+
+    TokenNew:
+      properties:
+        description:
+          type: string
+      example:
+        {
+          "description": "desc"
+        }
+
+    Error:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+
+    Tasks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Task'
+
+    Task:
+      properties:
+        id:
+          type: integer
+        state:
+          type: string
+          enum:
+            - init
+            - waiting
+            - running
+            - completed
+            - error
+        detailURL:
+          description: a relative URL to retrive detail of task
+          type: string
+        progress:
+          type: object
+          description: this field is appear if progress is available
+          properties:
+            percentage:
+              description: completed percentage from 0 to 100. -1 means undetermined
+              type: integer
+            message:
+              type: string
+      example:
+        {}
+
+    Installations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Installation'
+
+    Installation:
+      properties:
+        id:
+          type: integer
+        task:
+          $ref: '#/components/schemas/Task'
+        sku:
+          type: object
+          description: SKU information
+          properties:
+            id:
+              description: SKU ID
+              type: string
+            createdAt:
+              description: datetime to create this SKU
+              type: string
+              format: datetime
+            descirption:
+              type: string
+            production:
+              type: boolean
+              description: production or evaluation pack
+            tag:
+              type: string
+        plans:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                description: APP name
+                type: string
+              displayName:
+                description: APP display name
+                type: string
+              action:
+                type: string
+                enum:
+                  - install
+                  - uninstall
+                  - upgrade
+                  - degrade
+              version:
+                description: expected version
+                type: string
+              state:
+                type: string
+                enum:
+                  - init
+                  - waiting
+                  - running
+                  - completed
+                  - error
+      example:
+        {
+          "id": 22,
+          "task": {
+            "id": 22,
+            "state": "init",
+            "resourceType": "installation",
+            "resourceID": 22,
+            "progress": {
+              "percentage": -1,
+              "message": "init"
+            }
+          },
+          "plans": [
+            {
+              "name": "console",
+              "displayName": "Console",
+              "action": "upgrade",
+              "version": "0.3.0-6",
+              "state": "init"
+            }
+          ],
+          "sku": {
+            "id": "12345678",
+            "createdAt": "2018-11-12T08:08:17Z",
+            "description": "some description",
+            "Production": false,
+            "tag": "tag"
+          }
+        }
+
+    Configuration:
+      properties:
+        httpserverMode:
+          description: http server operating mode
+          type: string
+          enum:
+          - HTTP_ONLY
+          - HTTPS_ONLY
+          - BOTH
+          - REDIRECT_TO_HTTPS
+        httpserverHttpPort:
+          description: listen port for http
+          type: integer
+        httpserverHttpsPort:
+          description: listen port for https
+          type: integer
+        fail2banMaxRetry:
+          type: integer
+          description: Number of matches (i.e. value of the counter) which triggers ban action on the IP.
+        fail2banFindTime:
+          type: integer
+          description: The counter is set to zero if no match is found within "findtime" seconds.
+        fail2banBanTime:
+          type: integer
+          description: Duration (in seconds) for IP to be banned for. Negative number for "permanent" ban.
+        deviceName:
+          type: string
+          description: device name showing dashboard
+        deviceHostname:
+          type: string
+          description: device hostname
+        deviceCPU:
+          type: string
+          description: CPU model. read-only value.
+        deviceMemory:
+          type: integer
+          description: memory. read-only value.
+        deviceRouting:
+          type: string
+          description: default route via interface
+          enum:
+          - ethernet
+          - wifi
+          - cellular
+        deviceEdgeVersion:
+          description: (RO) edge version
+          type: string
+        deviceFirmwareVersion:
+          description: (RO) firmware version
+          type: string
+        deviceSkuId:
+          description: (RO) SKU ID
+          type: string
+        deviceSkuCreatedAt:
+          description: (RO) when to install SKU
+          type: string
+          format: date-time
+        deviceUpDuration:
+          description: (RO) uptime in seconds
+          type: integer
+        deviceNetworkMonitorEnabled:
+          description: enable network monitoring
+          type: boolean
+      example:
+        {
+          "deviceCPU": "Intel(R) Core(TM) i7-4770 CPU @ 3.40GHz",
+          "deviceDisk": "{\"/\":\"1484458688/2867002712\"}",
+          "deviceEdgeVersion": "0.0.0-0",
+          "deviceFirmwareVersion": "0.0.0-0",
+          "deviceHostname": "Moxa",
+          "deviceMemory": 28682088,
+          "deviceName": "",
+          "deviceNetworkMonitorEnabled": true,
+          "deviceRouting": "ethernet",
+          "deviceSkuCreatedAt": "",
+          "deviceSkuID": "",
+          "deviceUpDuration": 2158633,
+          "fail2banBanTime": "3600",
+          "fail2banFindTime": "1200",
+          "fail2banMaxRetry": "6",
+          "httpserverHttpPort": "80",
+          "httpserverHttpsPort": "443",
+          "httpserverMode": "HTTPS_ONLY"
+        }
+
+
+    Resources:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+      example:
+        [
+          {
+            "id": 1,
+            "displayName": "cpu-shares",
+            "type": "internal",
+            "devPath": "",
+            "sysPath": "/sys/fs/cgroup",
+            "exclusive": false,
+            "allocations": [{"app": "modbusmaster", "value": 1024}]
+          },
+          {
+            "id": 2,
+            "displayName": "cpu-cores",
+            "type": "internal",
+            "devPath": "",
+            "sysPath": "/sys/fs/cgroup",
+            "exclusive": false,
+            "allocations": [{"app": "modbusmaster", "value": [0,1]}]
+          },
+          {
+            "id": 3,
+            "displayName": "memory",
+            "type": "internal",
+            "devPath": "",
+            "sysPath": "/sys/fs/cgroup",
+            "exclusive": false,
+            "allocations": [{"app": "modbusmaster","value": 128}]
+          },
+          {
+            "id": 4,
+            "displayName": "p1",
+            "type": "serial",
+            "devPath": "/dev/ttyS1",
+            "sysPath": "/sys/devices/platform/ocp/48022000.serial/tty/ttyS1",
+            "exclusive": true,
+            "allocations": [{"app": "modbusmaster"}]
+          },
+          {
+            "id": 5,
+            "displayName": "p2",
+            "type": "serial",
+            "devName": "/dev/ttyS2",
+            "sysPath": "/sys/devices/platform/ocp/481aa000.serial/tty/ttyS2",
+            "exclusive": true,
+            "allocations": []
+          }
+        ]
+
+    Resource:
+      properties:
+        id:
+          type: integer
+        displayName:
+          description: cpu-shares, cpu-cores, memory
+          type: string
+        devPath:
+          type: string
+        sysPath:
+          type: string
+        exclusive:
+          type: boolean
+          description: only one APP can allocate to
+        allocations:
+          $ref: '#/components/schemas/Allocations'
+
+    Allocations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Allocation'
+      example:
+        [{"app": "modbusmaster", "value": 1024}]
+
+    Allocation:
+      properties:
+        app:
+          description: app name
+          type: string
+        value:
+          description: only available when the resource is not exclusive, and type depends on what the resource is.
+
+    AllocationsClaim:
+      type: array
+      items:
+        properties:
+          id:
+            description: ID of resource
+            type: integer
+          value:
+            description: resource claim. The value format depends on the resource. It will be bool indicating allocation or free for non-builtin resource.
+      example:
+        [{"id": 1, "value": 50}, {"id": 2, "value": [0,1]}]
+
+    MonitorStat:
+      properties:
+        ts:
+          description: timestamp in epoch miniseconds (unix timestamp)
+          type: integer
+        type:
+          type: string
+          enum:
+          - cpu
+          - memory
+          - network.ethernet.(interval)
+          - network.wifi.(interval)
+          - network.celllar.(interval)
+          - disk.(mountpoint)
+        data:
+          type: integer
+          description: cpu usage is percentage * 100. memory usage is in KB unit. network is in Bytes per second.
+        label:
+          type: string
+          description: APP name or "system" for system resource usage
+        interval:
+          type: integer
+          description: update interval
+      example:
+        {"ts":1541725427000,"type":"network.ethernet","data":2056,"label":"system","interval":3600}
+
+    Hardwares:
+      type: array
+      items:
+        $ref: '#/components/schemas/Hardware'
+
+    Hardware:
+      properties:
+        id:
+          description: user-defined hardware id
+          type: string
+        type:
+          description: user-defined hardware type
+          type: string
+
+    IDs:
+      type: array
+      items:
+        type: integer
+
+    LogContents:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogContent'
+
+    LogContent:
+      properties:
+        origin:
+          type: string
+          description: (required) APP name or system
+        labels:
+          type: array
+          items:
+            type: string
+          description: user defined label.
+        created:
+          type: string
+          description: log created time in millisecond
+        level:
+          type: string
+          description: log severity level, level default is info.
+          enum:
+          - CRITICAL
+          - ERROR
+          - WARN
+          - INFO
+          - DEBUG
+          - TRACE
+        message:
+          type: string
+          description: (required) log message
+      example:
+        {
+          "level": "INFO",
+          "labels": [
+            "notification"
+          ],
+          "origin": "modbusmaster-tcp",
+          "message": "Success to start Modbus Master TCP",
+          "created": 1545214762228
+        }
+
+  responses:
+    Success:
+      description: success
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnexpectedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+security:
+  - bearerAuth: []
+
+paths:
+  /_/ping:
+    get:
+      description: ping
+      security: []
+      responses:
+        "200":
+          $ref: '#/components/responses/Success'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /apps:
+    get:
+      summary: List APPs
+      tags:
+        - APPs
+      parameters:
+      - in: query
+        name: name
+        description: APP internal name
+        schema:
+          type: string
+      - in: query
+        name: fields
+        schema:
+          type: string
+          enum:
+            - runtime
+            - metadata
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apps'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create an APP
+      description: Create an APP by uploading MPKG or URL.
+      tags:
+        - APPs
+      requestBody:
+        description: The uploaded file data.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadedURL'
+          application/octet-stream:
+            schema:
+              format: binary
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /apps/{appname}:
+    get:
+      summary: Get an APP
+      tags:
+      - APPs
+      parameters:
+        - name: "appname"
+          in: "path"
+          description: name of APP
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: fields
+          schema:
+            type: string
+            enum:
+              - runtime
+              - metadata
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /apps/{appname}/{action}:
+    patch:
+      summary: Manage an installed APP or APP in market
+      tags:
+      - APPs
+      parameters:
+        - name: "appname"
+          in: "path"
+          description: name of APP
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: action
+          required: true
+          schema:
+            type: string
+            enum:
+              - "start"
+              - "stop"
+              - "install"
+              - "uninstall"
+              - "restart"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /tasks:
+    get:
+      summary: Get all tasks
+      tags:
+        - Tasks
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tasks'
+
+  /installations:
+    post:
+      summary: Create a installation task
+      tags:
+        - Tasks
+        - Installations
+      requestBody:
+        description: installation pack
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                upload:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Installation'
+        401:
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    get:
+      summary: Get installation tasks
+      tags:
+        - Installations
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Installations'
+
+  /installations/{id}:
+    get:
+      summary: Get an installation task
+      tags:
+        - Installations
+      parameters:
+        - name: "id"
+          in: "path"
+          description: id of installation pack
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Installation'
+        404:
+          description: not found
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete an installation task
+      tags:
+        - Installations
+      parameters:
+        - name: "id"
+          in: "path"
+          description: id of installation pack
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Installation'
+
+  /installations/{id}/start:
+    patch:
+      summary: Start an installation which the task state transits from init/error to waiting
+      tags:
+        - Installations
+      parameters:
+        - name: "id"
+          in: "path"
+          description: id of installation pack
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Installation'
+
+  /export:
+    get:
+      summary: Export tar file with selected apps.
+      tags:
+        - APPs
+      parameters:
+        - name: "apps"
+          in: "query"
+          description: names of APP
+          required: true
+          schema:
+            type: "array"
+            items:
+              type: "string"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apps'
+            application/x-tar:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /import:
+    post:
+      summary: Import apps data from a tar file.
+      tags:
+        - APPs
+      requestBody:
+        description: The uploaded file data.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                upload:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppsName'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+    put:
+      summary: Import apps.
+      tags:
+        - APPs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppsName'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppsName'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /sources:
+    get:
+      summary: List APP sources
+      tags:
+        - Sources
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sources'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+    post:
+      summary: Create an APP source
+      tags:
+        - Sources
+      requestBody:
+        description: The uploaded file data.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SourceNew"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+    patch:
+      summary: Fetch updates
+      tags:
+        - Sources
+      parameters:
+        - in: query
+          name: force
+          schema:
+            type: integer
+            format: int64
+          description: set to 1 if update without checking lastModified
+      responses:
+        200:
+          description: |
+            JSON object for each line. The schema looks like
+            {"level":"info","message":"updating source stable(https://repo.moxa.online/static/v3/edge/dists/v0.3.0/apps)"}
+            {"level":"info","message":"updated source stable(https://repo.moxa.online/static/v3/edge/dists/v0.3.0/apps)"}
+            {"level":"info","message":"updating package app-azure_0.3.0-17_amd64.mpkg"}
+            {"level":"info","message":"updating package app-azure_0.3.0-17_armhf.mpkg"}
+            {"level":"info","message":"updating package console_0.3.0-5_amd64.mpkg"}
+            {"level":"info","message":"updating package console_0.3.0-5_armhf.mpkg"}
+            {"level":"info","message":"updating package linuxdesktop_0.3.0-10_amd64.mpkg"}
+            {"level":"info","message":"updating package linuxdesktop_0.3.0-10_armhf.mpkg"}
+            {"level":"info","message":"updating package modbusmaster_3.5.3-11_armhf.mpkg"}
+            {"level":"info","message":"updating package north-hello_0.1.0_armhf.mpkg"}
+            {"level":"info","message":"updating package tagservice_0.2.4-14_amd64.mpkg"}
+            {"level":"info","message":"updating package tagservice_0.2.4-14_armhf.mpkg"}
+            {"level":"info","message":"updating package thingspro-web_0.3.0-1_amd64.mpkg"}
+            {"level":"info","message":"updating package thingspro-web_0.3.0-1_armhf.mpkg"}
+
+  /sources/{name}:
+    delete:
+      summary: Delete an APP source
+      tags:
+        - Sources
+      parameters:
+        - name: "name"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: '#/components/responses/Success'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /login:
+    post:
+      summary: login
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        description: The uploaded file data.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthLogin"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+        401:
+          description: unauthorized
+
+  /auth/refresh_token:
+    get:
+      summary: get new token
+      tags:
+        - Authentication
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+        401:
+          description: unauthorized
+
+  /auth/check:
+    get:
+      summary: check authentication header
+      tags:
+        - Authentication
+      responses:
+        200:
+          description: success
+        401:
+          description: unauthorized
+
+  /users:
+    get:
+      summary: Get user list
+      tags:
+        - Users
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        401:
+          description: unauthorized
+    post:
+      summary: Create a new user
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserNew"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: unauthorized
+
+  /users/me:
+    get:
+      summary: Get current user info
+      tags:
+      - Users
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: unauthorized
+
+  /users/{id}:
+    get:
+      summary: Get user info by ID
+      tags:
+        - Users
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of user
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: unauthorized
+    put:
+      summary: Update user info
+      tags:
+        - Users
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of user
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserNew"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: unauthorized
+        404:
+          description: not found
+    delete:
+      summary: Delete a user by ID
+      tags:
+        - Users
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of user
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: unauthorized
+        404:
+          description: not found
+
+  /users/{id}/password:
+    put:
+      summary: Update user's password
+      tags:
+      - Users
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of user
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserPassword"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: unauthorized
+
+  /tokens:
+    get:
+      summary: Get token list
+      tags:
+        - Tokens
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tokens'
+        401:
+          description: unauthorized
+    post:
+      summary: Create a new token
+      tags:
+      - Tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenNew"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        401:
+          description: unauthorized
+
+  /tokens/{id}:
+    get:
+      summary: Get token info by ID
+      tags:
+        - Tokens
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of token
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        401:
+          description: unauthorized
+    put:
+      summary: Update token's info
+      tags:
+        - Tokens
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of token
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenNew"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        401:
+          description: unauthorized
+    delete:
+      summary: Delete a token by ID
+      tags:
+        - Tokens
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ID of user
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        401:
+          description: unauthorized
+        404:
+          description: not found
+
+  /system/configuration:
+    get:
+      summary: get configurations
+      tags:
+      - Systems
+      parameters:
+      - in: query
+        name: q
+        description: key prefix to query
+        schema:
+          type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configuration'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+    patch:
+      summary: Update configurations
+      tags:
+      - Systems
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Configuration"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configuration'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /resman/resources:
+    get:
+      summary: get all resources
+      tags:
+      - Resources
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resources'
+
+  /resman/allocations/{appname}:
+    parameters:
+      - name: "appname"
+        in: "path"
+        description: APP name
+        required: true
+        schema:
+          type: integer
+    put:
+      summary: allocation resources of APP
+      tags:
+      - Resources
+      requestBody:
+        description: resources
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocationsClaim'
+      responses:
+        200:
+          description: success and return allocations of the APP
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resources'
+
+  # /resman/monitors/configuration:
+  #  get:
+  #     summary: get monitor configuration, such as refresh rate, range...
+  #     tags:
+  #     - Resources
+  #     responses:
+  #       200:
+  #         description: success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/Configuration'
+  #   put:
+  #     summary: update monitor configuration
+  #     tags:
+  #     - Resources
+  #     responses:
+  #       200:
+  #         description: success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/Configuration'
+
+  /resman/monitors/stats:
+    get:
+      summary: a live stream of resource usage statistics
+      description: when connecting at begining, it returns last 30 points data in 60 and 3000 seconds interval first, then update data every one second.
+      tags:
+      - Resources
+      responses:
+        101:
+          description: returns resource object in every line
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorStat'
+
+
+  /resman/hardwares/:
+    get:
+      summary: List hardwares
+      tags:
+      - Resources
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hardwares'
+    post:
+      summary: Create hardwares
+      tags:
+      - Resources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Hardwares"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hardwares'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    patch:
+      summary: Update hardwares
+      tags:
+      - Resources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Hardwares"
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hardwares'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /resman/hardwares/{type}/{ids}:
+    delete:
+      summary: Delete hardwares
+      tags:
+      - Resources
+      parameters:
+        - name: "type"
+          in: "path"
+          required: true
+          schema:
+            type: string
+        - name: "ids"
+          description: IDs seperated by ","
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IDs'
+
+  /logs:
+    get:
+      summary: Get logs for the specified criteria
+      tags:
+        - Logs
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of logs
+        - in: query
+          name: started
+          schema:
+            type: integer
+          description: Start time
+        - in: query
+          name: labels
+          schema:
+            type: string
+          description: labels of logs
+        - in: query
+          name: origins
+          schema:
+            type: string
+          description: origins of logs.
+        - in: query
+          name: levels
+          schema:
+            type: string
+          description: levels of logs.
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogContents'
+
+    post:
+      summary: Create new logs
+      tags:
+        - Logs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogContents"
+      responses:
+        200:
+          description: success
+
+  /logs/download:
+    get:
+      summary: download a diagnosis report
+      tags:
+        - Logs
+      responses:
+        200:
+          description: success
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+  /logs/ws:
+    get:
+      summary: websocket to listen logs update
+      description: parameters is as same as /logs get endpoint
+      tags:
+        - Logs
+      responses:
+        101:
+          description: success

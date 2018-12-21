@@ -1,27 +1,35 @@
-swagger: '2.0'
+openapi: '3.0.0'
 
 info:
-  version: 1.0.0
+  version: 0.9.0
   title: ThingsPro Edge RESTful API Reference
   description: |
     Welcome to the ThingsPro Edge RESTful API reference. This is a live document of how you can use ThingsPro Edge APIs.
     The ThingsPro Edge API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
 
-host: localhost
 basePath: '/api/v1'
-
-schemes:
-  - http
-  - https
-
-produces:
-  - application/json
+servers:
+  - url: https://127.0.0.1/api/v1
+  - url: http://core-appman:8082/api/v1
+    description: Authentication free
+  - url: http://core-appman:59000/api/v1
+    description: Log service without authentication
 
 tags:
-  - $ref: './tag/index.yaml#/tags'
+  $ref
+    - './tag/index.yaml#/tags'
+    - './appman/index.yaml#/tags'
 
 paths:
-  - $ref: './tag/index.yaml#/paths'
+  $ref:
+    - './tag/index.yaml#/paths'
+    - './appman/index.yaml#/paths'
 
-definitions:
-  - $ref: './tag/index.yaml#/definitions'
+components:
+  securitySchemes:
+    $ref:
+      - './appman/index.yaml#/securitySchemes'
+  schemas:
+    $ref:
+      - './tag/index.yaml#/components/schemas'
+      - './appman/index.yaml#/components/schemas'

@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.2
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -70,30 +70,45 @@ externalDocs:
   x-mocks:
     LoginRes:
       {
-        user:
+        "user":
           {
-            "userId": 1,
+            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
             "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "username": "username",
-            "firstName": "firstName",
-            "lastName": "lastName",
-            "email": "moxa@moxa.com",
-            "role":
-              {
-                "id": 1,
-                "roleName": "root",
-                "permissions":
-                  [
-                    { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
-                    { "id": 2, "value": 2, "name": "account", "description": "xxxxx" }
-                  ]
-              },
-            "phone": "1234567890",        
+            "displayName": "Ellen Woods",
+            "firstName": "Ellen",
+            "lastName": "Woods",
+            "email": "ellen@moxa.com",
+            "phone": "1234567890",  
+            "avatar": "https://xxx.com/abc.png",      
             "loginAt": "2018-08-12T20:17:46.384Z",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
+              },
+            "tenant": {
+              "permission": [
+                { "id": 1, "value": 2 },
+                { "id": 2, "value": 2 }
+              ]
+            },
+            "groupList": [
+              { 
+                "groupId": 1, 
+                "groupName": "All devices", 
+                "permission": [
+                  { "id": 1, "value": 2 },
+                  { "id": 2, "value": 1 }
+                ]
+              },
+              { 
+                "groupId": 2, 
+                "groupName": "North section", 
+                "permission": [
+                  { "id": 1, "value": 2 },
+                  { "id": 2, "value": 1 }
+                ]
               }
+            ]
           },
-        token: "USER_TOKEN"
+        "token": "USER_TOKEN"
       }

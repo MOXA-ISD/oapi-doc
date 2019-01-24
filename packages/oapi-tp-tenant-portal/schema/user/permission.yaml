@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.2
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -15,9 +15,9 @@ tags:
     description: Handles permission field data
 
 paths:
-  '/permissions':
+  '/permission':
     get:
-      description: Get all permissions field data
+      description: Get all permission field data
       responses:
         '200':
           description: success
@@ -33,11 +33,11 @@ definitions:
   Permission:
     title: Permission
     required:
-      - id
+      - permissionId
       - value
     type: object
     properties:
-      id:
+      permissionId:
         type: integer
         description: Unique identifier representing a specific user.
       value:
@@ -54,7 +54,19 @@ externalDocs:
   url: 'http://#'
   x-mocks:
     PermissionList:
-      [
-        { "id": 1, "value": 0, "name": "Device Management", "description": "xxxxx" },
-        { "id": 2, "value": 0, "name": "User Management", "description": "xxxxx" }
-      ]
+      {
+        "tenant": {
+          "name": "Tenant administrator",
+          "permissionList": [
+            { "permissionId": 1, "value": 2, "name": "User/Role management", "description": "User/Role management" },
+            { "permissionId": 2, "value": 2, "name": "Device register/grouping", "description": "Device register/grouping" }
+          ]
+        },
+        "device": {
+          "name": "Device operation",
+          "permissionList": [
+            { "permissionId": 1, "value": 2, "name": "View device information", "description": "View device information" },
+            { "permissionId": 2, "value": 1, "name": "Full manage device", "description": "Full manage device" }
+          ]
+        }
+      }

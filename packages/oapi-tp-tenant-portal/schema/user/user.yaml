@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.2
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -97,15 +97,40 @@ paths:
         204:
           description: success
 
+  /users/{userId}/avatar:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
+    post:
+      description: Return updated user data with given ID
+      parameters:
+        - name: body
+          in: body
+          description: Information of User
+          required: true
+          schema:
+            $ref: '#/definitions/UserReq'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+
 definitions:
   User:
     type: object
     properties:
       userId:
-        type: integer
+        type: string
         description: Unique identifier representing a specific user.
       tenantId:
-        type: integer
+        type: string
         description: Unique identifier representing a specific tenant.  
       username:
         type: string
@@ -138,30 +163,46 @@ definitions:
   UserReq:
     type: object
     properties:
-      username:
+      displayName:
         type: string
-        description: Username of user.
-        maxLength: 50
+        description: Display name of user.
+        maxLength: 30
       firstName:
         type: string
         description: First name of user.
-        maxLength: 50
+        maxLength: 255
       lastName:
         type: string
         description: Last name of user.
-        maxLength: 50
+        maxLength: 255
       email:
         type: string
         description: Email of user.
         maxLength: 254
+      avatar:
+        type: string
+        description: Avatar of user.
+        maxLength: 2083
       password:
         type: string
         description: Password of user.
-        maxLength: 255
+        maxLength: 100
       phone:
         type: string
         description: Phone of user.
-        maxLength: 20
+        maxLength: 50
+      company:
+        type: string
+        description: Company of user.
+        maxLength: 50
+      department:
+        type: string
+        description: Department of user.
+        maxLength: 50
+      employeeId:
+        type: string
+        description: Employee id of user.
+        maxLength: 8
       roleId:
         type: integer
         description: Associate role id of user.
@@ -174,15 +215,87 @@ externalDocs:
   x-mocks:
     User:
       {
-        "userId": 1,
+        "userId": "f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef",
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "username": "username",
-        "firstName": "firstName",
-        "lastName": "lastName",
-        "email": "moxa@moxa.com",
-        "roleId": 0,
-        "phone": "1234567890",        
+        "displayName": "Ryan Wang",
+        "firstName": "Ryan",
+        "lastName": "Wang",
+        "email": "ryan@moxa.com",
+        "avatar": "https://xxx.com/abc.png",
+        "phone": "1234567890",    
+        "company": "MOXA Inc.",
+        "department": "ABC",
+        "employeeId": "123",    
         "loginAt": "2018-08-12T20:17:46.384Z",
+        "status": "enable",
+        "data": 
+          {
+            "CUSTOM_FIELD": "CUSTOM_VALUE"
+          },
+        "tenant": {
+          "permission": [
+            { "id": 1, "value": 2 },
+            { "id": 2, "value": 2 }
+          ]
+        },
+        "groupList": [
+          { 
+            "groupId": 1, 
+            "groupName": "All devices", 
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 1 }
+            ]
+          },
+          { 
+            "groupId": 2, 
+            "groupName": "North section", 
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 1 }
+            ]
+          }
+        ]
+      }
+    InviteReq:
+      { 
+        "email": "kevin@moxa.com",
+        "tenant": {
+          "permission": [
+            { "id": 1, "value": 2 },
+            { "id": 2, "value": 2 }
+          ]
+        },
+        "groupList": [
+          { 
+            "groupId": 1, 
+            "groupName": "All devices", 
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 1 }
+            ]
+          },
+          { 
+            "groupId": 2, 
+            "groupName": "North section", 
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 1 }
+            ]
+          }
+        ]
+      }      
+    UserReq:
+      { 
+        "displayName": "Kevin Brown",
+        "firstName": "Kevin",
+        "lastName": "Brown",
+        "email": "kevin@moxa.com",
+        "password": "12345678",
+        "phone": "958123456",
+        "company": "MOXA Inc.",
+        "department": "Sales",
+        "employeeId": "20181234",
         "data": 
           {
             "CUSTOM_FIELD": "CUSTOM_VALUE"
@@ -191,49 +304,91 @@ externalDocs:
     UserList:
       [
         {
-          "userId": 1,
+          "userId": "f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef",
           "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "username": "username",
-          "firstName": "firstName",
-          "lastName": "lastName",
-          "email": "moxa@moxa.com",
-          "roleId": 0,
-          "phone": "1234567890",        
+          "displayName": "Brian Wang",
+          "firstName": "Brian",
+          "lastName": "Wang",
+          "email": "brian@moxa.com",
+          "avatar": "https://xxx.com/abc.png",
+          "phone": "1234567890",
+          "company": "MOXA Inc.",
+          "department": "ABC",
+          "employeeId": "123",     
           "loginAt": "2018-08-12T20:17:46.384Z",
+          "status": "enable",
           "data": 
             {
               "CUSTOM_FIELD": "CUSTOM_VALUE"
+            },
+          "tenant": {
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 2 }
+            ]
+          },
+          "groupList": [
+            { 
+              "groupId": 1, 
+              "groupName": "All devices", 
+              "permission": [
+                { "id": 1, "value": 2 },
+                { "id": 2, "value": 1 }
+              ] 
+            },
+            { 
+              "groupId": 2, 
+              "groupName": "North section", 
+              "permission": [
+                { "id": 1, "value": 2 },
+                { "id": 2, "value": 1 }
+              ]
             }
+          ]
         },
         {
-          "userId": 2,
+          "userId": "d806f8d9-1b3a-45ac-9e57-26a3b0e2c339",
           "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "username": "username",
-          "firstName": "firstName",
-          "lastName": "lastName",
-          "email": "moxa@moxa.com",
-          "roleId": 0,
-          "phone": "1234567890",        
+          "displayName": "Jenkins Wang",
+          "firstName": "Jenkins",
+          "lastName": "Wang",
+          "email": "jenkins@moxa.com",
+          "avatar": "https://xxx.com/abc.png",
+          "phone": "1234567890",
+          "company": "MOXA Inc.",
+          "department": "ABC",
+          "employeeId": "123",
           "loginAt": "2018-08-12T20:17:46.384Z",
+          "status": "waiting",
           "data": 
             {
               "CUSTOM_FIELD": "CUSTOM_VALUE"
+            },
+          "tenant": {
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 2 }
+            ]
+          },
+          "groupList": [
+            { 
+              "groupId": 1, 
+              "groupName": "All devices", 
+              "permission": [
+                { "id": 1, "value": 2 },
+                { "id": 2, "value": 1 }
+              ]
+            },  
+            { 
+              "groupId": 2, 
+              "groupName": "South section", 
+              "permission": [
+                { "id": 1, "value": 2 },
+                { "id": 2, "value": 1 }
+              ]
             }
+          ]
         }
       ]
-    UserReq:
-      { 
-        "username": "username",
-        "firstName": "firstName",
-        "lastName": "lastName",
-        "email": "moxa@moxa.com",
-        "password": "12345678",
-        "roleId": 0,
-        "phone": "1234567890",
-        "data": 
-          {
-            "CUSTOM_FIELD": "CUSTOM_VALUE"
-          }
-      }
-
+    
 

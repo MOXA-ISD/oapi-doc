@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.2
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -60,7 +60,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantRole' } }
       tags:
         - role
     put:
@@ -79,7 +79,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantRole' } }
       tags:
         - role
     delete:
@@ -101,7 +101,7 @@ definitions:
       roleName:
         type: string
         description: Name of role.
-      permissions:
+      permission:
         type: array
         items:
           type: object
@@ -116,7 +116,11 @@ definitions:
         type: string
         description: Name of role.
         maxLength: 30
-      permissions:
+      description:
+        type: string
+        description: Description of role.
+        maxLength: 200  
+      permission:
         type: array
         items:
           type: object
@@ -126,43 +130,102 @@ definitions:
 externalDocs:
   url: 'http://#'
   x-mocks:
-    Role:
+    TenantRole:
       {
-        "id": 1,
+        "roleId": 1,
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "roleName": "root",
-        "permissions":
-          [
-            { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
-            { "id": 2, "value": 2, "name": "account", "description": "xxxxx" }
-          ]
-      }
-    RoleReq: { 
-      "roleName": "new role", 
-      "permissions": [
-          { "id": 1, "value": 2 }, 
+        "roleName": "System manager",
+        "description": "System manager",
+        "permission": [
+          { "id": 1, "value": 2 },
           { "id": 2, "value": 2 }
-        ] 
+        ],
+        "userList" : [
+          { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
+          { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
+        ]
       }
-    RoleList:
-      [
-        {
-          "id": 1,
-          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "roleName": "root",
-          "permissions":
-            [
-              { "id": 1, "value": 2, "name": "DM", "description": "xxxxx" },
-              { "id": 2, "value": 2, "name": "account", "description": "xxxxx" }
+    DeviceRole:
+      {
+        "roleId": 2,
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "roleName": "System manager",
+        "description": "System manager",
+        "permission": [
+          { "id": 1, "value": 2 },
+          { "id": 2, "value": 1 }
+        ],
+        "groupList" : [
+          { "groupId": 1, "groupName": "All devices" }
+        ],
+        "userList" : [
+          { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
+          { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
+        ]
+      }  
+    TenantRoleReq: 
+      { 
+        "roleName": "new role", 
+        "description": "description",
+        "permission": [
+            { "id": 1, "value": 2 },
+            { "id": 2, "value": 2 }
+        ],
+        "userList" : [
+          { "userId": 1 }
+        ]
+      }
+    DeviceRoleReq:
+      {
+        "roleName": "System manager",
+        "description": "System manager",
+        "permission": [
+          { "id": 1, "value": 2 },
+          { "id": 2, "value": 1 }
+        ],
+        "groupList" : [
+          { "groupId": 1 }
+        ],
+        "userList" : [
+          { "userId": 1 },
+          { "userId": 2 }
+        ]
+      }    
+    RoleList: 
+      {
+        "tenantRoleList": [
+          {
+            "roleId": 1,
+            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "roleName": "System manager",
+            "description": "System manager",
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 2 }
+            ],
+            "userList" : [
+              { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
+              { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
             ]
-        },
-        {
-          "id": 2,
-          "roleName": "admin",
-          "permissions": 
-            [
-              { "id": 1, "value": 0, "name": "user management", "description": "xxxxx" }
+          }
+        ],
+        "deviceRoleList": [
+          {
+            "roleId": 2,
+            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "roleName": "System manager",
+            "description": "System manager",
+            "permission": [
+              { "id": 1, "value": 2 },
+              { "id": 2, "value": 1 }
+            ],
+            "groupList" : [
+              { "groupId": 1, "groupName": "All devices" }
+            ],
+            "userList" : [
+              { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
+              { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
             ]
-        }
-      ]
-
+          }  
+        ] 
+    }

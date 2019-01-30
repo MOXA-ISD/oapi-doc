@@ -56,11 +56,7 @@ definitions:
       user:
         type: object
         items:
-          - $ref: '#/definitions/User'
-      role:
-        type: object
-        items:
-          - $ref: '#/definitions/Role'    
+          - $ref: '#/definitions/User' 
       token:
         type: string
         description: Granted authentication token.
@@ -86,27 +82,34 @@ externalDocs:
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
               },
             "tenant": {
-              "permission": [
-                { "id": 1, "value": 2 },
-                { "id": 2, "value": 2 }
+              "permissionList": [
+                { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
+                { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
               ]
             },
             "groupList": [
               { 
                 "groupId": 1, 
                 "groupName": "All devices", 
-                "permission": [
-                  { "id": 1, "value": 2 },
-                  { "id": 2, "value": 1 }
+                "permissionList": [
+                  { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+                  { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
                 ]
               },
               { 
                 "groupId": 2, 
                 "groupName": "North section", 
-                "permission": [
-                  { "id": 1, "value": 2 },
-                  { "id": 2, "value": 1 }
+                "permissionList": [
+                  { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+                  { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
                 ]
+              }
+            ],
+            "roleList": [
+              {
+                "id": 2,
+                "name": "Device Register",
+                "type": "tenant"
               }
             ]
           },

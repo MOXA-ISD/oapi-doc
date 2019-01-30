@@ -15,7 +15,7 @@ tags:
     description: Handles permission field data
 
 paths:
-  '/permission':
+  '/permissions':
     get:
       description: Get all permission field data
       responses:
@@ -32,41 +32,42 @@ paths:
 definitions:
   Permission:
     title: Permission
-    required:
-      - permissionId
-      - value
+    type: object
+    properties:
+      permissionId:
+        type: integer
+        description: Unique identifier representing a specific user.
+      type:
+        type: string
+        description: Naming of permission group type
+        enum: [tenant, group]
+      permissionName:
+        type: string
+        description: Name of permission.
+      description:
+        type: string
+        description: Description of permission.
+  PermissionUnion:
     type: object
     properties:
       permissionId:
         type: integer
         description: Unique identifier representing a specific user.
       value:
-        type: integer
+        type: string
         description: Attribute of Permission, 0 is cannot view/edit, 1 is can view but cannot edit, 2 is can view and edit
-      name:
+      permissionName:
         type: string
         description: Name of permission.
-      description:
-        type: string
-        description: Description of permission.
 
 externalDocs:
   url: 'http://#'
   x-mocks:
     PermissionList:
-      {
-        "tenant": {
-          "name": "Tenant administrator",
-          "permissionList": [
-            { "permissionId": 1, "value": 2, "name": "User/Role management", "description": "User/Role management" },
-            { "permissionId": 2, "value": 2, "name": "Device register/grouping", "description": "Device register/grouping" }
-          ]
-        },
-        "device": {
-          "name": "Device operation",
-          "permissionList": [
-            { "permissionId": 1, "value": 2, "name": "View device information", "description": "View device information" },
-            { "permissionId": 2, "value": 1, "name": "Full manage device", "description": "Full manage device" }
-          ]
-        }
-      }
+      [
+        { "permissionId": 1, "type": "tenant", "permissionName": "User/Role management", "description": "User/Role management" },
+        { "permissionId": 2, "type": "tenant", "permissionName": "Device register/grouping", "description": "Device register/grouping" },
+        { "permissionId": 3, "type": "group", "permissionName": "View device information", "description": "View device information" },
+        { "permissionId": 4, "type": "group", "permissionName": "Full manage device", "description": "Full manage device" }
+      ]
+      

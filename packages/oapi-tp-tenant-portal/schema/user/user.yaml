@@ -97,31 +97,6 @@ paths:
         204:
           description: success
 
-  /users/{userId}/avatar:
-    parameters:
-      - name: userId
-        in: path
-        description: User unique identifier
-        required: true
-        type: string
-    post:
-      description: Return updated user data with given ID
-      parameters:
-        - name: body
-          in: body
-          description: Information of User
-          required: true
-          schema:
-            $ref: '#/definitions/UserReq'
-      responses:
-        200:
-          description: An Object of the user
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
-
 definitions:
   User:
     type: object
@@ -150,15 +125,46 @@ definitions:
       phone:
         type: string
         description: Phone of user.
-      roleId:
-        type: integer
-        description: Associate role id of user.
       loginAt:
         type: string
         description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.     
       data:
         type: object
-        description: metadata of user.
+        description: Metadata of user.
+      tenant:
+        type: object
+        description: Tenant permission.
+        properties:
+          permissionList:
+            type: array
+            items:
+              '$ref': '#/definitions/PermissionUnion'
+            description: Group permission list.
+      groupList:
+        type: array
+        description: Group permission.
+        items:
+          '$ref': '#/definitions/Group'   
+      roleList:
+        type: array
+        description: List of role which contains the user.
+        items:
+          '$ref': '#/definitions/RoleRes'   
+
+  Group:
+    type: object
+    properties:
+      groupId:
+        type: integer
+        description: Unique identifier representing a specific group.
+      groupName:
+        type: string
+        description: Name of group.  
+      permissionList:
+        type: array
+        items:
+          '$ref': '#/definitions/PermissionUnion'
+        description: Group permission list.
 
   UserReq:
     type: object
@@ -203,13 +209,10 @@ definitions:
         type: string
         description: Employee id of user.
         maxLength: 8
-      roleId:
-        type: integer
-        description: Associate role id of user.
       data:
         type: object
         description: metadata of user.
-
+  
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -233,27 +236,26 @@ externalDocs:
             "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
         "tenant": {
-          "permission": [
-            { "id": 1, "value": 2 },
-            { "id": 2, "value": 2 }
+          "permissionList": [
+            { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
+            { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
           ]
         },
         "groupList": [
           { 
             "groupId": 1, 
             "groupName": "All devices", 
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 1 }
+            "permissionList": [
+              { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+              { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
             ]
-          },
-          { 
-            "groupId": 2, 
-            "groupName": "North section", 
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 1 }
-            ]
+          }
+        ],
+        "roleList": [
+          {
+            "id": 2,
+            "name": "Device Register",
+            "type": "tenant"
           }
         ]
       }
@@ -261,26 +263,18 @@ externalDocs:
       { 
         "email": "kevin@moxa.com",
         "tenant": {
-          "permission": [
-            { "id": 1, "value": 2 },
-            { "id": 2, "value": 2 }
+          "permissionList": [
+            { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
+            { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
           ]
         },
         "groupList": [
           { 
             "groupId": 1, 
             "groupName": "All devices", 
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 1 }
-            ]
-          },
-          { 
-            "groupId": 2, 
-            "groupName": "North section", 
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 1 }
+            "permissionList": [
+              { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+              { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
             ]
           }
         ]
@@ -322,27 +316,26 @@ externalDocs:
               "CUSTOM_FIELD": "CUSTOM_VALUE"
             },
           "tenant": {
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 2 }
+            "permissionList": [
+              { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
+              { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
             ]
           },
           "groupList": [
             { 
               "groupId": 1, 
               "groupName": "All devices", 
-              "permission": [
-                { "id": 1, "value": 2 },
-                { "id": 2, "value": 1 }
+              "permissionList": [
+                { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+                { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
               ] 
-            },
-            { 
-              "groupId": 2, 
-              "groupName": "North section", 
-              "permission": [
-                { "id": 1, "value": 2 },
-                { "id": 2, "value": 1 }
-              ]
+            }
+          ],
+          "roleList": [
+            {
+              "id": 2,
+              "name": "Device Register",
+              "type": "tenant"
             }
           ]
         },
@@ -365,27 +358,34 @@ externalDocs:
               "CUSTOM_FIELD": "CUSTOM_VALUE"
             },
           "tenant": {
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 2 }
+            "permissionList": [
+              { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
+              { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
             ]
           },
           "groupList": [
             { 
               "groupId": 1, 
               "groupName": "All devices", 
-              "permission": [
-                { "id": 1, "value": 2 },
-                { "id": 2, "value": 1 }
+              "permissionList": [
+                { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+                { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
               ]
             },  
             { 
               "groupId": 2, 
               "groupName": "South section", 
-              "permission": [
-                { "id": 1, "value": 2 },
-                { "id": 2, "value": 1 }
+              "permissionList": [
+                { "permissionId": 3, "permissionName": "View device information", "value": 2 },
+                { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
               ]
+            }
+          ],
+          "roleList": [
+            {
+              "id": 2,
+              "name": "Device Register",
+              "type": "tenant"
             }
           ]
         }

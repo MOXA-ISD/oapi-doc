@@ -95,7 +95,7 @@ definitions:
     title: Role
     type: object
     properties:
-      id:
+      roleId:
         type: integer
         description: Unique identifier representing a specific user.
       roleName:
@@ -126,6 +126,22 @@ definitions:
           type: object
           items:
             - $ref: '#/definitions/Permission'
+  RoleRes:
+    title: Response of role request
+    type: object
+    properties:
+      roleId:
+        type: integer
+        description: Name of role.
+      roleName:
+        type: string
+        description: Name of role.
+        maxLength: 30
+      type:
+        type: string
+        description: Description of role.
+        maxLength: 200  
+        enum: [tenant, group]
 
 externalDocs:
   url: 'http://#'

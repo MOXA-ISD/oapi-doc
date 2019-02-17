@@ -18,6 +18,8 @@ paths:
   '/permissions':
     get:
       description: Get all permission field data
+      tags:
+        - permission
       responses:
         '200':
           description: success
@@ -26,48 +28,103 @@ paths:
             items:
               $ref: '#/definitions/Permission'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
+
+  '/permissions/{id}':
+    parameters:
+      - name: id
+        in: path
+        description: Permission ID
+        required: true
+        type: integer
+    get:
+      description: Get permission field data by id
       tags:
         - permission
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Permission'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Permission' } }
+
+  '/permissions/type/{type}':
+    parameters:
+      - name: type
+        in: path
+        description: Permission type - 1=tenant, 2=group
+        required: true
+        type: integer
+    get:
+      description: Get permission field data by type
+      tags:
+        - permission
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Permission'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
 
 definitions:
   Permission:
     title: Permission
     type: object
     properties:
-      permissionId:
+      id:
         type: integer
         description: Unique identifier representing a specific user.
-      type:
-        type: string
-        description: Naming of permission group type
-        enum: [tenant, group]
-      permissionName:
+      name:
         type: string
         description: Name of permission.
+      type:
+        type: integer
+        description: Naming of permission group type
+        enum: [1, 2]
       description:
         type: string
         description: Description of permission.
-  PermissionUnion:
-    type: object
-    properties:
-      permissionId:
-        type: integer
-        description: Unique identifier representing a specific user.
-      value:
-        type: string
-        description: Attribute of Permission, 0 is cannot view/edit, 1 is can view but cannot edit, 2 is can view and edit
-      permissionName:
-        type: string
-        description: Name of permission.
 
 externalDocs:
   url: 'http://#'
   x-mocks:
+    Permission:
+      {
+        "id": 1,
+        "name": "User/Role management",
+        "type": 1,
+        "description": "User/Role management"
+      }
     PermissionList:
-      [
-        { "permissionId": 1, "type": "tenant", "permissionName": "User/Role management", "description": "User/Role management" },
-        { "permissionId": 2, "type": "tenant", "permissionName": "Device register/grouping", "description": "Device register/grouping" },
-        { "permissionId": 3, "type": "group", "permissionName": "View device information", "description": "View device information" },
-        { "permissionId": 4, "type": "group", "permissionName": "Full manage device", "description": "Full manage device" }
-      ]
+      {
+        "data": [
+          {
+            "id": 1,
+            "name": "User/Role management",
+            "type": 1,
+            "description": "User/Role management"
+          },
+          {
+            "id": 2,
+            "name": "Device register/grouping",
+            "type": 1,
+            "description": "Device register/grouping"
+          },
+          {
+            "id": 3,
+            "name": "View device information",
+            "type": 2,
+            "description": "View device information"
+          },
+          {
+            "id": 4,
+            "name": "Full manage device",
+            "type": 2,
+            "description": "Full manage device"
+          }
+        ]
+      }
       

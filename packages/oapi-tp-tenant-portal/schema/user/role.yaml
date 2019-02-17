@@ -18,19 +18,20 @@ paths:
   /roles:
     get:
       description: Get all roles data
+      tags:
+        - role
       responses:
         200:
           description: An array of role
           schema:
             type: array
             items:
-              $ref: '#/definitions/Role'
+              $ref: '#/definitions/RolePermission'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleList' } }
-      tags:
-        - role
-
     post:
       description: Create a new role.
+      tags:
+        - role
       parameters:
         - name: body
           in: body
@@ -41,8 +42,6 @@ paths:
       responses:
         201:
           description: Create role successfully
-      tags:
-        - role
 
   /roles/{id}:
     parameters:
@@ -53,18 +52,20 @@ paths:
         type: string
     get:
       description: Return role data with given ID
+      tags:
+        - role
       responses:
         200:
           description: An Object of the role
           schema:
             type: object
             items:
-              $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantRole' } }
-      tags:
-        - role
+              $ref: '#/definitions/RolePermission'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RolePermission' } }
     put:
       description: Return updated user data with given ID
+      tags:
+        - role
       parameters:
         - name: body
           in: body
@@ -78,27 +79,24 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantRole' } }
-      tags:
-        - role
+              $ref: '#/definitions/RolePermission'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RolePermission' } }
     delete:
       description: Delete role with given ID
+      tags:
+        - role
       responses:
         204:
           description: success
-      tags:
-        - role
 
 definitions:
   Role:
-    title: Role
     type: object
     properties:
-      roleId:
+      id:
         type: integer
         description: Unique identifier representing a specific user.
-      roleName:
+      name:
         type: string
         description: Name of role.
       permission:
@@ -108,8 +106,35 @@ definitions:
           items:
             - $ref: '#/definitions/Permission'
 
+  RolePermission:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Role ID.
+      name:
+        type: string
+        description: Name of role.
+      type:
+        type: integer
+        description: Role type.
+      description:
+        type: string
+        description: Description of role.
+      enabled:
+        type: boolean
+        description: Status of role.
+      count:
+        type: integer
+        description: User count of role
+      permission:
+        type: array
+        items:
+          type: object
+          items:
+            - $ref: '#/definitions/Permission'
+
   RoleReq:
-    title: Role
     type: object
     properties:
       roleName:
@@ -126,8 +151,8 @@ definitions:
           type: object
           items:
             - $ref: '#/definitions/Permission'
+
   RoleRes:
-    title: Response of role request
     type: object
     properties:
       roleId:
@@ -143,105 +168,128 @@ definitions:
         maxLength: 200  
         enum: [tenant, group]
 
+  Permission:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      name:
+        type: string
+        description: Name of permission.
+      type:
+        type: integer
+        description: Naming of permission group type
+        enum: [1, 2]
+      description:
+        type: string
+        description: Description of permission.
+      value:
+        type: integer
+        description: Value of permission
+
 externalDocs:
   url: 'http://#'
   x-mocks:
-    TenantRole:
+    RolePermission:
       {
-        "roleId": 1,
-        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "roleName": "System manager",
-        "description": "System manager",
+        "id": 2,
+        "name": "Device Register",
+        "count": 3,
+        "description": "Device Register",
+        "enabled": true,
         "permission": [
-          { "id": 1, "value": 2 },
-          { "id": 2, "value": 2 }
-        ],
-        "userList" : [
-          { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
-          { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
-        ]
-      }
-    DeviceRole:
-      {
-        "roleId": 2,
-        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "roleName": "System manager",
-        "description": "System manager",
-        "permission": [
-          { "id": 1, "value": 2 },
-          { "id": 2, "value": 1 }
-        ],
-        "groupList" : [
-          { "groupId": 1, "groupName": "All devices" }
-        ],
-        "userList" : [
-          { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
-          { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
-        ]
-      }  
-    TenantRoleReq: 
-      { 
-        "roleName": "new role", 
-        "description": "description",
-        "permission": [
-            { "id": 1, "value": 2 },
-            { "id": 2, "value": 2 }
-        ],
-        "userList" : [
-          { "userId": 1 }
-        ]
-      }
-    DeviceRoleReq:
-      {
-        "roleName": "System manager",
-        "description": "System manager",
-        "permission": [
-          { "id": 1, "value": 2 },
-          { "id": 2, "value": 1 }
-        ],
-        "groupList" : [
-          { "groupId": 1 }
-        ],
-        "userList" : [
-          { "userId": 1 },
-          { "userId": 2 }
-        ]
-      }    
-    RoleList: 
-      {
-        "tenantRoleList": [
           {
-            "roleId": 1,
-            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "roleName": "System manager",
-            "description": "System manager",
-            "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 2 }
-            ],
-            "userList" : [
-              { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
-              { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
-            ]
+            "id": 1,
+            "name": "User/Role management",
+            "type": 1,
+            "description": "User/Role management",
+            "value": 0
+          },
+          {
+            "id": 2,
+            "name": "Device register/grouping",
+            "type": 1,
+            "description": "Device register/grouping",
+            "value": 1
           }
         ],
-        "deviceRoleList": [
+        "type": 1
+      }
+    RoleList: 
+      {
+        "data": [
           {
-            "roleId": 2,
-            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "roleName": "System manager",
-            "description": "System manager",
+            "id": 1,
+            "name": "Administrator",
+            "type": 0,
+            "description": "Administrator",
+            "enabled": true,
+            "count": 1,
             "permission": [
-              { "id": 1, "value": 2 },
-              { "id": 2, "value": 1 }
-            ],
-            "groupList" : [
-              { "groupId": 1, "groupName": "All devices" }
-            ],
-            "userList" : [
-              { "userId": 1, "displayName": "Jenkins", "email": "jenkins@moxa.com" },
-              { "userId": 2, "displayName": "Brian", "email": "brian@moxa.com" }
+              {
+                "id": 1,
+                "name": "User/Role management",
+                "type": 1,
+                "description": "User/Role management",
+                "value": 1
+              },
+              {
+                "id": 2,
+                "name": "Device register/grouping",
+                "type": 1,
+                "description": "Device register/grouping",
+                "value": 1
+              }
             ]
-          }  
-        ] 
-    }
+          },
+          {
+            "id": 2,
+            "name": "Device Register",
+            "type": 1,
+            "description": "Device Register",
+            "enabled": true,
+            "count": 3,
+            "permission": [
+              {
+                "id": 1,
+                "name": "User/Role management",
+                "type": 1,
+                "description": "User/Role management",
+                "value": 0
+              },
+              {
+                "id": 2,
+                "name": "Device register/grouping",
+                "type": 1,
+                "description": "Device register/grouping",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "name": "Full device manager",
+            "type": 2,
+            "description": "Full device manager",
+            "enabled": true,
+            "count": 3,
+            "permission": [
+                {
+                    "description": "View device information",
+                    "id": 3,
+                    "name": "View device information",
+                    "type": 2,
+                    "value": 1
+                },
+                {
+                    "description": "Full manage device",
+                    "id": 4,
+                    "name": "Full manage device",
+                    "type": 2,
+                    "value": 1
+                }
+            ]
+          }
+        ]
+      }

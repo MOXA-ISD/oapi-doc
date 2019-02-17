@@ -38,10 +38,15 @@ paths:
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/RoleReq'
+            $ref: '#/definitions/RoleCreate'
       responses:
         201:
           description: Create role successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Role'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
 
   /roles/{id}:
     parameters:
@@ -72,15 +77,15 @@ paths:
           description: Information of role
           required: true
           schema:
-            $ref: '#/definitions/RoleReq'
+            $ref: '#/definitions/RoleUpdate'
       responses:
         200:
           description: An Object of the role
           schema:
             type: object
             items:
-              $ref: '#/definitions/RolePermission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RolePermission' } }
+              $ref: '#/definitions/Role'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
     delete:
       description: Delete role with given ID
       tags:
@@ -99,12 +104,15 @@ definitions:
       name:
         type: string
         description: Name of role.
-      permission:
-        type: array
-        items:
-          type: object
-          items:
-            - $ref: '#/definitions/Permission'
+      type:
+        type: integer
+        description: Role type.
+      description:
+        type: string
+        description: Description of role.
+      enabled:
+        type: boolean
+        description: Status of role.
 
   RolePermission:
     type: object
@@ -134,17 +142,20 @@ definitions:
           items:
             - $ref: '#/definitions/Permission'
 
-  RoleReq:
+  RoleCreate:
     type: object
     properties:
-      roleName:
+      name:
         type: string
         description: Name of role.
         maxLength: 30
       description:
         type: string
         description: Description of role.
-        maxLength: 200  
+        maxLength: 200
+      type:
+        type: integer
+        description: Role type.
       permission:
         type: array
         items:
@@ -152,21 +163,23 @@ definitions:
           items:
             - $ref: '#/definitions/Permission'
 
-  RoleRes:
+  RoleUpdate:
     type: object
     properties:
-      roleId:
-        type: integer
-        description: Name of role.
-      roleName:
+      name:
         type: string
         description: Name of role.
         maxLength: 30
-      type:
+      description:
         type: string
         description: Description of role.
-        maxLength: 200  
-        enum: [tenant, group]
+        maxLength: 200
+      permission:
+        type: array
+        items:
+          type: object
+          items:
+            - $ref: '#/definitions/Permission'
 
   Permission:
     type: object
@@ -191,6 +204,14 @@ definitions:
 externalDocs:
   url: 'http://#'
   x-mocks:
+    Role:
+      {
+        "id": 19,
+        "name": "test role 2",
+        "type": 1,
+        "description": "test role 2",
+        "enabled": true
+      }
     RolePermission:
       {
         "id": 2,

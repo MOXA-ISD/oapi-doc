@@ -18,6 +18,8 @@ paths:
   /users:
     get:
       description: Get all users field data
+      tags:
+        - user
       responses:
         200:
           description: An array of users
@@ -26,32 +28,25 @@ paths:
             items:
               $ref: '#/definitions/User'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
-      tags:
-        - user
     post:
       description: Create a new user.
+      tags:
+        - user
       parameters:
         - name: body
           in: body
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/UserReq'
+            $ref: '#/definitions/UserCreate'
       responses:
         201:
           description: Create user successfully
           schema:
             type: object
-            properties:
-              token:
-                type: string
-                description: Granted authentication token.
-          examples:
-            token:
-              type: string
-              description: Granted authentication token.
-      tags:
-        - user
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
   /users/{userId}:
     parameters:
@@ -74,13 +69,15 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
     put:
       description: Return updated user data with given ID
+      tags:
+        - user
       parameters:
         - name: body
           in: body
           description: Information of User
           required: true
           schema:
-            $ref: '#/definitions/UserReq'
+            $ref: '#/definitions/UserUpdate'
       responses:
         200:
           description: An Object of the user
@@ -101,13 +98,13 @@ definitions:
   User:
     type: object
     properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
       userId:
         type: string
         description: Unique identifier representing a specific user.
-      tenantId:
-        type: string
-        description: Unique identifier representing a specific tenant.  
-      username:
+      displayName:
         type: string
         description: Username of user.
       firstName:
@@ -116,29 +113,41 @@ definitions:
       lastName:
         type: string
         description: Last name of user.
+      avatar:
+        type: string
+        description: Avatar of user.
       email:
         type: string
         description: Email of user.  
-      password:
+      company:
         type: string
-        description: Password of user.
+        description: Company of user.
+      department:
+        type: string
+        description: Department of user.
+      employeeId:
+        type: string
+        description: Employee Id of user.
       phone:
         type: string
         description: Phone of user.
-      loginAt:
+      status:
         type: string
-        description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.     
+        description: Enable Status of user.
       data:
         type: object
         description: Metadata of user.
+      loginAt:
+        type: string
+        description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.
       tenant:
         type: object
         description: Tenant permission.
         properties:
-          permissionList:
+          permission:
             type: array
             items:
-              '$ref': '#/definitions/PermissionUnion'
+              '$ref': '#/definitions/Permission'
             description: Group permission list.
       groupList:
         type: array
@@ -149,7 +158,7 @@ definitions:
         type: array
         description: List of role which contains the user.
         items:
-          '$ref': '#/definitions/RoleRes'   
+          '$ref': '#/definitions/Role'
 
   Group:
     type: object
@@ -160,13 +169,39 @@ definitions:
       groupName:
         type: string
         description: Name of group.  
-      permissionList:
+      permission:
         type: array
         items:
-          '$ref': '#/definitions/PermissionUnion'
+          '$ref': '#/definitions/Permission'
         description: Group permission list.
 
-  UserReq:
+  Role:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Role id.
+      name:
+        type: string
+        description: Role name.
+      value:
+        type: integer
+        description: Role value.
+
+  Permission:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Permission id.
+      name:
+        type: string
+        description: Permission name.
+      value:
+        type: integer
+        description: Permission value.
+
+  UserCreate:
     type: object
     properties:
       displayName:
@@ -193,10 +228,6 @@ definitions:
         type: string
         description: Password of user.
         maxLength: 100
-      phone:
-        type: string
-        description: Phone of user.
-        maxLength: 50
       company:
         type: string
         description: Company of user.
@@ -209,45 +240,88 @@ definitions:
         type: string
         description: Employee id of user.
         maxLength: 8
+      phone:
+        type: string
+        description: Phone of user.
+        maxLength: 50
       data:
         type: object
         description: metadata of user.
-  
+
+  UserUpdate:
+    type: object
+    properties:
+      displayName:
+        type: string
+        description: Display name of user.
+        maxLength: 30
+      firstName:
+        type: string
+        description: First name of user.
+        maxLength: 255
+      lastName:
+        type: string
+        description: Last name of user.
+        maxLength: 255
+      avatar:
+        type: string
+        description: Avatar of user.
+        maxLength: 2083
+      company:
+        type: string
+        description: Company of user.
+        maxLength: 50
+      department:
+        type: string
+        description: Department of user.
+        maxLength: 50
+      employeeId:
+        type: string
+        description: Employee id of user.
+        maxLength: 8
+      phone:
+        type: string
+        description: Phone of user.
+        maxLength: 50
+      data:
+        type: object
+        description: metadata of user.
+
 externalDocs:
   url: 'http://#'
   x-mocks:
     User:
       {
-        "userId": "f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef",
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "userId": "f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef",
         "displayName": "Ryan Wang",
         "firstName": "Ryan",
         "lastName": "Wang",
+        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef.jpg",
         "email": "ryan@moxa.com",
-        "avatar": "https://xxx.com/abc.png",
-        "phone": "1234567890",    
         "company": "MOXA Inc.",
-        "department": "ABC",
-        "employeeId": "123",    
+        "department": "Department",
+        "employeeId": "123",
+        "phone": "02-89191230",
+        "status": "Enabled",
         "loginAt": "2018-08-12T20:17:46.384Z",
-        "status": "enable",
         "data": 
           {
             "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
         "tenant": {
-          "permissionList": [
-            { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
-            { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
+          "permission": [
+            { "id": 1, "name": "User/Role management", "value": 2 },
+            { "id": 2, "name": "Device register/grouping", "value": 2 }
           ]
         },
         "groupList": [
           { 
             "groupId": 1, 
             "groupName": "All devices", 
-            "permissionList": [
-              { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-              { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
+            "permission": [
+              { "id": 3, "name": "View device information", "value": 2 },
+              { "id": 4, "name": "Full manage device", "value": 1 }
             ]
           }
         ],
@@ -263,18 +337,18 @@ externalDocs:
       { 
         "email": "kevin@moxa.com",
         "tenant": {
-          "permissionList": [
-            { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
-            { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
+          "permission": [
+            { "id": 1, "name": "User/Role management", "value": 2 },
+            { "id": 2, "name": "Device register/grouping", "value": 2 }
           ]
         },
         "groupList": [
           { 
             "groupId": 1, 
             "groupName": "All devices", 
-            "permissionList": [
-              { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-              { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
+            "permission": [
+              { "id": 3, "name": "View device information", "value": 2 },
+              { "id": 4, "name": "Full manage device", "value": 1 }
             ]
           }
         ]
@@ -296,99 +370,107 @@ externalDocs:
           }
       }
     UserList:
-      [
-        {
-          "userId": "f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef",
-          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "displayName": "Brian Wang",
-          "firstName": "Brian",
-          "lastName": "Wang",
-          "email": "brian@moxa.com",
-          "avatar": "https://xxx.com/abc.png",
-          "phone": "1234567890",
-          "company": "MOXA Inc.",
-          "department": "ABC",
-          "employeeId": "123",     
-          "loginAt": "2018-08-12T20:17:46.384Z",
-          "status": "enable",
-          "data": 
+      {
+        "count": 2,
+        "data": [
             {
-              "CUSTOM_FIELD": "CUSTOM_VALUE"
+                "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+                "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+                "displayName": "Rick Peng",
+                "firstName": "Rick",
+                "lastName": "Peng",
+                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/a1be69eb-258e-4c66-b07b-583474e57305.jpg",
+                "email": "rick.peng@moxa.com",
+                "company": "moxa",
+                "department": "iss",
+                "employeeId": "20040003",
+                "phone": "02-89191230",
+                "status": "Enabled",
+                "data": {},
+                "loginAt": "2019-01-29T05:29:00:297Z",
+                "tenant": {
+                    "permission": []
+                },
+                "grouplist": [],
+                "role": [
+                    {
+                        "id": 1,
+                        "name": "Administrator",
+                        "type": 0
+                    }
+                ]
             },
-          "tenant": {
-            "permissionList": [
-              { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
-              { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
-            ]
-          },
-          "groupList": [
-            { 
-              "groupId": 1, 
-              "groupName": "All devices", 
-              "permissionList": [
-                { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-                { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
-              ] 
-            }
-          ],
-          "roleList": [
             {
-              "id": 2,
-              "name": "Device Register",
-              "type": "tenant"
+                "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+                "userId": "aedd319a-3d21-4ba5-aee8-0b8ec2806b09",
+                "displayName": "Owen Kao",
+                "firstName": "Owen",
+                "lastName": "Kao",
+                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/aedd319a-3d21-4ba5-aee8-0b8ec2806b09.jpg",
+                "email": "owenyc.kao@moxa.com",
+                "company": "moxa",
+                "department": "iss",
+                "employeeId": "20170163",
+                "phone": "02-89191230",
+                "status": "Enabled",
+                "data": {},
+                "loginAt": "2019-01-29T05:29:00:297Z",
+                "role": [
+                    {
+                        "id": 2,
+                        "name": "Device Register",
+                        "type": 1
+                    },
+                    {
+                        "id": 3,
+                        "name": "System Manager",
+                        "type": 1
+                    },
+                    {
+                        "id": 4,
+                        "name": "User Manager",
+                        "type": 1
+                    },
+                    {
+                        "id": 5,
+                        "name": "Full device manager",
+                        "type": 2
+                    }
+                ],
+                "tenant": {
+                    "permission": [
+                        {
+                            "id": 1,
+                            "name": "User/Role management",
+                            "value": 1
+                        },
+                        {
+                            "id": 2,
+                            "name": "Device register/grouping",
+                            "value": 1
+                        }
+                    ]
+                },
+                "grouplist": [
+                    {
+                        "id": 5,
+                        "name": "Full device manager",
+                        "permission": [
+                            {
+                                "id": 3,
+                                "name": "View device information",
+                                "value": 1
+                            },
+                            {
+                                "id": 4,
+                                "name": "Full manage device",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
             }
-          ]
-        },
-        {
-          "userId": "d806f8d9-1b3a-45ac-9e57-26a3b0e2c339",
-          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-          "displayName": "Jenkins Wang",
-          "firstName": "Jenkins",
-          "lastName": "Wang",
-          "email": "jenkins@moxa.com",
-          "avatar": "https://xxx.com/abc.png",
-          "phone": "1234567890",
-          "company": "MOXA Inc.",
-          "department": "ABC",
-          "employeeId": "123",
-          "loginAt": "2018-08-12T20:17:46.384Z",
-          "status": "waiting",
-          "data": 
-            {
-              "CUSTOM_FIELD": "CUSTOM_VALUE"
-            },
-          "tenant": {
-            "permissionList": [
-              { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
-              { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
-            ]
-          },
-          "groupList": [
-            { 
-              "groupId": 1, 
-              "groupName": "All devices", 
-              "permissionList": [
-                { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-                { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
-              ]
-            },  
-            { 
-              "groupId": 2, 
-              "groupName": "South section", 
-              "permissionList": [
-                { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-                { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
-              ]
-            }
-          ],
-          "roleList": [
-            {
-              "id": 2,
-              "name": "Device Register",
-              "type": "tenant"
-            }
-          ]
-        }
-      ]
-    
-
+        ],
+        "limit": 100,
+        "offset": 0
+    }

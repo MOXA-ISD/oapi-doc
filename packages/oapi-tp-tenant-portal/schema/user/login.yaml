@@ -68,40 +68,43 @@ externalDocs:
       {
         "user":
           {
-            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
             "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
             "displayName": "Ellen Woods",
             "firstName": "Ellen",
             "lastName": "Woods",
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
             "email": "ellen@moxa.com",
-            "phone": "1234567890",  
-            "avatar": "https://xxx.com/abc.png",      
+            "company": "MOXA Inc.",
+            "department": "Department",
+            "employeeId": "123",
+            "phone": "02-89191230",
             "loginAt": "2018-08-12T20:17:46.384Z",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
               },
             "tenant": {
-              "permissionList": [
-                { "permissionId": 1, "permissionName": "User/Role management", "value": 2 },
-                { "permissionId": 2, "permissionName": "Device register/grouping", "value": 2 }
+              "permission": [
+                { "id": 1, "name": "User/Role management", "value": 2 },
+                { "id": 2, "name": "Device register/grouping", "value": 2 }
               ]
             },
             "groupList": [
               { 
                 "groupId": 1, 
                 "groupName": "All devices", 
-                "permissionList": [
-                  { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-                  { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
+                "permission": [
+                  { "id": 3, "name": "View device information", "value": 2 },
+                  { "id": 4, "name": "Full manage device", "value": 1 }
                 ]
               },
               { 
                 "groupId": 2, 
                 "groupName": "North section", 
-                "permissionList": [
-                  { "permissionId": 3, "permissionName": "View device information", "value": 2 },
-                  { "permissionId": 4, "permissionName": "Full manage device", "value": 1 }
+                "permission": [
+                  { "id": 3, "name": "View device information", "value": 2 },
+                  { "id": 4, "name": "Full manage device", "value": 1 }
                 ]
               }
             ],

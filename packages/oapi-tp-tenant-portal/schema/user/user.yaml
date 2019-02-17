@@ -20,6 +20,49 @@ paths:
       description: Get all users field data
       tags:
         - user
+      parameters:
+        - name: name
+          in: query
+          description: Filter the user list by user name
+          required: false
+          type: string
+        - name: email
+          in: query
+          description: Filter the user list by email
+          required: false
+          type: string
+        - name: active
+          in: query
+          description: Filter the user list by active
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: The user list order by some keyword.
+          required: false
+          type: string
+          enum:
+          - name
+          - email
+          - active
+        - name: sort
+          in: query
+          description: Sorting the filter user list, default is desc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: limit
+          in: query
+          description: max return users count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
       responses:
         200:
           description: An array of users
@@ -282,6 +325,26 @@ paths:
               $ref: '#/definitions/User'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
 
+  /users/invite/{inviteId}:
+    parameters:
+      - name: inviteId
+        in: path
+        description: Invitee data ID
+        required: true
+        type: string
+    get:
+      description: Return Invitee data with given ID
+      tags:
+        - user
+      responses:
+        200:
+          description: An Object of the invitee
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Invitee'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Invitee' } }
+
 definitions:
   User:
     type: object
@@ -388,6 +451,37 @@ definitions:
       value:
         type: integer
         description: Permission value.
+
+  Invitee:
+    type: object
+    properties:
+      inviteId:
+        type: string
+        description: Invite Data ID.
+      inviter:
+        type: string
+        description: Inviter ID.
+      domainName:
+        type: string
+        description: Tenant Domain Name.
+      email:
+        type: string
+        description: Email of invitation.
+      status:
+        type: string
+        description: Status of invitation.
+      data:
+        type: object
+        description: Metadata of invitation.
+      expireAt:
+        type: string
+        description: Expire date of invitation.
+      createdAt:
+        type: string
+        description: Create date of invitation.
+      updatedAt:
+        type: string
+        description: Update date of invitation.
 
   UserExist:
     type: object
@@ -754,4 +848,16 @@ externalDocs:
         ],
         "limit": 100,
         "offset": 0
-    }
+      }
+    Invitee:
+      {
+        "inviteId": "762e7efb-8b49-4855-89a3-30f3adabf580",
+        "inviter": "7dc93587-5444-48bf-a196-da811c39959d",
+        "domainName": "tenant-dev",
+        "email": "22222@moxa.com",
+        "status": "Inviting",
+        "data": {},
+        "expireAt": "2019-02-24T08:41:29.773480Z",
+        "createdAt": "2019-02-17T08:41:29.773480Z",
+        "updatedAt": "2019-02-17T08:41:29.773480Z"
+      }

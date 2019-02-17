@@ -105,6 +105,26 @@ paths:
           description: Role ID
           required: true
           type: string
+        - name: name
+          in: query
+          description: Filter the user list by user name
+          required: false
+          type: string
+        - name: email
+          in: query
+          description: Filter the user list by email
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: max return users count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
       responses:
         200:
           description: An Object of the user
@@ -129,6 +149,41 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RoleUser'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RoleUser'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserDataList' } }
+
+  /roles/{id}/unassign:
+    get:
+      description: Get unassign users
+      tags:
+        - role
+      parameters:
+        - name: id
+          in: path
+          description: Role ID
+          required: true
+          type: string
+        - name: keyword
+          in: query
+          description: Filter the user name & email by keyword
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: max return users count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
       responses:
         200:
           description: An Object of the user
@@ -416,6 +471,29 @@ externalDocs:
         ]
       }
     RoleUserList:
+      {
+        "count": 3,
+        "data": [
+          {
+            "avatar": null,
+            "displayName": "Owen Kao",
+            "email": "owenyc.kao@moxa.com"
+          },
+          {
+            "avatar": null,
+            "displayName": "Edie Lin",
+            "email": "ediejy.lin@moxa.com"
+          },
+          {
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+            "displayName": "Cain Chen",
+            "email": "cainhc.chen@moxa.com"
+          }
+        ],
+        "limit": 100,
+        "offset": 0
+      }
+    UserDataList:
       {
         "data": [
           {

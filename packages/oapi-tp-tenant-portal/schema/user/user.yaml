@@ -259,6 +259,29 @@ paths:
               $ref: '#/definitions/UserExist'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserExist' } }
 
+  /users/invite:
+    post:
+      description: Invite users to join this tenant
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserInvite'
+      responses:
+        201:
+          description: Invite users successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
+
 definitions:
   User:
     type: object
@@ -494,6 +517,19 @@ definitions:
         type: object
         description: metadata of user.
 
+  UserInvite:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Email of user.
+        maxLength: 254
+      role:
+        type: array
+        description: List of role.
+        items:
+          '$ref': '#/definitions/Role'
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -557,26 +593,6 @@ externalDocs:
       {
         "password":"moxamoxa"
       }
-    InviteReq:
-      { 
-        "email": "kevin@moxa.com",
-        "tenant": {
-          "permission": [
-            { "id": 1, "name": "User/Role management", "value": 2 },
-            { "id": 2, "name": "Device register/grouping", "value": 2 }
-          ]
-        },
-        "groupList": [
-          { 
-            "groupId": 1, 
-            "groupName": "All devices", 
-            "permission": [
-              { "id": 3, "name": "View device information", "value": 2 },
-              { "id": 4, "name": "Full manage device", "value": 1 }
-            ]
-          }
-        ]
-      }      
     UserCreate:
       {
         "email":"ediejy.lin@moxa.com",
@@ -597,6 +613,43 @@ externalDocs:
         "lastName": "Chen",
         "phone": "02-89191230#7262"
       }
+    UserInvite:
+      [
+        {
+          "email":"13579@moxa.com",
+          "role":[
+            {
+              "id": 3,
+              "name": "System Manager",
+              "type": 1
+            },
+            {
+              "id": 4,
+              "name": "User Manager",
+              "type": 1
+            },
+            {
+              "id": 5,
+              "name": "Full device manager",
+              "type": 2
+            }
+          ]
+        },
+        {
+          "email":"24680@moxa.com",
+          "role":[
+            {
+              "id": 2,
+              "name": "Device Register",
+              "type": 1
+            },{
+              "id": 6,
+              "name": "B204 viwer",
+              "type": 2
+            }
+          ]
+        }
+      ]
     UserList:
       {
         "count": 2,

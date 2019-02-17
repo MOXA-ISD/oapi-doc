@@ -94,6 +94,70 @@ paths:
         204:
           description: success
 
+  /roles/{id}/users:
+    get:
+      description: Get role users
+      tags:
+        - role
+      parameters:
+        - name: id
+          in: path
+          description: Role ID
+          required: true
+          type: string
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RoleUser'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
+    put:
+      description: Update users of role
+      tags:
+        - role
+      parameters:
+        - name: id
+          in: path
+          description: Role ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Information of role
+          required: true
+          schema:
+            $ref: '#/definitions/RoleUser'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RoleUser'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
+
+  /roles/{id}/duplicate:
+    post:
+      description: Duplicate a new role
+      tags:
+        - role
+      parameters:
+        - name: id
+          in: path
+          description: Role ID
+          required: true
+          type: string
+      responses:
+        201:
+          description: Create role successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Role'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+
 definitions:
   Role:
     type: object
@@ -141,6 +205,43 @@ definitions:
           type: object
           items:
             - $ref: '#/definitions/Permission'
+
+  RoleUser:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      firstName:
+        type: string
+        description: First name of user.
+      lastName:
+        type: string
+        description: Last name of user.
+      avatar:
+        type: string
+        description: Avatar of user.
+      email:
+        type: string
+        description: Email of user.
+      company:
+        type: string
+        description: Company of user.
+      department:
+        type: string
+        description: Department of user.
+      employeeId:
+        type: string
+        description: Employee Id of user.
+      phone:
+        type: string
+        description: Phone of user.
+      data:
+        type: object
+        description: Metadata of user.
 
   RoleCreate:
     type: object
@@ -311,6 +412,43 @@ externalDocs:
                     "value": 1
                 }
             ]
+          }
+        ]
+      }
+    RoleUserList:
+      {
+        "data": [
+          {
+            "userId": "6df5d905-e19c-4cc8-b963-88707c6fa7f3",
+            "displayName": "Edie Lin",
+            "firstName": "Edie",
+            "lastName": "Lin",
+            "avatar": null,
+            "email": "ediejy.lin@moxa.com",
+            "company": "moxa",
+            "department": "iss",
+            "employeeId": "20180101",
+            "phone": "02-89191230",
+            "data": {},
+            "createdAt": "2019-01-31T03:34:42.387811Z",
+            "updatedAt": "2019-01-31T03:34:42.387811Z",
+            "changePasswordAt": ""
+          },
+          {
+            "userId": "7dc93587-5444-48bf-a196-da811c39959d",
+            "displayName": "Cain Chen",
+            "firstName": "Cain",
+            "lastName": "Chen",
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+            "email": "cainhc.chen@moxa.com",
+            "company": "moxa",
+            "department": "iss",
+            "employeeId": "20180003",
+            "phone": "02-89191230#7262",
+            "data": {},
+            "createdAt": "2019-01-22T08:02:49.089379Z",
+            "updatedAt": "2019-02-10T15:16:33.139554Z",
+            "changePasswordAt": ""
           }
         ]
       }

@@ -94,6 +94,68 @@ paths:
         204:
           description: success
 
+  /users/exist/{email}:
+    parameters:
+      - name: email
+        in: path
+        description: User email
+        required: true
+        type: string
+    get:
+      description: Determining if the email exists in this tenant
+      tags:
+        - user
+      responses:
+        200:
+          description: Determining if the email exists
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/UserExist'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserExist' } }
+
+  /users/avatar:
+    post:
+      description: Upload an image file for non logged in user
+      tags:
+        - user
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: image
+          in: formData
+          description: an image file
+          required: true
+          type: file
+      responses:
+        200:
+          description: Upload an image file
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/UserAvatar'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
+    put:
+      description: Upload an image file for logged in user
+      tags:
+        - user
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: image
+          in: formData
+          description: an image file
+          required: true
+          type: file
+      responses:
+        200:
+          description: Upload an image file
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/UserAvatar'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
+
 definitions:
   User:
     type: object
@@ -200,6 +262,20 @@ definitions:
       value:
         type: integer
         description: Permission value.
+
+  UserExist:
+    type: object
+    properties:
+      exist:
+        type: boolean
+        description: Determining if the email exists in this tenant.
+
+  UserAvatar:
+    type: object
+    properties:
+      exist:
+        type: string
+        description: Return an absolute path in azure storage
 
   UserCreate:
     type: object
@@ -333,6 +409,10 @@ externalDocs:
           }
         ]
       }
+    UserExist:
+      { "exist": true }
+    UserAvatar:
+      { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/test.png" }
     InviteReq:
       { 
         "email": "kevin@moxa.com",

@@ -197,6 +197,48 @@ paths:
               $ref: '#/definitions/User'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
+  /users/forgetPassword:
+    post:
+      description: Send an email to user for reset password
+      tags:
+        - user
+      parameters:
+        - name: email
+          in: body
+          description: Input user email
+          required: true
+          schema:
+            $ref: '#/definitions/UserForgetPassword'
+      responses:
+        200:
+          description: success
+
+  /users/resetPassword/{code}:
+    put:
+      description: Reset password by forget password email link
+      tags:
+        - user
+      parameters:
+        - name: code
+          in: path
+          description: Reset passowrd code
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Information of Passowrd
+          required: true
+          schema:
+            $ref: '#/definitions/UserResetPassword'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+
   /users/exist/{email}:
     parameters:
       - name: email
@@ -350,6 +392,22 @@ definitions:
         description: New Passoword.
         maxLength: 100
 
+  UserForgetPassword:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Email of user.
+        maxLength: 254
+
+  UserResetPassword:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Password of user.
+        maxLength: 100
+
   UserCreate:
     type: object
     properties:
@@ -490,6 +548,14 @@ externalDocs:
       {
         "oldPassword":"moxamoxa",
         "newPassword":"123456"
+      }
+    UserForgetPassword:
+      {
+        "email":"cainhc.chen@moxa.com"
+      }
+    UserRsetPassword:
+      {
+        "password":"moxamoxa"
       }
     InviteReq:
       { 

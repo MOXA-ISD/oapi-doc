@@ -94,25 +94,45 @@ paths:
         204:
           description: success
 
-  /users/exist/{email}:
+  /users/{userId}/enable:
     parameters:
-      - name: email
+      - name: userId
         in: path
-        description: User email
+        description: User unique identifier
         required: true
         type: string
-    get:
-      description: Determining if the email exists in this tenant
+    put:
+      description: Enable a user in this tenant
       tags:
         - user
       responses:
         200:
-          description: Determining if the email exists
+          description: An Object of the user
           schema:
             type: object
             items:
-              $ref: '#/definitions/UserExist'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserExist' } }
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+
+  /users/{userId}/disable:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
+    put:
+      description: Disable a user in this tenant
+      tags:
+        - user
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
   /users/avatar:
     post:
@@ -155,6 +175,47 @@ paths:
             items:
               $ref: '#/definitions/UserAvatar'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
+
+  /users/changePassword:
+    put:
+      description: Upload an image file for logged in user
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: Information of Passowrd
+          required: true
+          schema:
+            $ref: '#/definitions/UserChangePassword'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+
+  /users/exist/{email}:
+    parameters:
+      - name: email
+        in: path
+        description: User email
+        required: true
+        type: string
+    get:
+      description: Determining if the email exists in this tenant
+      tags:
+        - user
+      responses:
+        200:
+          description: Determining if the email exists
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/UserExist'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserExist' } }
 
 definitions:
   User:
@@ -276,6 +337,18 @@ definitions:
       exist:
         type: string
         description: Return an absolute path in azure storage
+
+  UserChangePassword:
+    type: object
+    properties:
+      oldPassword:
+        type: string
+        description: Old Password.
+        maxLength: 100
+      newPassword:
+        type: string
+        description: New Passoword.
+        maxLength: 100
 
   UserCreate:
     type: object
@@ -413,6 +486,11 @@ externalDocs:
       { "exist": true }
     UserAvatar:
       { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/test.png" }
+    UserChangePassword:
+      {
+        "oldPassword":"moxamoxa",
+        "newPassword":"123456"
+      }
     InviteReq:
       { 
         "email": "kevin@moxa.com",
@@ -433,21 +511,25 @@ externalDocs:
           }
         ]
       }      
-    UserReq:
-      { 
-        "displayName": "Kevin Brown",
-        "firstName": "Kevin",
-        "lastName": "Brown",
-        "email": "kevin@moxa.com",
-        "password": "12345678",
-        "phone": "958123456",
-        "company": "MOXA Inc.",
-        "department": "Sales",
-        "employeeId": "20181234",
-        "data": 
-          {
-            "CUSTOM_FIELD": "CUSTOM_VALUE"
-          }
+    UserCreate:
+      {
+        "email":"ediejy.lin@moxa.com",
+        "displayName":"Edie Lin",
+        "firstName":"Edie",
+        "lastName":"Lin",
+        "password":"moxamoxa"
+      }
+    UserUpdate:
+      {
+        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+        "company": "moxa",
+        "data": {},
+        "displayName": "Cain Chen",
+        "email": "cainhc.chen@moxa.com",
+        "employeeId": "20180003",
+        "firstName": "Cain",
+        "lastName": "Chen",
+        "phone": "02-89191230#7262"
       }
     UserList:
       {

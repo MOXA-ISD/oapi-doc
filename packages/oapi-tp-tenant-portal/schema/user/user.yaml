@@ -90,6 +90,20 @@ paths:
             items:
               $ref: '#/definitions/User'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+    delete:
+      description: Delete all Users
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/UserBatch'
+      responses:
+        204:
+          description: success
 
   /users/{userId}:
     parameters:
@@ -136,46 +150,6 @@ paths:
       responses:
         204:
           description: success
-
-  /users/{userId}/enable:
-    parameters:
-      - name: userId
-        in: path
-        description: User unique identifier
-        required: true
-        type: string
-    put:
-      description: Enable a user in this tenant
-      tags:
-        - user
-      responses:
-        200:
-          description: An Object of the user
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
-
-  /users/{userId}/disable:
-    parameters:
-      - name: userId
-        in: path
-        description: User unique identifier
-        required: true
-        type: string
-    put:
-      description: Disable a user in this tenant
-      tags:
-        - user
-      responses:
-        200:
-          description: An Object of the user
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
   /users/avatar:
     post:
@@ -344,6 +318,48 @@ paths:
             items:
               $ref: '#/definitions/Invitee'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Invitee' } }
+
+  /users/enable:
+    put:
+      description: Enable users in this tenant
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/UserBatch'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+
+  /users/disable:
+    put:
+      description: Disable users in this tenant
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/UserBatch'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
 definitions:
   User:
@@ -524,6 +540,11 @@ definitions:
         type: string
         description: Password of user.
         maxLength: 100
+
+  UserBatch:
+    type: array
+    items:
+      type: string
 
   UserCreate:
     type: object

@@ -187,6 +187,45 @@ definitions:
         type: object
         readOnly: true
         description: Device's latest system properties
+        properties:
+          aliasName:
+            type: string
+            description: Display name of device
+          iccId:
+            type: string
+            description: Iccid of device
+          modelName:
+            type: string
+            description:  Model name of device
+          softwareVersion:
+            type: string
+            description: Firmware(software) version of device
+          defaultRoute:
+            type: string
+            enum:
+              - wwan0
+              - wlan0
+              - eth0
+            description: Default route of device, wwan0 represents cellular, wlan0 represents wifi, eth0 represents ethernet
+          gps:
+            type: object
+            properties:
+              lat:
+                type: number
+                description: gps lat value
+              lng:
+                type: number
+                description: gps lng value
+          wifi:
+            type: string
+            enum:
+              - connected
+              - disconnected
+              - auth_failed
+            description: Default route of device, wwan0 represents cellular, wlan0 represents wifi, eth0 represents ethernet
+          customProperties:
+            type: object
+            description: User custom defined properties
     example:
       $ref: '#/externalDocs/x-mocks/Device'
   DeviceList:

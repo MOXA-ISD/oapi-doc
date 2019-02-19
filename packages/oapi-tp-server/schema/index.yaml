@@ -31,7 +31,7 @@ tags:
 - $ref: "./deviceTask/index.yaml#/tags"
 - $ref: "./group/index.yaml#/tags"
 - $ref: "./groupTask/index.yaml#/tags"
-- $ref: "./system/index.yaml#/tags"
+- $ref: "./notification/index.yaml#/tags"
 
 paths:
 - $ref: "./device/index.yaml#/paths"

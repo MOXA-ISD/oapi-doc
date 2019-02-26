@@ -47,7 +47,7 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/NotificationCreated'
+            $ref: '#/definitions/NotificationCreate'
       responses:
         '200':
           description: reutrn created notification object
@@ -142,7 +142,7 @@ definitions:
         description: Description of notification recevier, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
     example:
       $ref: '#/externalDocs/x-mocks/Notification'
-  NotificationCreated:
+  NotificationCreate:
     type: object
     properties:
       eventType:
@@ -163,7 +163,7 @@ definitions:
         type: string
         description: Description of notification recevier, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
     example:
-      $ref: '#/externalDocs/x-mocks/NotificationCreated'
+      $ref: '#/externalDocs/x-mocks/NotificationCreate'
   Event:
     type: object
     properties:
@@ -221,7 +221,7 @@ externalDocs:
           "status": "Ready",
           "uuid": "3d444fc4-6c80-48b7-a129-79ead8c2cdab"
       }
-    NotificationCreated:
+    NotificationCreate:
       {
           "endpoint": "http://8.8.8.8/receive",
           "eventType": "device_online",

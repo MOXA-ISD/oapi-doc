@@ -378,12 +378,15 @@ definitions:
         - N/A
         - Registered
         description: Registered status of device.
-      displayName:
+      creator:
         type: string
-        description: Applicant name of this device
+        description: Creator name of this device
       createdAt:
         type: string
         description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updater:
+        type: string
+        description: Updater name of this device
       updatedAt:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.

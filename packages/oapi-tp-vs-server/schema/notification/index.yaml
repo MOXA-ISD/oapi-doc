@@ -18,7 +18,7 @@ securityDefinitions:
 
 tags:
   - name: notification
-    description: Cloud Gateway management
+    description: Register event callback handler function
 
 paths:
   /notifications:
@@ -208,7 +208,7 @@ definitions:
     items:
       type: string
       description: UUID of notification
-      example: ["ded6dd9e-49d9-485b-bac1-da0ca0ae9d70", "3d444fc4-6c80-48b7-a129-79ead8c2cdab"]
+      example: "ded6dd9e-49d9-485b-bac1-da0ca0ae9d70"
 
 externalDocs:
   url: 'http://#'

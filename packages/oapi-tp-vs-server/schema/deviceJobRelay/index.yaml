@@ -119,7 +119,7 @@ definitions:
         type: string
       taskId:
         description: Task ID
-        type: number
+        type: string
     example:
       $ref: '#/externalDocs/x-mocks/DeviceJobRelayResponse'
   DeviceJobRelay:
@@ -129,12 +129,9 @@ definitions:
     properties:
       taskId:
         description: Task ID
-        type: number
+        type: string
       status:
         description: response status
-        type: string
-      createdAt:
-        description: created time
         type: string
       updatedAt:
         description: updated time
@@ -142,8 +139,8 @@ definitions:
       code:
         description: http status code
         type: number
-      result:
-        description: result
+      payload:
+        description: payload of result
         type: object
     example:
       $ref: '#/externalDocs/x-mocks/DeviceJobRelay'
@@ -158,22 +155,16 @@ externalDocs:
         resource: /system/serial
     DeviceJobRelayResponse:
       deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
-      taskId: 1
+      taskId: job_1a9947d8-f97b-43a0-a1c6-eac5a65c2c01_1551157796.874439
     DeviceJobRelay:
-      taskId: 4
+      taskId: job_1a9947d8-f97b-43a0-a1c6-eac5a65c2c01_1551157796.874439
       status: Success from CG
-      createdAt: 2018-10-02T10:02:33Z
       updatedAt: 2018-10-02T10:02:36Z
       code: 200
-      result: 
-        id: 190760
-        taskId: 4
+      payload: 
         deviceUUID: 19c487dc-27c1-405b-bfce-000000000001
-        code: 200
         method: get
         resource: /system/serial
-        sign:
-          - serial
         data:
           - id: 1
             devDisplayName: PORT 1

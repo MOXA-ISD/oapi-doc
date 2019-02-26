@@ -32,25 +32,42 @@ paths:
           description: Filter the device list by deviceType
           required: false
           type: string
-        - name: order
+        - name: mac
           in: query
-          description: Ordering the filter device list, default is desc
+          description: Filter the device list by mac
           required: false
           type: string
-          enum:
-          - desc
-          - asc
-        - name: sort
+        - name: approvedStatus
           in: query
-          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
+          description: Filter the device list by approved status e.g. Waiting, Declined, Approved
+          required: false
+          type: string
+        - name: registeredStatus
+          in: query
+          description: Filter the device list by registered status e.g. N/A, Registred
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: Sort the device list by specific condition, default is order by 'lastUpdatedAt'
           required: false
           type: string
           enum:
           - deviceName
           - modelName
           - deviceType
-          - lastUpdatedAt
+          - mac
+          - approvedStatus
           - connectionStatus
+          - registeredStatus
+        - name: sort
+          in: query
+          description: Sorting the filter device list, default is desc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
         - name: limit
           in: query
           description: max return devices count (default is 100 and max is 1000)
@@ -325,7 +342,13 @@ definitions:
         description: Model name of device.
       deviceType:
         type: string
-        description: Type of device.  
+        description: Type of device.
+      mac:
+        type: string
+        description: Mac address of device.
+      serialNumber:
+        type: string
+        description: Serial number of device.
       imageUrl:
         type: string
         description: Image URL of device.  
@@ -335,6 +358,13 @@ definitions:
       allowConnection:
         type: boolean
         description: The device can connect to service or not.
+      approvedStatus:
+        type: string
+        enum:
+        - Waiting
+        - Approved
+        - Declined
+        description: Approved status of device.
       connectionStatus:
         type: string
         enum:
@@ -342,12 +372,36 @@ definitions:
         - offline
         - unknown
         description: Connection status of device.
+      registeredStatus:
+        type: string
+        enum:
+        - N/A
+        - Registered
+        description: Registered status of device.
+      creator:
+        type: string
+        description: Creator name of this device
       createdAt:
         type: string
-        description: Device created time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
+        description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updater:
+        type: string
+        description: Updater name of this device
       updatedAt:
         type: string
-        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
+        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      approvedAt:
+        type: string
+        description: Device approved time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      declinedAt:
+        type: string
+        description: Device declined time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      declinedReason:
+        type: string
+        description: Device declined resaon.
+      registeredAt:
+        type: string
+        description: Device registered time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
   DevicePoc:
     type: object

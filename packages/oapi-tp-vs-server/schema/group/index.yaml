@@ -22,8 +22,7 @@ tags:
 paths:
   /groups:
     get:
-      summary: Same as v2.3
-      description: The Group endpoint returns information about the device groups.
+      description: Same as v2.3<br />The Group endpoint returns information about the device groups.
       tags:
       - group
       parameters:
@@ -53,8 +52,7 @@ paths:
             }
 
     post:
-      summary: Same as v2.3
-      description: Create a new group.
+      description: Same as v2.3<br />Create a new group.
       tags:
       - group
       parameters:
@@ -79,8 +77,7 @@ paths:
             }
 
     delete:
-      summary: Same as v2.3
-      description: Delete groups.
+      description: Same as v2.3<br />Delete groups.
       tags:
       - group
       parameters:
@@ -103,8 +100,7 @@ paths:
       type: string
 
     get:
-      summary: Same as v2.3
-      description: Return Group with given ID
+      description: Same as v2.3<br />Return Group with given ID
       tags:
       - group
       responses:
@@ -121,8 +117,7 @@ paths:
               }
             }
     put:
-      summary: Same as v2.3
-      description: Update Group with given ID
+      description: Same as v2.3<br />Update Group with given ID
       tags:
       - group
       parameters:
@@ -147,8 +142,7 @@ paths:
             }
 
     delete:
-      summary: Same as v2.3
-      description: Delete Group with given ID
+      description: Same as v2.3<br />Delete Group with given ID
       tags:
       - group
       responses:
@@ -164,8 +158,7 @@ paths:
       type: string
 
     get:
-      summary: Same as v2.3
-      description: Return device uuid in this group
+      description: Same as v2.3<br />Return device uuid in this group
       tags:
       - group
       responses:
@@ -180,8 +173,7 @@ paths:
               }
             }
     post:
-      summary: Same as v2.3
-      description: Add devices to group
+      description: Same as v2.3<br />Add devices to group
       tags:
       - group
       parameters:
@@ -204,8 +196,7 @@ paths:
             }
 
     delete:
-      summary: Same as v2.3
-      description: Remove devices from group
+      description: Same as v2.3<br />Remove devices from group
       tags:
       - group
       parameters:

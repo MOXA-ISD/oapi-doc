@@ -23,12 +23,11 @@ tags:
 paths:
   /deviceJobRelay:
     post:
-      summary: New API
       tags:
         - deviceJobRelay
       security:
         - mx-api-token: []
-      description: Create a device task by non-blocking io model
+      description: New API<br />Create a device task by non-blocking io model
       consumes:
         - application/json
       parameters:
@@ -54,12 +53,11 @@ paths:
         required: true
         type: string
     get:
-      summary: New API
       security:
         - mx-api-token: []
       tags:
         - deviceJobRelay
-      description: Return Device task data with given id
+      description: New API<br />Return Device task data with given id
       responses:
         '200':
           description: An Object of the device task

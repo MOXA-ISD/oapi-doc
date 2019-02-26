@@ -27,7 +27,7 @@ paths:
         - notification
       security:
         - mx-api-token: []
-      description: return all subscribe notifications
+      description: New API<br />return all subscribe notifications
       responses:
         '200':
           description: An array of all subscribe notifications
@@ -37,12 +37,11 @@ paths:
               $ref: '#/definitions/Notification'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/NotificationList' } }
     post:
-      summary: New API
       tags:
         - notification
       security:
         - mx-api-token: []
-      description: Create (register) a new notification to ThingsPro Cloud Server, be notice, you must setup endpoint before you call this api, becasue Cloud server will trigger endpoint when you register immediately. If everything is ready, the subscriptions status will be ready or you will receive Pending Confirmation, once you got Pending Confirmation, you need call this api and try to send the same data again
+      description: New API<br />Create (register) a new notification to ThingsPro Cloud Server, be notice, you must setup endpoint before you call this api, becasue Cloud server will trigger endpoint when you register immediately. If everything is ready, the subscriptions status will be ready or you will receive Pending Confirmation, once you got Pending Confirmation, you need call this api and try to send the same data again
       parameters:
         - name: body
           in: body
@@ -59,12 +58,11 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/Notification'
     delete:
-      summary: New API
       tags:
         - notification
       security:
         - mx-api-token: []
-      description: Delete notifications from ThingsPro Cloud Server.
+      description: New API<br />Delete notifications from ThingsPro Cloud Server.
       parameters:
         - name: body
           in: body
@@ -85,24 +83,22 @@ paths:
         type: string
     
     delete:
-      summary: New API
       tags:
         - notification
       security:
         - mx-api-token: []
-      description: Delete notification with given UUID
+      description: New API<br />Delete notification with given UUID
       responses:
         '204':
           description: success
           
   /notifications/support:
     get:
-      summary: New API
       security:
         - mx-api-token: []
       tags:
         - notification
-      description: Return supported notification protocol and event type
+      description: New API<br />Return supported notification protocol and event type
       responses:
         '200':
           description: An Object of the device

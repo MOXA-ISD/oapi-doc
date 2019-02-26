@@ -23,12 +23,11 @@ tags:
 paths:
   /deviceTasks:
     post:
-      summary: Same as v2.3
       tags:
         - deviceTasks
       security:
         - mx-api-token: []
-      description: Create a remote task to target device
+      description: Same as v2.3<br />Create a remote task to target device
       consumes:
         - application/json
       parameters:
@@ -46,13 +45,12 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/DeviceTaskResp'
     put:
-      summary: Same as v2.3
       tags:
         - deviceTasks
       security:
         - mx-api-token: []
       description: >
-        Create a remote task (with files) to target device
+        Same as v2.3<br />Create a remote task (with files) to target device
 
         Note: This is a pseudo method because OpenAPI 2.0's limitation, please
         use method **POST instead of PUT**.

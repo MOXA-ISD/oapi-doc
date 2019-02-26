@@ -23,13 +23,12 @@ tags:
 paths:
   /devices:
     get:
-      summary: Same as v2.3
       tags:
         - device
       security:
         - mx-api-token: []
       description: >-
-        The Devices endpoint returns information about the *ThingsPro* gateway
+        Same as v2.3<br />The Devices endpoint returns information about the *ThingsPro* gateway
         information.
       parameters:
         - name: offset
@@ -82,12 +81,11 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/DeviceList'
     post:
-      summary: Same as v2.3
       tags:
         - device
       security:
         - mx-api-token: []
-      description: Create (register) a new device to ThingsPro Cloud Server.
+      description: Same as v2.3<br />Create (register) a new device to ThingsPro Cloud Server.
       parameters:
         - name: body
           in: body
@@ -105,12 +103,11 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/DeviceCreated'
     delete:
-      summary: Same as v2.3
       tags:
         - device
       security:
         - mx-api-token: []
-      description: Delete (de-register) devices from ThingsPro Cloud Server.
+      description: Same as v2.3<br />Delete (de-register) devices from ThingsPro Cloud Server.
       parameters:
         - name: body
           in: body
@@ -129,12 +126,11 @@ paths:
         required: true
         type: string
     get:
-      summary: Same as v2.3
       security:
         - mx-api-token: []
       tags:
         - device
-      description: Return Device with given UUID
+      description: Same as v2.3<br />Return Device with given UUID
       responses:
         '200':
           description: An Object of the device
@@ -145,12 +141,11 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/Device'
     delete:
-      summary: Same as v2.3
       tags:
         - device
       security:
         - mx-api-token: []
-      description: Delete Device with given UUID
+      description: Same as v2.3<br />Delete Device with given UUID
       responses:
         '200':
           description: success

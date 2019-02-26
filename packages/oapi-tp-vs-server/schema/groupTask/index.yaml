@@ -23,8 +23,7 @@ tags:
 paths:
   /groupTasks:
     post:
-      summary: Same as v2.3
-      description: Create a new group task.
+      description: Same as v2.3<br />Create a new group task.
       tags:
       - groupTasks
       parameters:

@@ -92,7 +92,7 @@ paths:
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/DeviceCreate'
       responses:
         '200':
           description: An array of gateways
@@ -101,7 +101,7 @@ paths:
             items:
               $ref: '#/definitions/Device'
             example:
-              $ref: '#/externalDocs/x-mocks/DeviceCreated'
+              $ref: '#/externalDocs/x-mocks/DeviceCreateRes'
     delete:
       tags:
         - device
@@ -151,6 +151,18 @@ paths:
           description: success
 
 definitions:
+  DeviceCreate:
+    type: object
+    properties:
+      displayName:
+        type: string
+        description: Display name of device.
+      mac:
+        type: string
+        description: MAC address of device.
+      serialNumber:
+        type: string
+        description: Serial number of device.
   Device:
     type: object
     properties:
@@ -277,7 +289,7 @@ externalDocs:
       mac: 223344FFFF11
       iccId: 898600MFSSYYGXXXXXXP
       serialNumber: MOXA00000001
-    DeviceCreated:
+    DeviceCreateRes:
       uuid: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
       description: Temperature monitoring
       displayName: 'Gym tempture sensor #1'

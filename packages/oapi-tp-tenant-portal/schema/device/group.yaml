@@ -77,15 +77,15 @@ paths:
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/GroupReq'
+            $ref: '#/definitions/GroupCreate'
       responses:
         201:
           description: Create group successfully
           schema:
             type: object
             items:
-              $ref: '#/definitions/Group'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Group' } }
+              $ref: '#/definitions/GroupResponse'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/GroupResponse' } }
       tags:
         - group
  
@@ -255,6 +255,9 @@ definitions:
       description:
         type: string
         description: Description of group.
+      deviceIdList:
+        type: string
+        description: id of devices belong to this group.
       count:
         type: integer
         description: Devices count.
@@ -263,8 +266,14 @@ definitions:
         items:
           $ref: '#/definitions/Device'
         description: Devices belong to this group
+      createdAt:
+        type: string
+        description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updatedAt:
+        type: string
+        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
-  GroupReq:
+  GroupCreate:
     type: object
     required:
       - groupName
@@ -296,7 +305,64 @@ definitions:
         type: array
         items:
           type: string
-        description: Device UUID list. 
+        description: Device UUID list.
+
+  GroupResponse:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      groupId:
+        type: integer
+        description: Unique identifier representing a specific tenant group.
+      groupName:
+        type: string
+        description: Name of group.
+      description:
+        type: string
+        description: Description of group.
+      deviceIdList:
+        type: string
+        description: id of devices belong to this group.
+      creator:
+        type: object
+        properties:
+          user:
+            type: object
+            items:
+              '$ref': '#/definitions/UserSimple'
+            description: Creator information of this group
+      createdAt:
+        type: string
+        description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updater:
+        type: object
+        properties:
+          user:
+            type: object
+            items:
+              '$ref': '#/definitions/UserSimple'
+            description: Creator information of this group
+      updatedAt:
+        type: string
+        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+
+  UserSimple:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      email:
+        type: string
+        description: Email of user.
+      avatar:
+        type: string
+        description: Avatar of user.
 
   DesiredProperties:
     type: object
@@ -630,11 +696,36 @@ externalDocs:
             }
           ]
       }
-    GroupReq:
+    GroupCreate:
       {
         "groupName": "moxa3",
         "description": "moxa group3",
         "devicdIdList": ["a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b", "91cc56a9-1159-4913-b5f2-ac482cd68ee6"]
+      }
+    GroupResponse:
+      {
+        "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+        "groupId": 11,
+        "groupName": "201902270912",
+        "description": "test",
+        "deviceIdList": [
+            "ac2f885e-222f-4aa9-afba-0888c7151aba",
+            "c4d42f3c-2cf5-464f-b6bd-370465323d1f"
+        ],
+        "createdAt": "2019-02-27T01:58:42.967276Z",
+        "creator": {
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+            "displayName": "Cain Chen",
+            "email": "cainhc.chen@moxa.com",
+            "userId": "7dc93587-5444-48bf-a196-da811c39959d"
+        },
+        "updatedAt": "2019-02-27T01:58:42.967276Z",
+        "updater": {
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+            "displayName": "Cain Chen",
+            "email": "cainhc.chen@moxa.com",
+            "userId": "7dc93587-5444-48bf-a196-da811c39959d"
+        }
       }
     DesiredProperties:
       { 

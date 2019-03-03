@@ -631,6 +631,12 @@ definitions:
       data:
         type: object
         description: metadata of user.
+      oldPassword:
+        type: string
+        description: Old password of user login.
+      newPassword:
+        type: string
+        description: New password of user login.
 
   UserInvite:
     type: object
@@ -726,7 +732,9 @@ externalDocs:
         "employeeId": "20180003",
         "firstName": "Cain",
         "lastName": "Chen",
-        "phone": "02-89191230#7262"
+        "phone": "02-89191230#7262",
+        "oldPassword":"123456",
+        "newPassword":"moxamoxa"
       }
     UserInvite:
       [

@@ -225,7 +225,7 @@ definitions:
         description: Name of role.
       type:
         type: integer
-        description: Role type.
+        description: Role type. 0=admin, 1=general role
       description:
         type: string
         description: Description of role.
@@ -244,7 +244,7 @@ definitions:
         description: Name of role.
       type:
         type: integer
-        description: Role type.
+        description: Role type. 0=admin, 1=general role
       description:
         type: string
         description: Description of role.
@@ -346,10 +346,6 @@ definitions:
       name:
         type: string
         description: Name of permission.
-      type:
-        type: integer
-        description: Naming of permission group type
-        enum: [1, 2]
       description:
         type: string
         description: Description of permission.
@@ -379,14 +375,12 @@ externalDocs:
           {
             "id": 1,
             "name": "User/Role management",
-            "type": 1,
             "description": "User/Role management",
             "value": 0
           },
           {
             "id": 2,
             "name": "Device register/grouping",
-            "type": 1,
             "description": "Device register/grouping",
             "value": 1
           }
@@ -407,14 +401,12 @@ externalDocs:
               {
                 "id": 1,
                 "name": "User/Role management",
-                "type": 1,
                 "description": "User/Role management",
                 "value": 1
               },
               {
                 "id": 2,
                 "name": "Device register/grouping",
-                "type": 1,
                 "description": "Device register/grouping",
                 "value": 1
               }
@@ -431,14 +423,12 @@ externalDocs:
               {
                 "id": 1,
                 "name": "User/Role management",
-                "type": 1,
                 "description": "User/Role management",
                 "value": 0
               },
               {
                 "id": 2,
                 "name": "Device register/grouping",
-                "type": 1,
                 "description": "Device register/grouping",
                 "value": 1
               }
@@ -447,23 +437,21 @@ externalDocs:
           {
             "id": 5,
             "name": "Full device manager",
-            "type": 2,
+            "type": 1,
             "description": "Full device manager",
             "enabled": true,
             "count": 3,
             "permission": [
                 {
-                    "description": "View device information",
                     "id": 3,
                     "name": "View device information",
-                    "type": 2,
+                    "description": "View device information",
                     "value": 1
                 },
                 {
-                    "description": "Full manage device",
                     "id": 4,
                     "name": "Full manage device",
-                    "type": 2,
+                    "description": "Full manage device",
                     "value": 1
                 }
             ]
@@ -475,16 +463,19 @@ externalDocs:
         "count": 3,
         "data": [
           {
+            "userId": "aedd319a-3d21-4ba5-aee8-0b8ec2806b09",
             "avatar": null,
             "displayName": "Owen Kao",
             "email": "owenyc.kao@moxa.com"
           },
           {
+            "userId": "6df5d905-e19c-4cc8-b963-88707c6fa7f3",
             "avatar": null,
             "displayName": "Edie Lin",
             "email": "ediejy.lin@moxa.com"
           },
           {
+            "7dc93587-5444-48bf-a196-da811c39959d",
             "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
             "displayName": "Cain Chen",
             "email": "cainhc.chen@moxa.com"

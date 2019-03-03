@@ -27,7 +27,7 @@ paths:
             properties:
               username:
                 type: string
-                example: 'moxa'
+                example: 'thingspro@moxa.com'
               password:
                 type: string
                 example: '12345678'
@@ -56,13 +56,170 @@ definitions:
       user:
         type: object
         items:
-          - $ref: '#/definitions/User' 
+          - $ref: '#/definitions/User'
+      tenant:
+        type: object
+        items:
+          - $ref: '#/definitions/Tenant'
       token:
         type: string
         description: Granted authentication token.
 
+  User:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      firstName:
+        type: string
+        description: First name of user.
+      lastName:
+        type: string
+        description: Last name of user.
+      avatar:
+        type: string
+        description: Avatar of user.
+      email:
+        type: string
+        description: Email of user.
+      company:
+        type: string
+        description: Company of user.
+      department:
+        type: string
+        description: Department of user.
+      employeeId:
+        type: string
+        description: Employee Id of user.
+      phone:
+        type: string
+        description: Phone of user.
+      status:
+        type: string
+        description: Enable Status of user.
+      data:
+        type: object
+        description: Metadata of user.
+      loginAt:
+        type: string
+        description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      role:
+        type: array
+        description: List of role which contains the user.
+        items:
+          '$ref': '#/definitions/Role'
+      permission:
+        type: array
+        items:
+          '$ref': '#/definitions/Permission'
+        description: permission list.
+
+  Tenant:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      domainName:
+        type: string
+        description: Domain name of tenant.
+      portalName:
+        type: string
+        description: Portal name of tenant.
+      company:
+        type: string
+        description: Company of tenant.
+      email:
+        type: string
+        description: Email of tenant.
+      username:
+        type: string
+        description: Username of tenant admin user.
+      firstName:
+        type: string
+        description: First name of tenant admin user.
+      lastName:
+        type: string
+        description: Last name of tenant admin user.
+      activate:
+        type: string
+        description: Activate status of tenant.
+      phone:
+        type: string
+        description: Phone of tenant.
+      culture:
+        type: string
+        description: Culture of tenant.
+      industry:
+        type: string
+        description: Industry of tenant.
+      customer:
+        type: boolean
+        description: Is customer or not.
+      provisionStatus:
+        type: string
+        description: Provision status of tenant.
+      deviceHlr:
+        type: string
+        description: Device home location url.
+      data:
+        type: object
+        description: metadata of tenant.
+      activatedAt:
+        type: string
+        description: Tenant activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      deactivatedAt:
+        type: string
+        description: Tenant deactivate time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      createdBy:
+        type: object
+        items:
+          - $ref: '#/definitions/User'
+      createdAt:
+        type: string
+        description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updatedAt:
+        type: string
+        description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+
+  Role:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Role id.
+      name:
+        type: string
+        description: Role name.
+      type:
+        type: integer
+        description: Role type. 0=admin, 1=general role
+        enum:
+        - 0
+        - 1
+
+  Permission:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Permission id.
+      name:
+        type: string
+        description: Permission name.
+      value:
+        type: integer
+        description: Permission value.
+
 externalDocs:
-  url: '#'
+  url: 'https://#'
   x-mocks:
     LoginRes:
       {
@@ -84,37 +241,48 @@ externalDocs:
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
               },
-            "tenant": {
-              "permission": [
-                { "id": 1, "name": "User/Role management", "value": 2 },
-                { "id": 2, "name": "Device register/grouping", "value": 2 }
-              ]
-            },
-            "groupList": [
-              { 
-                "groupId": 1, 
-                "groupName": "All devices", 
-                "permission": [
-                  { "id": 3, "name": "View device information", "value": 2 },
-                  { "id": 4, "name": "Full manage device", "value": 1 }
-                ]
-              },
-              { 
-                "groupId": 2, 
-                "groupName": "North section", 
-                "permission": [
-                  { "id": 3, "name": "View device information", "value": 2 },
-                  { "id": 4, "name": "Full manage device", "value": 1 }
-                ]
-              }
+            "permission": [
+              { "id": 1, "name": "User/Role management", "value": 2 },
+              { "id": 2, "name": "Device register/grouping", "value": 2 }
             ],
-            "roleList": [
-              {
-                "id": 2,
-                "name": "Device Register",
-                "type": "tenant"
-              }
+            "role": [
+              { "id": 2, "name": "Device Register", "type": 1 },
+              { "id": 3, "name": "System Manager", "type": 1 },
+              { "id": 6, "name": "B204 viwer", "type": 1 },
             ]
+          },
+        "tenant":
+          {
+            "activate": "approved",
+            "activatedAt": "",
+            "createdAt": "2019-01-22T07:49:07.104674Z",
+            "createdBy": {
+              "avatar": null,
+              "changePasswordAt": "",
+              "company": "moxa",
+              "createdAt": "2019-01-22T07:51:26.214357Z",
+              "data": {},
+              "department": "iss",
+              "displayName": "Rick Peng",
+              "email": "rick.peng@moxa.com",
+              "employeeId": "20040003",
+              "firstName": "Rick",
+              "lastName": "Peng",
+              "phone": "02-89191230",
+              "updatedAt": "2019-01-22T07:51:26.214357Z",
+              "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+            },
+            "culture": "zh-TW",
+            "customer": false,
+            "data": {},
+            "deactivatedAt": "",
+            "domainName": "tenant-dev",
+            "industry": 14,
+            "portalName": "ISS",
+            "provisionStatus": "Provision Completed. Email Sent Completed.",
+            "services": [],
+            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+            "updatedAt": "2019-01-22T07:49:07.104674Z"
           },
         "token": "USER_TOKEN"
       }

@@ -109,7 +109,10 @@ definitions:
         description: Metadata of user.
       loginAt:
         type: string
-        description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+        description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      passwordExpireAt:
+        type: string
+        description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       role:
         type: array
         description: List of role which contains the user.
@@ -237,6 +240,7 @@ externalDocs:
             "employeeId": "123",
             "phone": "02-89191230",
             "loginAt": "2018-08-12T20:17:46.384Z",
+            "passwordExpireAt": "2019-01-22T08:02:49:089Z",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"

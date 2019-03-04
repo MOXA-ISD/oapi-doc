@@ -118,11 +118,6 @@ definitions:
         description: List of role which contains the user.
         items:
           '$ref': '#/definitions/Role'
-      permission:
-        type: array
-        items:
-          '$ref': '#/definitions/Permission'
-        description: permission list.
 
   Tenant:
     type: object
@@ -201,12 +196,14 @@ definitions:
       name:
         type: string
         description: Role name.
-      type:
-        type: integer
-        description: Role type. 0=admin, 1=general role
-        enum:
-        - 0
-        - 1
+      admin:
+        type: boolean
+        description: Is admin role?
+      permission:
+        type: array
+        description: Permissions of the role.
+        items:
+          '$ref': '#/definitions/Permission'
 
   Permission:
     type: object
@@ -245,15 +242,38 @@ externalDocs:
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
               },
-            "permission": [
-              { "id": 1, "name": "User/Role management", "value": 2 },
-              { "id": 2, "name": "Device register/grouping", "value": 2 }
-            ],
-            "role": [
-              { "id": 2, "name": "Device Register", "type": 1 },
-              { "id": 3, "name": "System Manager", "type": 1 },
-              { "id": 6, "name": "B204 viwer", "type": 1 },
-            ]
+            "role": {
+              "admin": true,
+              "id": 1,
+              "name": "Administrator",
+              "permission": [
+                {
+                  "id": 1,
+                  "name": "User & Role management",
+                  "value": 1
+                },
+                {
+                  "id": 2,
+                  "name": "Device register",
+                  "value": 1
+                },
+                {
+                  "id": 3,
+                  "name": "Device grouping",
+                  "value": 1
+                },
+                {
+                  "id": 4,
+                  "name": "View device information",
+                  "value": 1
+                },
+                {
+                  "id": 5,
+                  "name": "Full manage device",
+                  "value": 1
+                }
+              ]
+            }
           },
         "tenant":
           {

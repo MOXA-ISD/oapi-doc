@@ -63,6 +63,9 @@ definitions:
       description:
         type: string
         description: Description of permission.
+      type:
+        type: integer
+        description: Type of permission. 1=Tenant Administration, 2=Device Operation
 
 externalDocs:
   url: 'http://#'
@@ -70,31 +73,42 @@ externalDocs:
     Permission:
       {
         "id": 1,
-        "name": "User/Role management",
-        "description": "User/Role management"
+        "name": "User & Role management",
+        "description": "User & Role management",
+        "type": 1
       }
     PermissionList:
       {
         "data": [
           {
             "id": 1,
-            "name": "User/Role management",
-            "description": "User/Role management"
+            "name": "User & Role management",
+            "description": "User & Role management",
+            "type": 1
           },
           {
             "id": 2,
-            "name": "Device register/grouping",
-            "description": "Device register/grouping"
+            "name": "Device register",
+            "description": "Device register",
+            "type": 1
           },
           {
             "id": 3,
-            "name": "View device information",
-            "description": "View device information"
+            "name": "Device grouping",
+            "description": "Device grouping",
+            "type": 1
           },
           {
             "id": 4,
+            "name": "View device information",
+            "description": "View device information",
+            "type": 2
+          },
+          {
+            "id": 5,
             "name": "Full manage device",
-            "description": "Full manage device"
+            "description": "Full manage device",
+            "type": 2
           }
         ]
       }

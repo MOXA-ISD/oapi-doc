@@ -21,11 +21,6 @@ paths:
           in: query
           description: Filter the order list by orderId
           required: false
-          type: number
-        - name: orderNo
-          in: query
-          description: Filter the order list by orderNo
-          required: false
           type: string
         - name: modelName
           in: query
@@ -187,18 +182,15 @@ definitions:
       tenantId:
         type: string
         description: Unique identifier representing a specific tenant.
-      tenantUserId:
+      userId:
         type: string
         description: Unique identifier representing a specific tenant user.
       orderId:
-        type: number
+        type: string
         description: POC order ID.
       orderName:
         type: string
         description: POC order name. (default = IIoT Application Suite)
-      orderNo:
-        type: string
-        description: POC order number.
       description:
         type: string
         description: Description of order.
@@ -221,11 +213,16 @@ definitions:
           type: object
         description: device profile.
       creator:
-        type: string
-        description: POC order creator.
+        type: object
+        items:
+          '$ref': '#/definitions/UserSimple'
+        description: Creator information of this poc order
       createdAt:
         type: string
         description: POC order created time.
+      updatedAt:
+        type: string
+        description: POC order updated time.
 
   CreateOrder:
     type: object
@@ -273,19 +270,40 @@ definitions:
         type: object
         description: payload content
 
+  UserSimple:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      email:
+        type: string
+        description: Email of user.
+      avatar:
+        type: string
+        description: Avatar of user.
+
 externalDocs:
   url: 'http://#'
   x-mocks:
     Order:
       {
-        "orderId": 17,
+        "orderId": "O20181107150754",
         "orderName": "IIoT Application Suite",
-        "orderNo": "O20181107150754",
         "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
-        "tenantUserId": "8a849228-b3fd-41f6-bfd6-84574580e40b",
+        "userId": "8a849228-b3fd-41f6-bfd6-84574580e40b",
         "appPackDownloadUrl": "http://thingspro9dev4system.blob.core.windows.net/pocorder/a163dd88-d0a6-45a6-b042-e89a0bf31fbd/17.tar",
-        "creator": "Zack",
+        "creator": {
+          "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+          "displayName": "Cain Chen",
+          "email": "cainhc.chen@moxa.com",
+          "userId": "7dc93587-5444-48bf-a196-da811c39959d"
+        },
         "createdAt": "2018-11-07T07:07:54.087862Z",
+        "updatedAt": "2018-11-07T07:07:54.087862Z",
         "description": "test poc order",
         "deviceProfile": {
           "architecture": "armhf",
@@ -373,7 +391,13 @@ externalDocs:
             {
               "appPackDownloadUrl": null,
               "createdAt": "2018-08-20T05:06:58.047171Z",
-              "creator": "Cain Chen",
+              "updatedAt": "2018-08-20T05:06:58.047171Z",
+              "creator": {
+                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+                "displayName": "Cain Chen",
+                "email": "cainhc.chen@moxa.com",
+                "userId": "7dc93587-5444-48bf-a196-da811c39959d"
+              },
               "description": "test poc order",
               "deviceProfile": {
                 "architecture": "armhf",
@@ -450,16 +474,21 @@ externalDocs:
                   "version": "0.3.0-6"
                 }
               ],
-              "orderId": 120,
+              "orderId": "O20181113095423",
               "orderName": "IIoT Application Suite",
-              "orderNo": "O20181113095423",
               "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
-              "tenantUserId": "8a849228-b3fd-41f6-bfd6-84574580e40b"
+              "userId": "8a849228-b3fd-41f6-bfd6-84574580e40b"
             },
             {
               "appPackDownloadUrl": null,
               "createdAt": "2018-08-20T05:06:58.047171Z",
-              "creator": "Cain Chen",
+              "updatedAt": "2018-08-20T05:06:58.047171Z",
+              "creator": {
+                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+                "displayName": "Cain Chen",
+                "email": "cainhc.chen@moxa.com",
+                "userId": "7dc93587-5444-48bf-a196-da811c39959d"
+              },
               "description": "test poc order",
               "deviceProfile": {
                 "architecture": "armhf",
@@ -536,11 +565,10 @@ externalDocs:
                   "version": "0.3.0-6"
                 }
               ],
-              "orderId": 119,
+              "orderId": "O20181113093054",
               "orderName": "IIoT Application Suite",
-              "orderNo": "O20181113093054",
               "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
-              "tenantUserId": "8a849228-b3fd-41f6-bfd6-84574580e40b"
+              "userId": "8a849228-b3fd-41f6-bfd6-84574580e40b"
             }
           ]
       }

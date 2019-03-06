@@ -301,7 +301,7 @@ externalDocs:
             "data": {},
             "deactivatedAt": "",
             "domainName": "tenant-dev",
-            "industry": 14,
+            "industry": "Others",
             "portalName": "ISS",
             "provisionStatus": "Provision Completed. Email Sent Completed.",
             "services": [],

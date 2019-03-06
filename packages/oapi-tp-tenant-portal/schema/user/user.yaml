@@ -385,7 +385,7 @@ definitions:
         description: Avatar of user.
       email:
         type: string
-        description: Email of user.  
+        description: Email of user.
       company:
         type: string
         description: Company of user.
@@ -406,26 +406,20 @@ definitions:
         description: Metadata of user.
       loginAt:
         type: string
-        description: User last login time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      tenant:
-        type: object
-        description: Tenant permission.
-        properties:
-          permission:
-            type: array
-            items:
-              '$ref': '#/definitions/Permission'
-            description: Group permission list.
-      groupList:
-        type: array
-        description: Group permission.
-        items:
-          '$ref': '#/definitions/Group'   
-      roleList:
+        description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      passwordExpireAt:
+        type: string
+        description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      role:
         type: array
         description: List of role which contains the user.
         items:
           '$ref': '#/definitions/Role'
+      permission:
+        type: array
+        items:
+          '$ref': '#/definitions/Permission'
+        description: permission list.
 
   Group:
     type: object
@@ -631,6 +625,12 @@ definitions:
       data:
         type: object
         description: metadata of user.
+      oldPassword:
+        type: string
+        description: Old password of user login.
+      newPassword:
+        type: string
+        description: New password of user login.
 
   UserInvite:
     type: object
@@ -651,44 +651,30 @@ externalDocs:
     User:
       {
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "userId": "f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef",
-        "displayName": "Ryan Wang",
-        "firstName": "Ryan",
-        "lastName": "Wang",
-        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/f503cd6e-bb0a-4f6a-b0b7-42d7f89e07ef.jpg",
-        "email": "ryan@moxa.com",
+        "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
+        "displayName": "Ellen Woods",
+        "firstName": "Ellen",
+        "lastName": "Woods",
+        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
+        "email": "ellen@moxa.com",
         "company": "MOXA Inc.",
         "department": "Department",
         "employeeId": "123",
         "phone": "02-89191230",
-        "status": "Enabled",
         "loginAt": "2018-08-12T20:17:46.384Z",
+        "passwordExpireAt": "2019-01-22T08:02:49:089Z",
         "data": 
           {
             "CUSTOM_FIELD": "CUSTOM_VALUE"
           },
-        "tenant": {
-          "permission": [
-            { "id": 1, "name": "User/Role management", "value": 2 },
-            { "id": 2, "name": "Device register/grouping", "value": 2 }
-          ]
-        },
-        "groupList": [
-          { 
-            "groupId": 1, 
-            "groupName": "All devices", 
-            "permission": [
-              { "id": 3, "name": "View device information", "value": 2 },
-              { "id": 4, "name": "Full manage device", "value": 1 }
-            ]
-          }
+        "permission": [
+          { "id": 1, "name": "User/Role management", "value": 2 },
+          { "id": 2, "name": "Device register/grouping", "value": 2 }
         ],
-        "roleList": [
-          {
-            "id": 2,
-            "name": "Device Register",
-            "type": "tenant"
-          }
+        "role": [
+          { "id": 2, "name": "Device Register", "type": 1 },
+          { "id": 3, "name": "System Manager", "type": 1 },
+          { "id": 6, "name": "B204 viwer", "type": 1 },
         ]
       }
     UserExist:
@@ -726,7 +712,9 @@ externalDocs:
         "employeeId": "20180003",
         "firstName": "Cain",
         "lastName": "Chen",
-        "phone": "02-89191230#7262"
+        "phone": "02-89191230#7262",
+        "oldPassword":"123456",
+        "newPassword":"moxamoxa"
       }
     UserInvite:
       [
@@ -767,105 +755,36 @@ externalDocs:
       ]
     UserList:
       {
-        "count": 2,
+        "count": 1,
         "data": [
-            {
-                "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-                "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
-                "displayName": "Rick Peng",
-                "firstName": "Rick",
-                "lastName": "Peng",
-                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/a1be69eb-258e-4c66-b07b-583474e57305.jpg",
-                "email": "rick.peng@moxa.com",
-                "company": "moxa",
-                "department": "iss",
-                "employeeId": "20040003",
-                "phone": "02-89191230",
-                "status": "Enabled",
-                "data": {},
-                "loginAt": "2019-01-29T05:29:00:297Z",
-                "tenant": {
-                    "permission": []
-                },
-                "grouplist": [],
-                "role": [
-                    {
-                        "id": 1,
-                        "name": "Administrator",
-                        "type": 0
-                    }
-                ]
-            },
-            {
-                "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-                "userId": "aedd319a-3d21-4ba5-aee8-0b8ec2806b09",
-                "displayName": "Owen Kao",
-                "firstName": "Owen",
-                "lastName": "Kao",
-                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/aedd319a-3d21-4ba5-aee8-0b8ec2806b09.jpg",
-                "email": "owenyc.kao@moxa.com",
-                "company": "moxa",
-                "department": "iss",
-                "employeeId": "20170163",
-                "phone": "02-89191230",
-                "status": "Enabled",
-                "data": {},
-                "loginAt": "2019-01-29T05:29:00:297Z",
-                "role": [
-                    {
-                        "id": 2,
-                        "name": "Device Register",
-                        "type": 1
-                    },
-                    {
-                        "id": 3,
-                        "name": "System Manager",
-                        "type": 1
-                    },
-                    {
-                        "id": 4,
-                        "name": "User Manager",
-                        "type": 1
-                    },
-                    {
-                        "id": 5,
-                        "name": "Full device manager",
-                        "type": 2
-                    }
-                ],
-                "tenant": {
-                    "permission": [
-                        {
-                            "id": 1,
-                            "name": "User/Role management",
-                            "value": 1
-                        },
-                        {
-                            "id": 2,
-                            "name": "Device register/grouping",
-                            "value": 1
-                        }
-                    ]
-                },
-                "grouplist": [
-                    {
-                        "id": 5,
-                        "name": "Full device manager",
-                        "permission": [
-                            {
-                                "id": 3,
-                                "name": "View device information",
-                                "value": 1
-                            },
-                            {
-                                "id": 4,
-                                "name": "Full manage device",
-                                "value": 1
-                            }
-                        ]
-                    }
-                ]
-            }
+          {
+            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
+            "displayName": "Ellen Woods",
+            "firstName": "Ellen",
+            "lastName": "Woods",
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
+            "email": "ellen@moxa.com",
+            "company": "MOXA Inc.",
+            "department": "Department",
+            "employeeId": "123",
+            "phone": "02-89191230",
+            "loginAt": "2018-08-12T20:17:46.384Z",
+            "passwordExpireAt": "2019-01-22T08:02:49:089Z",
+            "data":
+              {
+                "CUSTOM_FIELD": "CUSTOM_VALUE"
+              },
+            "permission": [
+              { "id": 1, "name": "User/Role management", "value": 2 },
+              { "id": 2, "name": "Device register/grouping", "value": 2 }
+            ],
+            "role": [
+              { "id": 2, "name": "Device Register", "type": 1 },
+              { "id": 3, "name": "System Manager", "type": 1 },
+              { "id": 6, "name": "B204 viwer", "type": 1 },
+            ]
+          }
         ],
         "limit": 100,
         "offset": 0

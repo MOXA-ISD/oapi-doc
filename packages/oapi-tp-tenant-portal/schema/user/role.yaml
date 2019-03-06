@@ -223,15 +223,12 @@ definitions:
       name:
         type: string
         description: Name of role.
-      type:
-        type: integer
-        description: Role type.
       description:
         type: string
         description: Description of role.
-      enabled:
+      admin:
         type: boolean
-        description: Status of role.
+        description: Admin role.
 
   RolePermission:
     type: object
@@ -242,15 +239,12 @@ definitions:
       name:
         type: string
         description: Name of role.
-      type:
-        type: integer
-        description: Role type.
       description:
         type: string
         description: Description of role.
-      enabled:
+      admin:
         type: boolean
-        description: Status of role.
+        description: Admin role.
       count:
         type: integer
         description: User count of role
@@ -309,9 +303,9 @@ definitions:
         type: string
         description: Description of role.
         maxLength: 200
-      type:
-        type: integer
-        description: Role type.
+      admin:
+        type: boolean
+        description: Admin role.
       permission:
         type: array
         items:
@@ -346,13 +340,12 @@ definitions:
       name:
         type: string
         description: Name of permission.
-      type:
-        type: integer
-        description: Naming of permission group type
-        enum: [1, 2]
       description:
         type: string
         description: Description of permission.
+      type:
+        type: integer
+        description: Type of permission. 1=Tenant Administration, 2=Device Operation
       value:
         type: integer
         description: Value of permission
@@ -366,7 +359,7 @@ externalDocs:
         "name": "test role 2",
         "type": 1,
         "description": "test role 2",
-        "enabled": true
+        "admin": false
       }
     RolePermission:
       {
@@ -374,24 +367,23 @@ externalDocs:
         "name": "Device Register",
         "count": 3,
         "description": "Device Register",
-        "enabled": true,
+        "admin": false,
         "permission": [
           {
             "id": 1,
             "name": "User/Role management",
-            "type": 1,
             "description": "User/Role management",
+            "type": 1,
             "value": 0
           },
           {
             "id": 2,
-            "name": "Device register/grouping",
+            "name": "Device register",
+            "description": "Device register",
             "type": 1,
-            "description": "Device register/grouping",
             "value": 1
           }
-        ],
-        "type": 1
+        ]
       }
     RoleList: 
       {
@@ -399,23 +391,22 @@ externalDocs:
           {
             "id": 1,
             "name": "Administrator",
-            "type": 0,
             "description": "Administrator",
-            "enabled": true,
+            "admin": true,
             "count": 1,
             "permission": [
               {
                 "id": 1,
                 "name": "User/Role management",
-                "type": 1,
                 "description": "User/Role management",
+                "type": 1,
                 "value": 1
               },
               {
                 "id": 2,
-                "name": "Device register/grouping",
+                "name": "Device register",
+                "description": "Device register",
                 "type": 1,
-                "description": "Device register/grouping",
                 "value": 1
               }
             ]
@@ -423,23 +414,22 @@ externalDocs:
           {
             "id": 2,
             "name": "Device Register",
-            "type": 1,
             "description": "Device Register",
-            "enabled": true,
+            "admin": false,
             "count": 3,
             "permission": [
               {
                 "id": 1,
                 "name": "User/Role management",
-                "type": 1,
                 "description": "User/Role management",
+                "type": 1,
                 "value": 0
               },
               {
                 "id": 2,
-                "name": "Device register/grouping",
+                "name": "Device register",
+                "description": "Device register",
                 "type": 1,
-                "description": "Device register/grouping",
                 "value": 1
               }
             ]
@@ -447,25 +437,24 @@ externalDocs:
           {
             "id": 5,
             "name": "Full device manager",
-            "type": 2,
             "description": "Full device manager",
-            "enabled": true,
+            "admin": false,
             "count": 3,
             "permission": [
-                {
-                    "description": "View device information",
-                    "id": 3,
-                    "name": "View device information",
-                    "type": 2,
-                    "value": 1
-                },
-                {
-                    "description": "Full manage device",
-                    "id": 4,
-                    "name": "Full manage device",
-                    "type": 2,
-                    "value": 1
-                }
+              {
+                "id": 3,
+                "name": "View device information",
+                "description": "View device information",
+                "type": 2,
+                "value": 1
+              },
+              {
+                "id": 4,
+                "name": "Full manage device",
+                "description": "Full manage device",
+                "type": 2,
+                "value": 1
+              }
             ]
           }
         ]
@@ -475,16 +464,19 @@ externalDocs:
         "count": 3,
         "data": [
           {
+            "userId": "aedd319a-3d21-4ba5-aee8-0b8ec2806b09",
             "avatar": null,
             "displayName": "Owen Kao",
             "email": "owenyc.kao@moxa.com"
           },
           {
+            "userId": "6df5d905-e19c-4cc8-b963-88707c6fa7f3",
             "avatar": null,
             "displayName": "Edie Lin",
             "email": "ediejy.lin@moxa.com"
           },
           {
+            "7dc93587-5444-48bf-a196-da811c39959d",
             "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
             "displayName": "Cain Chen",
             "email": "cainhc.chen@moxa.com"

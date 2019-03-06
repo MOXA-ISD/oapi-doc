@@ -49,26 +49,6 @@ paths:
               $ref: '#/definitions/Permission'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Permission' } }
 
-  '/permissions/type/{type}':
-    parameters:
-      - name: type
-        in: path
-        description: Permission type - 1=tenant, 2=group
-        required: true
-        type: integer
-    get:
-      description: Get permission field data by type
-      tags:
-        - permission
-      responses:
-        '200':
-          description: success
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Permission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
-
 definitions:
   Permission:
     title: Permission
@@ -80,13 +60,12 @@ definitions:
       name:
         type: string
         description: Name of permission.
-      type:
-        type: integer
-        description: Naming of permission group type
-        enum: [1, 2]
       description:
         type: string
         description: Description of permission.
+      type:
+        type: integer
+        description: Type of permission. 1=Tenant Administration, 2=Device Operation
 
 externalDocs:
   url: 'http://#'
@@ -94,36 +73,42 @@ externalDocs:
     Permission:
       {
         "id": 1,
-        "name": "User/Role management",
-        "type": 1,
-        "description": "User/Role management"
+        "name": "User & Role management",
+        "description": "User & Role management",
+        "type": 1
       }
     PermissionList:
       {
         "data": [
           {
             "id": 1,
-            "name": "User/Role management",
-            "type": 1,
-            "description": "User/Role management"
+            "name": "User & Role management",
+            "description": "User & Role management",
+            "type": 1
           },
           {
             "id": 2,
-            "name": "Device register/grouping",
-            "type": 1,
-            "description": "Device register/grouping"
+            "name": "Device register",
+            "description": "Device register",
+            "type": 1
           },
           {
             "id": 3,
-            "name": "View device information",
-            "type": 2,
-            "description": "View device information"
+            "name": "Device grouping",
+            "description": "Device grouping",
+            "type": 1
           },
           {
             "id": 4,
+            "name": "View device information",
+            "description": "View device information",
+            "type": 2
+          },
+          {
+            "id": 5,
             "name": "Full manage device",
-            "type": 2,
-            "description": "Full manage device"
+            "description": "Full manage device",
+            "type": 2
           }
         ]
       }

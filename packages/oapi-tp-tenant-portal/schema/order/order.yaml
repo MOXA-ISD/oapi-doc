@@ -230,6 +230,10 @@ definitions:
       deviceProfileId:
         type: number
         description: Device Profile ID.
+      orderName:
+        type: string
+        description: POC order name. (default = IIoT Application Suite)
+        maxLength: 30
       description:
         type: string
         description: POC order description.
@@ -250,7 +254,7 @@ definitions:
     properties:
       orderName:
         type: string
-        description: POC order name.
+        description: POC order name. (default = IIoT Application Suite)
         maxLength: 30
       description:
         type: string

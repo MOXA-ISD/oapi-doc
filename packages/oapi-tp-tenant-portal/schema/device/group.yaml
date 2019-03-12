@@ -342,153 +342,6 @@ definitions:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
-  UserSimple:
-    type: object
-    properties:
-      userId:
-        type: string
-        description: Unique identifier representing a specific user.
-      displayName:
-        type: string
-        description: Username of user.
-      email:
-        type: string
-        description: Email of user.
-      avatar:
-        type: string
-        description: Avatar of user.
-
-  DesiredProperties:
-    type: object
-    properties:
-      desiredLastUpdatedAt:
-        type: string
-        description: Device desired properties updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.   
-      desiredProperties:
-        type: array
-        items:
-          type: object
-        description: Device desired properties.
-        
-  DirectMethodList:
-    type: array
-    items:
-      type: object
-    description: Device direct method list.
-
-  Device:
-    type: object
-    properties:
-      tenantId:
-        type: string
-        description: Unique identifier representing a specific tenant.
-      deviceId:
-        type: string
-        description: Unique identifier representing a specific device.
-      modelName:
-        type: string
-        description: Model name of device.
-      deviceType:
-        type: string
-        description: Type of device.
-      mac:
-        type: string
-        description: Mac address of device.
-      serialNumber:
-        type: string
-        description: Serial number of device.
-      imageUrl:
-        type: string
-        description: Image URL of device.
-      logoUrl:
-        type: string
-        description: Logo URL of device.
-      allowConnection:
-        type: boolean
-        description: The device can connect to service or not.
-      note:
-        type: string
-        description: Note of device.
-      groupList:
-        type: array
-        description: Group list.
-        items:
-          '$ref': '#/definitions/Group'
-      approvedStatus:
-        type: string
-        enum:
-        - Waiting
-        - Approved
-        - Declined
-        description: Approved status of device.
-      connectionStatus:
-        type: string
-        enum:
-        - online
-        - offline
-        - unknown
-        description: Connection status of device.
-      registeredStatus:
-        type: string
-        enum:
-        - N/A
-        - Registered
-        description: Registered status of device.
-      creator:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Creator information of this group
-      createdAt:
-        type: string
-        description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updater:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Updater information of this group
-      updatedAt:
-        type: string
-        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      approvedAt:
-        type: string
-        description: Device approved time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      declinedAt:
-        type: string
-        description: Device declined time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      declinedReason:
-        type: string
-        description: Device declined resaon.
-      registeredAt:
-        type: string
-        description: Device registered time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
-  DevicePoc:
-    type: object
-    properties:
-      deviceId:
-        type: string
-        description: Unique identifier representing a specific device.
-      deviceName:
-        type: string
-        description: Device name.
-      modelName:
-        type: string
-        description: Model name of device.
-      mac:
-        type: string
-        description: MAC address of device.
-      connectionStatus:
-        type: string
-        enum:
-        - online
-        - offline
-        - unknown
-        description: Connection status of device.
-      lastupdatedat:
-        type: string
-        description: Device last updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
-
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -508,60 +361,6 @@ externalDocs:
             "deviceType": "IIoT Gateway",
             "mac": "00-0C-29-70-D2-EC",
             "serialNumber": "",
-            "allowConnection": true,
-            "imageURL": "http://123.456.net/xxx/xxx.jpg",
-            "logoURL": "http://123.456.net/xxx/xxx.jpg",
-            "reportedProperties": {
-              "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-              "reportedProperties": [
-                {
-                  "id": 1,
-                  "type": "general",
-                  "name": "deviceName",
-                  "description": "Device Name",
-                  "value": "Demo Device 01"
-                },
-                {
-                  "id": 2,
-                  "type": "general",
-                  "name": "firmwareVersion",
-                  "description": "Firmware Version",
-                  "value": "1.8.1"
-                }
-              ]
-            },
-            "desiredProperties": {
-              "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-              "desiredProperties": [
-                {
-                  "id": 1,
-                  "type": "general",
-                  "name": "deviceName",
-                  "description": "Device Name",
-                  "value": "Demo Device 01"
-                },
-                {
-                  "id": 4,
-                  "type": "network",
-                  "name": "eth0",
-                  "description": "Ethernet 0",
-                  "value": [
-                    {
-                      "id": 1,
-                      "name": "ipAddress",
-                      "description": "IP Address",
-                      "value": "192.168.3.21"
-                    },
-                    {
-                      "id": 2,
-                      "name": "mask",
-                      "description": "Subnet Mask",
-                      "value": "255.255.255.0"
-                    }
-                  ]
-                }
-              ]
-            },
             "groupList": [
               {
                 "id": 2,
@@ -574,10 +373,7 @@ externalDocs:
                 "description": "MOXA-ISS"
               }
             ],
-            "note": "",
-            "approvedStatus": "Waiting",
             "connectionStatus": "online",
-            "registeredStatus": "N/A",
             "creator": {
               "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
               "displayName": "Cain Chen",
@@ -591,11 +387,7 @@ externalDocs:
               "email": "cainhc.chen@moxa.com",
               "userId": "7dc93587-5444-48bf-a196-da811c39959d"
             },
-            "updatedAt": "2018-08-12T20:17:46.384Z",
-            "approvedAt": "2019-02-26T14:10:33:000Z",
-            "declinedReason": "",
-            "declinedAt": null,
-            "registeredAt": null
+            "updatedAt": "2018-08-12T20:17:46.384Z"
           }
         ]
       }
@@ -621,60 +413,6 @@ externalDocs:
                   "deviceType": "IIoT Gateway",
                   "mac": "00-0C-29-70-D2-EC",
                   "serialNumber": "",
-                  "allowConnection": true,
-                  "imageURL": "http://123.456.net/xxx/xxx.jpg",
-                  "logoURL": "http://123.456.net/xxx/xxx.jpg",
-                  "reportedProperties": {
-                    "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-                    "reportedProperties": [
-                      {
-                        "id": 1,
-                        "type": "general",
-                        "name": "deviceName",
-                        "description": "Device Name",
-                        "value": "Demo Device 01"
-                      },
-                      {
-                        "id": 2,
-                        "type": "general",
-                        "name": "firmwareVersion",
-                        "description": "Firmware Version",
-                        "value": "1.8.1"
-                      }
-                    ]
-                  },
-                  "desiredProperties": {
-                    "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-                    "desiredProperties": [
-                      {
-                        "id": 1,
-                        "type": "general",
-                        "name": "deviceName",
-                        "description": "Device Name",
-                        "value": "Demo Device 01"
-                      },
-                      {
-                        "id": 4,
-                        "type": "network",
-                        "name": "eth0",
-                        "description": "Ethernet 0",
-                        "value": [
-                          {
-                            "id": 1,
-                            "name": "ipAddress",
-                            "description": "IP Address",
-                            "value": "192.168.3.21"
-                          },
-                          {
-                            "id": 2,
-                            "name": "mask",
-                            "description": "Subnet Mask",
-                            "value": "255.255.255.0"
-                          }
-                        ]
-                      }
-                    ]
-                  },
                   "groupList": [
                     {
                       "id": 2,
@@ -687,18 +425,11 @@ externalDocs:
                       "description": "MOXA-ISS"
                     }
                   ],
-                  "note": "",
-                  "approvedStatus": "Waiting",
                   "connectionStatus": "online",
-                  "registeredStatus": "N/A",
                   "creator": "Cain Chen",
                   "createdAt": "2018-08-12T20:17:46.384Z",
-                  "updater": null,
-                  "updatedAt": "2018-08-12T20:17:46.384Z",
-                  "approvedAt": "2019-02-26T14:10:33:000Z",
-                  "declinedReason": "",
-                  "declinedAt": null,
-                  "registeredAt": null
+                  "updater": "",
+                  "updatedAt": "2018-08-12T20:17:46.384Z"
                 }
               ]
             }
@@ -734,6 +465,38 @@ externalDocs:
             "email": "cainhc.chen@moxa.com",
             "userId": "7dc93587-5444-48bf-a196-da811c39959d"
         }
+      }
+    DevicePocList:
+      {
+        "count": 3,
+        "offset": 0,
+        "limit": 100,
+        "data": [
+          {
+            "deviceId": "a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b",
+            "deviceName": "UC-8112-LX",
+            "mac": "81-CF-1C-14-3E-4C",
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"
+          },
+          {
+            "deviceId": "91cc56a9-1159-4913-b5f2-ac482cd68ee6",
+            "deviceName": "UC-8112-LX",
+            "mac": "67-88-DE-3C-F1-54",
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
+          },
+          {
+            "deviceId": "47c03400-3e45-466d-abd4-4e01199cd67a",
+            "deviceName": "UC-8112-LX",
+            "mac": "DF-FE-F1-9E-FF-76",
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
+          }
+        ]
       }
     DesiredProperties:
       { 
@@ -807,7 +570,8 @@ externalDocs:
         ]
       }
     DirectMethodList:
-        [
+      {    
+        "directMethodList": [
           {
             "methodName": "reboot",
             "displayName": "Reboot",
@@ -828,35 +592,5 @@ externalDocs:
             ]
           }
         ]      
-    DevicePocList:
-      {
-        "count": 3,
-        "offset": 0,
-        "limit": 100,
-        "data": [
-          {
-            "deviceId": "a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b",
-            "deviceName": "UC-8112-LX",
-            "mac": "81-CF-1C-14-3E-4C",
-            "modelName": "UC-8112-LX",
-            "connectionStatus": "online",
-            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"
-          },
-          {
-            "deviceId": "91cc56a9-1159-4913-b5f2-ac482cd68ee6",
-            "deviceName": "UC-8112-LX",
-            "mac": "67-88-DE-3C-F1-54",
-            "modelName": "UC-8112-LX",
-            "connectionStatus": "online",
-            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
-          },
-          {
-            "deviceId": "47c03400-3e45-466d-abd4-4e01199cd67a",
-            "deviceName": "UC-8112-LX",
-            "mac": "DF-FE-F1-9E-FF-76",
-            "modelName": "UC-8112-LX",
-            "connectionStatus": "online",
-            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
-          }
-        ]
       }
+    

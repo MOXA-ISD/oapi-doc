@@ -274,22 +274,6 @@ definitions:
         type: object
         description: payload content
 
-  UserSimple:
-    type: object
-    properties:
-      userId:
-        type: string
-        description: Unique identifier representing a specific user.
-      displayName:
-        type: string
-        description: Username of user.
-      email:
-        type: string
-        description: Email of user.
-      avatar:
-        type: string
-        description: Avatar of user.
-
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -354,7 +338,7 @@ externalDocs:
             "publishAt": "2018-11-08T01:24:15.640068Z",
             "publisher": "Moxa-ISD",
             "trialPeriodInDay": 30,
-            "unitPrice": null,
+            "unitPrice": "",
             "validAt": "2018-11-08T01:24:15.640068Z",
             "version": "0.7.0-32"
           },
@@ -379,7 +363,7 @@ externalDocs:
             "publishAt": "2018-10-16T06:19:39.604631Z",
             "publisher": "Moxa-ISD",
             "trialPeriodInDay": 30,
-            "unitPrice": null,
+            "unitPrice": "",
             "validAt": "2018-10-16T06:19:39.604631Z",
             "version": "0.3.0-6"
           }
@@ -393,7 +377,7 @@ externalDocs:
         "data":
           [
             {
-              "appPackDownloadUrl": null,
+              "appPackDownloadUrl": "",
               "createdAt": "2018-08-20T05:06:58.047171Z",
               "updatedAt": "2018-08-20T05:06:58.047171Z",
               "creator": {
@@ -448,7 +432,7 @@ externalDocs:
                   "publishAt": "2018-11-08T01:24:15.640068Z",
                   "publisher": "Moxa-ISD",
                   "trialPeriodInDay": 30,
-                  "unitPrice": null,
+                  "unitPrice": "",
                   "validAt": "2018-11-08T01:24:15.640068Z",
                   "version": "0.7.0-32"
                 },
@@ -473,7 +457,7 @@ externalDocs:
                   "publishAt": "2018-10-16T06:19:39.604631Z",
                   "publisher": "Moxa-ISD",
                   "trialPeriodInDay": 30,
-                  "unitPrice": null,
+                  "unitPrice": "",
                   "validAt": "2018-10-16T06:19:39.604631Z",
                   "version": "0.3.0-6"
                 }
@@ -484,7 +468,7 @@ externalDocs:
               "userId": "8a849228-b3fd-41f6-bfd6-84574580e40b"
             },
             {
-              "appPackDownloadUrl": null,
+              "appPackDownloadUrl": "",
               "createdAt": "2018-08-20T05:06:58.047171Z",
               "updatedAt": "2018-08-20T05:06:58.047171Z",
               "creator": {
@@ -539,7 +523,7 @@ externalDocs:
                   "publishAt": "2018-11-08T01:24:15.640068Z",
                   "publisher": "Moxa-ISD",
                   "trialPeriodInDay": 30,
-                  "unitPrice": null,
+                  "unitPrice": "",
                   "validAt": "2018-11-08T01:24:15.640068Z",
                   "version": "0.7.0-32"
                 },
@@ -564,7 +548,7 @@ externalDocs:
                   "publishAt": "2018-10-16T06:19:39.604631Z",
                   "publisher": "Moxa-ISD",
                   "trialPeriodInDay": 30,
-                  "unitPrice": null,
+                  "unitPrice": "",
                   "validAt": "2018-10-16T06:19:39.604631Z",
                   "version": "0.3.0-6"
                 }

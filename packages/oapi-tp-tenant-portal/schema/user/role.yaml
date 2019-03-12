@@ -465,13 +465,13 @@ externalDocs:
         "data": [
           {
             "userId": "aedd319a-3d21-4ba5-aee8-0b8ec2806b09",
-            "avatar": null,
+            "avatar": "",
             "displayName": "Owen Kao",
             "email": "owenyc.kao@moxa.com"
           },
           {
             "userId": "6df5d905-e19c-4cc8-b963-88707c6fa7f3",
-            "avatar": null,
+            "avatar": "",
             "displayName": "Edie Lin",
             "email": "ediejy.lin@moxa.com"
           },
@@ -493,7 +493,7 @@ externalDocs:
             "displayName": "Edie Lin",
             "firstName": "Edie",
             "lastName": "Lin",
-            "avatar": null,
+            "avatar": "",
             "email": "ediejy.lin@moxa.com",
             "company": "moxa",
             "department": "iss",

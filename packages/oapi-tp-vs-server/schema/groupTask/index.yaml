@@ -108,7 +108,7 @@ externalDocs:
             "groupTaskUUID": "b801b523-2900-493e-927e-70724c6ed162",
             "retryTimes": 0,
             "revoked": false,
-            "scheduledDateTime": null,
+            "scheduledDateTime": "",
             "state": "SUCCESS",
             "success": true,
             "updatedAt": "2017-02-23T08:05:22.003420",

@@ -37,16 +37,6 @@ paths:
           description: Filter the device list by mac
           required: false
           type: string
-        - name: approvedStatus
-          in: query
-          description: Filter the device list by approved status e.g. Waiting, Declined, Approved
-          required: false
-          type: string
-        - name: registeredStatus
-          in: query
-          description: Filter the device list by registered status e.g. N/A, Registred
-          required: false
-          type: string
         - name: order
           in: query
           description: Sort the device list by specific condition, default is order by 'lastUpdatedAt'
@@ -57,9 +47,7 @@ paths:
           - modelName
           - deviceType
           - mac
-          - approvedStatus
           - connectionStatus
-          - registeredStatus
         - name: sort
           in: query
           description: Sorting the filter device list, default is desc
@@ -358,34 +346,16 @@ definitions:
       allowConnection:
         type: boolean
         description: The device can connect to service or not.
-      note:
-        type: string
-        description: Note of device.
       groupList:
         type: array
-        description: Group list.
-        items:
-          '$ref': '#/definitions/Group'
-      approvedStatus:
-        type: string
-        enum:
-        - Waiting
-        - Approved
-        - Declined
-        description: Approved status of device.
+        description: Array of group list object.
       connectionStatus:
         type: string
         enum:
         - online
         - offline
-        - unknown
+        - registered
         description: Connection status of device.
-      registeredStatus:
-        type: string
-        enum:
-        - N/A
-        - Registered
-        description: Registered status of device.
       creator:
         type: object
         items:
@@ -405,28 +375,6 @@ definitions:
       approvedAt:
         type: string
         description: Device approved time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      declinedAt:
-        type: string
-        description: Device declined time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      declinedReason:
-        type: string
-        description: Device declined resaon.
-      registeredAt:
-        type: string
-        description: Device registered time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
-  Group:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: Unique identifier representing a specific group.
-      name:
-        type: string
-        description: Name of group.
-      description:
-        type: string
-        description: Description of group.
 
   DevicePoc:
     type: object
@@ -688,18 +636,12 @@ externalDocs:
             "description": "MOXA-ISS"
           }
         ],
-        "note": "",
-        "approvedStatus": "Waiting",
         "connectionStatus": "online",
-        "registeredStatus": "N/A",
         "creator": "Cain Chen",
         "createdAt": "2018-08-12T20:17:46.384Z",
-        "updater": null,
+        "updater": "",
         "updatedAt": "2018-08-12T20:17:46.384Z",
-        "approvedAt": "2019-02-26T14:10:33:000Z",
-        "declinedReason": "",
-        "declinedAt": null,
-        "registeredAt": null
+        "approvedAt": "2019-02-26T14:10:33:000Z"
       }
     DeviceList:
       {
@@ -782,18 +724,12 @@ externalDocs:
                   "description": "MOXA-ISS"
                 }
               ],
-              "note": "",
-              "approvedStatus": "Waiting",
               "connectionStatus": "online",
-              "registeredStatus": "N/A",
               "creator": "Cain Chen",
               "createdAt": "2018-08-12T20:17:46.384Z",
-              "updater": null,
+              "updater": "",
               "updatedAt": "2018-08-12T20:17:46.384Z",
-              "approvedAt": "2019-02-26T14:10:33:000Z",
-              "declinedReason": "",
-              "declinedAt": null,
-              "registeredAt": null
+              "approvedAt": "2019-02-26T14:10:33:000Z"
             },
             {
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
@@ -869,18 +805,12 @@ externalDocs:
                   "description": "MOXA-ISS"
                 }
               ],
-              "note": "",
-              "approvedStatus": "Waiting",
               "connectionStatus": "online",
-              "registeredStatus": "N/A",
               "creator": "Cain Chen",
               "createdAt": "2018-08-12T20:17:46.384Z",
-              "updater": null,
+              "updater": "",
               "updatedAt": "2018-08-12T20:17:46.384Z",
-              "approvedAt": "2019-02-26T14:10:33:000Z",
-              "declinedReason": "",
-              "declinedAt": null,
-              "registeredAt": null
+              "approvedAt": "2019-02-26T14:10:33:000Z"
             }
           ]
       }

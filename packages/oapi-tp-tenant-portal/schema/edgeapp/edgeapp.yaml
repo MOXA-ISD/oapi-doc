@@ -223,8 +223,8 @@ externalDocs:
         "licenseStatement": "Trial - 30 days",
         "publishAt": "2018-09-27T06:54:14.203998+00:00Z",
         "publisher": "Moxa-ISD",
-        "trialPeriodInDay": null,
-        "unitPrice": null,
+        "trialPeriodInDay": "",
+        "unitPrice": "",
         "validAt": "2018-09-27T06:54:14.203998+00:00Z",
         "version": "0.3.0-18"
       }
@@ -254,8 +254,8 @@ externalDocs:
             "licenseStatement": "Trial - 30 days",
             "publishAt": "2018-09-27T06:53:51.719756+00:00Z",
             "publisher": "Moxa-ISD",
-            "trialPeriodInDay": null,
-            "unitPrice": null,
+            "trialPeriodInDay": "",
+            "unitPrice": "",
             "validAt": "2018-09-27T06:53:51.719756+00:00Z",
             "version": "0.5.0-24"
           },
@@ -275,12 +275,12 @@ externalDocs:
             "displayName": "Linux Desktop",
             "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-linuxdesktop/12/linuxdesktop_0.3.0-12_amd64.mpkg",
             "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/linuxdesktop/0.3.0-12/logo.png",
-            "isTrialLicense": null,
+            "isTrialLicense": "",
             "licenseStatement": "Trial - 30 days",
             "publishAt": "2018-10-16T06:22:04.373362+00:00Z",
             "publisher": "Moxa-ISD",
-            "trialPeriodInDay": null,
-            "unitPrice": null,
+            "trialPeriodInDay": "",
+            "unitPrice": "",
             "validAt": "2018-10-16T06:22:04.373362+00:00Z",
             "version": "0.3.0-12"
           }

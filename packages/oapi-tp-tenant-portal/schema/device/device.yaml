@@ -39,12 +39,12 @@ paths:
           type: string
         - name: approvedStatus
           in: query
-          description: Filter the device list by approved status e.g. Waiting, Declined, Approved
+          description: Filter the device list by approved status e.g. waiting, declined, approved
           required: false
           type: string
         - name: registeredStatus
           in: query
-          description: Filter the device list by registered status e.g. N/A, Registred
+          description: Filter the device list by registered status e.g. registred
           required: false
           type: string
         - name: order
@@ -361,6 +361,9 @@ definitions:
       note:
         type: string
         description: Note of device.
+      reason:
+        type: string
+        description: Device declined resaon.
       groupList:
         type: array
         description: Group list.
@@ -369,9 +372,9 @@ definitions:
       approvedStatus:
         type: string
         enum:
-        - Waiting
-        - Approved
-        - Declined
+        - waiting
+        - approved
+        - declined
         description: Approved status of device.
       connectionStatus:
         type: string
@@ -405,12 +408,6 @@ definitions:
       approvedAt:
         type: string
         description: Device approved time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      declinedAt:
-        type: string
-        description: Device declined time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      declinedReason:
-        type: string
-        description: Device declined resaon.
       registeredAt:
         type: string
         description: Device registered time, ISO data format, like '2018-08-12T20:17:46.384Z'.
@@ -689,17 +686,16 @@ externalDocs:
           }
         ],
         "note": "",
+        "reason": "",
         "approvedStatus": "Waiting",
         "connectionStatus": "online",
         "registeredStatus": "N/A",
         "creator": "Cain Chen",
         "createdAt": "2018-08-12T20:17:46.384Z",
-        "updater": null,
+        "updater": {},
         "updatedAt": "2018-08-12T20:17:46.384Z",
         "approvedAt": "2019-02-26T14:10:33:000Z",
-        "declinedReason": "",
-        "declinedAt": null,
-        "registeredAt": null
+        "registeredAt": ""
       }
     DeviceList:
       {
@@ -783,17 +779,16 @@ externalDocs:
                 }
               ],
               "note": "",
+              "reason": "",
               "approvedStatus": "Waiting",
               "connectionStatus": "online",
               "registeredStatus": "N/A",
               "creator": "Cain Chen",
               "createdAt": "2018-08-12T20:17:46.384Z",
-              "updater": null,
+              "updater": {},
               "updatedAt": "2018-08-12T20:17:46.384Z",
               "approvedAt": "2019-02-26T14:10:33:000Z",
-              "declinedReason": "",
-              "declinedAt": null,
-              "registeredAt": null
+              "registeredAt": ""
             },
             {
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
@@ -870,17 +865,16 @@ externalDocs:
                 }
               ],
               "note": "",
+              "reason": "",
               "approvedStatus": "Waiting",
               "connectionStatus": "online",
               "registeredStatus": "N/A",
               "creator": "Cain Chen",
               "createdAt": "2018-08-12T20:17:46.384Z",
-              "updater": null,
+              "updater": {},
               "updatedAt": "2018-08-12T20:17:46.384Z",
               "approvedAt": "2019-02-26T14:10:33:000Z",
-              "declinedReason": "",
-              "declinedAt": null,
-              "registeredAt": null
+              "registeredAt": ""
             }
           ]
       }

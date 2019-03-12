@@ -156,6 +156,9 @@ definitions:
       domainName:
         type: string
         description: domainName of tenant.
+      createdBy:
+        type: string
+        description: Created tenant username  
       company:
         type: string
         description: Company of tenant.
@@ -259,6 +262,7 @@ externalDocs:
     Tenant:
       {
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "createdBy": "Rick Peng",
         "email": "moxa@moxa.com",
         "domainName": "moxa",
         "username": "username",

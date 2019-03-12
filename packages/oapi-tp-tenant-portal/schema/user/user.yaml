@@ -319,6 +319,18 @@ paths:
               $ref: '#/definitions/Invitee'
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Invitee' } }
 
+  /tenantInfo:
+    get:
+      description: get tenant info
+      responses:
+        200:
+          description: Return tenant info
+          schema:
+            $ref: '#/definitions/TenantInfo'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantInfo' } }
+      tags:
+        - user
+
 definitions:
   User:
     type: object
@@ -602,6 +614,72 @@ definitions:
         description: List of role.
         items:
           '$ref': '#/definitions/Role'
+  TenantInfo:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      domainName:
+        type: string
+        description: Domain name of tenant.
+      portalName:
+        type: string
+        description: Portal name of tenant.
+      company:
+        type: string
+        description: Company of tenant.
+      email:
+        type: string
+        description: Email of tenant.
+      username:
+        type: string
+        description: Username of tenant admin user.
+      firstName:
+        type: string
+        description: First name of tenant admin user.
+      lastName:
+        type: string
+        description: Last name of tenant admin user.
+      activate:
+        type: string
+        description: Activate status of tenant.
+      phone:
+        type: string
+        description: Phone of tenant.
+      culture:
+        type: string
+        description: Culture of tenant.
+      industry:
+        type: string
+        description: Industry of tenant.
+      customer:
+        type: boolean
+        description: Is customer or not.
+      provisionStatus:
+        type: string
+        description: Provision status of tenant.
+      deviceHlr:
+        type: string
+        description: Device home location url.
+      data:
+        type: object
+        description: metadata of tenant.
+      activatedAt:
+        type: string
+        description: Tenant activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      deactivatedAt:
+        type: string
+        description: Tenant deactivate time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      createdBy:
+        type: string
+        description: Created tenant username
+      createdAt:
+        type: string
+        description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updatedAt:
+        type: string
+        description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
 externalDocs:
   url: 'http://#'
@@ -759,4 +837,21 @@ externalDocs:
         "createdAt": "2019-02-17T08:41:29.773480Z",
         "updatedAt": "2019-02-17T08:41:29.773480Z"
       }
-
+    TenantInfo:
+      {
+        "activate": "approved",
+        "activatedAt": "",
+        "createdAt": "2019-01-22T07:49:07.104674Z",
+        "createdBy": "Rick Peng",
+        "culture": "zh-TW",
+        "customer": false,
+        "data": {},
+        "deactivatedAt": "",
+        "domainName": "tenant-dev",
+        "industry": "Others",
+        "portalName": "ISS",
+        "provisionStatus": "Provision Completed. Email Sent Completed.",
+        "services": [],
+        "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+        "updatedAt": "2019-01-22T07:49:07.104674Z"
+      }

@@ -31,7 +31,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantList' } }
       tags:
         - tenant
       security:
@@ -52,7 +52,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
       tags:
         - tenant
       security:
@@ -77,7 +77,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
     put:
       description: Return updated tenant data with given ID
       tags:
@@ -96,7 +96,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
     delete:
       description: Delete tenant with given ID
       tags:

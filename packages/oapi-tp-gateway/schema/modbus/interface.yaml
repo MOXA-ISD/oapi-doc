@@ -31,7 +31,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Interface'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Interfaces'
@@ -55,7 +55,7 @@ paths:
           description: sucess
           schema:
             $ref: '#/definitions/Interface'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/TCPInterface'
@@ -80,7 +80,7 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/Interface'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/RTUInterface'
@@ -104,7 +104,7 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/Interface'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/RTUInterface'
@@ -135,7 +135,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ModbusListEquipment'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/ModbusEquipments'

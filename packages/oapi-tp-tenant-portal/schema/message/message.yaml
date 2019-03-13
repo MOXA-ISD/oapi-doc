@@ -24,7 +24,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/MessageSchema'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchemaList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchemaList' } }
       tags:
         - messageSchema
     post:
@@ -43,7 +43,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/MessageSchema'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
       tags:
         - messageSchema
     
@@ -65,7 +65,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/MessageSchema'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
     put:
       description: Update message schema.
       parameters:
@@ -82,7 +82,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/MessageSchema'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/MessageSchema' } }
       tags:
         - messageSchema
     delete:
@@ -111,7 +111,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Tag'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
 
   /devices/{deviceId}/tags:
     parameters:
@@ -131,7 +131,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Tag'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/TagList' } }
 
 definitions:
   MessageSchema:

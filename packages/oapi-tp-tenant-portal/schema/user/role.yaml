@@ -27,7 +27,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RolePermission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleList' } }
     post:
       description: Create a new role.
       tags:
@@ -46,7 +46,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
 
   /roles/{id}:
     parameters:
@@ -66,7 +66,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/RolePermission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RolePermission' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RolePermission' } }
     put:
       description: Return updated user data with given ID
       tags:
@@ -85,7 +85,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
     delete:
       description: Delete role with given ID
       tags:
@@ -132,7 +132,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RoleUser'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
     put:
       description: Update users of role
       tags:
@@ -156,7 +156,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RoleUser'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserDataList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserDataList' } }
 
   /roles/{id}/unassign:
     get:
@@ -191,7 +191,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RoleUser'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
 
   /roles/{id}/duplicate:
     post:
@@ -211,7 +211,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
 
 definitions:
   Role:

@@ -73,7 +73,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/EdgeApp'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeAppList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeAppList' } }
       tags:
         - edgeapp
 
@@ -95,7 +95,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/EdgeApp'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeApp' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeApp' } }
 
   /edgeapp/appId/{appId}:
     parameters:
@@ -115,7 +115,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/EdgeApp'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeApp' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeApp' } }
 
   /edgeapp/category:
     get:
@@ -127,7 +127,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/EdgeAppCategory'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeAppCategoryList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/EdgeAppCategoryList' } }
       tags:
         - edgeapp
 

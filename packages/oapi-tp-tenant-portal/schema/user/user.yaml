@@ -70,7 +70,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
     post:
       description: Create a new user.
       tags:
@@ -89,7 +89,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
     delete:
       description: Delete all Users
       tags:
@@ -123,7 +123,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
     put:
       description: Return updated user data with given ID
       tags:
@@ -142,7 +142,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
     delete:
       description: Delete User with given ID
       tags:
@@ -171,7 +171,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/UserAvatar'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
     put:
       description: Upload an image file for logged in user
       tags:
@@ -191,7 +191,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/UserAvatar'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserAvatar' } }
 
   /users/changePassword:
     put:
@@ -212,7 +212,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
   /users/forgetPassword:
     post:
@@ -254,7 +254,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
 
   /users/exist/{email}:
     parameters:
@@ -274,7 +274,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/UserExist'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserExist' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserExist' } }
 
   /users/invite:
     post:
@@ -297,7 +297,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
 
   /users/invite/{inviteId}:
     parameters:
@@ -317,7 +317,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Invitee'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Invitee' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Invitee' } }
 
   /tenantInfo:
     get:
@@ -327,7 +327,7 @@ paths:
           description: Return tenant info
           schema:
             $ref: '#/definitions/TenantInfo'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantInfo' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantInfo' } }
       tags:
         - user
 

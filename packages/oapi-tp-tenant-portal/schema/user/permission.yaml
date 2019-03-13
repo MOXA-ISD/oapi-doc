@@ -27,7 +27,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Permission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
 
   '/permissions/{id}':
     parameters:
@@ -47,7 +47,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Permission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Permission' } }
+          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Permission' } }
 
 definitions:
   Permission:

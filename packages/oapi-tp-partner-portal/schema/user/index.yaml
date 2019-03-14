@@ -2,13 +2,10 @@
 swagger: '2.0'
 
 tags:
-- $ref: "./user.yaml#/tags"
 - $ref: "./login.yaml#/tags"
 
 paths:
-- $ref: "./user.yaml#/paths"
 - $ref: "./login.yaml#/paths"
 
 definitions:
-- $ref: "./user.yaml#/definitions"
 - $ref: "./login.yaml#/definitions"

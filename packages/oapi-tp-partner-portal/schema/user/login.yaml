@@ -36,8 +36,8 @@ paths:
           description: Return user and token data
           schema:
             $ref: '#/definitions/LoginRes'
-          example: 
-            $ref: '#/externalDocs/x-mocks/LoginRes'
+            example: 
+              $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
         - login
 
@@ -56,128 +56,9 @@ definitions:
     properties:
       user:
         type: object
-        items:
-          - $ref: '#/definitions/User'
       token:
         type: string
         description: Granted authentication token.
-
-  User:
-    type: object
-    properties:
-      tenantId:
-        type: string
-        description: Unique identifier representing a specific tenant.
-      userId:
-        type: string
-        description: Unique identifier representing a specific user.
-      displayName:
-        type: string
-        description: Username of user.
-      firstName:
-        type: string
-        description: First name of user.
-      lastName:
-        type: string
-        description: Last name of user.
-      avatar:
-        type: string
-        description: Avatar of user.
-      email:
-        type: string
-        description: Email of user.
-      company:
-        type: string
-        description: Company of user.
-      department:
-        type: string
-        description: Department of user.
-      employeeId:
-        type: string
-        description: Employee Id of user.
-      phone:
-        type: string
-        description: Phone of user.
-      status:
-        type: string
-        description: Enable Status of user.
-      data:
-        type: object
-        description: Metadata of user.
-      loginAt:
-        type: string
-        description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      passwordExpireAt:
-        type: string
-        description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
-  Tenant:
-    type: object
-    properties:
-      tenantId:
-        type: string
-        description: Unique identifier representing a specific tenant.
-      domainName:
-        type: string
-        description: Domain name of tenant.
-      portalName:
-        type: string
-        description: Portal name of tenant.
-      company:
-        type: string
-        description: Company of tenant.
-      email:
-        type: string
-        description: Email of tenant.
-      username:
-        type: string
-        description: Username of tenant admin user.
-      firstName:
-        type: string
-        description: First name of tenant admin user.
-      lastName:
-        type: string
-        description: Last name of tenant admin user.
-      activate:
-        type: string
-        description: Activate status of tenant.
-      phone:
-        type: string
-        description: Phone of tenant.
-      culture:
-        type: string
-        description: Culture of tenant.
-      industry:
-        type: string
-        description: Industry of tenant.
-      customer:
-        type: boolean
-        description: Is customer or not.
-      provisionStatus:
-        type: string
-        description: Provision status of tenant.
-      deviceHlr:
-        type: string
-        description: Device home location url.
-      data:
-        type: object
-        description: metadata of tenant.
-      activatedAt:
-        type: string
-        description: Tenant activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      deactivatedAt:
-        type: string
-        description: Tenant deactivate time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      createdBy:
-        type: object
-        items:
-          - $ref: '#/definitions/User'
-      createdAt:
-        type: string
-        description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updatedAt:
-        type: string
-        description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
 externalDocs:
   url: 'https://#'
@@ -186,23 +67,25 @@ externalDocs:
       {
         "user":
           {
-            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
-            "displayName": "Ellen Woods",
-            "firstName": "Ellen",
-            "lastName": "Woods",
-            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
-            "email": "ellen@moxa.com",
+            "avatar": "https://www.moxa.com/80f1.jpg",
             "company": "MOXA Inc.",
-            "department": "Department",
-            "employeeId": "123",
-            "phone": "02-89191230",
-            "loginAt": "2018-08-12T20:17:46.384Z",
-            "passwordExpireAt": "2019-01-22T08:02:49:089Z",
+            "createdAt": "2018-08-12T20:17:46.384Z",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
               },
+            "department": "Department",
+            "displayName": "Ellen Woods",
+            "domainName": "partner-dev",
+            "email": "ellen@moxa.com",
+            "employeeId": "123",
+            "firstName": "Ellen",
+            "lastName": "Woods",
+            "partnerId": "07473967-3c29-4914-b275-d0511c42554e",
+            "phone": "02-89191230",
+            "portalName": "MOXA Partner",
+            "passwordExpireAt": "2019-01-22T08:02:49:089Z",
+            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
             "role": {
               "admin": true,
               "id": 1,
@@ -235,39 +118,6 @@ externalDocs:
                 }
               ]
             }
-          },
-        "tenant":
-          {
-            "activate": "approved",
-            "activatedAt": "",
-            "createdAt": "2019-01-22T07:49:07.104674Z",
-            "createdBy": {
-              "avatar": "",
-              "changePasswordAt": "",
-              "company": "moxa",
-              "createdAt": "2019-01-22T07:51:26.214357Z",
-              "data": {},
-              "department": "iss",
-              "displayName": "Rick Peng",
-              "email": "rick.peng@moxa.com",
-              "employeeId": "20040003",
-              "firstName": "Rick",
-              "lastName": "Peng",
-              "phone": "02-89191230",
-              "updatedAt": "2019-01-22T07:51:26.214357Z",
-              "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
-            },
-            "culture": "zh-TW",
-            "customer": false,
-            "data": {},
-            "deactivatedAt": "",
-            "domainName": "tenant-dev",
-            "industry": "Others",
-            "portalName": "ISS",
-            "provisionStatus": "Provision Completed. Email Sent Completed.",
-            "services": [],
-            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-            "updatedAt": "2019-01-22T07:49:07.104674Z"
           },
         "token": "USER_TOKEN"
       }

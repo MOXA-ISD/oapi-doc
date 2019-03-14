@@ -26,10 +26,13 @@ securityDefinitions:
 
 tags:
   - $ref: './user/index.yaml#/tags'
+  - $ref: './cert/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
+  - $ref: './cert/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
+  - $ref: './cert/index.yaml#/definitions'
  

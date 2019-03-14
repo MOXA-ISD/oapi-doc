@@ -66,7 +66,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Group'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/GroupList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/GroupList'
       tags:
         - group
     post:
@@ -85,7 +86,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/GroupResponse'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/GroupResponse' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/GroupResponse'
       tags:
         - group
  
@@ -113,7 +115,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Group' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Group'
     delete:
       description: Delete group with given ID
       tags:
@@ -136,12 +139,8 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/Group'
-          example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/Group'
-              }
-            } 
+            example:
+              $ref: '#/externalDocs/x-mocks/Group'
   /groups/{groupId}/unassignDevices:
     parameters:
       - name: groupId
@@ -197,7 +196,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DevicePoc'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DevicePocList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DevicePocList'
 
   /groups/{groupId}/desiredProperties:
     parameters:
@@ -217,7 +217,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DesiredProperties'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DesiredProperties'
 
   /groups/{groupId}/directMethodList:
     parameters:
@@ -237,7 +238,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DirectMethodList'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DirectMethodList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DirectMethodList'
 
 definitions:
   Group:

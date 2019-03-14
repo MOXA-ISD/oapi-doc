@@ -86,7 +86,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Order'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/OrderList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/OrderList'
       tags:
         - order
     post:
@@ -105,7 +106,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Order'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Order'
       tags:
         - order
 
@@ -127,7 +129,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Order'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Order'
     put:
       description: Update POC order data with given ID
       tags:
@@ -146,7 +149,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Order'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Order' } }
+            example:
+              $ref: '#/externalDocs/x-mocks/Order'
     delete:
       description: Delete order with given ID
       tags:
@@ -171,7 +175,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DeployOrder'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeployOrder' } }
+            example:
+              $ref: '#/externalDocs/x-mocks/DeployOrder'
       tags:
         - order
 

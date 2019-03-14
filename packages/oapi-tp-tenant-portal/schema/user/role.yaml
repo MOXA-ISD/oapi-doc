@@ -27,7 +27,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RolePermission'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/RoleList'
     post:
       description: Create a new role.
       tags:
@@ -46,7 +47,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Role'
 
   /roles/{id}:
     parameters:
@@ -66,7 +68,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/RolePermission'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RolePermission' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/RolePermission'
     put:
       description: Return updated user data with given ID
       tags:
@@ -85,7 +88,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Role'
     delete:
       description: Delete role with given ID
       tags:
@@ -132,7 +136,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RoleUser'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/RoleUserList'
     put:
       description: Update users of role
       tags:
@@ -148,7 +153,9 @@ paths:
           description: Information of role
           required: true
           schema:
-            $ref: '#/definitions/RoleUser'
+            type: array
+            items:
+              type: string
       responses:
         200:
           description: An Object of the user
@@ -156,7 +163,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RoleUser'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserDataList' } }
+            example:
+              $ref: '#/externalDocs/x-mocks/UserDataList'
 
   /roles/{id}/unassign:
     get:
@@ -191,7 +199,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/RoleUser'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/RoleUserList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/RoleUserList'
 
   /roles/{id}/duplicate:
     post:
@@ -211,7 +220,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Role'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Role' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Role'
 
 definitions:
   Role:
@@ -331,31 +341,19 @@ definitions:
           items:
             - $ref: '#/definitions/Permission'
 
-  Permission:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: Unique identifier representing a specific user.
-      name:
-        type: string
-        description: Name of permission.
-      description:
-        type: string
-        description: Description of permission.
-      type:
-        type: integer
-        description: Type of permission. 1=Tenant Administration, 2=Device Operation
-      value:
-        type: integer
-        description: Value of permission
-
 externalDocs:
   url: 'http://#'
   x-mocks:
     Role:
       {
         "id": 19,
+        "name": "test role 2",
+        "type": 1,
+        "description": "test role 2",
+        "admin": false
+      }
+    RoleCreate:
+      {
         "name": "test role 2",
         "type": 1,
         "description": "test role 2",
@@ -476,7 +474,7 @@ externalDocs:
             "email": "ediejy.lin@moxa.com"
           },
           {
-            "7dc93587-5444-48bf-a196-da811c39959d",
+            "userId": "7dc93587-5444-48bf-a196-da811c39959d",
             "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
             "displayName": "Cain Chen",
             "email": "cainhc.chen@moxa.com"

@@ -84,7 +84,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Device'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
     post:
@@ -103,7 +104,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Device'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Device'
       tags:
         - device
 
@@ -162,7 +164,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/DevicePoc'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DevicePocList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DevicePocList'
       tags:
         - device
  
@@ -184,7 +187,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Device'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Device'
     delete:
       description: Delete device with given ID
       tags:
@@ -221,7 +225,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Telemetry'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/TelemetryList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/TelemetryList'
 
   /devices/{deviceId}/reportedProperties:
     parameters:
@@ -241,7 +246,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/ReportedProperties'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/ReportedProperties' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/ReportedProperties'
 
   /desiredProperties:
     post:
@@ -293,7 +299,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DesiredProperties'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DesiredProperties'
 
   /devices/{deviceId}/directMethodList:
     parameters:
@@ -313,7 +320,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DirectMethodList'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DirectMethodList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DirectMethodList'
 
 definitions:
   Device:
@@ -349,6 +357,8 @@ definitions:
       groupList:
         type: array
         description: Array of group list object.
+        items:
+          type: object
       connectionStatus:
         type: string
         enum:

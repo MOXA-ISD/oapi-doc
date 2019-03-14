@@ -15,21 +15,22 @@ tags:
     description: Handles permission field data
 
 paths:
-  '/permissions':
+  /permissions:
     get:
       description: Get all permission field data
       tags:
         - permission
       responses:
-        '200':
+        200:
           description: success
           schema:
             type: array
             items:
               $ref: '#/definitions/Permission'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/PermissionList'
 
-  '/permissions/{id}':
+  /permissions/{id}:
     parameters:
       - name: id
         in: path
@@ -41,13 +42,14 @@ paths:
       tags:
         - permission
       responses:
-        '200':
+        200:
           description: success
           schema:
             type: array
             items:
               $ref: '#/definitions/Permission'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Permission' } }
+            example:
+              $ref: '#/externalDocs/x-mocks/Permission'
 
 definitions:
   Permission:

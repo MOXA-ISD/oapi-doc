@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.2
+  version: 0.0.0
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -36,8 +36,8 @@ paths:
           description: Return user and token data
           schema:
             $ref: '#/definitions/LoginRes'
-            example: 
-              $ref: '#/externalDocs/x-mocks/LoginRes'
+          example: 
+            $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
         - login
 
@@ -110,17 +110,74 @@ definitions:
       passwordExpireAt:
         type: string
         description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      portalName:
+
+  Tenant:
+    type: object
+    properties:
+      tenantId:
         type: string
-        description: Tenant portal name.
+        description: Unique identifier representing a specific tenant.
       domainName:
         type: string
-        description: Tenant domain name.
-      role:
-        type: array
-        description: List of role which contains the user.
+        description: Domain name of tenant.
+      portalName:
+        type: string
+        description: Portal name of tenant.
+      company:
+        type: string
+        description: Company of tenant.
+      email:
+        type: string
+        description: Email of tenant.
+      username:
+        type: string
+        description: Username of tenant admin user.
+      firstName:
+        type: string
+        description: First name of tenant admin user.
+      lastName:
+        type: string
+        description: Last name of tenant admin user.
+      activate:
+        type: string
+        description: Activate status of tenant.
+      phone:
+        type: string
+        description: Phone of tenant.
+      culture:
+        type: string
+        description: Culture of tenant.
+      industry:
+        type: string
+        description: Industry of tenant.
+      customer:
+        type: boolean
+        description: Is customer or not.
+      provisionStatus:
+        type: string
+        description: Provision status of tenant.
+      deviceHlr:
+        type: string
+        description: Device home location url.
+      data:
+        type: object
+        description: metadata of tenant.
+      activatedAt:
+        type: string
+        description: Tenant activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      deactivatedAt:
+        type: string
+        description: Tenant deactivate time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      createdBy:
+        type: object
         items:
-          '$ref': '#/definitions/Role'
+          - $ref: '#/definitions/User'
+      createdAt:
+        type: string
+        description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updatedAt:
+        type: string
+        description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
 externalDocs:
   url: 'https://#'
@@ -142,8 +199,6 @@ externalDocs:
             "phone": "02-89191230",
             "loginAt": "2018-08-12T20:17:46.384Z",
             "passwordExpireAt": "2019-01-22T08:02:49:089Z",
-            "portalName": "ISS",
-            "domainName": "tenant-dev",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
@@ -181,7 +236,38 @@ externalDocs:
               ]
             }
           },
+        "tenant":
+          {
+            "activate": "approved",
+            "activatedAt": "",
+            "createdAt": "2019-01-22T07:49:07.104674Z",
+            "createdBy": {
+              "avatar": "",
+              "changePasswordAt": "",
+              "company": "moxa",
+              "createdAt": "2019-01-22T07:51:26.214357Z",
+              "data": {},
+              "department": "iss",
+              "displayName": "Rick Peng",
+              "email": "rick.peng@moxa.com",
+              "employeeId": "20040003",
+              "firstName": "Rick",
+              "lastName": "Peng",
+              "phone": "02-89191230",
+              "updatedAt": "2019-01-22T07:51:26.214357Z",
+              "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+            },
+            "culture": "zh-TW",
+            "customer": false,
+            "data": {},
+            "deactivatedAt": "",
+            "domainName": "tenant-dev",
+            "industry": "Others",
+            "portalName": "ISS",
+            "provisionStatus": "Provision Completed. Email Sent Completed.",
+            "services": [],
+            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+            "updatedAt": "2019-01-22T07:49:07.104674Z"
+          },
         "token": "USER_TOKEN"
       }
-
-          

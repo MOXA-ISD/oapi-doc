@@ -24,7 +24,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Profile'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/ProfileList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/ProfileList'
       tags:
         - profile
 
@@ -46,7 +47,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Profile'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/Profile' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Profile'
 
   /profiles/deviceModelList:
     get:
@@ -66,7 +68,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/DeviceModel'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceModelList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DeviceModelList'
 
 definitions:
   Profile:

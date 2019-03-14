@@ -31,7 +31,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/UserList' } }
+          example: 
+            $ref: '#/externalDocs/x-mocks/UserList'
       tags:
         - user
       security:
@@ -82,7 +83,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: 
+            $ref: '#/externalDocs/x-mocks/User'
     put:
       description: Return updated user data with given ID
       parameters:
@@ -99,7 +101,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-          example: { 'application/json': { $ref: '#/externalDocs/x-mocks/User' } }
+          example: 
+            $ref: '#/externalDocs/x-mocks/User'
     delete:
       description: Delete User with given ID
       tags:

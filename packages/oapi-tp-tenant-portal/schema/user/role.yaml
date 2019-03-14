@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.2
+  version: 0.0.0
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -39,7 +39,12 @@ paths:
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/RoleCreate'
+            type: object
+            items:
+              $ref: '#/definitions/RoleCreate'
+            example:
+              $ref: '#/externalDocs/x-mocks/RoleCreate'  
+
       responses:
         201:
           description: Create role successfully
@@ -80,7 +85,11 @@ paths:
           description: Information of role
           required: true
           schema:
-            $ref: '#/definitions/RoleUpdate'
+            type: object
+            items:
+              $ref: '#/definitions/RoleUpdate'
+            example:
+              $ref: '#/externalDocs/x-mocks/RoleUpdate'  
       responses:
         200:
           description: An Object of the role
@@ -133,11 +142,11 @@ paths:
         200:
           description: An Object of the user
           schema:
-            type: array
+            type: object
             items:
-              $ref: '#/definitions/RoleUser'
+              $ref: '#/definitions/RoleUserUpdate'
             example: 
-              $ref: '#/externalDocs/x-mocks/RoleUserList'
+              $ref: '#/externalDocs/x-mocks/RoleUserUpdate'
     put:
       description: Update users of role
       tags:
@@ -156,6 +165,7 @@ paths:
             type: array
             items:
               type: string
+            description: user id list
       responses:
         200:
           description: An Object of the user
@@ -313,9 +323,6 @@ definitions:
         type: string
         description: Description of role.
         maxLength: 200
-      admin:
-        type: boolean
-        description: Admin role.
       permission:
         type: array
         items:
@@ -340,6 +347,14 @@ definitions:
           type: object
           items:
             - $ref: '#/definitions/Permission'
+  
+  RoleUserUpdate:
+    type: object
+    properties:
+      users:
+        type: object
+        items:
+          type: string
 
 externalDocs:
   url: 'http://#'
@@ -350,14 +365,44 @@ externalDocs:
         "name": "test role 2",
         "type": 1,
         "description": "test role 2",
-        "admin": false
+        "admin": false,
+        "permission": [
+          {
+            "id": 1,
+            "name": "User/Role management",
+            "description": "User/Role management",
+            "type": 1,
+            "value": 0
+          },
+          {
+            "id": 2,
+            "name": "Device register",
+            "description": "Device register",
+            "type": 1,
+            "value": 1
+          }
+        ]
       }
     RoleCreate:
       {
-        "name": "test role 2",
-        "type": 1,
-        "description": "test role 2",
-        "admin": false
+        "name": "Device Register",
+        "description": "Device Register",
+        "permission": [
+          {
+            "id": 1,
+            "name": "User/Role management",
+            "description": "User/Role management",
+            "type": 1,
+            "value": 0
+          },
+          {
+            "id": 2,
+            "name": "Device register",
+            "description": "Device register",
+            "type": 1,
+            "value": 1
+          }
+        ]
       }
     RolePermission:
       {
@@ -483,6 +528,12 @@ externalDocs:
         "limit": 100,
         "offset": 0
       }
+    RoleUserUpdate:
+      {
+        users: [
+          "6df5d905-e19c-4cc8-b963-88707c6fa7f3"
+        ]
+      }  
     UserDataList:
       {
         "data": [

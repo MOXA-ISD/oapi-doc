@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.2
+  version: 0.0.3
   title: ThingsPro Tenant Portal RESTful API reference
   description: |
     Welcome to the ThingsPro Tenant Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
@@ -18,7 +18,7 @@ produces:
   - application/json
 
 securityDefinitions:
-  Bearer token:
+  token:
     type: apiKey
     name: Authorization
     in: header

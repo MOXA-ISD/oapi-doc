@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.2
+  version: 0.0.0
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -93,7 +93,7 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/User'
     delete:
-      description: Delete all Users
+      description: Delete Users
       tags:
         - user
       parameters:
@@ -102,7 +102,11 @@ paths:
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/UserBatch'
+            type: object
+            items:
+              $ref: '#/definitions/UserBatch'
+            example:
+              $ref: '#/externalDocs/x-mocks/UuidList'
       responses:
         204:
           description: success
@@ -626,6 +630,7 @@ definitions:
         description: List of role.
         items:
           '$ref': '#/definitions/Role'
+
   TenantInfo:
     type: object
     properties:
@@ -867,3 +872,7 @@ externalDocs:
         "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "updatedAt": "2019-01-22T07:49:07.104674Z"
       }
+    UuidList:
+      [
+        "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
+      ]

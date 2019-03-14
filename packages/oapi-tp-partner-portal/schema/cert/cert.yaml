@@ -18,29 +18,42 @@ paths:
     get:
       description: Get all certificates data
       parameters:
-        - name: deviceId
+        - name: tenant
           in: query
           type: string
-          description: 'Get group device belongs to'
+          description: Filter the certificates list by tenant
           required: false
-        - name: groupName
+        - name: applicant
           in: query
           type: string
-          description: Filter the group list by groupName
-          required: false
-        - name: description
+          description: Filter the certificates list by applicant
+          required: false  
+        - name: mac
           in: query
           type: string
-          description: Filter the group list by description
+          description: Filter the certificates list by mac
           required: false
+        - name: applyStatus
+          in: query
+          type: string
+          description: Filter the certificates list by apply status
+          required: false
+        - name: createdAt
+          in: query
+          type: string
+          description: Filter the certificates list by created time
+          required: false  
         - name: order
           in: query
-          description: Sort the group list by specific condition, default is order by 'lastUpdatedAt'
+          description: Sort the group list by specific condition, default is order by 'createdAt'
           required: false
           type: string
           enum:
-          - groupName
-          - deviceCount
+          - tenant
+          - applicant
+          - mac
+          - applyStatus
+          - createdAt
         - name: sort
           in: query
           description: Sorting the filter group list, default is desc

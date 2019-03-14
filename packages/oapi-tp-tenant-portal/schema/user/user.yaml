@@ -160,37 +160,14 @@ paths:
           description: success
 
   /users/avatar:
-    post:
-      description: Upload an image file for non logged in user
-      tags:
-        - user
-      consumes:
-        - multipart/form-data
-      parameters:
-        - name: image
-          in: formData
-          description: an image file
-          required: true
-          type: file
-      responses:
-        200:
-          description: Upload an image file
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/UserAvatar'
-            example: 
-              $ref: '#/externalDocs/x-mocks/UserAvatar'
     put:
       description: Upload an image file for logged in user
       tags:
         - user
-      consumes:
-        - multipart/form-data
       parameters:
         - name: image
           in: formData
-          description: an image file
+          description: use form-data to upload a image. key = image, value = {image file}
           required: true
           type: file
       responses:

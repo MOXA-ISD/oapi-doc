@@ -545,10 +545,6 @@ definitions:
         type: string
         description: Email of user.
         maxLength: 254
-      avatar:
-        type: string
-        description: Avatar of user.
-        maxLength: 2083
       password:
         type: string
         description: Password of user.
@@ -569,9 +565,6 @@ definitions:
         type: string
         description: Phone of user.
         maxLength: 50
-      data:
-        type: object
-        description: metadata of user.
 
   UserUpdate:
     type: object
@@ -625,9 +618,9 @@ definitions:
         type: string
         description: Email of user.
         maxLength: 254
-      role:
-        type: array
-        description: List of role.
+      roleId:
+        type: integer
+        description: Role id.
         items:
           '$ref': '#/definitions/Role'
 
@@ -703,37 +696,58 @@ externalDocs:
   x-mocks:
     User:
       {
-        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
-        "displayName": "Ellen Woods",
-        "firstName": "Ellen",
-        "lastName": "Woods",
-        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
-        "email": "ellen@moxa.com",
-        "company": "MOXA Inc.",
-        "department": "Department",
-        "employeeId": "123",
-        "phone": "02-89191230",
-        "loginAt": "2018-08-12T20:17:46.384Z",
+        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+        "company": "moxa",
+        "data": {},
+        "department": "",
+        "displayName": "Cain Chen",
+        "email": "cainhc.chen@moxa.com",
+        "employeeId": "20180003",
+        "firstName": "Cain",
+        "lastName": "Chen",
+        "loginAt": "2019-03-14T02:44:03:735Z",
         "passwordExpireAt": "2019-01-22T08:02:49:089Z",
-        "data": 
-          {
-            "CUSTOM_FIELD": "CUSTOM_VALUE"
-          },
-        "permission": [
-          { "id": 1, "name": "User/Role management", "value": 2 },
-          { "id": 2, "name": "Device register/grouping", "value": 2 }
-        ],
-        "role": [
-          { "id": 2, "name": "Device Register", "type": 1 },
-          { "id": 3, "name": "System Manager", "type": 1 },
-          { "id": 6, "name": "B204 viwer", "type": 1 },
-        ]
+        "phone": "02-89191230#7262",
+        "role": {
+          "admin": true,
+          "id": 1,
+          "name": "Administrator",
+          "permission": [
+            {
+              "id": 1,
+              "name": "User & Role management",
+              "value": 1
+            },
+            {
+              "id": 2,
+              "name": "Device register",
+              "value": 1
+            },
+            {
+              "id": 3,
+              "name": "Device grouping",
+              "value": 1
+            },
+            {
+              "id": 4,
+              "name": "View device information",
+              "value": 1
+            },
+            {
+              "id": 5,
+              "name": "Full manage device",
+              "value": 1
+            }
+          ]
+        },
+        "status": "enabled",
+        "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+        "userId": "7dc93587-5444-48bf-a196-da811c39959d"
       }
     UserExist:
       { "exist": true }
     UserAvatar:
-      { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/test.png" }
+      { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/test.png" }
     UserChangePassword:
       {
         "oldPassword":"moxamoxa",
@@ -773,37 +787,11 @@ externalDocs:
       [
         {
           "email":"13579@moxa.com",
-          "role":[
-            {
-              "id": 3,
-              "name": "System Manager",
-              "type": 1
-            },
-            {
-              "id": 4,
-              "name": "User Manager",
-              "type": 1
-            },
-            {
-              "id": 5,
-              "name": "Full device manager",
-              "type": 2
-            }
-          ]
+          "roleId": 3
         },
         {
           "email":"24680@moxa.com",
-          "role":[
-            {
-              "id": 2,
-              "name": "Device Register",
-              "type": 1
-            },{
-              "id": 6,
-              "name": "B204 viwer",
-              "type": 2
-            }
-          ]
+          "roleId": 4
         }
       ]
     UserList:
@@ -811,32 +799,53 @@ externalDocs:
         "count": 1,
         "data": [
           {
-            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
-            "displayName": "Ellen Woods",
-            "firstName": "Ellen",
-            "lastName": "Woods",
-            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
-            "email": "ellen@moxa.com",
-            "company": "MOXA Inc.",
-            "department": "Department",
-            "employeeId": "123",
+            "avatar": "",
+            "company": "moxa",
+            "data": {},
+            "department": "iss",
+            "displayName": "Rick Peng",
+            "email": "rick.peng@moxa.com",
+            "employeeId": "20040003",
+            "firstName": "Rick",
+            "lastName": "Peng",
+            "loginAt": "2019-02-27T06:45:44:015Z",
+            "passwordExpireAt": "2019-01-22T07:51:26:214Z",
             "phone": "02-89191230",
-            "loginAt": "2018-08-12T20:17:46.384Z",
-            "passwordExpireAt": "2019-01-22T08:02:49:089Z",
-            "data":
-              {
-                "CUSTOM_FIELD": "CUSTOM_VALUE"
-              },
-            "permission": [
-              { "id": 1, "name": "User/Role management", "value": 2 },
-              { "id": 2, "name": "Device register/grouping", "value": 2 }
-            ],
-            "role": [
-              { "id": 2, "name": "Device Register", "type": 1 },
-              { "id": 3, "name": "System Manager", "type": 1 },
-              { "id": 6, "name": "B204 viwer", "type": 1 },
-            ]
+            "role": {
+              "admin": true,
+              "id": 1,
+              "name": "Administrator",
+              "permission": [
+                {
+                  "id": 1,
+                  "name": "User & Role management",
+                  "value": 1
+                },
+                {
+                  "id": 2,
+                  "name": "Device register",
+                  "value": 1
+                },
+                {
+                  "id": 3,
+                  "name": "Device grouping",
+                  "value": 1
+                },
+                {
+                  "id": 4,
+                  "name": "View device information",
+                  "value": 1
+                },
+                {
+                  "id": 5,
+                  "name": "Full manage device",
+                  "value": 1
+                }
+              ]
+            },
+            "status": "enabled",
+            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
           }
         ],
         "limit": 100,

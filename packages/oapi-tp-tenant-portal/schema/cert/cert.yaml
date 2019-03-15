@@ -160,9 +160,6 @@ definitions:
       tenantId:
         type: string
         description: Unique identifier representing a specific tenant.
-      portalName:
-        type: string
-        description: Tenant portal name.  
       mac:
         type: string
         description: Mac address of device.
@@ -221,7 +218,6 @@ externalDocs:
       {
         "id": "1",
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "portalNmae": "MOXA",
         "mac": "00-0C-29-70-D2-EC", 
         "serialNumber": "12345678", 
         "modelName": "UC-8112",    
@@ -242,7 +238,6 @@ externalDocs:
             {
               "id": "1",
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-              "portalNmae": "MOXA",
               "mac": "00-0C-29-70-D2-EC", 
               "serialNumber": "12345678", 
               "modelName": "UC-8112",    
@@ -257,7 +252,6 @@ externalDocs:
       }
     CertCreate:
       {
-        "deviceProfileId": 1, 
         "mac": "00-0C-29-70-D2-EC", 
         "serialNumber": "12345678",
         "modelName": "UC-8112",  

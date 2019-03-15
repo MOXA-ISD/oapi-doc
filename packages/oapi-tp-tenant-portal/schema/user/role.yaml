@@ -162,19 +162,22 @@ paths:
           description: Information of role
           required: true
           schema:
-            type: array
-            items:
-              type: string
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  type: string
             description: user id list
             example:
-              $ref: '#/externalDocs/x-mocks/UuidList'  
+              $ref: '#/externalDocs/x-mocks/RoleUserUpdate'
       responses:
         200:
           description: An Object of the user
           schema:
             type: array
             items:
-              $ref: '#/definitions/RoleUserCreate'
+              $ref: '#/definitions/RoleUser'
             example:
               $ref: '#/externalDocs/x-mocks/RoleUserResponse'
 
@@ -315,7 +318,7 @@ definitions:
     type: object
     properties:
       users:
-        type: object
+        type: array
         items:
           type: string
 
@@ -492,16 +495,27 @@ externalDocs:
         "limit": 100,
         "offset": 0
       }
+    RoleUser:
+      {
+        "userId": "6df5d905-e19c-4cc8-b963-88707c6fa7f3",
+        "displayName": "Edie Lin",
+        "avatar": "",
+        "email": "ediejy.lin@moxa.com"
+      }
     RoleUserCreate:
       {
-        users: [
+        "users": [
           "6df5d905-e19c-4cc8-b963-88707c6fa7f3"
         ]
       }  
-    UuidList:
-      [
-        "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
-      ]
+    RoleUserUpdate:
+      {
+        "users":[
+          "aedd319a-3d21-4ba5-aee8-0b8ec2806b09",
+          "7dc93587-5444-48bf-a196-da811c39959d",
+          "6df5d905-e19c-4cc8-b963-88707c6fa7f3"
+        ]
+      }
     RoleUserResponse:
       {
         "data": [

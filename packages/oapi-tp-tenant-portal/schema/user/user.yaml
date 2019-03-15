@@ -188,7 +188,7 @@ paths:
       parameters:
         - name: body
           in: body
-          description: Information of Passowrd
+          description: Information of passowrd ( old password & new password )
           required: true
           schema:
             $ref: '#/definitions/UserChangePassword'
@@ -286,9 +286,9 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/Invitee'
             example: 
-              $ref: '#/externalDocs/x-mocks/UserList'
+              $ref: '#/externalDocs/x-mocks/InviteeList'
 
   /users/invite/{inviteId}:
     parameters:
@@ -433,7 +433,7 @@ definitions:
         description: Invite Data ID.
       inviter:
         type: string
-        description: Inviter ID.
+        description: Inviter Name.
       domainName:
         type: string
         description: Tenant Domain Name.
@@ -598,8 +598,6 @@ definitions:
       roleId:
         type: integer
         description: Role id.
-        items:
-          '$ref': '#/definitions/Role'
 
   TenantInfo:
     type: object
@@ -724,7 +722,7 @@ externalDocs:
     UserExist:
       { "exist": true }
     UserAvatar:
-      { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/test.png" }
+      { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg" }
     UserChangePassword:
       {
         "oldPassword":"moxamoxa",
@@ -748,7 +746,7 @@ externalDocs:
       }
     UserUpdate:
       {
-        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg",
         "company": "moxa",
         "data": {},
         "displayName": "Cain Chen",
@@ -839,6 +837,33 @@ externalDocs:
         "expireAt": "2019-02-24T08:41:29.773480Z",
         "createdAt": "2019-02-17T08:41:29.773480Z",
         "updatedAt": "2019-02-17T08:41:29.773480Z"
+      }
+    InviteeList:
+      {
+        "data": [
+          {
+            "createdAt": "2019-03-14T10:04:53.034540Z",
+            "data": {},
+            "domainName": "tenant-dev",
+            "email": "201903141802@moxa.com",
+            "expireAt": "2019-03-21T10:04:53.034540Z",
+            "inviteId": "9a9812d8-86c9-4a71-aaf9-7103e67c2148",
+            "inviter": "Cain Chen",
+            "status": "inviting",
+            "updatedAt": "2019-03-14T10:04:53.034540Z"
+          },
+          {
+            "createdAt": "2019-03-14T10:04:53.034540Z",
+            "data": {},
+            "domainName": "tenant-dev",
+            "email": "201903141803@moxa.com",
+            "expireAt": "2019-03-21T10:04:53.034540Z",
+            "inviteId": "d7109838-690d-487d-8f9f-98ad70c2de72",
+            "inviter": "Cain Chen",
+            "status": "inviting",
+            "updatedAt": "2019-03-14T10:04:53.034540Z"
+          }
+        ]
       }
     TenantInfo:
       {

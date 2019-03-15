@@ -39,7 +39,7 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
-        - login
+        - user
 
   /logout:
     post:
@@ -48,7 +48,7 @@ paths:
         200:
           description: user logout
       tags:
-        - logout
+        - user
 
 definitions:
   LoginRes:

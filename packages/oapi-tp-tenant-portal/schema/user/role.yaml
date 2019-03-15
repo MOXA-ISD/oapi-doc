@@ -293,7 +293,7 @@ definitions:
         items:
           type: object
           items:
-            - $ref: '#/definitions/Permission'
+            - $ref: '#/definitions/PermissionReq'
 
   RoleUser:
     type: object
@@ -319,6 +319,20 @@ definitions:
         items:
           type: string
 
+  PermissionReq:
+    title: Permission
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      value:
+        type: integer
+        enum:
+          - 0
+          - 1
+        description: Type of permission. 1=enable, 0=disable
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -331,16 +345,10 @@ externalDocs:
         "permission": [
           {
             "id": 1,
-            "name": "User/Role management",
-            "description": "User/Role management",
-            "type": 1,
             "value": 0
           },
           {
             "id": 2,
-            "name": "Device register",
-            "description": "Device register",
-            "type": 1,
             "value": 1
           }
         ]
@@ -352,16 +360,10 @@ externalDocs:
         "permission": [
           {
             "id": 1,
-            "name": "User/Role management",
-            "description": "User/Role management",
-            "type": 1,
             "value": 0
           },
           {
             "id": 2,
-            "name": "Device register",
-            "description": "Device register",
-            "type": 1,
             "value": 1
           }
         ]

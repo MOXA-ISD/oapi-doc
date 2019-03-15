@@ -33,11 +33,6 @@ paths:
           type: string
           description: Filter the certificates list by apply status
           required: false
-        - name: createdAt
-          in: query
-          type: string
-          description: Filter the certificates list by created time
-          required: false  
         - name: order
           in: query
           description: Sort the group list by specific condition, default is order by 'createdAt'
@@ -47,7 +42,6 @@ paths:
           - modelType
           - mac
           - applyStatus
-          - createdAt
         - name: sort
           in: query
           description: Sorting the filter group list, default is desc

@@ -182,7 +182,7 @@ paths:
 
   /users/changePassword:
     put:
-      description: Upload an image file for logged in user
+      description: Change user password
       tags:
         - user
       parameters:

@@ -126,6 +126,8 @@ paths:
           description: success
     patch:
       description: Update group settings
+      tags:
+        - group
       parameters:
       - name: body
         in: body

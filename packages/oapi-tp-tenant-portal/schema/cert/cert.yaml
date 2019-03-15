@@ -42,6 +42,7 @@ paths:
           - modelType
           - mac
           - applyStatus
+          - createdAt
         - name: sort
           in: query
           description: Sorting the filter group list, default is desc

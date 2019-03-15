@@ -96,6 +96,35 @@ paths:
       tags:
         - certificate
 
+  /certificates/{id}/approve:
+    post:
+      description: Request to approve or decline certificate.
+      parameters:
+        - name: id
+          in: path
+          description: Certificate unique identifier
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Certificate approve or decline data
+          required: true
+          schema:
+            properties:
+              approved:
+                description: default is false
+                type: boolean
+                example: true
+              reason:
+                type: string
+                example: 'Decline reason'
+      responses:
+        200:
+          description: Result of certificate approve or decline
+          
+      tags:
+        - certificate
+
   /certificates/{id}/download:
     post:
       description: Request to download certificate.
@@ -130,6 +159,9 @@ definitions:
       tenantId:
         type: string
         description: Unique identifier representing a specific tenant.
+      portalName:
+        type: string
+        description: Tenant portal name.  
       mac:
         type: string
         description: Mac address of device.
@@ -141,7 +173,10 @@ definitions:
         description: Model name of device.  
       note:
         type: string
-        description: Mac address of device.
+        description: Certificate apply form note.
+      reason:
+        type: string
+        description: Declined certificate reason.  
       applicant:
         type: string
         description: Certificate applicant.
@@ -185,10 +220,12 @@ externalDocs:
       {
         "id": "1",
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "portalNmae": "MOXA",
         "mac": "00-0C-29-70-D2-EC", 
         "serialNumber": "12345678", 
         "modelName": "UC-8112",    
         "note": "test device",
+        "reason": "",
         "applicant": "Owen Kao",
         "applyAt": "2018-10-01T08:25:31.422Z",
         "applyStatus": "waiting",
@@ -204,10 +241,12 @@ externalDocs:
             {
               "id": "1",
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "portalNmae": "MOXA",
               "mac": "00-0C-29-70-D2-EC", 
               "serialNumber": "12345678", 
               "modelName": "UC-8112",    
               "note": "test device",
+              "reason": "",
               "applicant": "Owen Kao",
               "applyAt": "2018-10-01T08:25:31.422Z",
               "applyStatus": "waiting",

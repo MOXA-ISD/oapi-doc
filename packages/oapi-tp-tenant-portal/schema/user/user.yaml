@@ -182,13 +182,13 @@ paths:
 
   /users/changePassword:
     put:
-      description: Upload an image file for logged in user
+      description: Change user password
       tags:
         - user
       parameters:
         - name: body
           in: body
-          description: Information of Passowrd
+          description: Information of passowrd ( old password & new password )
           required: true
           schema:
             $ref: '#/definitions/UserChangePassword'

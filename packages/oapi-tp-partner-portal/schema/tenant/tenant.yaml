@@ -1,0 +1,58 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro Partner Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: certificate
+    description: Handles tenants data
+
+paths:
+  /tenants:
+    get:
+      description: Get all tenants 
+      responses:
+        200:
+          description: An array of tenants
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tenant'
+            example: 
+              $ref: '#/externalDocs/x-mocks/TenantList'
+      tags:
+        - tenant
+    
+
+definitions:
+  Tenant:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      portalName:
+        type: string
+        description: Tenant portal name.  
+     
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Tenant:
+      {
+        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "portalNmae": "MOXA"
+      }
+    TenantList:
+      [
+        {
+          "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "portalNmae": "MOXA"
+        }
+      ]

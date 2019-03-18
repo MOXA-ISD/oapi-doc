@@ -10,7 +10,7 @@ schemes:
 produces:
   - application/json
 tags:
-  - name: certificate
+  - name: tenant
     description: Handles tenants data
 
 paths:

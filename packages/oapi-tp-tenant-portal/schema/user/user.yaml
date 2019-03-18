@@ -576,6 +576,9 @@ definitions:
         type: string
         description: Phone of user.
         maxLength: 50
+      roleId:
+        type: integer
+        description: Role id.
 
   UserUpdate:
     type: object
@@ -732,7 +735,8 @@ externalDocs:
         "displayName":"Edie Lin",
         "firstName":"Edie",
         "lastName":"Lin",
-        "password":"moxamoxa"
+        "password":"moxamoxa",
+        "roleId": 4
       }
     UserUpdate:
       {

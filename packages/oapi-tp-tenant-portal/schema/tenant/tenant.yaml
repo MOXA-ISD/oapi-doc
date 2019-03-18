@@ -23,16 +23,16 @@ paths:
           description: Return tenant info
           schema:
             $ref: '#/definitions/TenantInfo'
-            example: 
-              $ref: '#/externalDocs/x-mocks/TenantInfo'
+          example: 
+            $ref: '#/externalDocs/x-mocks/TenantInfo'
       tags:
-        - user
+        - tenant
 
   /tenant/avatar:
     put:
       description: Upload an image file for tenant
       tags:
-        - user
+        - tenant
       consumes:
         - multipart/form-data
       parameters:

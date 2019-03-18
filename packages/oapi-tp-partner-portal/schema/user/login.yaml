@@ -11,7 +11,7 @@ produces:
   - application/json
 
 tags:
-  - name: login
+  - name: user
     description: Handles login/logout operation
 
 paths:
@@ -39,7 +39,7 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
-        - login
+        - user
 
   /logout:
     post:
@@ -48,7 +48,7 @@ paths:
         200:
           description: user logout
       tags:
-        - logout
+        - user
 
 definitions:
   LoginRes:

@@ -259,6 +259,6 @@ externalDocs:
       }
     DownloadLink:
       {
-        "link": "https://www.moxa.com"
+        "path": "https://www.moxa.com"
       }  
 

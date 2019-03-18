@@ -18,15 +18,15 @@ paths:
     get:
       description: Get all certificates data
       parameters:
-        - name: modelType
+        - name: portalName
           in: query
           type: string
-          description: Filter the certificates list by modelType
+          description: Filter the certificates list by portalName
           required: false
-        - name: mac
+        - name: applicant
           in: query
           type: string
-          description: Filter the certificates list by mac
+          description: Filter the certificates list by applicant
           required: false
         - name: applyStatus
           in: query
@@ -39,8 +39,8 @@ paths:
           required: false
           type: string
           enum:
-          - modelType
-          - mac
+          - portalName
+          - applicant
           - applyStatus
           - createdAt
         - name: sort
@@ -201,6 +201,9 @@ definitions:
       - mac
       - modelName
     properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
       mac:
         type: string
         description: Mac address of device.
@@ -265,6 +268,6 @@ externalDocs:
       }
     DownloadLink:
       {
-        "link": "https://www.moxa.com"
+        "path": "https://www.moxa.com"
       }  
 

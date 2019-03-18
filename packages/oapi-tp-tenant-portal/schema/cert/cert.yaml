@@ -97,35 +97,6 @@ paths:
       tags:
         - certificate
 
-  /certificates/{id}/approve:
-    post:
-      description: Request to approve or decline certificate.
-      parameters:
-        - name: id
-          in: path
-          description: Certificate unique identifier
-          required: true
-          type: string
-        - name: body
-          in: body
-          description: Certificate approve or decline data
-          required: true
-          schema:
-            properties:
-              approved:
-                description: default is false
-                type: boolean
-                example: true
-              reason:
-                type: string
-                example: 'Decline reason'
-      responses:
-        200:
-          description: Result of certificate approve or decline
-          
-      tags:
-        - certificate
-
   /certificates/{id}/download:
     post:
       description: Request to download certificate.

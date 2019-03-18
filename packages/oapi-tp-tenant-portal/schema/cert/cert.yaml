@@ -216,7 +216,7 @@ externalDocs:
   x-mocks:
     Cert:
       {
-        "id": "1",
+        "applyId": "1",
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "mac": "00-0C-29-70-D2-EC", 
         "serialNumber": "12345678", 
@@ -236,7 +236,7 @@ externalDocs:
         "data":
           [
             {
-              "id": "1",
+              "applyId": "1",
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "mac": "00-0C-29-70-D2-EC", 
               "serialNumber": "12345678", 

@@ -225,7 +225,7 @@ externalDocs:
   x-mocks:
     Cert:
       {
-        "id": "1",
+        "applyId": "1",
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "portalNmae": "MOXA",
         "tenantAvatar": "https://www.moxa.com",

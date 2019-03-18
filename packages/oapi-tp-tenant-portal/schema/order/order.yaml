@@ -288,9 +288,9 @@ externalDocs:
         "orderName": "IIoT Application Suite",
         "tenantId": "a163dd88-d0a6-45a6-b042-e89a0bf31fbd",
         "userId": "8a849228-b3fd-41f6-bfd6-84574580e40b",
-        "appPackDownloadUrl": "http://thingspro9dev4system.blob.core.windows.net/pocorder/a163dd88-d0a6-45a6-b042-e89a0bf31fbd/17.tar",
+        "appPackDownloadUrl": "http://www.moxa.com/pocorder/a163dd88-d0a6-45a6-b042-e89a0bf31fbd/17.tar",
         "creator": {
-          "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+          "avatar": "https://www.moxa.com/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
           "displayName": "Cain Chen",
           "email": "cainhc.chen@moxa.com",
           "userId": "7dc93587-5444-48bf-a196-da811c39959d"
@@ -324,7 +324,7 @@ externalDocs:
         "edgeAppList": [
           {
             "appId": 1,
-            "appName": "app-azure",
+            "appName": "app-cloud",
             "appVersionId": 29,
             "categoryList": [
                 {
@@ -334,10 +334,10 @@ externalDocs:
                 }
             ],
             "cpuArch": "amd64",
-            "description": "MOXA Azure client",
-            "displayName": "Azure Client",
-            "downloadUrl": "https://thingspro9stage4system.blob.core.windows.net/edge-application/edge-app-azure/32/app-azure_0.7.0-32_amd64.mpkg",
-            "iconUrl": "https://thingspro9stage4system.blob.core.windows.net/edge-application/edge-app-azure/32/images/logo.png",
+            "description": "MOXA cloud client",
+            "displayName": "cloud Client",
+            "downloadUrl": "https://www.moxa.com/app-cloud.mpkg",
+            "iconUrl": "https://www.moxa.com/app-cloud.png",
             "isTrialLicense": true,
             "licenseStatement": "Trial - 30 days",
             "publishAt": "2018-11-08T01:24:15.640068Z",
@@ -361,8 +361,8 @@ externalDocs:
             "cpuArch": "amd64",
             "description": "Web console",
             "displayName": "Console",
-            "downloadUrl": "https://thingspro9stage4system.blob.core.windows.net/edge-application/edge-app-console/6/console_0.3.0-6_amd64.mpkg",
-            "iconUrl": "https://thingspro9stage4system.blob.core.windows.net/edge-application/edge-app-console/6/images/logo.png",
+            "downloadUrl": "https://www.moxa.com/abc.mpkg",
+            "iconUrl": "https://www.moxa.com/abc.png",
             "isTrialLicense": true,
             "licenseStatement": "Trial - 30 days",
             "publishAt": "2018-10-16T06:19:39.604631Z",
@@ -386,7 +386,7 @@ externalDocs:
               "createdAt": "2018-08-20T05:06:58.047171Z",
               "updatedAt": "2018-08-20T05:06:58.047171Z",
               "creator": {
-                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+                "avatar": "https://www.moxa.com/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
                 "displayName": "Cain Chen",
                 "email": "cainhc.chen@moxa.com",
                 "userId": "7dc93587-5444-48bf-a196-da811c39959d"
@@ -418,7 +418,7 @@ externalDocs:
               "edgeAppList": [
                 {
                   "appId": 1,
-                  "appName": "app-azure",
+                  "appName": "app-cloud",
                   "appVersionId": 29,
                   "categoryList": [
                     {
@@ -428,10 +428,10 @@ externalDocs:
                     }
                   ],
                   "cpuArch": "amd64",
-                  "description": "MOXA Azure client",
-                  "displayName": "Azure Client",
-                  "downloadUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-azure/32/app-azure_0.7.0-32_amd64.mpkg",
-                  "iconUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-azure/32/images/logo.png",
+                  "description": "MOXA cloud client",
+                  "displayName": "Cloud Client",
+                  "downloadUrl": "https://www.moxa.com/edge-application/edge-app/32/app-.7.0-32_amd64.mpkg",
+                  "iconUrl": "https://www.moxa.com/edge-application/edge-app/32/images/logo.png",
                   "isTrialLicense": true,
                   "licenseStatement": "Trial - 30 days",
                   "publishAt": "2018-11-08T01:24:15.640068Z",
@@ -455,8 +455,8 @@ externalDocs:
                   "cpuArch": "amd64",
                   "description": "Web console",
                   "displayName": "Console",
-                  "downloadUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-console/6/console_0.3.0-6_amd64.mpkg",
-                  "iconUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-console/6/images/logo.png",
+                  "downloadUrl": "https://www.moxa.com/edge-application/edge-app-console/6/console_0.3.0-6_amd64.mpkg",
+                  "iconUrl": "https://www.moxa.com/edge-application/edge-app-console/6/images/logo.png",
                   "isTrialLicense": true,
                   "licenseStatement": "Trial - 30 days",
                   "publishAt": "2018-10-16T06:19:39.604631Z",
@@ -477,7 +477,7 @@ externalDocs:
               "createdAt": "2018-08-20T05:06:58.047171Z",
               "updatedAt": "2018-08-20T05:06:58.047171Z",
               "creator": {
-                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+                "avatar": "https://www.moxa.com/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
                 "displayName": "Cain Chen",
                 "email": "cainhc.chen@moxa.com",
                 "userId": "7dc93587-5444-48bf-a196-da811c39959d"
@@ -509,7 +509,7 @@ externalDocs:
               "edgeAppList": [
                 {
                   "appId": 1,
-                  "appName": "app-azure",
+                  "appName": "app-cloud",
                   "appVersionId": 29,
                   "categoryList": [
                     {
@@ -519,10 +519,10 @@ externalDocs:
                     }
                   ],
                   "cpuArch": "amd64",
-                  "description": "MOXA Azure client",
-                  "displayName": "Azure Client",
-                  "downloadUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-azure/32/app-azure_0.7.0-32_amd64.mpkg",
-                  "iconUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-azure/32/images/logo.png",
+                  "description": "MOXA cloud client",
+                  "displayName": "Cloud Client",
+                  "downloadUrl": "https://www.moxa.com/edge-application/32/app_0.7.0-32_amd64.mpkg",
+                  "iconUrl": "https://www.moxa.com/edge-application/32/images/logo.png",
                   "isTrialLicense": true,
                   "licenseStatement": "Trial - 30 days",
                   "publishAt": "2018-11-08T01:24:15.640068Z",
@@ -546,8 +546,8 @@ externalDocs:
                   "cpuArch": "amd64",
                   "description": "Web console",
                   "displayName": "Console",
-                  "downloadUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-console/6/console_0.3.0-6_amd64.mpkg",
-                  "iconUrl": "https://thingspro9dev4system.blob.core.windows.net/edge-application/edge-app-console/6/images/logo.png",
+                  "downloadUrl": "https://www.moxa.com/edge-application/edge-app-console/6/console_0.3.0-6_amd64.mpkg",
+                  "iconUrl": "https://www.moxa.com/edge-application/edge-app-console/6/images/logo.png",
                   "isTrialLicense": true,
                   "licenseStatement": "Trial - 30 days",
                   "publishAt": "2018-10-16T06:19:39.604631Z",
@@ -580,7 +580,7 @@ externalDocs:
                 "id": 120,
                 "name": "tobeInstall",
                 "type": "application",
-                "value": "http://thingspro9dev4system.blob.core.windows.net/pocorder/a163dd88d0a645a6b042e89a0bf31fbd/120.pack"
+                "value": "http://www.moxa.com/pocorder/a163dd88d0a645a6b042e89a0bf31fbd/120.pack"
               }
             ]
           },

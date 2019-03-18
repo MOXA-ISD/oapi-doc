@@ -363,42 +363,6 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/User'
 
-  /tenant/info:
-    get:
-      description: get tenant info
-      responses:
-        200:
-          description: Return tenant info
-          schema:
-            $ref: '#/definitions/TenantInfo'
-            example: 
-              $ref: '#/externalDocs/x-mocks/TenantInfo'
-      tags:
-        - user
-
-  /tenant/avatar:
-    put:
-      description: Upload an image file for tenant
-      tags:
-        - user
-      consumes:
-        - multipart/form-data
-      parameters:
-        - name: image
-          in: formData
-          description: use form-data to upload a image. key = image, value = {image file}
-          required: true
-          type: file
-      responses:
-        200:
-          description: Upload an image file
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Avatar'
-            example:
-              $ref: '#/externalDocs/x-mocks/Avatar'
-
 definitions:
   User:
     type: object
@@ -458,7 +422,6 @@ definitions:
         items:
           '$ref': '#/definitions/Permission'
         description: permission list.
-
   Group:
     type: object
     properties:
@@ -473,7 +436,6 @@ definitions:
         items:
           '$ref': '#/definitions/Permission'
         description: Group permission list.
-
   Role:
     type: object
     properties:
@@ -486,7 +448,6 @@ definitions:
       value:
         type: integer
         description: Role value.
-
   Permission:
     type: object
     properties:
@@ -499,14 +460,12 @@ definitions:
       value:
         type: integer
         description: Permission value.
-
   Avatar:
     type: object
     properties:
       exist:
         type: string
         description: Return an absolute path in azure storage
-
   Invitee:
     type: object
     properties:
@@ -699,82 +658,12 @@ definitions:
         description: Login password.
         example: '12345678'
 
-  TenantInfo:
-    type: object
-    properties:
-      tenantId:
-        type: string
-        description: Unique identifier representing a specific tenant.
-      domainName:
-        type: string
-        description: Domain name of tenant.
-      portalName:
-        type: string
-        description: Portal name of tenant.
-      company:
-        type: string
-        description: Company of tenant.
-      email:
-        type: string
-        description: Email of tenant.
-      username:
-        type: string
-        description: Username of tenant admin user.
-      firstName:
-        type: string
-        description: First name of tenant admin user.
-      lastName:
-        type: string
-        description: Last name of tenant admin user.
-      activate:
-        type: string
-        description: Activate status of tenant.
-      phone:
-        type: string
-        description: Phone of tenant.
-      culture:
-        type: string
-        description: Culture of tenant.
-      industry:
-        type: string
-        description: Industry of tenant.
-      avatar:
-        type: string
-        description: Avatar of user.
-      customer:
-        type: boolean
-        description: Is customer or not.
-      provisionStatus:
-        type: string
-        description: Provision status of tenant.
-      deviceHlr:
-        type: string
-        description: Device home location url.
-      data:
-        type: object
-        description: metadata of tenant.
-      activatedAt:
-        type: string
-        description: Tenant activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      deactivatedAt:
-        type: string
-        description: Tenant deactivate time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      createdBy:
-        type: string
-        description: Created tenant username
-      createdAt:
-        type: string
-        description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updatedAt:
-        type: string
-        description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
 externalDocs:
   url: 'http://#'
   x-mocks:
     User:
       {
-        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+        "avatar": "https://www.moxa.com/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",
         "company": "moxa",
         "data": {},
         "department": "",
@@ -847,7 +736,7 @@ externalDocs:
       }
     UserUpdate:
       {
-        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg",
+        "avatar": "https://www.moxa.com/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg",
         "company": "moxa",
         "data": {},
         "displayName": "Cain Chen",
@@ -974,25 +863,6 @@ externalDocs:
         "email": "201903181112@moxa.com",
         "displayName": "Test 201903181112",
         "password": "moxamoxa"
-      }
-    TenantInfo:
-      {
-        "activate": "approved",
-        "activatedAt": "",
-        "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/tenant/ed31872d-b57e-4c94-a989-c2782c0d3fe7.jpeg",
-        "createdAt": "2019-01-22T07:49:07.104674Z",
-        "createdBy": "Rick Peng",
-        "culture": "zh-TW",
-        "customer": false,
-        "data": {},
-        "deactivatedAt": "",
-        "domainName": "tenant-dev",
-        "industry": "Others",
-        "portalName": "ISS",
-        "provisionStatus": "Provision Completed. Email Sent Completed.",
-        "services": [],
-        "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-        "updatedAt": "2019-01-22T07:49:07.104674Z"
       }
     UuidList:
       [

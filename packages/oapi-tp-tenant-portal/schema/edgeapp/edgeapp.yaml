@@ -210,7 +210,7 @@ externalDocs:
       {
         "appId": 1,
         "appVersionId": 21,
-        "appName": "app-azure",
+        "appName": "app-cloud",
         "categoryList": [
           {
             "categoryId": 3,
@@ -219,10 +219,10 @@ externalDocs:
           }
         ],
         "cpuArch": "armhf",
-        "description": "app-azure",
-        "displayName": "app-azure",
-        "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/app-azure/0.3.0-18/logo.png",
-        "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-azure/18/app-azure_0.3.0-18_armhf.mpkg",
+        "description": "app-cloud",
+        "displayName": "app-cloud",
+        "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/app-cloud/0.3.0-18/logo.png",
+        "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-cloud/18/app-cloud.3.0-18_armhf.mpkg",
         "isTrialLicense": true,
         "licenseStatement": "Trial - 30 days",
         "publishAt": "2018-09-27T06:54:14.203998+00:00Z",
@@ -240,7 +240,7 @@ externalDocs:
         "data": [
           {
             "appId": 1,
-            "appName": "app-azure",
+            "appName": "app-cloud",
             "appVersionId": 1,
             "categoryList": [
               {
@@ -250,10 +250,10 @@ externalDocs:
               }
             ],
             "cpuArch": "amd64",
-            "description": "MOXA Azure client",
-            "displayName": "Azure Client",
-            "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-azure/24/app-azure_0.5.0-24_amd64.mpkg",
-            "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/app-azure/0.5.0-24/logo.png",
+            "description": "MOXA cloud client",
+            "displayName": "cloud Client",
+            "downloadUrl": "http://repo.moxa.online/static/v3/edge/builds/edge-app-cloud/24/app-cloud.5.0-24_amd64.mpkg",
+            "iconUrl": "http://tenant-west-us.thingspro.io/images/edge-application/app-cloud/0.5.0-24/logo.png",
             "isTrialLicense": true,
             "licenseStatement": "Trial - 30 days",
             "publishAt": "2018-09-27T06:53:51.719756+00:00Z",

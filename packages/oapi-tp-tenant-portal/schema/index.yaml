@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.5
+  version: 0.0.6
   title: ThingsPro Tenant Portal RESTful API reference
   description: |
     Welcome to the ThingsPro Tenant Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
@@ -30,6 +30,7 @@ tags:
   - $ref: './edgeapp/index.yaml#/tags'
   - $ref: './order/index.yaml#/tags'
   - $ref: './cert/index.yaml#/tags'  
+  - $ref: './tenant/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
@@ -37,10 +38,12 @@ paths:
   - $ref: './edgeapp/index.yaml#/paths'
   - $ref: './order/index.yaml#/paths'
   - $ref: './cert/index.yaml#/paths'
+  - $ref: './tenant/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
   - $ref: './device/index.yaml#/definitions'
   - $ref: './edgeapp/index.yaml#/definitions'
   - $ref: './order/index.yaml#/definitions'
-  - $ref: './cert/index.yaml#/definitions'  
+  - $ref: './cert/index.yaml#/definitions'
+  - $ref: './tenant/index.yaml#/definitions'  

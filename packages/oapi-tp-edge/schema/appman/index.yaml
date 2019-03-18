@@ -1099,8 +1099,6 @@ paths:
             JSON object for each line. The schema looks like
             {"level":"info","message":"updating source stable(https://repo.moxa.online/static/v3/edge/dists/v0.3.0/apps)"}
             {"level":"info","message":"updated source stable(https://repo.moxa.online/static/v3/edge/dists/v0.3.0/apps)"}
-            {"level":"info","message":"updating package app-azure_0.3.0-17_amd64.mpkg"}
-            {"level":"info","message":"updating package app-azure_0.3.0-17_armhf.mpkg"}
             {"level":"info","message":"updating package console_0.3.0-5_amd64.mpkg"}
             {"level":"info","message":"updating package console_0.3.0-5_armhf.mpkg"}
             {"level":"info","message":"updating package linuxdesktop_0.3.0-10_amd64.mpkg"}

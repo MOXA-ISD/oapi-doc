@@ -129,7 +129,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-            example: 
+            example:
               $ref: '#/externalDocs/x-mocks/User'
     put:
       description: Return updated user data with given ID
@@ -158,6 +158,34 @@ paths:
       responses:
         204:
           description: success
+
+  /users/{userId}/roles:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
+    put:
+      description: Update user's role
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: Information of User
+          required: true
+          schema:
+            $ref: '#/definitions/UserRole'
+      responses:
+        200:
+          description: An Object of the user
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/User'
+            example:
+              $ref: '#/externalDocs/x-mocks/User'
 
   /users/avatar:
     put:
@@ -201,7 +229,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-            example: 
+            example:
               $ref: '#/externalDocs/x-mocks/User'
 
   /users/forgetPassword:
@@ -244,7 +272,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/User'
-            example: 
+            example:
               $ref: '#/externalDocs/x-mocks/User'
 
   /users/exist/{email}:
@@ -326,14 +354,14 @@ paths:
           schema:
             $ref: '#/definitions/UserRegister'
       responses:
-        201:
-          description: User register successfully
+        200:
+          description: An Object of the user
           schema:
             type: object
             items:
-              $ref: '#/definitions/LoginRes'
+              $ref: '#/definitions/User'
             example:
-              $ref: '#/externalDocs/x-mocks/LoginRes'
+              $ref: '#/externalDocs/x-mocks/User'
 
   /tenant/info:
     get:
@@ -635,6 +663,13 @@ definitions:
         type: string
         description: New password of user login.
 
+  UserRole:
+    type: object
+    properties:
+      roleId:
+        type: integer
+        description: Role id.
+
   UserInvite:
     type: object
     properties:
@@ -733,17 +768,6 @@ definitions:
       updatedAt:
         type: string
         description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
-  LoginRes:
-    type: object
-    properties:
-      user:
-        type: object
-        items:
-          - $ref: '#/definitions/User'
-      token:
-        type: string
-        description: Granted authentication token.
 
 externalDocs:
   url: 'http://#'
@@ -974,61 +998,3 @@ externalDocs:
       [
         "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
       ]
-    LoginRes:
-      {
-        "user":
-          {
-            "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-            "userId": "916b3c8b-8c61-46a3-8751-e1bc4ddf80f1",
-            "displayName": "Ellen Woods",
-            "firstName": "Ellen",
-            "lastName": "Woods",
-            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/916b3c8b-8c61-46a3-8751-e1bc4ddf80f1.jpg",
-            "email": "ellen@moxa.com",
-            "company": "MOXA Inc.",
-            "department": "Department",
-            "employeeId": "123",
-            "phone": "02-89191230",
-            "loginAt": "2018-08-12T20:17:46.384Z",
-            "passwordExpireAt": "2019-01-22T08:02:49:089Z",
-            "portalName": "ISS",
-            "domainName": "tenant-dev",
-            "data":
-              {
-                "CUSTOM_FIELD": "CUSTOM_VALUE"
-              },
-            "role": {
-              "admin": true,
-              "id": 1,
-              "name": "Administrator",
-              "permission": [
-                {
-                  "id": 1,
-                  "name": "User & Role management",
-                  "value": 1
-                },
-                {
-                  "id": 2,
-                  "name": "Device register",
-                  "value": 1
-                },
-                {
-                  "id": 3,
-                  "name": "Device grouping",
-                  "value": 1
-                },
-                {
-                  "id": 4,
-                  "name": "View device information",
-                  "value": 1
-                },
-                {
-                  "id": 5,
-                  "name": "Full manage device",
-                  "value": 1
-                }
-              ]
-            }
-          },
-        "token": "USER_TOKEN"
-      }

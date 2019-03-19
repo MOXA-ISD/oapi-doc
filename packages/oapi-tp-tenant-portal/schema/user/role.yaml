@@ -148,27 +148,6 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/RoleUserList'
 
-  /roles/{id}/duplicate:
-    post:
-      description: Duplicate a new role
-      tags:
-        - role
-      parameters:
-        - name: id
-          in: path
-          description: Role ID
-          required: true
-          type: string
-      responses:
-        201:
-          description: Create role successfully
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Role'
-            example: 
-              $ref: '#/externalDocs/x-mocks/Role'
-
 definitions:
   Role:
     type: object

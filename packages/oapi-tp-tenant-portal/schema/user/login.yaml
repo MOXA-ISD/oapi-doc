@@ -12,7 +12,6 @@ produces:
 
 tags:
   - name: user
-    description: Handles login/logout operation
 
 paths:
   /login:

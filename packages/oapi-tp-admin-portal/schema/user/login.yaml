@@ -17,8 +17,7 @@ securityDefinitions:
     description: ThingsPro RESTful API token, The token should be created on web console.
 
 tags:
-  - name: login
-    description: Handles login/logout operation
+  - name: user
 
 paths:
   '/login':

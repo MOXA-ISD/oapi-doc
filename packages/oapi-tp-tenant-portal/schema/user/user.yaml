@@ -187,6 +187,46 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/User'
 
+  /users/enable:
+    put:
+      description: Enable all users
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/UserBatch'
+            example:
+              $ref: '#/externalDocs/x-mocks/UuidList'
+      responses:
+        200:
+          description: success
+
+  /users/disable:
+    put:
+      description: Disable all users ( suspend )
+      tags:
+        - user
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/UserBatch'
+            example:
+              $ref: '#/externalDocs/x-mocks/UuidList'
+      responses:
+        200:
+          description: success
+
   /users/avatar:
     put:
       description: Upload an image file for logged in user

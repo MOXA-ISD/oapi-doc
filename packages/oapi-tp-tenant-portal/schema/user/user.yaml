@@ -36,6 +36,10 @@ paths:
           description: Filter the user list by active
           required: false
           type: string
+          enum:
+          - waiting
+          - enabled
+          - disabled
         - name: order
           in: query
           description: The user list order by some keyword.

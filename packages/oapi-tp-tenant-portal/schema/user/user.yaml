@@ -385,6 +385,27 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/Invitee'
 
+  /users/revoke/{inviteId}:
+    parameters:
+      - name: inviteId
+        in: path
+        description: Invitee data ID
+        required: true
+        type: string
+    put:
+      description: Revoke user invitation
+      tags:
+        - user
+      responses:
+        200:
+          description: An Object of the invitee
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Invitee'
+            example:
+              $ref: '#/externalDocs/x-mocks/Invitee'
+
   /users/register:
     post:
       description: User register.

@@ -282,7 +282,6 @@ definitions:
     required:
       - groupName
       - description
-      - devicdIdList
     properties:
       groupName:
         type: string
@@ -290,7 +289,7 @@ definitions:
       description:
         type: string
         description: Group descripton.
-      devicdIdList:
+      deviceIdList:
         type: array
         items:
           type: string
@@ -305,7 +304,7 @@ definitions:
       description:
         type: string
         description: Group descripton.
-      devicdIdList:
+      deviceIdList:
         type: array
         items:
           type: string
@@ -443,7 +442,7 @@ externalDocs:
       {
         "groupName": "moxa3",
         "description": "moxa group3",
-        "devicdIdList": ["a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b", "91cc56a9-1159-4913-b5f2-ac482cd68ee6"]
+        "deviceIdList": ["a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b", "91cc56a9-1159-4913-b5f2-ac482cd68ee6"]
       }
     GroupResponse:
       {

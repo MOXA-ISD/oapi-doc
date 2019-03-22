@@ -59,6 +59,40 @@ definitions:
         type: string
         description: Return download path of avatar
 
+  Offer:
+    type: object
+    properties:
+      price:
+        type: integer
+        description: Price of this offer
+
+  Subscription:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of subscribe service.
+      status:
+        type: string
+        description: Status of subscribe service.
+        enum:
+        - activated
+        - deactivated
+      startTime:
+        type: string
+        description: Start time of subscribe service.
+      endTime:
+        type: string
+        description: End time of subscribe service.
+      offer:
+        type: object
+        description: Offer of subscribe service.
+        items:
+          '$ref': '#/definitions/Offer'
+      autoRenew:
+        type: boolean
+        description: Subscrption automatically renews at the end of your subscrption's expiry period.
+
   TenantInfo:
     type: object
     properties:
@@ -110,12 +144,19 @@ definitions:
       updatedAt:
         type: string
         description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      subscriptions:
+        type: array
+        description: Subscribe services of the tenant.
+        items:
+          '$ref': '#/definitions/Subscription'
 
 externalDocs:
   url: 'http://#'
   x-mocks:
     Avatar:
-      { "path": "https://www.moxa.com/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg" }
+      { 
+        "path": "https://www.moxa.com/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg" 
+      }
     TenantInfo:
       {
         "activate": "approved",
@@ -132,5 +173,18 @@ externalDocs:
         "portalName": "ISS",
         "provisionStatus": "Provision Completed. Email Sent Completed.",
         "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+        "subscription": 
+        [
+          {
+            "name": "Device Management",
+            "status": "activated",
+            "startTime": 2019-03-20T07:49:07.104674Z", 
+            "endTime": 2019-04-20T07:49:07.104674Z",
+            "offer": {
+              "price": 20
+            },
+            "autoRenew": True
+          }
+        ],
         "updatedAt": "2019-01-22T07:49:07.104674Z"
       }

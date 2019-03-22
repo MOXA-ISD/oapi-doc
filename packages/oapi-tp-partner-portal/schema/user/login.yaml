@@ -35,8 +35,8 @@ paths:
           description: Return user and token data
           schema:
             $ref: '#/definitions/LoginRes'
-            example: 
-              $ref: '#/externalDocs/x-mocks/LoginRes'
+          example: 
+            $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
         - user
 

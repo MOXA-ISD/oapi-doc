@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.7
+  version: 0.0.8
   title: ThingsPro Tenant Portal RESTful API reference
   description: |
     Welcome to the ThingsPro Tenant Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.

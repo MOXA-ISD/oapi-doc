@@ -879,7 +879,7 @@ externalDocs:
     Invitee:
       {
         "inviteId": "762e7efb-8b49-4855-89a3-30f3adabf580",
-        "inviter": "7dc93587-5444-48bf-a196-da811c39959d",
+        "inviter": "Cain Chen",
         "domainName": "tenant-dev",
         "email": "22222@moxa.com",
         "status": "Inviting",

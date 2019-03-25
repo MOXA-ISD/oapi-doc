@@ -96,24 +96,6 @@ paths:
               $ref: '#/definitions/User'
             example: 
               $ref: '#/externalDocs/x-mocks/User'
-    delete:
-      description: Delete Users
-      tags:
-        - user
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/UserBatch'
-            example:
-              $ref: '#/externalDocs/x-mocks/UuidList'
-      responses:
-        204:
-          description: success
 
   /users/{userId}:
     parameters:
@@ -191,7 +173,13 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/User'
 
-  /users/enable:
+  /users/{userId}/enable:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
     put:
       description: Enable all users
       tags:
@@ -204,14 +192,20 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/UserBatch'
+              $ref: '#/definitions/User'
             example:
-              $ref: '#/externalDocs/x-mocks/UuidList'
+              $ref: '#/externalDocs/x-mocks/User'
       responses:
         200:
           description: success
 
-  /users/disable:
+  /users/{userId}/disable:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
     put:
       description: Disable all users ( suspend )
       tags:
@@ -224,9 +218,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/UserBatch'
+              $ref: '#/definitions/User'
             example:
-              $ref: '#/externalDocs/x-mocks/UuidList'
+              $ref: '#/externalDocs/x-mocks/User'
       responses:
         200:
           description: success
@@ -597,11 +591,6 @@ definitions:
         description: Password of user.
         maxLength: 100
 
-  UserBatch:
-    type: array
-    items:
-      type: string
-
   UserCreate:
     type: object
     properties:
@@ -933,7 +922,3 @@ externalDocs:
         "displayName": "Test 201903181112",
         "password": "moxamoxa"
       }
-    UuidList:
-      [
-        "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
-      ]

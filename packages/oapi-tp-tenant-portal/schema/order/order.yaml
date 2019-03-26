@@ -207,7 +207,7 @@ definitions:
         items:
           type: object
         description: device list for this order.
-      edgeAppList:
+      appList:
         type: array
         items:
           type: object
@@ -321,7 +321,7 @@ externalDocs:
             "status": "Unknown"
           }
         ],
-        "edgeAppList": [
+        "appList": [
           {
             "appId": 1,
             "appName": "app-cloud",
@@ -415,7 +415,7 @@ externalDocs:
                   "status": "Unknown"
                 }
               ],
-              "edgeAppList": [
+              "appList": [
                 {
                   "appId": 1,
                   "appName": "app-cloud",
@@ -506,7 +506,7 @@ externalDocs:
                   "status": "Unknown"
                 }
               ],
-              "edgeAppList": [
+              "appList": [
                 {
                   "appId": 1,
                   "appName": "app-cloud",

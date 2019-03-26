@@ -171,6 +171,8 @@ externalDocs:
         "domainName": "tenant-dev",
         "industry": "Others",
         "portalName": "ISS",
+        "supporter": "Rick Peng",
+        "supporterEmail": "rick.peng@moxa.com",
         "provisionStatus": "Provision Completed. Email Sent Completed.",
         "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "subscription": 

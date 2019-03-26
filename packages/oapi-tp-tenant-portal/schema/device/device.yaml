@@ -88,26 +88,6 @@ paths:
               $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
-    post:
-      description: Create a new device.
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceReq'
-      responses:
-        201:
-          description: Create device successfully
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Device'
-            example: 
-              $ref: '#/externalDocs/x-mocks/Device'
-      tags:
-        - device
 
   /devices/poc:
     get:
@@ -445,13 +425,6 @@ definitions:
           type: object
         description: Device reported properties.
 
-  DeviceReq:
-    type: object
-    properties:
-      modelName:
-        type: string
-        description: Model name of device.
-  
   PropertyReq:
     type: object
     properties:
@@ -855,10 +828,6 @@ externalDocs:
             "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
           }
         ]
-      }
-    DeviceReq:
-      {
-        "modelName": "moxa"
       }
     ReportedProperties:
       {    

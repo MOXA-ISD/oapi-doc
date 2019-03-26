@@ -131,10 +131,10 @@ paths:
       parameters:
         - name: body
           in: body
+          description: The parameters for update single group
           required: true
           schema:
-            items:
-              $ref: '#/definitions/GroupUpdate'
+            $ref: '#/definitions/GroupUpdate'
       responses:
         200:
           description: success
@@ -426,6 +426,7 @@ externalDocs:
       {
         "groupName": "moxa4",
         "description": "moxa group4",
+        "deviceIdList": ["570d0573-b2e3-4304-9136-cfeb2dfb4695"]
       }
     GroupResponse:
       {

@@ -126,6 +126,12 @@ definitions:
       provisionStatus:
         type: string
         description: Provision status of tenant.
+      supporter:
+        type: string
+        description: Tenant supporter name.
+      supporterEmail:
+        type: string
+        description: Tenant supporter email.
       data:
         type: object
         description: metadata of tenant.
@@ -174,6 +180,8 @@ externalDocs:
         "supporter": "Rick Peng",
         "supporterEmail": "rick.peng@moxa.com",
         "provisionStatus": "Provision Completed. Email Sent Completed.",
+        "supporter": "Rick Peng",
+        "supporterEmail": "rick.peng@moxa.com",
         "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "subscription": 
         [

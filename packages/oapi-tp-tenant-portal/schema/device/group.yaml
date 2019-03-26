@@ -129,13 +129,12 @@ paths:
       tags:
         - group
       parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: '#/definitions/GroupUpdate'
+        - name: body
+          in: body
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/GroupUpdate'
       responses:
         200:
           description: success
@@ -422,6 +421,11 @@ externalDocs:
         "groupName": "moxa3",
         "description": "moxa group3",
         "deviceIdList": ["a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b", "91cc56a9-1159-4913-b5f2-ac482cd68ee6"]
+      }
+    GroupUpdate:
+      {
+        "groupName": "moxa4",
+        "description": "moxa group4",
       }
     GroupResponse:
       {

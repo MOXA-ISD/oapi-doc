@@ -133,7 +133,7 @@ paths:
         in: body
         required: true
         schema:
-          type: array
+          type: object
           items:
             $ref: '#/definitions/GroupUpdate'
       responses:

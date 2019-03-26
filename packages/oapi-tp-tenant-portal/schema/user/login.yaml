@@ -50,6 +50,25 @@ paths:
         - user
 
 definitions:
+  Tenant:
+    type: object
+    properties:
+      portalName:
+        type: string
+        description: Tenant portal name.
+      domainName:
+        type: string
+        description: Tenant domain name.
+      supporter:
+        type: string
+        description: Tenant supporter name.
+      supporterEmail:
+        type: string
+        description: Tenant supporter email.
+      createdAt:
+        type: string
+        description: Tenant created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+
   LoginRes:
     type: object
     properties:
@@ -57,6 +76,10 @@ definitions:
         type: object
         items:
           - $ref: '#/definitions/User'
+      tenant:
+        type: object
+        items:
+          - $ref: '#/definitions/Tenant'    
       token:
         type: string
         description: Granted authentication token.
@@ -109,12 +132,6 @@ definitions:
       passwordExpireAt:
         type: string
         description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      portalName:
-        type: string
-        description: Tenant portal name.
-      domainName:
-        type: string
-        description: Tenant domain name.
       role:
         type: array
         description: List of role which contains the user.
@@ -141,8 +158,6 @@ externalDocs:
             "phone": "02-89191230",
             "loginAt": "2018-08-12T20:17:46.384Z",
             "passwordExpireAt": "2019-01-22T08:02:49:089Z",
-            "portalName": "ISS",
-            "domainName": "tenant-dev",
             "data": 
               {
                 "CUSTOM_FIELD": "CUSTOM_VALUE"
@@ -180,6 +195,14 @@ externalDocs:
               ]
             }
           },
+        "tenant":
+        {
+          "createdAt": "2019-03-17T15:49:12.421655Z",
+          "domainName": "tenant-dev",
+          "portalName": "ISS",
+          "supporter": "owen",
+          "supporterEmail": "owen@moxa.com"
+        },  
         "token": "USER_TOKEN"
       }
 

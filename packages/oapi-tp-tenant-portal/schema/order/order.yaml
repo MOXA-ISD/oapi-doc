@@ -565,6 +565,19 @@ externalDocs:
             }
           ]
       }
+    CreateOrder:
+      {
+        "deviceId":["ca1baa5d-f220-4ba3-814a-6faf2098e156"],
+        "appVersionId":[44],
+        "deviceProfileId":1,
+        "orderName": "test poc order - 201903070920",
+        "description": "test description"
+      }
+    UpdateOrder:
+      {
+        "orderName": "test poc order - 201903261018",
+        "description": "test description - 201903261018"
+      }
     DeployOrder:
       {
         "action": "create job–install application",

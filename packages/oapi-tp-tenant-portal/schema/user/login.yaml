@@ -196,13 +196,13 @@ externalDocs:
             }
           },
         "tenant":
-        {
-          "createdAt": "2019-03-17T15:49:12.421655Z",
-          "domainName": "tenant-dev",
-          "portalName": "ISS",
-          "supporter": "owen",
-          "supporterEmail": "owen@moxa.com"
-        },  
+          {
+            "createdAt": "2019-03-17T15:49:12.421655Z",
+            "domainName": "tenant-dev",
+            "portalName": "ISS",
+            "supporter": "owen",
+            "supporterEmail": "owen@moxa.com"
+          },
         "token": "USER_TOKEN"
       }
 

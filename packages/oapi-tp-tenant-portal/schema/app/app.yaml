@@ -39,22 +39,20 @@ paths:
           type: string
         - name: order
           in: query
-          description: Ordering the filter app list, default is asc
-          required: false
-          type: string  
-          enum:
-          - desc
-          - asc
-        - name: sort
-          in: query
-          description: Sort the app list by specific ordering, default is sort by 'appId'
+          description: Ordering the app list, default is order by 'appId'
           required: false
           type: string
           enum:
           - appId
           - appName
-          - categoryId
-          - categoryName
+        - name: sort
+          in: query
+          description: Sorting the filter app list, default is asc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
         - name: limit
           in: query
           description: max return app count (default is 100 and max is 1000)
@@ -197,8 +195,8 @@ externalDocs:
         "appName": "app-cloud",
         "categoryList": [
           {
-            "categoryId": 3,
-            "categoryName": "Intelligence",
+            "id": 3,
+            "name": "Intelligence",
             "description": "Intelligence",
             "type": "edge"
           }
@@ -229,8 +227,8 @@ externalDocs:
             "appVersionId": 1,
             "categoryList": [
               {
-                "categoryId": 2,
-                "categoryName": "Cloud Connectivity",
+                "id": 2,
+                "name": "Cloud Connectivity",
                 "description": "Cloud Connectivity",
                 "type": "edge"
               }
@@ -255,8 +253,8 @@ externalDocs:
             "appVersionId": 21,
             "categoryList": [
               {
-                "categoryId": 3,
-                "categoryName": "Intelligence",
+                "id": 3,
+                "name": "Intelligence",
                 "description": "Intelligence",
                 "type": "edge"
               }
@@ -281,26 +279,26 @@ externalDocs:
       {
         "data": [
           {
-            "categoryId": 1,
-            "categoryName": "Protocol",
+            "id": 1,
+            "name": "Protocol",
             "description": "Protocol",
             "type": "edge"
           },
           {
-            "categoryId": 2,
-            "categoryName": "Cloud Connectivity",
+            "id": 2,
+            "name": "Cloud Connectivity",
             "description": "Cloud Connectivity",
             "type": "edge"
           },
           {
-            "categoryId": 3,
-            "categoryName": "Edge Computing",
+            "id": 3,
+            "name": "Edge Computing",
             "description": "Edge Computing",
             "type": "edge"
           },
           {
-            "categoryId": 4,
-            "categoryName": "Others",
+            "id": 4,
+            "name": "Others",
             "description": "Others",
             "type": "edge"
           }

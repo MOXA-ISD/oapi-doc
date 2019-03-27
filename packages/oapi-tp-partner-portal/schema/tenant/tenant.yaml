@@ -28,8 +28,31 @@ paths:
               $ref: '#/externalDocs/x-mocks/TenantList'
       tags:
         - tenant
-    
-
+  /tenants/{tenantId}/offer:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    patch:
+      description: Change tenant offer
+      parameters:
+        - name: body
+          in: body
+          description: Information of User
+          required: true
+          schema:
+            type: object
+            properties:
+              offerId:
+                type: integer
+      responses:
+        200:
+          description: success
+      tags:
+        - tenant
+        
 definitions:
   Tenant:
     type: object

@@ -40,7 +40,7 @@ paths:
       parameters:
         - name: body
           in: body
-          description: Information of User
+          description: Offer identifier
           required: true
           schema:
             type: object

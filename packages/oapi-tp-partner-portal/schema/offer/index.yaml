@@ -1,0 +1,12 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./offer.yaml#/tags"
+
+paths:
+- $ref: "./offer.yaml#/paths"
+
+definitions:
+- $ref: "./offer.yaml#/definitions"
+

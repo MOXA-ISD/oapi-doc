@@ -28,13 +28,16 @@ tags:
   - $ref: './user/index.yaml#/tags'
   - $ref: './cert/index.yaml#/tags'
   - $ref: './tenant/index.yaml#/tags'
+  - $ref: './offer/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
   - $ref: './cert/index.yaml#/paths'
   - $ref: './tenant/index.yaml#/paths'
+  - $ref: './offer/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
   - $ref: './cert/index.yaml#/definitions'
   - $ref: './tenant/index.yaml#/definitions'
+  - $ref: './offer/index.yaml#/definitions'

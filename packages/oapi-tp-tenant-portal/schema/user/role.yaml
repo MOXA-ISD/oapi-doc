@@ -26,7 +26,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/RolePermission'
+              $ref: '#/definitions/Role'
             example: 
               $ref: '#/externalDocs/x-mocks/RoleList'
     post:
@@ -154,22 +154,6 @@ definitions:
     properties:
       id:
         type: integer
-        description: Unique identifier representing a specific user.
-      name:
-        type: string
-        description: Name of role.
-      description:
-        type: string
-        description: Description of role.
-      admin:
-        type: boolean
-        description: Admin role.
-
-  RolePermission:
-    type: object
-    properties:
-      id:
-        type: integer
         description: Role ID.
       name:
         type: string
@@ -251,17 +235,45 @@ externalDocs:
   x-mocks:
     Role:
       {
-        "id": 19,
-        "name": "test role 2",
-        "description": "test role 2",
         "admin": false,
+        "count": 6,
+        "description": "Full permission on managing devices.",
+        "id": 2,
+        "name": "Device manager",
         "permission": [
           {
+            "description": "User & Role management",
             "id": 1,
+            "name": "User & Role management",
+            "type": 1,
             "value": 0
           },
           {
+            "description": "Device register",
             "id": 2,
+            "name": "Device register",
+            "type": 1,
+            "value": 0
+          },
+          {
+            "description": "Device grouping",
+            "id": 3,
+            "name": "Device grouping",
+            "type": 1,
+            "value": 0
+          },
+          {
+            "description": "View device information",
+            "id": 4,
+            "name": "View device information",
+            "type": 2,
+            "value": 1
+          },
+          {
+            "description": "Full manage device",
+            "id": 5,
+            "name": "Full manage device",
+            "type": 2,
             "value": 1
           }
         ]
@@ -277,30 +289,6 @@ externalDocs:
           },
           {
             "id": 2,
-            "value": 1
-          }
-        ]
-      }
-    RolePermission:
-      {
-        "id": 2,
-        "name": "Device Register",
-        "count": 3,
-        "description": "Device Register",
-        "admin": false,
-        "permission": [
-          {
-            "id": 1,
-            "name": "User/Role management",
-            "description": "User/Role management",
-            "type": 1,
-            "value": 0
-          },
-          {
-            "id": 2,
-            "name": "Device register",
-            "description": "Device register",
-            "type": 1,
             "value": 1
           }
         ]

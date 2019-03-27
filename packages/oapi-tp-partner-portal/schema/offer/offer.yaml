@@ -144,14 +144,14 @@ definitions:
         description: Product type of offer.
       duration:
         type: integer
-        description: Commit month of offer, should be [0-12], 0 presents infinte.  
+        description: Commit month of offer, should be [1-12], -1 presents infinte.  
       price:
         type: number
         format: float
         description: Price of offer
       deviceLimit:
         type: integer
-        description: Limit number of devices
+        description: Limit number of devices, -1 presents infinte.
       deviceOverage:
         type: boolean
         description: Device can overage or not.
@@ -161,7 +161,7 @@ definitions:
         description: Price of overage device.
       apiLimit:
         type: integer
-        description: Limit number of api  
+        description: Limit number of api, -1 presents infinte.
       apiOverage:
         type: boolean
         description: Api can overage or not.
@@ -175,19 +175,18 @@ externalDocs:
   x-mocks:
     Offer:
       {
-        "offerId": "1",
-        "offerName": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "portalNmae": "MOXA",
-        "tenantAvatar": "https://www.moxa.com",
-        "mac": "00-0C-29-70-D2-EC", 
-        "serialNumber": "12345678", 
-        "modelName": "UC-8112",    
-        "note": "test device",
-        "reason": "",
-        "applicant": "Owen Kao",
-        "applyAt": "2018-10-01T08:25:31.422Z",
-        "applyStatus": "waiting",
-        "createdAt": "2018-10-01T08:25:31.422Z"
+        "offerId": 1,
+        "offerName": "SDE",
+        "price": 0,
+        "product": "basic",
+        "duration": -1,
+        "deviceLimit": -1,
+        "deviceOverage": true,
+        "deviceOverageRate": 0,
+        "apiLimit": -1,
+        "apiOverage": true,
+        "apiOverageRate": 0,
+        "createdAt": "2019-03-26T07:51:35.663935Z"
       }
     OfferList:
       {
@@ -197,29 +196,32 @@ externalDocs:
         "data":
           [
             {
-              "id": "1",
-              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-              "portalNmae": "MOXA",
-              "tenantAvatar": "https://www.moxa.com",
-              "mac": "00-0C-29-70-D2-EC", 
-              "serialNumber": "12345678", 
-              "modelName": "UC-8112",    
-              "note": "test device",
-              "reason": "",
-              "applicant": "Owen Kao",
-              "applyAt": "2018-10-01T08:25:31.422Z",
-              "applyStatus": "waiting",
-              "createdAt": "2018-10-01T08:25:31.422Z"
+              "offerId": 1,
+              "offerName": "SDE",
+              "price": 0,
+              "product": "basic",
+              "duration": -1,
+              "deviceLimit": -1,
+              "deviceOverage": true,
+              "deviceOverageRate": 0,
+              "apiLimit": -1,
+              "apiOverage": true,
+              "apiOverageRate": 0,
+              "createdAt": "2019-03-26T07:51:35.663935Z"
             }
           ]
       }
     OfferCreate:
       {
-        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "mac": "00-0C-29-70-D2-EC", 
-        "serialNumber": "12345678",
-        "modelName": "UC-8112",  
-        "note": "test device"
+        "offerName": "SDE",
+        "price": 0,
+        "product": "basic",
+        "duration": -1,
+        "deviceLimit": -1,
+        "deviceOverage": true,
+        "deviceOverageRate": 0,
+        "apiLimit": -1,
+        "apiOverage": true,
+        "apiOverageRate": 0
       }
-
 

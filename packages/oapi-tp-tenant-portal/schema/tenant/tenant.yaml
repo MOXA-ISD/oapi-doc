@@ -62,37 +62,49 @@ definitions:
   Offer:
     type: object
     properties:
-      price:
+      offerId:
         type: integer
-        description: Price of this offer
-
-  Subscription:
-    type: object
-    properties:
-      name:
+        description: Unique identifier representing a specific offer.
+      offerName:
         type: string
-        description: Name of subscribe service.
-      status:
+        description: Name of Offer.
+      product:
         type: string
-        description: Status of subscribe service.
         enum:
-        - activated
-        - deactivated
-      startTime:
-        type: string
-        description: Start time of subscribe service.
-      endTime:
-        type: string
-        description: End time of subscribe service.
-      offer:
-        type: object
-        description: Offer of subscribe service.
-        items:
-          '$ref': '#/definitions/Offer'
-      autoRenew:
+        - Standard
+        - Professional
+        description: Product type of offer.
+      duration:
+        type: integer
+        description: Commit month of offer, should be [0-12], 0 presents infinte.  
+      price:
+        type: number
+        format: float
+        description: Price of offer
+      deviceLimit:
+        type: integer
+        description: Limit number of devices
+      deviceOverage:
         type: boolean
-        description: Subscrption automatically renews at the end of your subscrption's expiry period.
-
+        description: Device can overage or not.
+      deviceOverageRate:
+        type: number
+        format: float
+        description: Price of overage device.
+      apiLimit:
+        type: integer
+        description: Limit number of api  
+      apiOverage:
+        type: boolean
+        description: Api can overage or not.
+      apiOverageRate:
+        type: number
+        format: float
+        description: Price of overage api.
+      createdAt:
+        type: string
+        description: Offer created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+   
   TenantInfo:
     type: object
     properties:
@@ -144,17 +156,17 @@ definitions:
       createdBy:
         type: string
         description: Created tenant username
+      Offer:
+        type: object
+        description: Subscribe offer of the tenant.
+        items:
+          '$ref': '#/definitions/Offer'
       createdAt:
         type: string
         description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
       updatedAt:
         type: string
         description: Tenant updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      subscriptions:
-        type: array
-        description: Subscribe services of the tenant.
-        items:
-          '$ref': '#/definitions/Subscription'
 
 externalDocs:
   url: 'http://#'
@@ -181,18 +193,20 @@ externalDocs:
         "supporterEmail": "rick.peng@moxa.com",
         "provisionStatus": "Provision Completed. Email Sent Completed.",
         "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-        "subscription":
-        [
-          {
-            "name": "Device Management",
-            "status": "activated",
-            "startTime": 2019-03-20T07:49:07.104674Z",
-            "endTime": 2019-04-20T07:49:07.104674Z",
-            "offer": {
-              "price": 20
-            },
-            "autoRenew": True
-          }
-        ],
+        "offer": 
+        {
+          "offerId": 1,
+          "offerName": "SDE",
+          "price": 0,
+          "product": "basic",
+          "duration": -1,
+          "deviceLimit": -1,
+          "deviceOverage": true,
+          "deviceOverageRate": 0,
+          "apiLimit": -1,
+          "apiOverage": true,
+          "apiOverageRate": 0,
+          "createdAt": "2019-03-26T07:51:35.663935Z"
+        }
         "updatedAt": "2019-01-22T07:49:07.104674Z"
       }

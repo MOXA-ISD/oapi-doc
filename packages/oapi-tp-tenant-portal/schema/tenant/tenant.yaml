@@ -23,7 +23,7 @@ paths:
           description: Return tenant info
           schema:
             $ref: '#/definitions/TenantInfo'
-          example: 
+          example:
             $ref: '#/externalDocs/x-mocks/TenantInfo'
       tags:
         - tenant
@@ -160,8 +160,8 @@ externalDocs:
   url: 'http://#'
   x-mocks:
     Avatar:
-      { 
-        "path": "https://www.moxa.com/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg" 
+      {
+        "path": "https://www.moxa.com/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg"
       }
     TenantInfo:
       {
@@ -180,15 +180,13 @@ externalDocs:
         "supporter": "Rick Peng",
         "supporterEmail": "rick.peng@moxa.com",
         "provisionStatus": "Provision Completed. Email Sent Completed.",
-        "supporter": "Rick Peng",
-        "supporterEmail": "rick.peng@moxa.com",
         "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-        "subscription": 
+        "subscription":
         [
           {
             "name": "Device Management",
             "status": "activated",
-            "startTime": 2019-03-20T07:49:07.104674Z", 
+            "startTime": 2019-03-20T07:49:07.104674Z",
             "endTime": 2019-04-20T07:49:07.104674Z",
             "offer": {
               "price": 20

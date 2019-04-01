@@ -218,10 +218,8 @@ definitions:
           type: object
         description: device profile.
       creator:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Creator information of this poc order
+        type: string
+        description: Creator of this poc order
       createdAt:
         type: string
         description: POC order created time.

@@ -307,18 +307,14 @@ definitions:
         type: string
         description: id of devices belong to this group.
       creator:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Creator information of this group
+        type: string
+        description: Creator of group.
       createdAt:
         type: string
         description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       updater:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Creator information of this group
+        type: string
+        description: Updater of group.
       updatedAt:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.

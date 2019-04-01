@@ -347,18 +347,14 @@ definitions:
         - registered
         description: Connection status of device.
       creator:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Creator information of this device
+        type: string
+        description: Creator of device.
       createdAt:
         type: string
         description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       updater:
-        type: object
-        items:
-          '$ref': '#/definitions/UserSimple'
-        description: Updater information of this device
+        type: string
+        description: Updater of device.
       updatedAt:
         type: string
         description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
@@ -525,22 +521,6 @@ definitions:
         type: string
         description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
 
-  UserSimple:
-    type: object
-    properties:
-      userId:
-        type: string
-        description: Unique identifier representing a specific user.
-      displayName:
-        type: string
-        description: Username of user.
-      email:
-        type: string
-        description: Email of user.
-      avatar:
-        type: string
-        description: Avatar of user.
-  
 externalDocs:
   url: 'http://#'
   x-mocks:

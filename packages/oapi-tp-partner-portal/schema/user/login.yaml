@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 0.0.0
-  title: ThingsPro Tenant Portal RESTful API reference
+  title: ThingsPro Partner Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
   - http
@@ -53,21 +53,45 @@ definitions:
   Partner:
     type: object
     properties:
+      partnerId:
+        type: string
+        description: Unique identifier representing a specific partner.
       portalName:
         type: string
-        description: Tenant portal name.
+        description: Portal name of this partner.
       domainName:
         type: string
-        description: Tenant domain name.
-      supporter:
+        description: Domain name of this partner.
+      financeContact:
+        type: object
+        items:
+          '$ref': '#/definitions/UserSimple'
+        description: Finance contact of this partner
+      generalContact:
+        type: object
+        items:
+          '$ref': '#/definitions/UserSimple'
+        description: General contact of this partner
+      supportContact:
+        type: object
+        items:
+          '$ref': '#/definitions/UserSimple'
+        description: Support contact of this partner
+      avatar:
         type: string
-        description: Tenant supporter name.
-      supporterEmail:
+        description: Avatar of this partner.
+      creator:
         type: string
-        description: Tenant supporter email.
+        description: Creator of this partner.
       createdAt:
         type: string
-        description: Tenant created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        description: Partner created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updater:
+        type: string
+        description: Updater of this partner.
+      updatedAt:
+        type: string
+        description: Partner updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
   LoginRes:
     type: object
@@ -87,9 +111,9 @@ definitions:
   User:
     type: object
     properties:
-      tenantId:
+      partnerId:
         type: string
-        description: Unique identifier representing a specific tenant.
+        description: Unique identifier representing a specific partner.
       userId:
         type: string
         description: Unique identifier representing a specific user.
@@ -137,6 +161,25 @@ definitions:
         description: List of role which contains the user.
         items:
           '$ref': '#/definitions/Role'
+
+  UserSimple:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      email:
+        type: string
+        description: Email of user.
+      phone:
+        type: string
+        description: Phone of user.
+      avatar:
+        type: string
+        description: Avatar of user.
 
   Role:
     type: object

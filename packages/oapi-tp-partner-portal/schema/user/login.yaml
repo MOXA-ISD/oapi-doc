@@ -161,10 +161,36 @@ externalDocs:
       {
         "partner":
           {
+            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/partner/07473967-3c29-4914-b275-d0511c42554e.jpeg",
+            "createdAt": "2019-03-12T03:33:17.617015Z",
+            "creator": "Cain Chen",
+            "data": {},
             "domainName": "partner-dev",
-            "portalName": "MOXA Partner",
-            "supporter": "Edie Lin",
-            "supporterEmail": "ediejy.lin@moxa.com"
+            "financeContact": {
+              "avatar": "",
+              "displayName": "Kevin Kao",
+              "email": "kevincy.kao@moxa.com",
+              "phone": "02-89191230",
+              "userId": "1378ca4f-392f-48bf-955d-68f3369a4f07"
+            },
+            "generalContact": {
+                "avatar": "",
+                "displayName": "Rick Peng",
+                "email": "rick.peng@moxa.com",
+                "phone": "02-89191230",
+                "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+            },
+            "supportContact": {
+                "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/6df5d905-e19c-4cc8-b963-88707c6fa7f3.jpeg",
+                "displayName": "Edie Lin",
+                "email": "ediejy.lin@moxa.com",
+                "phone": "02-89191230",
+                "userId": "6df5d905-e19c-4cc8-b963-88707c6fa7f3"
+            },
+            "partnerId": "07473967-3c29-4914-b275-d0511c42554e",
+            "partnerName": "MOXA Partner",
+            "updatedAt": "2019-03-13T08:00:55.150882Z",
+            "updater": "Cain Chen"
           },
         "user":
           {

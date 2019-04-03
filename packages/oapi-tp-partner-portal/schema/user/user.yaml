@@ -512,7 +512,10 @@ definitions:
         description: Inviter Name.
       domainName:
         type: string
-        description: Tenant Domain Name.
+        description: Partner Domain Name.
+      portalName:
+        type: string
+        description: Partner Portal Name.
       email:
         type: string
         description: Email of invitation.
@@ -812,7 +815,8 @@ externalDocs:
       {
         "inviteId": "762e7efb-8b49-4855-89a3-30f3adabf580",
         "inviter": "Cain Chen",
-        "domainName": "tenant-dev",
+        "domainName": "partner-dev",
+        "portalName": "MOXA-ISS",
         "email": "22222@moxa.com",
         "status": "Inviting",
         "data": {},
@@ -826,7 +830,8 @@ externalDocs:
           {
             "createdAt": "2019-03-14T10:04:53.034540Z",
             "data": {},
-            "domainName": "tenant-dev",
+            "domainName": "partner-dev",
+            "portalName": "MOXA-ISS",
             "email": "201903141802@moxa.com",
             "expireAt": "2019-03-21T10:04:53.034540Z",
             "inviteId": "9a9812d8-86c9-4a71-aaf9-7103e67c2148",
@@ -837,7 +842,8 @@ externalDocs:
           {
             "createdAt": "2019-03-14T10:04:53.034540Z",
             "data": {},
-            "domainName": "tenant-dev",
+            "domainName": "partner-dev",
+            "portalName": "MOXA-ISS",
             "email": "201903141803@moxa.com",
             "expireAt": "2019-03-21T10:04:53.034540Z",
             "inviteId": "d7109838-690d-487d-8f9f-98ad70c2de72",

@@ -22,9 +22,10 @@ paths:
         200:
           description: Return tenant info
           schema:
-            $ref: '#/definitions/TenantInfo'
-          example:
-            $ref: '#/externalDocs/x-mocks/TenantInfo'
+            items:
+              $ref: '#/definitions/TenantInfo'
+            example:
+              $ref: '#/externalDocs/x-mocks/TenantInfo'
       tags:
         - tenant
 
@@ -207,6 +208,6 @@ externalDocs:
           "apiOverage": true,
           "apiOverageRate": 0,
           "createdAt": "2019-03-26T07:51:35.663935Z"
-        }
+        },
         "updatedAt": "2019-01-22T07:49:07.104674Z"
       }

@@ -257,6 +257,21 @@ paths:
         200:
           description: success
         
+  /portal:
+    get:
+      description: Get basic portal info
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An array of tenants
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Portal'
+            example:
+              $ref: '#/externalDocs/x-mocks/Portal'
+
 definitions:
   Tenant:
     type: object
@@ -520,6 +535,13 @@ definitions:
         type: integer
         description: Type of permission. 1=Partner Administration, 2=Tenant Management
 
+  Portal:
+    type: object
+    properties:
+      portalName:
+        type: string
+        description: Portal name.
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -639,6 +661,10 @@ externalDocs:
         "limit": 1,
         "offset": 1
       }
+    Portal:
+      {
+        "portalName": "moxa"
+      }  
     TenantMemberList:
       {
         "data": [

@@ -1,0 +1,12 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./rule.yaml#/tags"
+
+paths:
+- $ref: "./rule.yaml#/paths"
+
+definitions:
+- $ref: "./rule.yaml#/definitions"
+

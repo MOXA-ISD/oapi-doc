@@ -1,0 +1,12 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./device.yaml#/tags"
+
+paths:
+- $ref: "./device.yaml#/paths"
+
+definitions:
+- $ref: "./device.yaml#/definitions"
+

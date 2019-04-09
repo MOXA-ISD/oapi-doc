@@ -125,7 +125,7 @@ definitions:
   Cert:
     type: object
     properties:
-      id:
+      applyId:
         type: string
         description: Unique identifier representing a specific certificate.
       tenantId:

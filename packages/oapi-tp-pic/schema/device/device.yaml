@@ -73,14 +73,12 @@ paths:
       tags:
         - device
   /connect:
-    parameters:
+    post:
+      parameters:
       - name: body
         in: body
-        description: ''
-        required: true
         schema:
           $ref: '#/definitions/ConnectReq'
-    post:
       description: Register device and return iot connection data
       tags:
         - device
@@ -98,7 +96,7 @@ paths:
       tags:
         - device
       responses:
-        200:
+        204:
           description: Unregister device success
 
   /enroll:
@@ -186,11 +184,7 @@ definitions:
         description: Device last updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
   ConnectReq:
     type: object
-    description: Device connection data payload
-    required:
-    - url
-    - username
-    - password
+    description: Device connection data payload, the payload is used to connect to tenant portal, if the request body is empty, PIC will use default data to connect to tenant portal, if user brings custom data(url, username, password), PIC will use this data connect to tenant portal.
     properties:
       url:
         type: string

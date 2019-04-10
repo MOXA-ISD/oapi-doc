@@ -72,6 +72,15 @@ paths:
               $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
+  /devices/{uuid}:
+    delete:
+      description: This api is called by Tenant portal used to change device status to unregister
+      tags:
+        - device
+      responses:
+        204:
+          description: Unregister device success
+
   /connect:
     post:
       parameters:

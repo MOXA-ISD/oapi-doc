@@ -98,7 +98,7 @@ paths:
         - certificate
 
   /certificates/{id}/download:
-    post:
+    get:
       description: Request to download certificate.
       parameters:
         - name: id

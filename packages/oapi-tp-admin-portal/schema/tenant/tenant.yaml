@@ -196,9 +196,6 @@ definitions:
       provisionStatus:
         type: string
         description: Provision status of tenant.
-      deviceHlr:
-        type: string
-        description: Device home location url.     
       data:
         type: object
         description: metadata of tenant.   
@@ -279,7 +276,6 @@ externalDocs:
         "industry": "Telecom",
         "customer": true,
         "provisionStatus": "ok",
-        "deviceHlr": "https://preview.thingspro.io",
         "activatedAt": "2018-08-12T20:17:46.384Z",
         "deactivatedAt": "2018-08-12T20:17:46.384Z",
         "createdAt": "2018-08-12T20:17:46.384Z",
@@ -305,7 +301,6 @@ externalDocs:
           "industry": "Telecom",
           "customer": true,
           "provisionStatus": "ok",
-          "deviceHlr": "https://preview.thingspro.io",
           "activatedAt": "2018-08-12T20:17:46.384Z",
           "deactivatedAt": "2018-08-12T20:17:46.384Z",
           "createdAt": "2018-08-12T20:17:46.384Z",
@@ -329,7 +324,6 @@ externalDocs:
           "industry": "Telecom",
           "customer": true,
           "provisionStatus": "ok",
-          "deviceHlr": "https://preview.thingspro.io",
           "activatedAt": "2018-08-12T20:17:46.384Z",
           "deactivatedAt": "2018-08-12T20:17:46.384Z",
           "createdAt": "2018-08-12T20:17:46.384Z",

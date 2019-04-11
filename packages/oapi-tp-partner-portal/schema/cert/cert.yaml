@@ -61,6 +61,14 @@ paths:
           description: offset
           required: false
           type: integer
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          type: string
+          enum:
+          - modelName
+          - applyStatus
       responses:
         200:
           description: An array of apply certificates 

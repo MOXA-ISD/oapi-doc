@@ -323,7 +323,7 @@ externalDocs:
       }  
     EnrollReq:
       {
-        "mac": "00:11:22:33:44:55",
+        "mac": "001122334455",
         "sn": "12345678",
         "modelType": "UC-8112",
         "tag": "1234"
@@ -337,7 +337,7 @@ externalDocs:
     BatchEnrollRes:
       [
         {
-          "mac": "00:11:22:33:44:55",
+          "mac": "001122334455",
           "privateKey": "moxa",
           "certificate": "moxa",
           "rootCA": "1234"

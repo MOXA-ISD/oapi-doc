@@ -322,7 +322,7 @@ externalDocs:
         "reason": "Connection failure reason",
         "data": 
           {
-            "cloudProvider": “aws”, 
+            "cloudProvider": "aws", 
             "hostname": "http://www.moxa.com",
             "authType": "x509"
           }

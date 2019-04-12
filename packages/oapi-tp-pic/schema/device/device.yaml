@@ -11,12 +11,12 @@ produces:
   - application/json
 tags:
   - name: device
-    description: Handles device enroll and resiter function
+    description: Handles device enroll and register function
 
 paths:
   /devices:
     get:
-      description: Get all devices data
+      description: Get devices data
       parameters:
         - name: modelName
           in: query
@@ -35,7 +35,7 @@ paths:
           type: string  
         - name: order
           in: query
-          description: The device list order by some keyword. default is order by 'tag'
+          description: The device list order by some keyword. default is order by 'updatedAt'
           required: false
           type: string
           enum:
@@ -73,13 +73,19 @@ paths:
       tags:
         - device
   /devices/{uuid}:
+    parameters:
+      - name: uuid
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
     delete:
       description: This api is called by Tenant portal used to change device status to unregister
       tags:
         - device
       responses:
         204:
-          description: Unregister device success
+          description: Delete device success
 
   /connect:
     post:
@@ -88,7 +94,7 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/ConnectReq'
-      description: Register device and return iot connection data
+      description: Register device on PIC service and return IOT connection data
       tags:
         - device
       responses:
@@ -101,7 +107,7 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/ConnectRes'
     delete:
-      description: Unregister device
+      description: Unregister device on a PIC service
       tags:
         - device
       responses:
@@ -117,7 +123,7 @@ paths:
         schema:
           $ref: '#/definitions/EnrollReq'
     post:
-      description: Enroll a device
+      description: Let device enrolls on PIC service
       tags:
         - device
       responses:
@@ -138,7 +144,7 @@ paths:
         schema:
           $ref: '#/definitions/BatchEnrollReq'
     post:
-      description: Enroll a group of devices
+      description: Enroll a group of devices to PIC service
       tags:
         - device
       responses:
@@ -214,7 +220,7 @@ definitions:
           200: cannot connect tenant portal 
           201: wrong username or password 
           202: permission denied 
-          203: model type mismatch
+          203: model name mismatch
       reason:
         type: string
         description: If http status code is not 200, user sholud reference this reason to identify failure reason.
@@ -236,7 +242,7 @@ definitions:
         description: Device serial number.
       modelName:
         type: string
-        description: Deice model Type.    
+        description: Deice model name.    
       tag:
         type: string
         description: Device tag.   

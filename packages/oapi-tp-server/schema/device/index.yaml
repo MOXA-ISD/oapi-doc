@@ -290,7 +290,6 @@ externalDocs:
       mac: 223344FFFF11
       iccId: 898600MFSSYYGXXXXXXP
       serialNumber: MOXA00000001
-      psk: PBKDF2$sha256$901$xl/Ws1LGqr/WV5QB$XtAQ7g12TTs5F0PWHT3yXCRLBuKU4qOb
     DeviceList:
       count: 3
       data:

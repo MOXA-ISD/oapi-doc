@@ -366,21 +366,9 @@ definitions:
         - offline
         - registered
         description: Connection status of device.
-      creator:
+      connectionAt:
         type: string
-        description: Creator of device.
-      createdAt:
-        type: string
-        description: Device created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updater:
-        type: string
-        description: Updater of device.
-      updatedAt:
-        type: string
-        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      approvedAt:
-        type: string
-        description: Device approved time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        description: Device connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
   DevicePoc:
     type: object
@@ -641,11 +629,7 @@ externalDocs:
           }
         ],
         "connectionStatus": "online",
-        "creator": "Cain Chen",
-        "createdAt": "2018-08-12T20:17:46.384Z",
-        "updater": "",
-        "updatedAt": "2018-08-12T20:17:46.384Z",
-        "approvedAt": "2019-02-26T14:10:33:000Z"
+        "connectionAt": "2019-02-26T14:10:33:000Z"
       }
     DeviceList:
       {
@@ -729,11 +713,7 @@ externalDocs:
                 }
               ],
               "connectionStatus": "online",
-              "creator": "Cain Chen",
-              "createdAt": "2018-08-12T20:17:46.384Z",
-              "updater": "",
-              "updatedAt": "2018-08-12T20:17:46.384Z",
-              "approvedAt": "2019-02-26T14:10:33:000Z"
+              "connectionAt": "2019-02-26T14:10:33:000Z"
             },
             {
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
@@ -810,11 +790,7 @@ externalDocs:
                 }
               ],
               "connectionStatus": "online",
-              "creator": "Cain Chen",
-              "createdAt": "2018-08-12T20:17:46.384Z",
-              "updater": "",
-              "updatedAt": "2018-08-12T20:17:46.384Z",
-              "approvedAt": "2019-02-26T14:10:33:000Z"
+              "connectionAt": "2019-02-26T14:10:33:000Z"
             }
           ]
       }

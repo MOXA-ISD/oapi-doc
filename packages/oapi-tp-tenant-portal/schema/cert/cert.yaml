@@ -166,18 +166,19 @@ definitions:
   CertCreate:
     type: object
     required:
+      - deviceProfileId
       - mac
-      - modelName
+      - serialNumber
     properties:
+      deviceProfileId:
+        type: string
+        description: ID of device profile.
       mac:
         type: string
         description: Mac address of device.
       serialNumber:
         type: string
         description: Serial number of device.
-      modelName:
-        type: string
-        description: Model name of device.  
       note:
         type: string
         description: Mac address of device.

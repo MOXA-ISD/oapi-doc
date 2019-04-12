@@ -543,7 +543,15 @@ definitions:
 
   DeviceReq:
     type: object
+    required:
+      - deviceId
+      - modelType
+      - mac
+      - serialNumber      
     properties:
+      deviceId:
+        type: string
+        description: Device unique id.
       modelType:
         type: string
         description: Model name of device.

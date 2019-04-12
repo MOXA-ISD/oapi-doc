@@ -224,9 +224,9 @@ externalDocs:
       }
     CertCreate:
       {
+        "deviceProfileId": 1,
         "mac": "00-0C-29-70-D2-EC", 
         "serialNumber": "12345678",
-        "modelName": "UC-8112",  
         "note": "test device"
       }
     DownloadLink:

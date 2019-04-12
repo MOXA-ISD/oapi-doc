@@ -545,14 +545,14 @@ definitions:
     type: object
     required:
       - deviceId
-      - modelType
+      - modelName
       - mac
       - serialNumber      
     properties:
       deviceId:
         type: string
         description: Device unique id.
-      modelType:
+      modelName:
         type: string
         description: Model name of device.
       mac:
@@ -647,6 +647,10 @@ externalDocs:
         "updatedAt": "2018-08-12T20:17:46.384Z",
         "approvedAt": "2019-02-26T14:10:33:000Z"
       }
+    DeviceReq:
+      {
+
+      }  
     DeviceList:
       {
         "count": 5,

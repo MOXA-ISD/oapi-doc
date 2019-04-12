@@ -18,9 +18,9 @@ paths:
     get:
       description: Get all devices data
       parameters:
-        - name: modelType
+        - name: modelName
           in: query
-          description: Filter the device list by modelType
+          description: Filter the device list by modelName
           required: false
           type: string
         - name: mac
@@ -39,7 +39,7 @@ paths:
           required: false
           type: string
           enum:
-          - modelType
+          - modelName
           - mac
           - status
           - updatedAt
@@ -163,7 +163,7 @@ definitions:
       tag:
         type: string
         description: Device tag.   
-      modelType:
+      modelName:
         type: string
         description: Device tag.   
       uuid:
@@ -226,7 +226,7 @@ definitions:
     required:
     - mac
     - sn
-    - modelType
+    - modelName
     properties:
       mac:
         type: string
@@ -234,7 +234,7 @@ definitions:
       sn:
         type: string
         description: Device serial number.
-      modelType:
+      modelName:
         type: string
         description: Deice model Type.    
       tag:
@@ -268,8 +268,8 @@ externalDocs:
   x-mocks:
     Device:
       {
-        "modelType": "UC-8112",
-        "mac": "00:11:22:33:44:55",
+        "modelName": "UC-8112",
+        "mac": "001122334455",
         "sn": "12345678",
         "tag": "moxa",
         "uuid": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
@@ -289,8 +289,8 @@ externalDocs:
         "data":
           [
             {
-              "modelType": "UC-8112",
-              "mac": "00:11:22:33:44:55",
+              "modelName": "UC-8112",
+              "mac": "001122334455",
               "sn": "12345678",
               "tag": "moxa",
               "uuid": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
@@ -325,7 +325,7 @@ externalDocs:
       {
         "mac": "001122334455",
         "sn": "12345678",
-        "modelType": "UC-8112",
+        "modelName": "UC-8112",
         "tag": "1234"
       }
     EnrollRes:

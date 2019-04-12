@@ -18,10 +18,10 @@ paths:
     get:
       description: Get all certificates data
       parameters:
-        - name: modelType
+        - name: modelName
           in: query
           type: string
-          description: Filter the certificates list by modelType
+          description: Filter the certificates list by modelName
           required: false
         - name: mac
           in: query
@@ -39,7 +39,7 @@ paths:
           required: false
           type: string
           enum:
-          - modelType
+          - modelName
           - mac
           - applyStatus
           - createdAt

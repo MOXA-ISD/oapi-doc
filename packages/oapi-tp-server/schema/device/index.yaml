@@ -185,12 +185,6 @@ definitions:
       serialNumber:
         type: string
         description: Serial number of device.
-      psk:
-        type: string
-        readOnly: true
-        description: >-
-          MQTT Broker TLS PSK credential. (this property exist only exist as a
-          creating response)
       connection:
         type: object
         readOnly: true

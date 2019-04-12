@@ -88,6 +88,26 @@ paths:
               $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
+    post:
+      description: Create a new device.
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceReq'
+      responses:
+        201:
+          description: Create device successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Device'
+          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+      tags:
+        - device
+
 
   /devices/poc:
     get:
@@ -520,6 +540,19 @@ definitions:
       repeatedPattern:
         type: string
         description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
+
+  DeviceReq:
+    type: object
+    properties:
+      modelType:
+        type: string
+        description: Model name of device.
+      mac:
+        type: string
+        description: MAC of device.
+      serialNumber:
+        type: string
+        description: Seriar number of device.
 
 externalDocs:
   url: 'http://#'

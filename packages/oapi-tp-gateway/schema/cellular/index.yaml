@@ -1,14 +1,14 @@
-swagger: '2.0'
+swagger: "2.0"
 
 info:
   version: 2.1.0
   title: ThingsPro Gateway RESTful API reference
-basePath: '/api/v1'
+basePath: /api/v1
 schemes:
-  - http
-  - https
+- http
+- https
 produces:
-  - application/json
+- application/json
 securityDefinitions:
   mx-api-token:
     type: apiKey
@@ -18,68 +18,62 @@ securityDefinitions:
 
 tags:
   - name: cellular
-    description: Provides the cellular configuration interface
+    description: Handles the Cellular interfaces
 
 paths:
-  '/network/cellulars':
+  /network/cellulars:
     get:
       summary: Cellular Interface(s)
       description: |
         The system returns information about the settings of all
         *Cellular interface(s)*.
+      parameters: []
       responses:
-        '200':
+        200:
           description: An array of Cellular interface(s)
           schema:
             type: array
             items:
-              '$ref': '#/definitions/Cellular'
+              $ref: '#/definitions/CellularAll'
             example:
               - id: 1
                 name: wwan1
+                capabilities:
+                  sim:
+                  - 1
+                  - 2
+                  carriers:
+                  - ATT
+                  - SPRINT
                 mode: umts
                 signal:
                   csq: 14
                   rssi: -76
                   ecio: -8.5
                 operatorName: Chunghwa Telecom
-                lac: '11114'
-                tac: ''
-                nid: ''
-                cellId: '1249'
-                bid: ''
-                iccId: ''
-                imsi: '466977502877452'
-                imei: '356853050370859'
+                lac: "11114"
+                tac: ""
+                nid: ""
+                cellId: "1249"
+                bid: ""
+                iccId: ""
+                imsi: "466977502877452"
+                imei: "356853050370859"
                 esn: 802202F0
                 pinRetryRemain: 3
                 status: connected
-                mac: '00:00:00:00:00:00'
+                mac: 00:00:00:00:00:00
                 ip: 111.70.146.125
                 netmask: 255.255.255.252
                 gateway: 111.70.146.126
                 dns:
-                  - 168.95.1.1
-                  - 168.95.192.1
+                - 168.95.1.1
+                - 168.95.192.1
                 usage:
                   txkbyte: 40023
                   rxkbyte: 3493
+                currentProfileId: 1
                 enable: true
-                pdpContext:
-                  static: true
-                  id: 1
-                  retryTimeout: 1200
-                  primary:
-                    apn: internet
-                    type: ipv4v6
-                  secondary:
-                    apn: internet
-                    type: ipv4v6
-                  list:
-                    - id: 1
-                      apn: internet
-                      type: ipv4v6
-                pinCode: '0000'
                 keepalive:
                   enable: true
                   targetHost: 8.8.8.8
@@ -87,69 +81,82 @@ paths:
                   reboot:
                     enable: false
                     cycles: 1
+                profileId: 1
+                profileTimeout: 300
+                profiles:
+                - id: 1
+                  pinCode: "0000"
+                  pdpContext:
+                    static: true
+                    id: 1
+                    apn: internet
+                    type: ipv4v6
+                    auth:
+                      protocol: none
+                      username: ""
+                      password: ""
+                  keepalive:
+                    enable: false
+                  init:
+                  - sim:1
+                  - carrier:ATT
       tags:
         - cellular
       security:
         - mx-api-token: []
-  '/network/cellulars/{id}':
-    parameters:
+  /network/cellulars/{id}:
+    get:
+      description: |
+        Get settings of indicated Cellular interface.
+      parameters:
       - name: id
         in: path
-        type: integer
         required: true
-    get:
-      description: 'Get settings of indicated Cellular interface.'
+        type: integer
       responses:
-        '200':
+        200:
           description: An Cellular interface settings.
           schema:
-            '$ref': '#/definitions/Cellular'
+            $ref: '#/definitions/CellularAll'
             example:
               id: 1
               name: wwan1
+              capabilities:
+                sim:
+                - 1
+                - 2
+                carriers:
+                - ATT
+                - SPRINT
               mode: umts
               signal:
                 csq: 14
                 rssi: -76
                 ecio: -8.5
               operatorName: Chunghwa Telecom
-              lac: '11114'
-              tac: ''
-              nid: ''
-              cellId: '1249'
-              bid: ''
-              iccId: ''
-              imsi: '466977502877452'
-              imei: '356853050370859'
+              lac: "11114"
+              tac: ""
+              nid: ""
+              cellId: "1249"
+              bid: ""
+              iccId: ""
+              imsi: "466977502877452"
+              imei: "356853050370859"
               esn: 802202F0
               pinRetryRemain: 3
               status: connected
-              mac: '00:00:00:00:00:00'
+              mac: 00:00:00:00:00:00
               ip: 111.70.146.125
               netmask: 255.255.255.252
               gateway: 111.70.146.126
               dns:
-                - 168.95.1.1
-                - 168.95.192.1
+              - 168.95.1.1
+              - 168.95.192.1
               usage:
                 txkbyte: 40023
                 rxkbyte: 3493
+              currentProfileId: 1
               enable: true
-              pdpContext:
-                static: true
-                id: 1
-                retryTimeout: 1200
-                primary:
-                  apn: internet
-                  type: ipv4v6
-                secondary:
-                  apn: internet
-                  type: ipv4v6
-                list:
-                  - id: 1
-                    apn: internet
-                    type: ipv4v6
-              pinCode: '0000'
               keepalive:
                 enable: true
                 targetHost: 8.8.8.8
@@ -157,6 +164,25 @@ paths:
                 reboot:
                   enable: false
                   cycles: 1
+              profileId: 1
+              profileTimeout: 300
+              profiles:
+              - id: 1
+                pinCode: "0000"
+                pdpContext:
+                  static: true
+                  id: 1
+                  apn: internet
+                  type: ipv4v6
+                  auth:
+                    protocol: none
+                    username: ""
+                    password: ""
+                keepalive:
+                  enable: false
+                init:
+                - sim:1
+                - carrier:ATT
       tags:
         - cellular
       security:
@@ -165,63 +191,24 @@ paths:
       summary: Cellular Interface
       description: Update an Cellular interface settings.
       parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            '$ref': '#/definitions/Cellular'
+      - name: id
+        in: path
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: ""
+        required: true
+        schema:
+          $ref: '#/definitions/CellularSettings'
       responses:
-        '200':
+        200:
           description: OK
           schema:
-            '$ref': '#/definitions/Cellular'
+            $ref: '#/definitions/CellularSettings'
             example:
               id: 1
-              name: wwan1
-              mode: umts
-              signal:
-                csq: 14
-                rssi: -76
-                ecio: -8.5
-              operatorName: Chunghwa Telecom
-              lac: '11114'
-              tac: ''
-              nid: ''
-              cellId: '1249'
-              bid: ''
-              iccId: ''
-              imsi: '466977502877452'
-              imei: '356853050370859'
-              esn: 802202F0
-              pinRetryRemain: 3
-              status: connected
-              mac: '00:00:00:00:00:00'
-              ip: 111.70.146.125
-              netmask: 255.255.255.252
-              gateway: 111.70.146.126
-              dns:
-                - 168.95.1.1
-                - 168.95.192.1
-              usage:
-                txkbyte: 40023
-                rxkbyte: 3493
               enable: true
-              pdpContext:
-                static: true
-                id: 1
-                retryTimeout: 1200
-                primary:
-                  apn: internet
-                  type: ipv4v6
-                secondary:
-                  apn: internet
-                  type: ipv4v6
-                list:
-                  - id: 1
-                    apn: internet
-                    type: ipv4v6
-              pinCode: '0000'
               keepalive:
                 enable: true
                 targetHost: 8.8.8.8
@@ -229,23 +216,106 @@ paths:
                 reboot:
                   enable: false
                   cycles: 1
+              profileId: 1
+              profileTimeout: 300
+              profiles:
+              - id: 1
+                pinCode: "0000"
+                pdpContext:
+                  static: true
+                  id: 1
+                  apn: internet
+                  type: ipv4v6
+                  auth:
+                    protocol: none
+                    username: ""
+                    password: ""
+                keepalive:
+                  enable: false
+                init:
+                - sim:1
+                - carrier:ATT
+              - id: 2
+                pdpContext:
+                  id: 3
+                  static: false
+                  apn: ""
+                  type: ipv4
+                  auth:
+                    protocol: none
+                    username: ""
+                    password: ""
+                keepalive:
+                  targetHost: 1.2.3.4
+                init:
+                - carrier:VZW
       tags:
         - cellular
       security:
         - mx-api-token: []
-  '/network/cellulars/{id}/firmware':
-    parameters:
+  /network/cellulars/{id}/carrier:
+    get:
+      description: |
+        Get carrier information of indicated Cellular interface.
+      parameters:
       - name: id
         in: path
-        type: integer
         required: true
-    get:
-      description: 'Get firmware information of indicated Cellular interface.'
+        type: integer
       responses:
-        '200':
+        200:
+          description: carrier information of indicated Cellular interface.
+          schema:
+            $ref: '#/definitions/CellularCarrierInfo'
+            example:
+              switchable: true
+              current: ATT
+              preferred: ATT
+              available:
+              - ATT
+              - VZW
+      tags:
+        - cellular
+      security:
+        - mx-api-token: []
+    put:
+      description: Set preferred carrier
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: ""
+        required: true
+        schema:
+          $ref: '#/definitions/CellularCarrierEntry'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CellularCarrierEntry'
+            example:
+              carrier: VZW
+      tags:
+        - cellular
+      security:
+        - mx-api-token: []
+  /network/cellulars/{id}/firmware:
+    get:
+      description: |
+        Get firmware information of indicated Cellular interface.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+      responses:
+        200:
           description: firmware information of indicated Cellular interface.
           schema:
-            '$ref': '#/definitions/CellularFirmwareInfo'
+            $ref: '#/definitions/CellularFirmwareInfo'
             example:
               switchable: true
               current:
@@ -257,12 +327,12 @@ paths:
                 config: ATT_005.029_001
                 carrier: ATT
               available:
-                - fwver: 05.05.58.01
-                  config: ATT_005.029_001
-                  carrier: ATT
-                - fwver: 05.05.58.02
-                  config: VZW_005.029_002
-                  carrier: VZW
+              - fwver: 05.05.58.01
+                config: ATT_005.029_001
+                carrier: ATT
+              - fwver: 05.05.58.02
+                config: VZW_005.029_002
+                carrier: VZW
       tags:
         - cellular
       security:
@@ -270,17 +340,21 @@ paths:
     put:
       description: Set preferred firmware
       parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            '$ref': '#/definitions/CellularFirmwareEntry'
+      - name: id
+        in: path
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: ""
+        required: true
+        schema:
+          $ref: '#/definitions/CellularFirmwareEntry'
       responses:
-        '200':
+        200:
           description: OK
           schema:
-            '$ref': '#/definitions/CellularFirmwareEntry'
+            $ref: '#/definitions/CellularFirmwareEntry'
             example:
               fwver: 05.05.58.01
               config: ATT_005.029_001
@@ -289,49 +363,112 @@ paths:
         - cellular
       security:
         - mx-api-token: []
-
 definitions:
-  Cellular:
-    title: Cellular
-    required:
-      - id
-      - enable
-      - pinCode
-      - pdpContext
-      - keepalive
+  CellularAll:
+    title: Cellular Status & Settings
+    allOf:
+    - $ref: '#/definitions/CellularSettings'
+    - $ref: '#/definitions/CellularStatus'
+    example:
+      id: 1
+      name: wwan1
+      capabilities:
+        sim:
+        - 1
+        - 2
+        carriers:
+        - ATT
+        - SPRINT
+      mode: umts
+      signal:
+        csq: 14
+        rssi: -76
+        ecio: -8.5
+      operatorName: Chunghwa Telecom
+      lac: "11114"
+      tac: ""
+      nid: ""
+      cellId: "1249"
+      bid: ""
+      iccId: ""
+      imsi: "466977502877452"
+      imei: "356853050370859"
+      esn: 802202F0
+      pinRetryRemain: 3
+      status: connected
+      mac: 00:00:00:00:00:00
+      ip: 111.70.146.125
+      netmask: 255.255.255.252
+      gateway: 111.70.146.126
+      dns:
+      - 168.95.1.1
+      - 168.95.192.1
+      usage:
+        txkbyte: 40023
+        rxkbyte: 3493
+      currentProfileId: 1
+      enable: true
+      keepalive:
+        enable: true
+        targetHost: 8.8.8.8
+        intervalSec: 60
+        reboot:
+          enable: false
+          cycles: 1
+      profileId: 1
+      profileTimeout: 300
+      profiles:
+      - id: 1
+        pinCode: "0000"
+        pdpContext:
+          static: true
+          id: 1
+          apn: internet
+          type: ipv4v6
+          auth:
+            protocol: none
+            username: ""
+            password: ""
+        keepalive:
+          enable: false
+        init:
+        - sim:1
+        - carrier:ATT
+  CellularCapabilities:
     properties:
-      id:
-        type: integer
-        description: Identifier for an Cellular interface.
+      sim:
+        type: array
+        items:
+          type: integer
+      carriers:
+        type: array
+        items:
+          type: string
+    title: Cellular Capabilities
+    example:
+      sim:
+      - 1
+      - 2
+      carriers:
+      - ATT
+      - SPRINT
+  CellularStatus:
+    type: object
+    properties:
       name:
         type: string
         description: Interface name.
+      capabilities:
+        $ref: '#/definitions/CellularCapabilities'
+      currentProfileId:
+        type: integer
+        description: Current used profile Id.
       mode:
         type: string
-        description: Given cellular connection mode. Could be one of `"umts"`, `"lte"`.
+        description: |
+          Given cellular connection mode. Could be one of `"umts"`, `"lte"`.
       signal:
-        type: object
-        description: Cellular RF signal strength, include RSSI and EcIo.
-        required:
-          - csq
-          - rssi
-          - ecio
-        properties:
-          csq:
-            type: integer
-            description: |
-              Signal quality, Only shows the first part of the response, RSSI
-              (Received signal strength indicator).
-          rssi:
-            type: integer
-            description: |
-              Cellular RF signal strength, in `dbm`. Value `0` indicates no
-              SIM card found.
-          ecio:
-            type: integer
-            description: |
-              The ratio of the received energy per chip (= code bit) and the
-              interference level, given in `dBm`.
+        $ref: '#/definitions/CellularStatus_signal'
       operatorName:
         type: string
         description: Indicate current operator name if exist.
@@ -367,206 +504,105 @@ definitions:
         description: PIN Retry remaining.
       status:
         type: string
-        description: Indicate current status of cellular connection. Could be one
-          of "nosim", "pin", "noservice", "ready", "connected", "connecting", "connect-failed".
+        description: |
+          Indicate current status of cellular connection.
+
+          - initializing: get module and SIM card info, unlock SIM card if
+            necessary
+          - nosim: no SIM card or unknown error with SIM card status
+
+          - pin: SIM card is locked with a PIN code
+
+          - ready: SIM card is ready for connect (unlocked or lock is
+            disabled)
+          - connecting: during connect state
+
+          - connect_failure: connect failed or keepalive failed (if keepalive
+            enabled)
+          - connected: connect success with keepalive success or success with
+            keepalive disabled
+          - power_cycle: power cycle the module to recover issues
+
+          - service_searching: roaming
+
+          - service_attached: attached with a base station
+
+          - pin_error: PIN code error
+
+          - switching_carrier: module is switching carrier
+        enum:
+        - initializing
+        - nosim
+        - pin
+        - puk
+        - ready
+        - connecting
+        - connect_failure
+        - connected
+        - power_cycle
+        - service_searching
+        - service_attached
+        - pin_error
+        - switching_carrier
       mac:
         type: string
-        readOnly: true
         description: The identical MAC address.
+        readOnly: true
       ip:
         type: string
-        pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
         description: IP address. `""` when not connected.
+        pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3} (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
       netmask:
         type: string
-        pattern: "^(254|252|248|240|224|192|128)\\.0\\.0\\.0|255\\.(254|252|248|240|224|192|128|0)\\.0\\.0|255\\.255\\.(254|252|248|240|224|192|128|0)\\.0|255\\.255\\.255\\.(254|252|248|240|224|192|128|0)"
         description: Subnet mask. `""` when not connected.
+        pattern: |-
+          ^(254|252|248|240|224|192|128)\.0\.0\.0|
+            255\.(254|252|248|240|224|192|128|0)\.0\.0|
+            255\.255\.(254|252|248|240|224|192|128|0)\.0|
+            255\.255\.255\.(254|252|248|240|224|192|128|0)
       gateway:
         type: string
-        pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
         description: Gateway IP address. `""` when not connected.
+        pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3} (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
       dns:
         type: array
         description: A list of DNS IP addresses. `[]` when not connected.
         items:
           type: string
-          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3} (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
       usage:
-        type: object
-        description: Data usage.
-        required:
-          - txkbyte
-          - rxkbyte
-        properties:
-          txkbyte:
-            type: integer
-            description: Amount of data transmitted, in Kbytes.
-          rxkbyte:
-            type: integer
-            description: Amount of data received, in Kbytes.
+        $ref: '#/definitions/Usage'
+    title: Cellular Status
+  CellularSettings:
+    properties:
       enable:
         type: boolean
         description: Enable Cellular Networking.
-      pdpContext:
-        type: object
-        description: PDP context data for dialing up to Cellular Network.
-        required:
-          - static
-          - id
-          - primary
-          - secondary
-        properties:
-          static:
-            type: boolean
-            description: Use static APN or dynamic.
-          id:
-            type: integer
-            description: Specifies PDP context id.
-            minimum: 1
-            maximum: 16
-          retryTimeout:
-            type: integer
-            description: |
-              Retry timeout in seconds for static APN to switch primary to
-              secondary settings.
-            minimum: 60
-            maximum: 86399
-          primary:
-            type: object
-            description: Primary PDP context.
-            properties:
-              apn:
-                type: string
-                description: Edit APN of the specified PDP context.
-              type:
-                type: string
-                description: Indicate the PDP type to use.
-                enum:
-                  - ipv4
-                  - ipv6
-                  - ipv4v6
-          secondary:
-            type: object
-            description: Secondary PDP context.
-            properties:
-              apn:
-                type: string
-                description: Edit APN of the specified PDP context.
-              type:
-                type: string
-                description: Indicate the PDP type to use.
-                enum:
-                  - ipv4
-                  - ipv6
-                  - ipv4v6
-          list:
-            readOnly: true
-            type: array
-            description: PDP context list.
-            items:
-              type: object
-              description: An PDP context
-              required:
-                - id
-                - apn
-                - type
-              properties:
-                id:
-                  type: integer
-                  minimum: 1
-                  maximum: 16
-                apn:
-                  type: string
-                type:
-                  type: string
-                  enum:
-                    - ipv4
-                    - ipv6
-                    - ipv4v6
-      pinCode:
-        type: string
-        description: PIN code of SIM card. Takes no effect when SIM card PIN weren't
-          not set.
+      id:
+        type: integer
+        description: Identifier for an Cellular interface.
+      profileId:
+        type: integer
+        description: |
+          Specify profile to connect, 0 for connect and retry automatically.
+      profileTimeout:
+        type: integer
+        description: |
+          Retry timeout in seconds for static APN to switch primary to
+          secondary settings.
+        minimum: 60
+        maximum: 86399
+      profiles:
+        type: array
+        description: Profiles for redundency
+        items:
+          $ref: '#/definitions/CellularProfile'
       keepalive:
-        type: object
-        description: Keep-alive configuration.
-        required:
-          - enable
-          - targetHost
-          - intervalSec
-        properties:
-          enable:
-            type: boolean
-            description: Enable/disable Cellular connection keep-alive by ping.
-          targetHost:
-            type: string
-            description: IP address to ping.
-          intervalSec:
-            type: integer
-            minimum: 60
-            maximum: 86399
-            description: Check alive interval.
-          reboot:
-            type: object
-            description: 'Reboot system while check alive failed after a defined cycle(s).'
-            properties:
-              enable:
-                type: boolean
-                description: 'Enable/disable reboot policy for check alive failed.'
-              cycles:
-                type: integer
-                minimum: 1
-                maximum: 48
-                description: |
-                  Define cycles to check if reboot is required; a cycle is
-                  a global value defined by system, default should be 20
-                  minutes.
+        $ref: '#/definitions/Keepalive'
+    title: Cellular Settings
     example:
       id: 1
-      name: wwan1
-      mode: umts
-      signal:
-        csq: 14
-        rssi: -76
-        ecio: -8.5
-      operatorName: Chunghwa Telecom
-      lac: '11114'
-      tac: ''
-      nid: ''
-      cellId: '1249'
-      bid: ''
-      iccId: ''
-      imsi: '466977502877452'
-      imei: '356853050370859'
-      esn: 802202F0
-      pinRetryRemain: 3
-      status: connected
-      mac: '00:00:00:00:00:00'
-      ip: 111.70.146.125
-      netmask: 255.255.255.252
-      gateway: 111.70.146.126
-      dns:
-        - 168.95.1.1
-        - 168.95.192.1
-      usage:
-        txkbyte: 40023
-        rxkbyte: 3493
       enable: true
-      pdpContext:
-        static: true
-        id: 1
-        retryTimeout: 1200
-        primary:
-          apn: internet
-          type: ipv4v6
-        secondary:
-          apn: internet
-          type: ipv4v6
-        list:
-          - id: 1
-            apn: internet
-            type: ipv4v6
-      pinCode: '0000'
       keepalive:
         enable: true
         targetHost: 8.8.8.8
@@ -574,24 +610,197 @@ definitions:
         reboot:
           enable: false
           cycles: 1
-  CellularFirmwareInfo:
-    title: CellularFirmwareInfo
-    description: Display current, preferred, available firmware properties, if current
-      firmware is not  equal to preferred firmware, you should check your configuration.
-      (fwver, config, carrier mismatch?).
+      profileId: 1
+      profileTimeout: 300
+      profiles:
+      - id: 1
+        pinCode: "0000"
+        pdpContext:
+          static: true
+          id: 1
+          apn: internet
+          type: ipv4v6
+          auth:
+            protocol: none
+            username: ""
+            password: ""
+        keepalive:
+          enable: false
+        init:
+        - sim:1
+        - carrier:ATT
+      - id: 2
+        pdpContext:
+          id: 3
+          static: false
+          apn: ""
+          type: ipv4
+          auth:
+            protocol: none
+            username: ""
+            password: ""
+        keepalive:
+          targetHost: 1.2.3.4
+        init:
+        - carrier:VZW
+  Usage:
+    type: object
+    required:
+    - rxkbyte
+    - txkbyte
+    properties:
+      txkbyte:
+        type: integer
+        description: Amount of data transmitted, in Kbytes.
+      rxkbyte:
+        type: integer
+        description: Amount of data received, in Kbytes.
+    title: Usage
+    description: Data usage.
+    example:
+      txkbyte: 40023
+      rxkbyte: 3493
+  Keepalive:
+    type: object
+    properties:
+      enable:
+        type: boolean
+        description: Enable/disable Cellular connection keep-alive by ping.
+      targetHost:
+        type: string
+        description: IP address to ping.
+      intervalSec:
+        type: integer
+        description: Check alive interval.
+        minimum: 60
+        maximum: 86399
+      reboot:
+        $ref: '#/definitions/KeepaliveReboot'
+    title: Keepalive Settings
+    example:
+      enable: true
+      targetHost: 8.8.8.8
+      intervalSec: 60
+      reboot:
+        enable: false
+        cycles: 1
+  KeepaliveReboot:
+    type: object
+    properties:
+      enable:
+        type: boolean
+        description: |
+          Enable/disable reboot policy for check alive failed.
+      cycles:
+        type: integer
+        description: |
+          Define cycles to check if reboot is required; a cycle is
+          a global value defined by system, default should be 20
+          minutes.
+        minimum: 1
+        maximum: 48
+    title: Reboot to Keepalive
+    description: |
+      Reboot system while check alive failed after a defined cycle(s).
+    example:
+      enable: true
+      targetHost: 8.8.8.8
+      intervalSec: 60
+      reboot:
+        enable: false
+        cycles: 1
+  CellularProfile:
+    type: object
+    required:
+    - id
+    - pdpContext
+    properties:
+      id:
+        type: integer
+        description: Identifier for an Cellular interface.
+      name:
+        type: string
+        description: Alias name for the profile.
+        minLength: 0
+        maxLength: 100
+      pdpContext:
+        $ref: '#/definitions/CellularProfile_pdpContext'
+      pinCode:
+        type: string
+        description: |
+          PIN code of SIM card. Takes no effect when SIM card PIN
+          weren't not set.
+      init:
+        type: array
+        description: "Initialize process before executing the profile.\n\n- sim:\\\
+          <sim-slot\\>\n\n- carrier:\\<carrier\\>    \n"
+        items:
+          type: string
+    title: Cellular Profile
+    example:
+      id: 1
+      pinCode: "0000"
+      pdpContext:
+        static: true
+        id: 1
+        apn: internet
+        type: ipv4v6
+        auth:
+          protocol: none
+          username: ""
+          password: ""
+      keepalive:
+        enable: false
+      init:
+      - sim:1
+      - carrier:ATT
+  CellularCarrierInfo:
+    type: object
     properties:
       switchable:
         type: boolean
+        description: Cellular carrier could be switched or not.
         readOnly: true
-        description: Cellular firmware could be switched or not.
       current:
-        '$ref': '#/definitions/CellularFirmwareEntry'
+        $ref: '#/definitions/CellularCarrierName'
       preferred:
-        '$ref': '#/definitions/CellularFirmwareEntry'
+        $ref: '#/definitions/CellularCarrierName'
       available:
         type: array
         items:
-          '$ref': '#/definitions/CellularFirmwareEntry'
+          $ref: '#/definitions/CellularCarrierName'
+    title: CellularCarrierInfo
+    description: |
+      Display current, preferred, available carrier properties, if
+      current carrier is not  equal to preferred carrier irmware, you should
+      check your configuration. (fwver, config, carrier mismatch?).
+    example:
+      switchable: true
+      current: ATT
+      preferred: ATT
+      available:
+      - ATT
+      - VZW
+  CellularFirmwareInfo:
+    type: object
+    properties:
+      switchable:
+        type: boolean
+        description: Cellular firmware could be switched or not.
+        readOnly: true
+      current:
+        $ref: '#/definitions/CellularFirmwareEntry'
+      preferred:
+        $ref: '#/definitions/CellularFirmwareEntry'
+      available:
+        type: array
+        items:
+          $ref: '#/definitions/CellularFirmwareEntry'
+    title: CellularFirmwareInfo
+    description: |
+      Display current, preferred, available firmware properties, if
+      current firmware is not  equal to preferred firmware, you should
+      check your configuration. (fwver, config, carrier mismatch?).
     example:
       switchable: true
       current:
@@ -603,20 +812,37 @@ definitions:
         config: ATT_005.029_001
         carrier: ATT
       available:
-        - fwver: 05.05.58.01
-          config: ATT_005.029_001
-          carrier: ATT
-        - fwver: 05.05.58.02
-          config: VZW_005.029_002
-          carrier: VZW
-  CellularFirmwareEntry:
-    title: CellularFirmwareEntry
+      - fwver: 05.05.58.01
+        config: ATT_005.029_001
+        carrier: ATT
+      - fwver: 05.05.58.02
+        config: VZW_005.029_002
+        carrier: VZW
+  CellularCarrierName:
+    type: string
+    title: CellularCarrierName
+    minLength: 0
+    maxLength: 32
+    description: Carrier name
+  CellularCarrierEntry:
     type: object
-    description: sdfdf
     required:
-      - fwver
-      - config
-      - carrier
+    - carrier
+    properties:
+      carrier:
+        type: string
+        description: Carrier name
+        minLength: 0
+        maxLength: 32
+    title: CellularCarrierEntry
+    example:
+      carrier: VZW
+  CellularFirmwareEntry:
+    type: object
+    required:
+    - carrier
+    - config
+    - fwver
     properties:
       fwver:
         type: string
@@ -633,7 +859,81 @@ definitions:
         description: Carrier name
         minLength: 0
         maxLength: 32
+    title: CellularFirmwareEntry
+    description: ""
     example:
       fwver: 05.05.58.01
       config: ATT_005.029_001
       carrier: ATT
+  CellularStatus_signal:
+    required:
+    - csq
+    - ecio
+    - rssi
+    properties:
+      csq:
+        type: integer
+        description: |
+          Signal quality, Only shows the first part of the response, RSSI
+          (Received signal strength indicator).
+      rssi:
+        type: integer
+        description: |
+          Cellular RF signal strength, in `dbm`. Value `0` indicates no
+          SIM card found.
+      ecio:
+        type: integer
+        description: |
+          The ratio of the received energy per chip (= code bit) and the
+          interference level, given in `dBm`.
+    description: Cellular RF signal strength, include RSSI and EcIo.
+  CellularProfile_pdpContext_auth:
+    required:
+    - protocol
+    properties:
+      protocol:
+        type: string
+        description: The negotiated authentication protocol.
+        enum:
+        - none
+        - chap
+        - pap
+        - both
+      username:
+        type: string
+        description: Username for PAP and/or CHAP.
+        minLength: 0
+        maxLength: 255
+      password:
+        type: string
+        description: Password for PAP and/or CHAP.
+        minLength: 0
+        maxLength: 255
+    description: The negotiated authentication.
+  CellularProfile_pdpContext:
+    required:
+    - id
+    - static
+    properties:
+      static:
+        type: boolean
+        description: Use static APN or dynamic.
+      id:
+        type: integer
+        description: Specifies PDP context id.
+        minimum: 1
+        maximum: 16
+      apn:
+        type: string
+        description: Edit APN of the specified PDP context.
+      type:
+        type: string
+        description: Indicate the PDP type to use.
+        enum:
+        - ipv4
+        - ipv6
+        - ipv4v6
+      auth:
+        $ref: '#/definitions/CellularProfile_pdpContext_auth'
+    description: |
+      PDP context data for dialing up to Cellular Network.

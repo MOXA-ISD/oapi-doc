@@ -171,7 +171,7 @@ definitions:
         description: Device tag.   
       modelName:
         type: string
-        description: Device tag.   
+        description: Device model name.   
       uuid:
         type: string
         description: Device uuid.
@@ -199,17 +199,37 @@ definitions:
         description: Device last updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
   ConnectReq:
     type: object
-    description: Device connection data payload, the payload is used to connect to tenant portal, if the request body is empty, PIC will use default data to connect to tenant portal, if user brings custom data(url, username, password), PIC will use this data connect to tenant portal.
+    required:
+    - mac
+    - sn
+    - modelName
+    description: Device connection data payload, manualRegister payload is used to connect to tenant portal, if manualRegister is empty, PIC will use default data connect to tenant portal, if user brings manualRegister(url, email, password), PIC will use this data connect to tenant portal.
     properties:
-      url:
+      mac:
         type: string
-        description: Tenant portal url.
-      username:
+        description: Device mac.
+      sn:
         type: string
-        description: Tenant portal username.
-      password:
+        description: Device serial number.
+      tag:
         type: string
-        description: Tenant portal password.    
+        description: Device tag.   
+      modelName:
+        type: string
+        description: Device model name. 
+      manualRegister:
+        type: object
+        description: This
+        properties:
+          url:
+            type: string
+            description: Tenant portal url.
+          email:
+            type: string
+            description: Tenant portal login email.
+          password:
+            type: string
+            description: Tenant portal login password.    
   ConnectRes:
     type: object
     properties:
@@ -217,10 +237,14 @@ definitions:
         type: integer
         description: |
           If http status code is not 200, user should reference this value to identify failure reason. 
-          200: cannot connect tenant portal 
-          201: wrong username or password 
+          200: tenant portal is unreachable
+          201: wrong email or password
           202: permission denied 
-          203: model name mismatch
+          203: model type mismatch
+          204, POST connect request body format error
+          205, caonnt find tag
+          300, save db error
+          400, unknown error
       reason:
         type: string
         description: If http status code is not 200, user sholud reference this reason to identify failure reason.
@@ -312,9 +336,16 @@ externalDocs:
       }
     ConnectReq:
       {
-        "url": "http://www.moxa.com",
-        "username": "moxa",
-        "password": "1234"
+        "mac": "001122334455",
+        "sn": "12345678",
+        "modelName": "UC-8112",
+        "tag": "1234",
+        "manualRegister": 
+        {
+          "url": "http://www.moxa.com",
+          "email": "owen@moxa.com",
+          "password": "1234"
+        }
       }
     ConnectRes:
       {

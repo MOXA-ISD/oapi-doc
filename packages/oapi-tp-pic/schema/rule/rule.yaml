@@ -30,9 +30,9 @@ paths:
           description: Filter the rule list by url
           required: false
           type: string
-        - name: username
+        - name: email
           in: query
-          description: Filter the rule list by username
+          description: Filter the rule list by email
           required: false
           type: string
         - name: status
@@ -48,7 +48,7 @@ paths:
           enum:
           - tag
           - url
-          - username
+          - email
           - status
         - name: sort
           in: query
@@ -147,10 +147,10 @@ definitions:
         description: Tag name.
       url:
         type: string
-        description: Tenant portal url.
-      username:
+        description: Tenant portal login url.
+      email:
         type: string
-        description: Tenant portal username.
+        description: Tenant portal login email.
       status:
         type: string
         enum:
@@ -165,7 +165,7 @@ definitions:
     required:
     - tag
     - url
-    - username
+    - email
     - password
     properties:
       tag:
@@ -174,15 +174,15 @@ definitions:
       url:
         type: string
         description: Tenant portal url.
-      username:
+      email:
         type: string
-        description: Tenant portal username.
+        description: Tenant portal login email.
       password:
         type: string
-        description: Tenant portal password.  
+        description: Tenant portal login password.  
   RuleUpdate:
     type: object
-    description: User can update tag, url, (username, password), status separtely
+    description: User can update tag, url, (email, password), status separtely
     properties:
       tag:
         type: string
@@ -190,12 +190,12 @@ definitions:
       url:
         type: string
         description: Tenant portal url.
-      username:
+      email:
         type: string
-        description: Tenant portal username.
+        description: Tenant portal login email.
       password:
         type: string
-        description: Tenant portal password.    
+        description: Tenant portal login password.    
       status:
         type: string
         enum:
@@ -225,7 +225,7 @@ externalDocs:
         "id": 1,
         "tag": "moxa",
         "url": "http://www.moxa.com",
-        "username": "owen",
+        "email": "owen@moxa.com",
         "status": "active",
         "updatedAt": "2019-03-26T07:51:35.663935Z"
       }
@@ -233,14 +233,14 @@ externalDocs:
       {
         "tag": "moxa",
         "url": "http://www.moxa.com",
-        "username": "owen",
+        "email": "owen@moxa.com",
         "password": "abc"
       }
     RuleUpdate:
       {
         "tag": "moxa",
         "url": "http://www.moxa.com",
-        "username": "owen",
+        "email": "owen@moxa.com",
         "password": "abc",
         "status": "active"
       }
@@ -252,7 +252,7 @@ externalDocs:
             "id": 1,
             "tag": "moxa",
             "url": "http://www.moxa.com",
-            "username": "owen",
+            "email": "owen@moxa.com",
             "status": "active",
             "updatedAt": "2019-03-26T07:51:35.663935Z"
           }

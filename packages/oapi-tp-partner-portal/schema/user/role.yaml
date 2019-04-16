@@ -1,0 +1,69 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro Partner Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: role
+    description: Handles role field data
+
+paths:
+  /roles:
+    get:
+      description: Get all roles data
+      tags:
+        - role
+      responses:
+        200:
+          description: An array of role
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Role'
+            example: 
+              $ref: '#/externalDocs/x-mocks/RoleList'
+
+definitions:
+  Role:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Role ID.
+      name:
+        type: string
+        description: Name of role.
+      description:
+        type: string
+        description: Description of role.
+      admin:
+        type: boolean
+        description: Admin role.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    RoleList:
+      {
+        "data": [
+          {
+            "admin": true,
+            "description": "Administrator",
+            "id": 1,
+            "name": "Administrator"
+          },
+          {
+            "admin": false,
+            "description": "Member",
+            "id": 2,
+            "name": "Member"
+          }
+        ]
+      }

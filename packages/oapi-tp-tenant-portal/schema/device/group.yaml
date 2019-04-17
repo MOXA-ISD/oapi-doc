@@ -430,10 +430,31 @@ externalDocs:
         "groupId": 11,
         "groupName": "201902270912",
         "description": "test",
-        "deviceIdList": [
-            "ac2f885e-222f-4aa9-afba-0888c7151aba",
-            "c4d42f3c-2cf5-464f-b6bd-370465323d1f"
-        ],
+        "devices": [
+            {
+              "deviceId": "c4d42f3c-2cf5-464f-b6bd-370465323d1f",
+              "deviceName": "UC-8112-LX",
+              "deviceProfileId": 1,
+              "deviceType": "IIoT Gateway",
+              "groupList": [
+                {
+                    "description": "A123",
+                    "id": 2,
+                    "name": "A123"
+                },
+                {
+                    "description": "MOXA-ISS",
+                    "id": 4,
+                    "name": "MOXA-ISS"
+                },
+                {
+                    "description": "test",
+                    "id": 9,
+                    "name": "201902270912"
+                }
+              ]
+            }
+          ],
         "createdAt": "2019-02-27T01:58:42.967276Z",
         "creator": {
             "avatar": "https://www.moxa.com/images/avatar/7dc93587-5444-48bf-a196-da811c39959d.jpg",

@@ -24,7 +24,7 @@ paths:
           schema:
             type: object
             properties:
-              username:
+              email:
                 type: string
                 example: 'thingspro@moxa.com'
               password:

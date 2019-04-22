@@ -172,19 +172,12 @@ definitions:
       modelName:
         type: string
         description: Device model name.   
-      uuid:
+      deviceId:
         type: string
         description: Device uuid.
-      moxaSN:
-        type: string
-        description: moxaSN.
-      certSN:
-        type: string
-        description: certSN.  
       status:
         type: string
         enum:
-        - unregistered
         - registered
         - enrolled
         description: status.  
@@ -194,9 +187,9 @@ definitions:
       registeredAt:
         type: string
         description: Device registered time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updatedAt:
+      connecteddAt:
         type: string
-        description: Device last updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
   ConnectReq:
     type: object
     required:
@@ -241,16 +234,41 @@ definitions:
           201: wrong email or password
           202: permission denied 
           203: model type mismatch
-          204, POST connect request body format error
-          205, caonnt find tag
-          300, save db error
-          400, unknown error
+          204: POST connect request body format error
+          205: caonnt find tag
+          206: device is not enrolled
+          207: re-generate new certfiicate
+          300: save db error
+          400: unknown error
       reason:
         type: string
         description: If http status code is not 200, user sholud reference this reason to identify failure reason.
       data:
-        type: string
-        description: IOT connection data.    
+        type: object
+        description: IOT connection data.   
+        properties:
+          cloudProvider:
+            type: string
+            description: aws or azure   
+          hostname:
+            type: string
+            description: IOT connection hostname.  
+          authType:
+            type: string
+            description: Auth type, x509 is default  
+      newCert:
+        type: object
+        description: PIC will generate new certificate, if the old certificate expired
+        properties:
+          privateKey:
+            type: string
+            description: Private key.
+          certificate:
+            type: string
+            description: Certificate.
+          rootCA:
+            type: string
+            description: Root certificate
   EnrollReq:
     type: object
     required:
@@ -288,7 +306,7 @@ definitions:
         description: Certificate.
       rootCA:
         type: string
-        description: RootCA.   
+        description: Root certificate.   
   BatchEnrollRes:
     type: array
     items:
@@ -302,14 +320,11 @@ externalDocs:
         "mac": "001122334455",
         "sn": "12345678",
         "tag": "moxa",
-        "uuid": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
-        "moxaSN": "123456",
-        "certSN": "123456",
-        "cert": "1234",
+        "deviceId": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
         "status": "enrolled",
-        "enrollAt": "2019-03-26T07:51:35.663935Z",
-        "registerAt": "2019-03-26T07:51:35.663935Z",
-        "lastConnectedAt": "2019-03-26T07:51:35.663935Z"
+        "enrolledAt": "2019-03-26T07:51:35.663935Z",
+        "registeredAt": "2019-03-26T07:51:35.663935Z",
+        "connectedAt": "2019-03-26T07:51:35.663935Z"
       }
     DeviceList:
       {
@@ -323,14 +338,11 @@ externalDocs:
               "mac": "001122334455",
               "sn": "12345678",
               "tag": "moxa",
-              "uuid": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
-              "moxaSN": "123456",
-              "certSN": "123456",
-              "cert": "1234",
+              "deviceId": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
               "status": "enrolled",
               "enrolledAt": "2019-03-26T07:51:35.663935Z",
               "registeredAt": "2019-03-26T07:51:35.663935Z",
-              "lastConnectedAt": "2019-03-26T07:51:35.663935Z"
+              "connectedAt": "2019-03-26T07:51:35.663935Z"
             }
           ]
       }

@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.0
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -15,46 +15,103 @@ tags:
     description: Handles permission field data
 
 paths:
-  '/permissions':
+  /permissions:
     get:
-      description: Get all permissions field data
+      description: Get all permission field data
+      tags:
+        - permission
       responses:
-        '200':
+        200:
           description: success
           schema:
             type: array
             items:
               $ref: '#/definitions/Permission'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/PermissionList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/PermissionList'
+
+  /permissions/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Permission ID
+        required: true
+        type: integer
+    get:
+      description: Get permission field data by id
       tags:
         - permission
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Permission'
+            example:
+              $ref: '#/externalDocs/x-mocks/Permission'
 
 definitions:
   Permission:
     title: Permission
-    required:
-      - id
-      - value
     type: object
     properties:
       id:
         type: integer
         description: Unique identifier representing a specific user.
-      value:
-        type: integer
-        description: Attribute of Permission, 0 is cannot view/edit, 1 is can view but cannot edit, 2 is can view and edit
       name:
         type: string
         description: Name of permission.
       description:
         type: string
         description: Description of permission.
+      type:
+        type: integer
+        description: Type of permission. 1=Tenant Administration, 2=Device Operation
 
 externalDocs:
   url: 'http://#'
   x-mocks:
+    Permission:
+      {
+        "id": 1,
+        "name": "User & Role management",
+        "description": "User & Role management",
+        "type": 1
+      }
     PermissionList:
-      [
-        { "id": 1, "value": 0, "name": "Device Management", "description": "xxxxx" },
-        { "id": 2, "value": 0, "name": "User Management", "description": "xxxxx" }
-      ]
+      {
+        "data": [
+          {
+            "id": 1,
+            "name": "User & Role management",
+            "description": "User & Role management",
+            "type": 1
+          },
+          {
+            "id": 2,
+            "name": "Device register",
+            "description": "Device register",
+            "type": 1
+          },
+          {
+            "id": 3,
+            "name": "Device grouping",
+            "description": "Device grouping",
+            "type": 1
+          },
+          {
+            "id": 4,
+            "name": "View device information",
+            "description": "View device information",
+            "type": 2
+          },
+          {
+            "id": 5,
+            "name": "Full manage device",
+            "description": "Full manage device",
+            "type": 2
+          }
+        ]
+      }
+      

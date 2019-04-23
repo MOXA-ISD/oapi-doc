@@ -1,0 +1,690 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro Partner Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: tenant
+    description: Handles tenants data
+
+paths:
+  /tenants:
+    get:
+      description: Get all tenants
+      tags:
+        - tenant
+      parameters:
+        - name: domainName
+          in: query
+          description: Filter the tenant list by domain name
+          required: false
+          type: string
+        - name: portalName
+          in: query
+          description: Filter the tenant list by portal name
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: The tenant list order by some keyword. default is order by 'createdAt'
+          required: false
+          type: string
+          enum:
+          - domainName
+          - portalName
+        - name: sort
+          in: query
+          description: Sorting the filter tenant list, default is asc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: limit
+          in: query
+          description: max return tenants count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
+      responses:
+        200:
+          description: An array of tenants
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tenant'
+            example:
+              $ref: '#/externalDocs/x-mocks/TenantList'
+    post:
+      description: Create a new tenant.
+      tags:
+        - tenant
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/TenantCreate'
+      responses:
+        201:
+          description: Create tenant successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Tenant'
+            example:
+              $ref: '#/externalDocs/x-mocks/Tenant'
+
+  /tenants/{tenantId}:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Return tenant data with given ID
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An Object of the tenant
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Tenant'
+            example:
+              $ref: '#/externalDocs/x-mocks/Tenant'
+
+  /tenants/{tenantId}/certificates:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Return certificates apply of tenant data with given ID
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An array of tenant certificates
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantCertificate'
+            example:
+              $ref: '#/externalDocs/x-mocks/TenantCertificateList'
+
+  /tenants/{tenantId}/users:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Return users of tenant data with given ID
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An array of tenant users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantUser'
+            example:
+              $ref: '#/externalDocs/x-mocks/TenantUserList'
+
+  /tenants/{tenantId}/members:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    get:
+      description: Return members of tenant data with given ID
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An array of tenant members
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantMember'
+            example:
+              $ref: '#/externalDocs/x-mocks/TenantMemberList'
+    put:
+      description: Update tenant members
+      tags:
+        - tenant
+      parameters:
+        - name: body
+          in: body
+          description: Information of User
+          required: true
+          schema:
+            $ref: '#/definitions/MemberUpdate'
+      responses:
+        200:
+          description: An array of tenant members
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/TenantMember'
+            example:
+              $ref: '#/externalDocs/x-mocks/TenantMemberList'
+
+  /tenants/{tenantId}/enable:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    put:
+      description: Enable tenant by tenant ID.
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An Object of the tenant
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Tenant'
+            example:
+              $ref: '#/externalDocs/x-mocks/Tenant'
+
+  /tenants/{tenantId}/disable:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    put:
+      description: Disable tenant by tenant ID.
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An Object of the tenant
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Tenant'
+            example:
+              $ref: '#/externalDocs/x-mocks/Tenant'
+
+  /tenants/{tenantId}/offer:
+    parameters:
+      - name: tenantId
+        in: path
+        description: Tenant unique identifier
+        required: true
+        type: string
+    patch:
+      description: Change tenant offer
+      tags:
+        - tenant
+      parameters:
+        - name: body
+          in: body
+          description: Offer identifier
+          required: true
+          schema:
+            type: object
+            properties:
+              offerId:
+                type: integer
+      responses:
+        200:
+          description: success
+        
+  /portal:
+    get:
+      description: Get basic portal info
+      tags:
+        - tenant
+      responses:
+        200:
+          description: An array of tenants
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Portal'
+            example:
+              $ref: '#/externalDocs/x-mocks/Portal'
+
+definitions:
+  Tenant:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      domainName:
+        type: string
+        description: Domain name of tenant.
+      portalName:
+        type: string
+        description: Portal name of tenant.
+      avatar:
+        type: string
+        description: Avatar of tenant.
+      enabled:
+        type: boolean
+        description: The tenant is enabled or disabled in this partner
+      memberCount:
+        type: integer
+        description: Members of the tenant
+      deviceCount:
+        type: integer
+        description: Devices of the tenant
+      userCount:
+        type: integer
+        description: Users of the tenant
+      activate:
+        type: string
+        description: Activate status of tenant.
+      activatedAt:
+        type: string
+        description: Tenant activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      creator:
+        type: string
+        description: Created tenant username
+      createdAt:
+        type: string
+        description: Tenant created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
+
+  TenantCreate:
+    type: object
+    properties:
+      domainName:
+        type: string
+        description: Domain name of tenant.
+        maxLength: 50
+      portalName:
+        type: string
+        description: Portal name of tenant.
+        maxLength: 50
+      email:
+        type: string
+        description: Email of user.
+        maxLength: 254
+
+  TenantCertificate:
+    type: object
+    properties:
+      applyId:
+        type: string
+        description: Unique identifier representing a specific certificate.
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      portalName:
+        type: string
+        description: Tenant portal name.
+      mac:
+        type: string
+        description: Mac address of device.
+      serialNumber:
+        type: string
+        description: Serial number of device.
+      modelName:
+        type: string
+        description: Model name of device.
+      note:
+        type: string
+        description: Certificate apply form note.
+      reason:
+        type: string
+        description: Declined certificate reason.
+      applicant:
+        type: string
+        description: Certificate applicant.
+      applyStatus:
+        type: string
+        enum:
+        - waiting
+        - approved
+        - declined
+        description: Certificate apply status.
+      applyAt:
+        type: string
+        description: Certificate apply time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      createdAt:
+        type: string
+        description: Certificate created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+
+  TenantUser:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        description: Unique identifier representing a specific tenant.
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      firstName:
+        type: string
+        description: First name of user.
+      lastName:
+        type: string
+        description: Last name of user.
+      avatar:
+        type: string
+        description: Avatar of user.
+      email:
+        type: string
+        description: Email of user.
+      company:
+        type: string
+        description: Company of user.
+      department:
+        type: string
+        description: Department of user.
+      employeeId:
+        type: string
+        description: Employee Id of user.
+      phone:
+        type: string
+        description: Phone of user.
+      status:
+        type: string
+        description: Enable Status of user.
+      data:
+        type: object
+        description: Metadata of user.
+      loginAt:
+        type: string
+        description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      passwordExpireAt:
+        type: string
+        description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      role:
+        type: array
+        description: List of role which contains the user.
+        items:
+          '$ref': '#/definitions/Role'
+
+  TenantMember:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      displayName:
+        type: string
+        description: Username of user.
+      avatar:
+        type: string
+        description: Avatar of user.
+      email:
+        type: string
+        description: Email of user.
+      role:
+        type: object
+        description: Role information. 1=Administrator, 2=Member
+        items:
+          '$ref': '#/definitions/PartnerRole'
+      permission:
+        type: object
+        description: Permission for single tenant. 1=Full Manage Tenant, 2=View Tenant Information
+        items:
+          '$ref': '#/definitions/PartnerPermission'
+
+  MemberUpdate:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: Unique identifier representing a specific user.
+      permissionId:
+        type: integer
+        description: Unique identifier representing a specific user.
+
+  Role:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Role id.
+      name:
+        type: string
+        description: Role name.
+      value:
+        type: integer
+        description: Role value.
+      admin:
+        type: boolean
+        description: Is administrator?
+      permission:
+        type: array
+        items:
+          $ref: '#/definitions/Permission'
+
+  Permission:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      name:
+        type: string
+        description: Name of permission.
+      description:
+        type: string
+        description: Description of permission.
+      type:
+        type: integer
+        description: Type of permission. 1=Tenant Administration, 2=Device Operation
+      value:
+        type: integer
+        description: Permission value.
+
+  PartnerRole:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Role id.
+      name:
+        type: string
+        description: Role name.
+      value:
+        type: integer
+        description: Role value.
+      admin:
+        type: boolean
+        description: Is administrator?
+
+  PartnerPermission:
+    title: PartnerPermission
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      name:
+        type: string
+        description: Name of permission.
+      description:
+        type: string
+        description: Description of permission.
+      type:
+        type: integer
+        description: Type of permission. 1=Partner Administration, 2=Tenant Management
+
+  Portal:
+    type: object
+    properties:
+      portalName:
+        type: string
+        description: Portal name.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Tenant:
+      {
+        "activate": "approved",
+        "activatedAt": "",
+        "avatar": "",
+        "createdAt": "2019-03-08T07:18:27:565Z",
+        "creator": "Cain Chen",
+        "deviceCount": 5,
+        "domainName": "tenant-dev",
+        "enabled": true,
+        "memberCount": 4,
+        "portalName": "MOXA-ISS",
+        "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+        "userCount": 28
+      }
+    TenantList:
+      {
+        "count": 13,
+        "data": [
+          {
+            "activate": "approved",
+            "activatedAt": "",
+            "avatar": "",
+            "createdAt": "2019-03-08T07:18:27:565Z",
+            "creator": "Cain Chen",
+            "deviceCount": 5,
+            "domainName": "tenant-dev",
+            "enabled": true,
+            "memberCount": 4,
+            "portalName": "MOXA-ISS",
+            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+            "userCount": 28
+          }
+        ],
+        "limit": 1,
+        "offset": 0
+      }
+    TenantCertificateList:
+      {
+        "count": 15,
+        "data": [
+          {
+            "applicant": "Owen Kao",
+            "applyAt": "",
+            "applyId": 23,
+            "applyStatus": "approved",
+            "createdAt": "2019-03-20T05:59:08:085Z",
+            "mac": "12-34-56-78-90-1A",
+            "modelName": "UC-8112-LX",
+            "note": "",
+            "portalName": "MOXA-ISS",
+            "reason": "",
+            "serialNumber": "123",
+            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
+          }
+        ],
+        "limit": 1,
+        "offset": 0
+      }
+    TenantUserList:
+      {
+        "count": 28,
+        "data": [
+          {
+            "avatar": "",
+            "company": "moxa",
+            "data": {},
+            "department": "iss",
+            "displayName": "Rick Peng",
+            "email": "rick.peng@moxa.com",
+            "employeeId": "20040003",
+            "firstName": "Rick",
+            "lastName": "Peng",
+            "loginAt": "2019-02-27T06:45:44:015Z",
+            "passwordExpireAt": "2019-01-22T07:51:26:214Z",
+            "phone": "02-89191230",
+            "role": {
+              "admin": false,
+              "id": 5,
+              "name": "User manager",
+              "permission": [
+                {
+                  "id": 1,
+                  "name": "User & Role management",
+                  "value": 1
+                },
+                {
+                  "id": 2,
+                  "name": "Device register",
+                  "value": 0
+                },
+                {
+                  "id": 3,
+                  "name": "Device grouping",
+                  "value": 0
+                },
+                {
+                  "id": 4,
+                  "name": "View device information",
+                  "value": 0
+                },
+                {
+                  "id": 5,
+                  "name": "Full manage device",
+                  "value": 0
+                }
+              ]
+            },
+            "status": "enabled",
+            "tenantId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+          }
+        ],
+        "limit": 1,
+        "offset": 1
+      }
+    Portal:
+      {
+        "portalName": "moxa"
+      }  
+    TenantMemberList:
+      {
+        "data": [
+          {
+            "avatar": "",
+            "displayName": "Rick Peng",
+            "email": "rick.peng@moxa.com",
+            "permission": {
+              "description": "Full Manage Tenant",
+              "id": 1,
+              "name": "Full Manage Tenant",
+              "type": 2
+            },
+            "role": {
+              "admin": true,
+              "description": "Administrator",
+              "id": 1,
+              "name": "Administrator"
+            },
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+          }
+        ]
+     }

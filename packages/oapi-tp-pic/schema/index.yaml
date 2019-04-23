@@ -1,0 +1,30 @@
+swagger: '2.0'
+
+info:
+  version: 1.0.4
+  title: ThingsPro PIC service RESTful API reference
+  description: |
+    Welcome to the ThingsPro PIC service RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
+    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
+
+host: localhost
+basePath: '/api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+tags:
+  - $ref: './device/index.yaml#/tags'
+  - $ref: './rule/index.yaml#/tags'
+
+paths:
+  - $ref: './device/index.yaml#/paths'
+  - $ref: './rule/index.yaml#/paths'
+
+definitions:
+  - $ref: './device/index.yaml#/definitions'
+  - $ref: './rule/index.yaml#/definitions'

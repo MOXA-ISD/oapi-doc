@@ -92,7 +92,7 @@ paths:
           description: ''
           required: true
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/DeviceCreate'
       responses:
         '200':
           description: An array of gateways
@@ -101,7 +101,7 @@ paths:
             items:
               $ref: '#/definitions/Device'
             example:
-              $ref: '#/externalDocs/x-mocks/DeviceCreated'
+              $ref: '#/externalDocs/x-mocks/DeviceCreateRes'
     delete:
       tags:
         - device
@@ -151,6 +151,18 @@ paths:
           description: success
 
 definitions:
+  DeviceCreate:
+    type: object
+    properties:
+      displayName:
+        type: string
+        description: Display name of device.
+      mac:
+        type: string
+        description: MAC address of device.
+      serialNumber:
+        type: string
+        description: Serial number of device.
   Device:
     type: object
     properties:
@@ -173,12 +185,6 @@ definitions:
       serialNumber:
         type: string
         description: Serial number of device.
-      psk:
-        type: string
-        readOnly: true
-        description: >-
-          MQTT Broker TLS PSK credential. (this property exist only exist as a
-          creating response)
       connection:
         type: object
         readOnly: true
@@ -187,6 +193,45 @@ definitions:
         type: object
         readOnly: true
         description: Device's latest system properties
+        properties:
+          aliasName:
+            type: string
+            description: Display name of device
+          iccId:
+            type: string
+            description: Iccid of device
+          modelName:
+            type: string
+            description:  Model name of device
+          softwareVersion:
+            type: string
+            description: Firmware(software) version of device
+          defaultRoute:
+            type: string
+            enum:
+              - wwan0
+              - wlan0
+              - eth0
+            description: Default route of device, wwan0 represents cellular, wlan0 represents wifi, eth0 represents ethernet
+          gps:
+            type: object
+            properties:
+              lat:
+                type: number
+                description: gps lat value
+              lng:
+                type: number
+                description: gps lng value
+          wifi:
+            type: string
+            enum:
+              - connected
+              - disconnected
+              - auth_failed
+            description: Default route of device, wwan0 represents cellular, wlan0 represents wifi, eth0 represents ethernet
+          customProperties:
+            type: object
+            description: User custom defined properties
     example:
       $ref: '#/externalDocs/x-mocks/Device'
   DeviceList:
@@ -238,14 +283,13 @@ externalDocs:
       mac: 223344FFFF11
       iccId: 898600MFSSYYGXXXXXXP
       serialNumber: MOXA00000001
-    DeviceCreated:
+    DeviceCreateRes:
       uuid: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
       description: Temperature monitoring
       displayName: 'Gym tempture sensor #1'
       mac: 223344FFFF11
       iccId: 898600MFSSYYGXXXXXXP
       serialNumber: MOXA00000001
-      psk: PBKDF2$sha256$901$xl/Ws1LGqr/WV5QB$XtAQ7g12TTs5F0PWHT3yXCRLBuKU4qOb
     DeviceList:
       count: 3
       data:

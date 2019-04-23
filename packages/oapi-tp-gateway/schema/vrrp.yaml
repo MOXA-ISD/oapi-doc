@@ -20,7 +20,7 @@ paths:
             VRRP setting
           schema:
             $ref: '#/definitions/VrrpSetting'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpSettingExample'
     put:
@@ -38,7 +38,7 @@ paths:
             VRRP setting
           schema:
             $ref: '#/definitions/VrrpSetting'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpSettingExample'
             x-override-response: true
@@ -58,7 +58,7 @@ paths:
             VRRP interface setting
           schema:
             $ref: '#/definitions/VrrpEntry_Id'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpEntryIdExample'
     get:
@@ -72,7 +72,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/VrrpEntry_Id'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpInterfacesExample'
     put:
@@ -94,7 +94,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/VrrpEntry_Id'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpInterfacesExample_Put'
     delete:
@@ -116,7 +116,7 @@ paths:
             type: array
             items:
               type: integer
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpInterfacesExample_Delete'
   /network/vrrp/interfaces/{id}:
@@ -134,7 +134,7 @@ paths:
             VRRP interface setting
           schema:
             $ref: '#/definitions/VrrpEntry'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpEntryExample'
     put:
@@ -152,7 +152,7 @@ paths:
             VRRP interface setting
           schema:
             $ref: '#/definitions/VrrpEntry'
-          examples:
+          example:
             application/json:
               $ref: '#/externalDocs/x-mocks/VrrpEntryExample_Put'
     delete:

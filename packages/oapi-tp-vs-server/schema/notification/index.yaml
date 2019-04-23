@@ -1,0 +1,279 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro Server RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+  - name: notification
+    description: Register event callback handler function
+
+paths:
+  /notifications:
+    get:
+      tags:
+        - notification
+      security:
+        - mx-api-token: []
+      description: New API<br />return all subscribe notifications
+      responses:
+        '200':
+          description: An array of all subscribe notifications
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Notification'
+          example: 
+            $ref: '#/externalDocs/x-mocks/NotificationList'
+    post:
+      tags:
+        - notification
+      security:
+        - mx-api-token: []
+      description: New API<br />Create (register) a new notification to ThingsPro Cloud Server, be notice, you must setup endpoint before you call this api, becasue Cloud server will trigger endpoint when you register immediately. If everything is ready, the subscriptions status will be ready or you will receive Pending Confirmation, once you got Pending Confirmation, you need call this api and try to send the same data again
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationCreate'
+      responses:
+        '200':
+          description: reutrn created notification object
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Notification'
+            example:
+              $ref: '#/externalDocs/x-mocks/Notification'
+    delete:
+      tags:
+        - notification
+      security:
+        - mx-api-token: []
+      description: New API<br />Delete notifications from ThingsPro Cloud Server.
+      parameters:
+        - name: body
+          in: body
+          description: Delete uuids
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationUUIDs'
+      responses:
+        '200':
+          description: success
+
+  /notifications/{uuid}:
+    parameters:
+      - name: uuid
+        in: path
+        description: Notification unique identifier
+        required: true
+        type: string
+    
+    delete:
+      tags:
+        - notification
+      security:
+        - mx-api-token: []
+      description: New API<br />Delete notification with given UUID
+      responses:
+        '204':
+          description: success
+          
+  /notifications/support:
+    get:
+      security:
+        - mx-api-token: []
+      tags:
+        - notification
+      description: New API<br />Return supported notification protocol and event type
+      responses:
+        '200':
+          description: An Object of the device
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/SupportList'
+            example:
+              $ref: '#/externalDocs/x-mocks/SupportList'
+
+definitions:
+  Notification:
+    type: object
+    properties:
+      uuid:
+        type: string
+        readOnly: true
+        description: Unique identifier representing a specific notification.
+      eventType:
+        type: string
+        description: Description of event type.
+        enum:
+          - device_online
+          - device_offline
+          - job_update
+          - property_update
+      status:
+        type: string
+        description: Description of status.
+        enum:
+          - Ready
+          - Pending Confirmation
+      protocol:
+        type: string
+        description: Description of supported protocol.
+        enum:
+          - http
+          - https
+      endpoint:
+        type: string
+        description: Description of notification recevier, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
+    example:
+      $ref: '#/externalDocs/x-mocks/Notification'
+  NotificationCreate:
+    type: object
+    properties:
+      eventType:
+        type: string
+        description: Description of event type.
+        enum:
+        - device_online
+        - device_offline
+        - job_update
+        - property_update
+      protocol:
+        type: string
+        description: Description of supported protocol.
+        enum:
+        - http
+        - https
+      endpoint:
+        type: string
+        description: Description of notification recevier, for protocol is http or https, this should be api endpoint, http://api/v1/notification, https://api/v1/notification  
+    example:
+      $ref: '#/externalDocs/x-mocks/NotificationCreate'
+  Event:
+    type: object
+    properties:
+      eventType:
+        type: string
+        enum:
+          - device_online
+          - device_offline
+          - job_update
+          - property_update
+        description: Describe support event type,
+      displayName:
+        type: string
+        description: Describe event display name  
+  Protocol:
+    type: object
+    properties:
+      id:
+        type: string
+        enum:
+          - http
+          - https
+        description: Describe the unique id of protocol
+      displayName:
+        type: string
+        description: Describe protocol display name  
+  SupportList:
+    type: object
+    properties:
+      event:
+        type: array
+        items:
+          $ref: '#/definitions/Event'
+      protocol:
+        type: array
+        items:
+          $ref: '#/definitions/Protocol'    
+    example:
+      $ref: '#/externalDocs/x-mocks/SupportList'
+  NotificationUUIDs:
+    type: array
+    items:
+      type: string
+      description: UUID of notification
+      example: "ded6dd9e-49d9-485b-bac1-da0ca0ae9d70"
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Notification:
+      {
+          "endpoint": "https://8.8.8.8/receive",
+          "eventType": "device_online",
+          "protocol": "https",
+          "status": "Ready",
+          "uuid": "3d444fc4-6c80-48b7-a129-79ead8c2cdab"
+      }
+    NotificationCreate:
+      {
+          "endpoint": "http://8.8.8.8/receive",
+          "eventType": "device_online",
+          "protocol": "http"
+      }
+    NotificationList:
+      [
+        {
+          "endpoint": "http://8.8.8.8/receive",
+          "eventType": "device_online",
+          "protocol": "http",
+          "status": "Ready",
+          "uuid": "3d444fc4-6c80-48b7-a129-79ead8c2cdab"
+        },
+        {
+          "endpoint": "https://123.abc.com/aa.jsp",
+          "eventType": "device_offline",
+          "protocol": "https",
+          "status": "Pending Confirmation",
+          "uuid": "0"
+        }
+      ]
+    SupportList:
+      {
+        "event":[
+          {
+            "displayName": "Device online",
+            "eventType": "device_online"
+          },
+          {
+            "displayName": "Device offline",
+            "eventType": "device_offline"
+          },
+          {
+            "displayName": "Job update",
+            "eventType": "job_update"
+          },
+          {
+            "displayName": "Property update",
+            "eventType": "property_update"
+          }
+        ],
+        "protocol":[
+          {
+            "displayName": "HTTP",
+            "id": "http"
+          },
+          {
+            "displayName": "HTTPS",
+            "id": "https"
+          }
+        ]
+      }  
+    

@@ -31,7 +31,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TenantList' } }
+          example: 
+            $ref: '#/externalDocs/x-mocks/TenantList'
       tags:
         - tenant
       security:
@@ -52,7 +53,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
+          example:
+            $ref: '#/externalDocs/x-mocks/Tenant'
       tags:
         - tenant
       security:
@@ -77,7 +79,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
+          example: 
+            $ref: '#/externalDocs/x-mocks/Tenant'
     put:
       description: Return updated tenant data with given ID
       tags:
@@ -96,7 +99,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Tenant'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Tenant' } }
+          example: 
+            $ref: '#/externalDocs/x-mocks/Tenant'
     delete:
       description: Delete tenant with given ID
       tags:
@@ -156,6 +160,9 @@ definitions:
       domainName:
         type: string
         description: domainName of tenant.
+      createdBy:
+        type: string
+        description: Created tenant username  
       company:
         type: string
         description: Company of tenant.
@@ -189,9 +196,6 @@ definitions:
       provisionStatus:
         type: string
         description: Provision status of tenant.
-      deviceHlr:
-        type: string
-        description: Device home location url.     
       data:
         type: object
         description: metadata of tenant.   
@@ -214,29 +218,37 @@ definitions:
       domainName:
         type: string
         description: domainName of tenant.
+        maxLength: 50
       company:
         type: string
         description: Company of tenant admin user.
+        maxLength: 50
       email:
         type: string
         description: Email of tenant admin user.
+        maxLength: 254
       username:
         type: string
         description: Username of tenant admin user.
+        maxLength: 50
       firstName:
         type: string
         description: First name of tenant admin user.
+        maxLength: 50
       lastName:
         type: string
         description: Last name of tenant admin user.
+        maxLength: 50
       phone:
         type: string
         description: Phone of tenant admin user.
+        maxLength: 30
       culture:
         type: string
         description: Culture of tenant.
+        maxLength: 10
       industry:
-        type: string
+        type: number
         description: Industry of tenant.
       customer:
         type: boolean
@@ -251,6 +263,7 @@ externalDocs:
     Tenant:
       {
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "createdBy": "Rick Peng",
         "email": "moxa@moxa.com",
         "domainName": "moxa",
         "username": "username",
@@ -263,7 +276,6 @@ externalDocs:
         "industry": "Telecom",
         "customer": true,
         "provisionStatus": "ok",
-        "deviceHlr": "https://preview.thingspro.io",
         "activatedAt": "2018-08-12T20:17:46.384Z",
         "deactivatedAt": "2018-08-12T20:17:46.384Z",
         "createdAt": "2018-08-12T20:17:46.384Z",
@@ -289,7 +301,6 @@ externalDocs:
           "industry": "Telecom",
           "customer": true,
           "provisionStatus": "ok",
-          "deviceHlr": "https://preview.thingspro.io",
           "activatedAt": "2018-08-12T20:17:46.384Z",
           "deactivatedAt": "2018-08-12T20:17:46.384Z",
           "createdAt": "2018-08-12T20:17:46.384Z",
@@ -313,7 +324,6 @@ externalDocs:
           "industry": "Telecom",
           "customer": true,
           "provisionStatus": "ok",
-          "deviceHlr": "https://preview.thingspro.io",
           "activatedAt": "2018-08-12T20:17:46.384Z",
           "deactivatedAt": "2018-08-12T20:17:46.384Z",
           "createdAt": "2018-08-12T20:17:46.384Z",
@@ -334,7 +344,7 @@ externalDocs:
         "company": "moxa",
         "phone": "1234567890",                      
         "culture": "Taiwan",
-        "industry": "Telecom",
+        "industry": 1,
         "customer": true,
         "data": 
           {

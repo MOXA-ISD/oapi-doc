@@ -1,0 +1,268 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro PIC service RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: rule
+    description: Let admin portal can update rule data, beside admin portal, please do not call below api.
+
+paths:
+  /rules:
+    get:
+      description: Get all rules data
+      tags:
+        - rule
+      parameters:
+        - name: tag
+          in: query
+          description: Filter the rule list by tag
+          required: false
+          type: string
+        - name: url
+          in: query
+          description: Filter the rule list by url
+          required: false
+          type: string
+        - name: email
+          in: query
+          description: Filter the rule list by email
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: Filter the rule list by status
+          required: false
+          type: string    
+        - name: order
+          in: query
+          description: The rule list order by some keyword. default is order by 'tag'
+          required: false
+          type: string
+          enum:
+          - tag
+          - url
+          - email
+          - status
+        - name: sort
+          in: query
+          description: Sorting the filter rule list, default is asc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: limit
+          in: query
+          description: max return rules count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
+      responses:
+        200:
+          description: An array of rules
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rule'
+            example:
+              $ref: '#/externalDocs/x-mocks/RuleList'
+    post:
+      description: Create a new rule.
+      tags:
+        - rule
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/RuleCreate'
+      responses:
+        201:
+          description: Create rule successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Rule'
+            example:
+              $ref: '#/externalDocs/x-mocks/Rule'
+
+  /rules/{ruleId}:
+    parameters:
+      - name: ruleId
+        in: path
+        description: Rule unique identifier
+        required: true
+        type: string
+      - name: body
+        in: body
+        description: ''
+        required: true
+        schema:
+          $ref: '#/definitions/RuleUpdate'
+    patch:
+      description: Update rule data
+      tags:
+        - rule
+      responses:
+        200:
+          description: Update rule sucess
+
+  /tags:
+    parameters:
+      - name: body
+        in: body
+        description: ''
+        required: true
+        schema:
+          $ref: '#/definitions/TagUpdate'
+    put:
+      description: Update group of devices tag
+      tags:
+        - rule
+      responses:
+        200:
+          description: Update success
+
+definitions:
+  Rule:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Rule id.
+      tag:
+        type: string
+        description: Tag name.
+      url:
+        type: string
+        description: Tenant portal login url.
+      email:
+        type: string
+        description: Tenant portal login email.
+      status:
+        type: string
+        enum:
+          - active
+          - inactive
+        description: Auto provision status.
+      updatedAt:
+        type: string
+        description: Rule last updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+  RuleCreate:
+    type: object
+    required:
+    - tag
+    - url
+    - email
+    - password
+    properties:
+      tag:
+        type: string
+        description: Tag name.
+      url:
+        type: string
+        description: Tenant portal url.
+      email:
+        type: string
+        description: Tenant portal login email.
+      password:
+        type: string
+        description: Tenant portal login password.  
+  RuleUpdate:
+    type: object
+    description: User can update tag, url, (email, password), status separtely
+    properties:
+      tag:
+        type: string
+        description: Tag name.
+      url:
+        type: string
+        description: Tenant portal url.
+      email:
+        type: string
+        description: Tenant portal login email.
+      password:
+        type: string
+        description: Tenant portal login password.    
+      status:
+        type: string
+        enum:
+          - active
+          - inactive
+        description: Auto provision status.
+  TagUpdate:
+    type: object
+    required:
+      - tag
+      - deviceIdList
+    properties:
+      tag:
+        type: string
+        description: Tag name.
+      deviceIdList:
+        type: array
+        items:
+          type: string
+        description: Device UUID list.    
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Rule:
+      {
+        "id": 1,
+        "tag": "moxa",
+        "url": "http://www.moxa.com",
+        "email": "owen@moxa.com",
+        "status": "active",
+        "updatedAt": "2019-03-26T07:51:35.663935Z"
+      }
+    RuleCreate:
+      {
+        "tag": "moxa",
+        "url": "http://www.moxa.com",
+        "email": "owen@moxa.com",
+        "password": "abc"
+      }
+    RuleUpdate:
+      {
+        "tag": "moxa",
+        "url": "http://www.moxa.com",
+        "email": "owen@moxa.com",
+        "password": "abc",
+        "status": "active"
+      }
+    RuleList:
+      {
+        "count": 28,
+        "data": [
+          {
+            "id": 1,
+            "tag": "moxa",
+            "url": "http://www.moxa.com",
+            "email": "owen@moxa.com",
+            "status": "active",
+            "updatedAt": "2019-03-26T07:51:35.663935Z"
+          }
+        ],
+        "limit": 100,
+        "offset": 20
+      }
+    TagUpdate:
+      {
+        "tag": "abc",
+        "deviceIdList": ["ed31872d-b57e-4c94-a989-c2782c0d3fe7"]
+      }  
+    

@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.0
   title: ThingsPro Tenant Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
@@ -22,11 +22,6 @@ paths:
           description: Filter the device list by deviceName
           required: false
           type: string
-        - name: tag
-          in: query
-          description: Filter the device list by tag
-          required: false
-          type: string
         - name: modelName
           in: query
           description: Filter the device list by modelName
@@ -37,36 +32,40 @@ paths:
           description: Filter the device list by deviceType
           required: false
           type: string
+        - name: mac
+          in: query
+          description: Filter the device list by mac
+          required: false
+          type: string
         - name: order
           in: query
-          description: Ordering the filter device list, default is desc
-          required: false
-          type: string  
-          enum:
-          - desc
-          - asc
-        - name: sort
-          in: query
-          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
+          description: Sort the device list by specific condition, default is order by 'lastUpdatedAt'
           required: false
           type: string
           enum:
           - deviceName
-          - tag
           - modelName
           - deviceType
-          - lastUpdatedAt
+          - mac
           - connectionStatus
+        - name: sort
+          in: query
+          description: Sorting the filter device list, default is desc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
         - name: limit
           in: query
           description: max return devices count (default is 100 and max is 1000)
           required: false
-          type: integer  
+          type: integer
         - name: offset
           in: query
           description: offset
           required: false
-          type: integer      
+          type: integer
         - name: distinct
           in: query
           description: Get distict value of speific field, this query parameter will return string array only
@@ -76,7 +75,6 @@ paths:
           - deviceName
           - modelName
           - deviceType
-          - group
           - connectionStatus        
       description: Get all devices field data
       responses:
@@ -86,7 +84,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Device'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DeviceList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
     post:
@@ -108,6 +107,67 @@ paths:
           examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
       tags:
         - device
+
+
+  /devices/poc:
+    get:
+      parameters:
+        - name: deviceName
+          in: query
+          description: Filter the device list by deviceName
+          required: false
+          type: string
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: Ordering the filter device list, default is desc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: sort
+          in: query
+          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - modelName
+        - name: limit
+          in: query
+          description: max return devices count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          type: string
+          enum:
+          - deviceName
+          - modelName
+      description: Get all poc devices field data
+      responses:
+        200:
+          description: An array of poc devices
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DevicePoc'
+            example: 
+              $ref: '#/externalDocs/x-mocks/DevicePocList'
+      tags:
+        - device
  
   /devices/{deviceId}:
     parameters:
@@ -127,7 +187,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Device'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/Device'
     delete:
       description: Delete device with given ID
       tags:
@@ -164,7 +225,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Telemetry'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/TelemetryList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/TelemetryList'
 
   /devices/{deviceId}/reportedProperties:
     parameters:
@@ -184,7 +246,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/ReportedProperties'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/ReportedProperties' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/ReportedProperties'
 
   /desiredProperties:
     post:
@@ -236,7 +299,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DesiredProperties'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DesiredProperties' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DesiredProperties'
 
   /devices/{deviceId}/directMethodList:
     parameters:
@@ -256,7 +320,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/DirectMethodList'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/DirectMethodList' } }
+            example: 
+              $ref: '#/externalDocs/x-mocks/DirectMethodList'
 
 definitions:
   Device:
@@ -268,17 +333,18 @@ definitions:
       deviceId:
         type: string
         description: Unique identifier representing a specific device.
-      group:
-        type: array
-        items:
-          type: string
-        description: Tags of device.
       modelName:
         type: string
         description: Model name of device.
       deviceType:
         type: string
-        description: Type of device.  
+        description: Type of device.
+      mac:
+        type: string
+        description: Mac address of device.
+      serialNumber:
+        type: string
+        description: Serial number of device.
       imageUrl:
         type: string
         description: Image URL of device.  
@@ -288,6 +354,37 @@ definitions:
       allowConnection:
         type: boolean
         description: The device can connect to service or not.
+      groupList:
+        type: array
+        description: Array of group list object.
+        items:
+          type: object
+      connectionStatus:
+        type: string
+        enum:
+        - online
+        - offline
+        - registered
+        description: Connection status of device.
+      connectionAt:
+        type: string
+        description: Device connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+
+  DevicePoc:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: Unique identifier representing a specific device.
+      deviceName:
+        type: string
+        description: Device name.
+      modelName:
+        type: string
+        description: Model name of device.
+      mac:
+        type: string
+        description: MAC address of device.
       connectionStatus:
         type: string
         enum:
@@ -295,25 +392,9 @@ definitions:
         - offline
         - unknown
         description: Connection status of device.
-      createdAt:
+      lastupdatedat:
         type: string
-        description: Device created time,ISO data format, like '2018-08-12T20:17:46.384Z'.   
-      updatedAt:
-        type: string
-        description: Device updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
-  
-  Group:
-    type: object
-    properties:
-      groupId:
-        type: integer
-        description: Unique identifier representing a specific group.
-      groupName:
-        type: string
-        description: Name of group.
-      description:
-        type: string
-        description: Description of group.  
+        description: Device last updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
 
   DesiredProperties:
     type: object
@@ -348,13 +429,6 @@ definitions:
           type: object
         description: Device reported properties.
 
-  DeviceReq:
-    type: object
-    properties:
-      modelName:
-        type: string
-        description: Model name of device.
-  
   PropertyReq:
     type: object
     properties:
@@ -454,7 +528,28 @@ definitions:
       repeatedPattern:
         type: string
         description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
-  
+
+  DeviceReq:
+    type: object
+    required:
+      - deviceId
+      - modelName
+      - mac
+      - serialNumber      
+    properties:
+      deviceId:
+        type: string
+        description: Device unique id.
+      modelName:
+        type: string
+        description: Model name of device.
+      mac:
+        type: string
+        description: MAC of device.
+      serialNumber:
+        type: string
+        description: Seriar number of device.
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -463,9 +558,10 @@ externalDocs:
         "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "deviceName": "moxa",
-        "group": ["A", "B"],
         "modelName": "UC-8112-LX-CG",
         "deviceType": "IIoT Gateway",
+        "mac": "00-0C-29-70-D2-EC",
+        "serialNumber": "",
         "allowConnection": true,
         "imageURL": "http://123.456.net/xxx/xxx.jpg",
         "logoURL": "http://123.456.net/xxx/xxx.jpg",
@@ -520,10 +616,25 @@ externalDocs:
             }          
           ]
         },
+        "groupList": [
+          {
+            "id": 2,
+            "name": "A123",
+            "description": "A123"
+          },
+          {
+            "id": 4,
+            "name": "MOXA-ISS",
+            "description": "MOXA-ISS"
+          }
+        ],
         "connectionStatus": "online",
-        "createdAt": "2018-08-12T20:17:46.384Z",
-        "updatedAt": "2018-08-12T20:17:46.384Z"
+        "connectionAt": "2019-02-26T14:10:33:000Z"
       }
+    DeviceReq:
+      {
+
+      }  
     DeviceList:
       {
         "count": 5,
@@ -535,9 +646,10 @@ externalDocs:
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa1",
-              "group": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
+              "mac": "00-0C-29-70-D2-EC",
+              "serialNumber": "",
               "allowConnection": true,
               "imageURL": "http://123.456.net/xxx/xxx.jpg",
               "logoURL": "http://123.456.net/xxx/xxx.jpg",
@@ -592,17 +704,29 @@ externalDocs:
                   }          
                 ]
               },
-              "connectionStatus": "online", 
-              "createdAt": "2018-08-12T20:17:46.384Z",
-              "updatedAt": "2018-08-12T20:17:46.384Z"
+              "groupList": [
+                {
+                  "id": 2,
+                  "name": "A123",
+                  "description": "A123"
+                },
+                {
+                  "id": 4,
+                  "name": "MOXA-ISS",
+                  "description": "MOXA-ISS"
+                }
+              ],
+              "connectionStatus": "online",
+              "connectionAt": "2019-02-26T14:10:33:000Z"
             },
             {
               "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa2",
-              "group": ["A", "B"],
               "modelName": "UC-8112-LX-CG",
               "deviceType": "IIoT Gateway",
+              "mac": "00-0C-29-70-D2-EC",
+              "serialNumber": "",
               "allowConnection": true,
               "imageURL": "http://123.456.net/xxx/xxx.jpg",
               "logoURL": "http://123.456.net/xxx/xxx.jpg",
@@ -657,15 +781,54 @@ externalDocs:
                   }          
                 ]
               },
+              "groupList": [
+                {
+                  "id": 2,
+                  "name": "A123",
+                  "description": "A123"
+                },
+                {
+                  "id": 4,
+                  "name": "MOXA-ISS",
+                  "description": "MOXA-ISS"
+                }
+              ],
               "connectionStatus": "online",
-              "createdAt": "2018-08-12T20:17:46.384Z",
-              "updatedAt": "2018-08-12T20:17:46.384Z"
+              "connectionAt": "2019-02-26T14:10:33:000Z"
             }
           ]
       }
-    DeviceReq:
+    DevicePocList:
       {
-        "modelName": "moxa"
+        "count": 3,
+        "offset": 0,
+        "limit": 100,
+        "data": [
+          {
+            "deviceId": "a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b",
+            "deviceName": "UC-8112-LX",
+            "mac": "81-CF-1C-14-3E-4C",
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"
+          },
+          {
+            "deviceId": "91cc56a9-1159-4913-b5f2-ac482cd68ee6",
+            "deviceName": "UC-8112-LX",
+            "mac": "67-88-DE-3C-F1-54",
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
+          },
+          {
+            "deviceId": "47c03400-3e45-466d-abd4-4e01199cd67a",
+            "deviceName": "UC-8112-LX",
+            "mac": "DF-FE-F1-9E-FF-76",
+            "modelName": "UC-8112-LX",
+            "connectionStatus": "online",
+            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
+          }
+        ]
       }
     ReportedProperties:
       {    

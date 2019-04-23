@@ -1,0 +1,11 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./order.yaml#/tags"
+
+paths:
+- $ref: "./order.yaml#/paths"
+
+definitions:
+- $ref: "./order.yaml#/definitions"

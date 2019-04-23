@@ -1,0 +1,395 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro PIC service RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: device
+    description: Handles device enroll and register function
+
+paths:
+  /devices:
+    get:
+      description: Get devices data
+      parameters:
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          type: string
+        - name: mac
+          in: query
+          description: Filter the device list by mac
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: Filter the device list by status
+          required: false
+          type: string  
+        - name: order
+          in: query
+          description: The device list order by some keyword. default is order by 'updatedAt'
+          required: false
+          type: string
+          enum:
+          - modelName
+          - mac
+          - status
+          - updatedAt
+        - name: sort
+          in: query
+          description: Sorting the filter device list, default is desc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: limit
+          in: query
+          description: max return device count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
+      responses:
+        200:
+          description: An array of device list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Device'
+            example: 
+              $ref: '#/externalDocs/x-mocks/DeviceList'
+      tags:
+        - device
+  /devices/{uuid}:
+    parameters:
+      - name: uuid
+        in: path
+        description: device unique identifier
+        required: true
+        type: string
+    delete:
+      description: This api is called by Tenant portal used to change device status to unregister
+      tags:
+        - device
+      responses:
+        204:
+          description: Delete device success
+
+  /connect:
+    post:
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/ConnectReq'
+      description: Register device on PIC service and return IOT connection data
+      tags:
+        - device
+      responses:
+        200:
+          description: Connect device sucess
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ConnectRes'
+            example:
+              $ref: '#/externalDocs/x-mocks/ConnectRes'
+    delete:
+      description: Unregister device on a PIC service
+      tags:
+        - device
+      responses:
+        204:
+          description: Unregister device success
+
+  /enroll:
+    parameters:
+      - name: body
+        in: body
+        description: ''
+        required: true
+        schema:
+          $ref: '#/definitions/EnrollReq'
+    post:
+      description: Let device enrolls on PIC service
+      tags:
+        - device
+      responses:
+        200:
+          description: Enroll device sucess
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/EnrollRes'
+            example:
+              $ref: '#/externalDocs/x-mocks/EnrollRes'
+
+  /batchEnroll:
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchEnrollReq'
+    post:
+      description: Enroll a group of devices to PIC service
+      tags:
+        - device
+      responses:
+        200:
+          description: Enroll device sucess
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/BatchEnrollRes'
+            example:
+              $ref: '#/externalDocs/x-mocks/BatchEnrollRes'
+definitions:
+  Device:
+    type: object
+    properties:
+      mac:
+        type: string
+        description: Device mac.
+      sn:
+        type: string
+        description: Device serial number.
+      tag:
+        type: string
+        description: Device tag.   
+      modelName:
+        type: string
+        description: Device model name.   
+      deviceId:
+        type: string
+        description: Device uuid.
+      status:
+        type: string
+        enum:
+        - registered
+        - enrolled
+        description: status.  
+      enrolledAt:
+        type: string
+        description: Device enrolled time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      registeredAt:
+        type: string
+        description: Device registered time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      connecteddAt:
+        type: string
+        description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+  ConnectReq:
+    type: object
+    required:
+    - mac
+    - sn
+    - modelName
+    description: Device connection data payload, manualRegister payload is used to connect to tenant portal, if manualRegister is empty, PIC will use default data connect to tenant portal, if user brings manualRegister(url, email, password), PIC will use this data connect to tenant portal.
+    properties:
+      mac:
+        type: string
+        description: Device mac.
+      sn:
+        type: string
+        description: Device serial number.
+      tag:
+        type: string
+        description: Device tag.   
+      modelName:
+        type: string
+        description: Device model name. 
+      manualRegister:
+        type: object
+        description: This
+        properties:
+          url:
+            type: string
+            description: Tenant portal url.
+          email:
+            type: string
+            description: Tenant portal login email.
+          password:
+            type: string
+            description: Tenant portal login password.    
+  ConnectRes:
+    type: object
+    properties:
+      errorCode:
+        type: integer
+        description: |
+          If http status code is not 200, user should reference this value to identify failure reason. 
+          200: tenant portal is unreachable
+          201: wrong email or password
+          202: permission denied 
+          203: model type mismatch
+          204: POST connect request body format error
+          205: caonnt find tag
+          206: device is not enrolled
+          207: re-generate new certfiicate
+          300: save db error
+          400: unknown error
+      reason:
+        type: string
+        description: If http status code is not 200, user sholud reference this reason to identify failure reason.
+      data:
+        type: object
+        description: IOT connection data.   
+        properties:
+          cloudProvider:
+            type: string
+            description: aws or azure   
+          hostname:
+            type: string
+            description: IOT connection hostname.  
+          authType:
+            type: string
+            description: Auth type, x509 is default  
+      newCert:
+        type: object
+        description: PIC will generate new certificate, if the old certificate expired
+        properties:
+          privateKey:
+            type: string
+            description: Private key.
+          certificate:
+            type: string
+            description: Certificate.
+          rootCA:
+            type: string
+            description: Root certificate
+  EnrollReq:
+    type: object
+    required:
+    - mac
+    - sn
+    - modelName
+    properties:
+      mac:
+        type: string
+        description: Device mac.
+      sn:
+        type: string
+        description: Device serial number.
+      modelName:
+        type: string
+        description: Deice model name.    
+      tag:
+        type: string
+        description: Device tag.   
+  BatchEnrollReq:
+    type: array
+    items:
+      '$ref': '#/definitions/EnrollReq'
+  EnrollRes:
+    type: object
+    properties:
+      mac:
+        type: string
+        description: Device mac.
+      privateKey:
+        type: string
+        description: Private key.
+      certificate:
+        type: string
+        description: Certificate.
+      rootCA:
+        type: string
+        description: Root certificate.   
+  BatchEnrollRes:
+    type: array
+    items:
+      '$ref': '#/definitions/EnrollReq'
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Device:
+      {
+        "modelName": "UC-8112",
+        "mac": "001122334455",
+        "sn": "12345678",
+        "tag": "moxa",
+        "deviceId": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
+        "status": "enrolled",
+        "enrolledAt": "2019-03-26T07:51:35.663935Z",
+        "registeredAt": "2019-03-26T07:51:35.663935Z",
+        "connectedAt": "2019-03-26T07:51:35.663935Z"
+      }
+    DeviceList:
+      {
+        "count": 5,
+        "offset": 0,
+        "limit": 100,
+        "data":
+          [
+            {
+              "modelName": "UC-8112",
+              "mac": "001122334455",
+              "sn": "12345678",
+              "tag": "moxa",
+              "deviceId": "c3d4e60e-3519-4819-9051-8efbc1d700f1",
+              "status": "enrolled",
+              "enrolledAt": "2019-03-26T07:51:35.663935Z",
+              "registeredAt": "2019-03-26T07:51:35.663935Z",
+              "connectedAt": "2019-03-26T07:51:35.663935Z"
+            }
+          ]
+      }
+    ConnectReq:
+      {
+        "mac": "001122334455",
+        "sn": "12345678",
+        "modelName": "UC-8112",
+        "tag": "1234",
+        "manualRegister": 
+        {
+          "url": "http://www.moxa.com",
+          "email": "owen@moxa.com",
+          "password": "1234"
+        }
+      }
+    ConnectRes:
+      {
+        "resultCode": 100,
+        "reason": "Connection failure reason",
+        "data": 
+          {
+            "cloudProvider": "aws", 
+            "hostname": "http://www.moxa.com",
+            "authType": "x509"
+          }
+      }  
+    EnrollReq:
+      {
+        "mac": "001122334455",
+        "sn": "12345678",
+        "modelName": "UC-8112",
+        "tag": "1234"
+      }
+    EnrollRes:
+      {
+        "privateKey": "moxa",
+        "certificate": "moxa",
+        "rootCA": "1234"
+      }
+    BatchEnrollRes:
+      [
+        {
+          "mac": "001122334455",
+          "privateKey": "moxa",
+          "certificate": "moxa",
+          "rootCA": "1234"
+        }
+      ]
+      

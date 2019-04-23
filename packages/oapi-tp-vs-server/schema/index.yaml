@@ -1,0 +1,50 @@
+---
+swagger: '2.0'
+
+info:
+  version: 2.5.0-vs1.0.0
+  title: ThingsPro Cloud Server RESTful API Reference
+  description: |
+    Welcome to the ThingsPro Cloud Server RESTful API reference. This is a live document of how you can use ThingsPro Cloud Server APIs.
+    The ThingsPro Cloud Server API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors. All requests are authenticated using an `mx-api-token` which can be obtained from ThingsPro Cloud Server web.
+
+host: localhost
+basePath: "/api/v1"
+
+schemes:
+- http
+- https
+
+produces:
+- application/json
+
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: mx-api-token
+    in: header
+    description: ThingsPro RESTful API token, The token should be created on web console.
+
+tags:
+- $ref: "./device/index.yaml#/tags"
+- $ref: "./deviceJobRelay/index.yaml#/tags"
+- $ref: "./deviceTask/index.yaml#/tags"
+- $ref: "./group/index.yaml#/tags"
+- $ref: "./groupTask/index.yaml#/tags"
+- $ref: "./notification/index.yaml#/tags"
+
+paths:
+- $ref: "./device/index.yaml#/paths"
+- $ref: "./deviceJobRelay/index.yaml#/paths"
+- $ref: "./deviceTask/index.yaml#/paths"
+- $ref: "./group/index.yaml#/paths"
+- $ref: "./groupTask/index.yaml#/paths"
+- $ref: "./notification/index.yaml#/paths"
+
+definitions:
+- $ref: "./device/index.yaml#/definitions"
+- $ref: "./deviceJobRelay/index.yaml#/definitions"
+- $ref: "./deviceTask/index.yaml#/definitions"
+- $ref: "./group/index.yaml#/definitions"
+- $ref: "./groupTask/index.yaml#/definitions"
+- $ref: "./notification/index.yaml#/definitions"

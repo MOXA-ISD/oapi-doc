@@ -119,20 +119,17 @@ definitions:
         type: string
       taskId:
         description: Task ID
-        type: string
+        type: number
     example:
       $ref: '#/externalDocs/x-mocks/DeviceJobRelayResponse'
   DeviceJobRelay:
     type: object
     required:
       - taskId
-      - status
-      - createdAt
-      - result
     properties:
       taskId:
         description: Task ID
-        type: string
+        type: number
       status:
         description: response status
         type: string

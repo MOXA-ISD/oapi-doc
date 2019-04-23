@@ -44,7 +44,7 @@ paths:
           description: An array of groups
           schema:
             $ref: '#/definitions/GroupList'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/GroupList'
@@ -69,7 +69,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Group'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Group'
@@ -110,7 +110,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Group'
@@ -134,7 +134,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Group'
@@ -166,7 +166,7 @@ paths:
           description: An array of the device uuid
           schema:
             $ref: '#/definitions/DeviceUUIDs'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
@@ -188,7 +188,7 @@ paths:
           description: An array of the device uuid in this group
           schema:
             $ref: '#/definitions/DeviceUUIDs'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
@@ -211,7 +211,7 @@ paths:
           description: An array of the device uuid in this group
           schema:
             $ref: '#/definitions/DeviceUUIDs'
-          examples:
+          example:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
@@ -347,7 +347,6 @@ externalDocs:
             "mac": "223344FF8F12",
             "serialNumber": "TAFLB1003683",
             "properties": {},
-            "psk": "efe8d947a9a97792e67de8d9137b9a398a40367f30fecb8cdfde9685677dd134",
             "updatedAt": "2016-12-22T10:07:56",
             "uuid": "17dbee9c-696c-4598-b1d9-547e740d94fa"
           }
@@ -370,7 +369,7 @@ externalDocs:
             },
             "retryTimes": 0,
             "revoked": false,
-            "scheduledDateTime": null,
+            "scheduledDateTime": "",
             "state": "SUCCESS",
             "success": true,
             "updatedAt": "2017-02-23T08:05:22.003420",
@@ -449,7 +448,7 @@ externalDocs:
                 "groupTaskUUID": "72fe59aa-b06a-4ba9-b2cc-373a0dc39b5b",
                 "retryTimes": 0,
                 "revoked": false,
-                "scheduledDateTime": null,
+                "scheduledDateTime": "",
                 "state": "SUCCESS",
                 "success": true,
                 "updatedAt": "2017-03-22T06:20:58.689765",

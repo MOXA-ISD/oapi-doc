@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.1.0
+  version: 2.5.0
   title: ThingsPro Gateway RESTful API reference
   description: |
     Welcome to the ThingsPro Gateway RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.

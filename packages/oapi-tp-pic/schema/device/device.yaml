@@ -226,7 +226,7 @@ definitions:
   ConnectRes:
     type: object
     properties:
-      errorCode:
+      resultCode:
         type: integer
         description: |
           If http status code is not 200, user should reference this value to identify failure reason. 
@@ -238,7 +238,7 @@ definitions:
           205: caonnt find tag
           206: device is not enrolled
           207: re-generate new certfiicate
-          300: save db error
+          208: device sn or mac is not matched
           400: unknown error
       reason:
         type: string
@@ -368,6 +368,12 @@ externalDocs:
             "cloudProvider": "aws", 
             "hostname": "http://www.moxa.com",
             "authType": "x509"
+          },
+        "newCert": 
+          {
+            "privateKey": "moxa",
+            "certificate": "moxa",
+            "rootCA": "1234"
           }
       }  
     EnrollReq:

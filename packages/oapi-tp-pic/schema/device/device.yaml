@@ -287,7 +287,10 @@ definitions:
         description: Deice model name.    
       tag:
         type: string
-        description: Device tag.   
+        description: Device tag.  
+      url:
+        type: string
+        description: Tenant url.   
   BatchEnrollReq:
     type: array
     items:
@@ -295,6 +298,9 @@ definitions:
   EnrollRes:
     type: object
     properties:
+      deviceId:
+        type: string
+        description: Device id.
       mac:
         type: string
         description: Device mac.
@@ -385,6 +391,7 @@ externalDocs:
       }
     EnrollRes:
       {
+        "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "privateKey": "moxa",
         "certificate": "moxa",
         "rootCA": "1234"

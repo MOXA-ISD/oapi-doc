@@ -266,9 +266,6 @@ definitions:
           certificate:
             type: string
             description: Certificate.
-          rootCA:
-            type: string
-            description: Root certificate
   EnrollReq:
     type: object
     required:
@@ -310,9 +307,6 @@ definitions:
       certificate:
         type: string
         description: Certificate.
-      rootCA:
-        type: string
-        description: Root certificate.   
   BatchEnrollRes:
     type: array
     items:
@@ -378,8 +372,7 @@ externalDocs:
         "newCert": 
           {
             "privateKey": "moxa",
-            "certificate": "moxa",
-            "rootCA": "1234"
+            "certificate": "moxa"
           }
       }  
     EnrollReq:
@@ -393,16 +386,14 @@ externalDocs:
       {
         "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "privateKey": "moxa",
-        "certificate": "moxa",
-        "rootCA": "1234"
+        "certificate": "moxa"
       }
     BatchEnrollRes:
       [
         {
           "mac": "001122334455",
           "privateKey": "moxa",
-          "certificate": "moxa",
-          "rootCA": "1234"
+          "certificate": "moxa"
         }
       ]
       

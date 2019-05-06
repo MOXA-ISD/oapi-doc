@@ -72,13 +72,7 @@ paths:
               $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
-  /devices/{uuid}:
-    parameters:
-      - name: uuid
-        in: path
-        description: device unique identifier
-        required: true
-        type: string
+  /devices:
     delete:
       description: This api is called by Tenant portal used to change device status to unregister
       tags:

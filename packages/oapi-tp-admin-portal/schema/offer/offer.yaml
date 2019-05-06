@@ -92,6 +92,26 @@ paths:
               $ref: '#/definitions/Offer'
             example:
               $ref: '#/externalDocs/x-mocks/Offer'
+    patch:
+      description: Return updated offer data with given ID
+      tags:
+        - offer
+      parameters:
+        - name: body
+          in: body
+          description: Information of offer
+          required: true
+          schema:
+            $ref: '#/definitions/OfferUpdate'
+      responses:
+        200:
+          description: An Object of the offer
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Offer'
+            example:
+              $ref: '#/externalDocs/x-mocks/Offer'
 
 definitions:
   Offer:
@@ -199,6 +219,31 @@ definitions:
         type: number
         format: float
         description: Price of overage api.
+
+  OfferUpdate:
+    type: object
+    properties:
+      offerName:
+        type: string
+        description: Name of Offer.
+      description:
+        type: string
+        description: Description of Offer.
+      deviceLimit:
+        type: integer
+        description: Limit number of devices, -1 presents infinte.
+      deviceOverage:
+        type: boolean
+        description: Device can overage or not.
+      apiLimit:
+        type: integer
+        description: Limit number of api, -1 presents infinte.
+      apiOverage:
+        type: boolean
+        description: Api can overage or not.
+      status:
+        type: boolean
+        description: enable or disable.
 
 externalDocs:
   url: 'http://#'

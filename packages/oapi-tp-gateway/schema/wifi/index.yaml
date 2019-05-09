@@ -50,16 +50,13 @@ paths:
                       security: none
                     - ssid: test-wpa
                       security: wpa
-                      password: '12345678'
                       priority: 5
                     - ssid: test-eap
                       security: eap
                       username: moxa
-                      password: moxa
                       priority: 10
                     - ssid: test-wep
                       security: wep
-                      password: '12345'
                       priority: 1
                   signal: 100
                   ip: 111.70.146.125
@@ -97,7 +94,9 @@ paths:
         '200':
           description: An WiFi interface settings.
           schema:
-            '$ref': '#/definitions/WiFiIface'
+            type: object
+            items:
+              '$ref': '#/definitions/WiFiIface'
             example:
               id: 1
               name: wlan0
@@ -115,16 +114,13 @@ paths:
                     security: none
                   - ssid: test-wpa
                     security: wpa
-                    password: '12345678'
                     priority: 5
                   - ssid: test-eap
                     security: eap
                     username: moxa
-                    password: moxa
                     priority: 10
                   - ssid: test-wep
                     security: wep
-                    password: '12345'
                     priority: 1
                 signal: 100
                 ip: 111.70.146.125
@@ -164,7 +160,9 @@ paths:
         '200':
           description: OK
           schema:
-            '$ref': '#/definitions/WiFiIface'
+            type: object
+            item:
+              '$ref': '#/definitions/WiFiIface'
             example:
               id: 1
               name: wlan0
@@ -182,16 +180,13 @@ paths:
                     security: none
                   - ssid: test-wpa
                     security: wpa
-                    password: '12345678'
                     priority: 5
                   - ssid: test-eap
                     security: eap
                     username: moxa
-                    password: moxa
                     priority: 10
                   - ssid: test-wep
                     security: wep
-                    password: '12345'
                     priority: 1
                 signal: 100
                 ip: 111.70.146.125

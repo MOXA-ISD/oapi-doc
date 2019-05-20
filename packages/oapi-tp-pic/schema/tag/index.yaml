@@ -3,10 +3,13 @@ swagger: '2.0'
 
 tags:
 - $ref: "./tag.yaml#/tags"
+- $ref: "./scenario.yaml#/tags"
 
 paths:
 - $ref: "./tag.yaml#/paths"
+- $ref: "./scenario.yaml#/paths"
 
 definitions:
 - $ref: "./tag.yaml#/definitions"
+- $ref: "./scenario.yaml#/definitions"
 

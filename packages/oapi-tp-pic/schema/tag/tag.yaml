@@ -20,9 +20,9 @@ paths:
       tags:
         - tag
       parameters:
-        - name: tag
+        - name: name
           in: query
-          description: Filter the tag list by tag
+          description: Filter the tag list by name
           required: false
           type: string
         - name: status

@@ -1,0 +1,158 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro PIC service RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: customer
+    description: Handle customers data
+
+paths:
+  /customers:
+    get:
+      description: Get all customers data
+      tags:
+        - customer
+      parameters:
+        - name: name
+          in: query
+          description: Filter the customer list by customer
+          required: false
+          type: string 
+        - name: order
+          in: query
+          description: The customer list order by some keyword. default is order by 'tag'
+          required: false
+          type: string
+          enum:
+          - name
+        - name: sort
+          in: query
+          description: Sorting the filter customer list, default is asc
+          required: false
+          type: string
+          enum:
+          - desc
+          - asc
+        - name: limit
+          in: query
+          description: max return customers count (default is 100 and max is 1000)
+          required: false
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: integer
+      responses:
+        200:
+          description: An array of customers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+            example:
+              $ref: '#/externalDocs/x-mocks/CustomerList'
+    post:
+      description: Create a new customer.
+      tags:
+        - customer
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerCreate'
+      responses:
+        201:
+          description: Create customer successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Customer'
+            example:
+              $ref: '#/externalDocs/x-mocks/Customer'
+    put:
+      description: Update a new customer.
+      tags:
+        - customer
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerUpdate'
+      responses:
+        200:
+          description: Update customer successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Customer'
+            example:
+              $ref: '#/externalDocs/x-mocks/Customer'
+definitions:
+  Customer:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Customer id.
+      name:
+        type: string
+        description: Customer name.
+  CustomerCreate:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        description: Customer name.
+  CustomerUpdate:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        description: Customer name.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Customer:
+      {
+        "id": 1,
+        "name": "moxa"
+      }
+    CustomerCreate:
+      {
+        "name": "moxa"
+      }
+    CustomerUpdate:
+      {
+        "name": "moxa"
+      }
+    CustomerList:
+      {
+        "count": 28,
+        "data": [
+          {
+            "id": 1,
+            "name": "moxa"
+          }
+        ],
+        "limit": 100,
+        "offset": 20
+      }
+
+    

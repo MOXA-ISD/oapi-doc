@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 1.0.7
+  version: 1.1.0
   title: ThingsPro PIC service RESTful API reference
   description: |
     Welcome to the ThingsPro PIC service RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
@@ -18,13 +18,16 @@ produces:
   - application/json
 
 tags:
+  - $ref: './customer/index.yaml#/tags'  
   - $ref: './device/index.yaml#/tags'
-  - $ref: './rule/index.yaml#/tags'
+  - $ref: './tag/index.yaml#/tags'
 
 paths:
+  - $ref: './customer/index.yaml#/paths'
   - $ref: './device/index.yaml#/paths'
-  - $ref: './rule/index.yaml#/paths'
+  - $ref: './tag/index.yaml#/paths'
 
 definitions:
+  - $ref: './customer/index.yaml#/definitions'
   - $ref: './device/index.yaml#/definitions'
-  - $ref: './rule/index.yaml#/definitions'
+  - $ref: './tag/index.yaml#/definitions'

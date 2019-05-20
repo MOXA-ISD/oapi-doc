@@ -1,0 +1,61 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: ThingsPro PIC service RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: scenario
+    description: Get scenario data
+
+paths:
+  /scenarios:
+    get:
+      description: Get all scenario data
+      tags:
+        - scenario
+      responses:
+        200:
+          description: An array of scenario
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Scenario'
+            example:
+              $ref: '#/externalDocs/x-mocks/ScenarioList'
+
+definitions:
+  Scenario:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Scenario id.
+      name:
+        type: string
+        description: Scenario name.
+      
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Scenario:
+      {
+        "id": 1,
+        "name": "ThingsPro Edge to ThingsPro Server"
+      }
+    ScenarioList:
+      [
+        {
+          "id": 1,
+          "name": "ThingsPro Edge to ThingsPro Server"
+        },
+        {
+          "id": 2,
+          "name": "moThingsPro Edge to Azure IoT Hub"
+        }
+      ]

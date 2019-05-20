@@ -1,0 +1,12 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./customer.yaml#/tags"
+
+paths:
+- $ref: "./customer.yaml#/paths"
+
+definitions:
+- $ref: "./customer.yaml#/definitions"
+

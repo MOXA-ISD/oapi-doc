@@ -52,10 +52,10 @@ externalDocs:
       [
         {
           "id": 1,
-          "name": "ThingsPro Edge to ThingsPro Server"
+          "name": "ThingsPro Edge to Azure IoT Hub"
         },
         {
           "id": 2,
-          "name": "moThingsPro Edge to Azure IoT Hub"
+          "name": "ThingsPro Edge to AWS IoT Core"
         }
       ]

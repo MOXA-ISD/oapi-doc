@@ -80,13 +80,13 @@ paths:
         204:
           description: Delete device success
 
-  /connect:
+  /register:
     post:
       parameters:
       - name: body
         in: body
         schema:
-          $ref: '#/definitions/ConnectReq'
+          $ref: '#/definitions/RegisterReq'
       description: Register device on PIC service and return IOT connection data
       tags:
         - device
@@ -96,9 +96,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/ConnectRes'
+              $ref: '#/definitions/RegisterRes'
             example:
-              $ref: '#/externalDocs/x-mocks/ConnectRes'
+              $ref: '#/externalDocs/x-mocks/RegisterRes'
     delete:
       description: Unregister device on a PIC service
       tags:
@@ -149,6 +149,22 @@ paths:
               $ref: '#/definitions/BatchEnrollRes'
             example:
               $ref: '#/externalDocs/x-mocks/BatchEnrollRes'
+  /devices/tags:
+    parameters:
+      - name: body
+        in: body
+        description: ''
+        required: true
+        schema:
+          $ref: '#/definitions/DevicesTagUpdate'
+    put:
+      description: Update group of devices tag
+      tags:
+        - device
+      responses:
+        200:
+          description: Update success
+
 definitions:
   Device:
     type: object
@@ -183,7 +199,7 @@ definitions:
       connecteddAt:
         type: string
         description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-  ConnectReq:
+  RegisterReq:
     type: object
     required:
     - mac
@@ -215,31 +231,39 @@ definitions:
             description: Tenant portal login email.
           password:
             type: string
-            description: Tenant portal login password.    
-  ConnectRes:
+            description: Tenant portal login password. 
+         
+  RegisterRes:
     type: object
     properties:
-      resultCode:
-        type: integer
-        description: |
-          If http status code is not 200, user should reference this value to identify failure reason. 
-          200: tenant portal is unreachable
-          201: wrong email or password
-          202: permission denied 
-          203: model type mismatch
-          204: POST connect request body format error
-          205: caonnt find tag
-          206: device is not enrolled
-          207: re-generate new certfiicate
-          208: device sn or mac is not matched
-          400: unknown error
-      reason:
-        type: string
+      error:
+        type: object
         description: If http status code is not 200, user sholud reference this reason to identify failure reason.
+        properties:
+          code:
+            type: integer
+            description: |
+              If http status code is not 200, user should reference this value to identify failure reason. 
+              200: tenant portal is unreachable
+              201: wrong email or password
+              202: permission denied 
+              203: model type mismatch
+              204: POST connect request body format error
+              205: caonnt find tag
+              206: device is not enrolled
+              207: re-generate new certfiicate
+              208: device sn or mac is not matched
+              400: unknown error
+          reason:
+            type: string
+            description: If http status code is not 200, user sholud reference this reason to identify failure reason.
       data:
         type: object
         description: IOT connection data.   
         properties:
+          scenarioId:
+            type: integer
+            description: 1 is Azure IoT Hub, 2 is AWS IoT Core
           cloudProvider:
             type: string
             description: aws or azure   
@@ -304,6 +328,21 @@ definitions:
     type: array
     items:
       '$ref': '#/definitions/EnrollReq'
+  DevicesTagUpdate:
+    type: object
+    required:
+      - name
+      - deviceIdList
+    properties:
+      name:
+        type: string
+        description: Tag name.
+      deviceIdList:
+        type: array
+        items:
+          type: string
+        description: Device UUID list.    
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -339,7 +378,7 @@ externalDocs:
             }
           ]
       }
-    ConnectReq:
+    RegisterReq:
       {
         "mac": "001122334455",
         "sn": "12345678",
@@ -352,12 +391,15 @@ externalDocs:
           "password": "1234"
         }
       }
-    ConnectRes:
+    RegisterRes:
       {
-        "resultCode": 100,
-        "reason": "Connection failure reason",
+        "error": {
+          "code": 100,
+          "reason": "Register failure reason"
+        },
         "data": 
           {
+            "scenarioId": 1,
             "cloudProvider": "aws", 
             "hostname": "http://www.moxa.com",
             "authType": "x509"
@@ -389,4 +431,22 @@ externalDocs:
           "certificate": "moxa"
         }
       ]
-      
+    DevicesTagUpdate:
+      {
+        "tag": "abc",
+        "deviceIdList": ["ed31872d-b57e-4c94-a989-c2782c0d3fe7"]
+      }  
+    DataAzureIoTHub:
+      {
+        "credential": "xxxxx"
+      }
+    DataAWSIoTCore:
+      {
+        "credential": "xxxxx"
+      }
+    DataTPServer:
+      {
+        "url": "http://www.moxa.com",
+        "email": "owen@moxa.com",
+        "password": "1234"
+      }  

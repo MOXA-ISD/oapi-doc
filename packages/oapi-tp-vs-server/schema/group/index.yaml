@@ -45,11 +45,7 @@ paths:
           schema:
             $ref: '#/definitions/GroupList'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/GroupList'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/GroupList'
 
     post:
       description: Same as v2.3<br />Create a new group.
@@ -70,11 +66,7 @@ paths:
             items:
               $ref: '#/definitions/Group'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/Group'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/Group'
 
     delete:
       description: Same as v2.3<br />Delete groups.
@@ -111,11 +103,7 @@ paths:
             items:
               $ref: '#/definitions/Group'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/Group'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/Group'
     put:
       description: Same as v2.3<br />Update Group with given ID
       tags:
@@ -135,11 +123,7 @@ paths:
             items:
               $ref: '#/definitions/Group'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/Group'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/Group'
 
     delete:
       description: Same as v2.3<br />Delete Group with given ID
@@ -167,11 +151,7 @@ paths:
           schema:
             $ref: '#/definitions/DeviceUUIDs'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
     post:
       description: Same as v2.3<br />Add devices to group
       tags:
@@ -189,11 +169,7 @@ paths:
           schema:
             $ref: '#/definitions/DeviceUUIDs'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
 
     delete:
       description: Same as v2.3<br />Remove devices from group
@@ -212,11 +188,7 @@ paths:
           schema:
             $ref: '#/definitions/DeviceUUIDs'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
 
 definitions:
   DeviceUUIDs:
@@ -337,18 +309,21 @@ externalDocs:
         "devices": [
           {
             "connection": {
-              "createdAt": "2016-12-22T10:07:56",
-              "deviceUUID": "17dbee9c-696c-4598-b1d9-547e740d94fa",
               "status": "created"
             },
             "createdAt": "2016-12-22T10:07:56",
             "description": "Device",
             "displayName": "MOXA HQ Sensor 4",
             "mac": "223344FF8F12",
+            "properties": {
+              "aliasName": "ramen",
+              "defaultRoute": "eth0",
+              "gps": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
             "serialNumber": "TAFLB1003683",
-            "properties": {},
-            "psk": "efe8d947a9a97792e67de8d9137b9a398a40367f30fecb8cdfde9685677dd134",
-            "updatedAt": "2016-12-22T10:07:56",
             "uuid": "17dbee9c-696c-4598-b1d9-547e740d94fa"
           }
         ],
@@ -395,19 +370,14 @@ externalDocs:
             "devices": [
               {
                 "connection": {
-                  "createdAt": "2017-03-22T08:15:01.359380",
-                  "deviceUUID": "2ad0fbb8-6f53-46ea-a10a-00b7b75145d3",
                   "status": "offline"
                 },
-                "createdAt": "2017-03-21T03:01:10.175584",
                 "description": "Device",
                 "displayName": "ThingsPro-changed",
                 "mac": "223344FF8F51",
                 "serialNumber": "TAFLB1003683",
                 "properties": {
                   "aliasName": "ThingsPro-changed",
-                  "createdAt": "2017-03-22T06:41:33.195046",
-                  "deviceUUID": "2ad0fbb8-6f53-46ea-a10a-00b7b75145d3",
                   "gps": {
                     "lat": 0,
                     "lng": 0
@@ -418,17 +388,13 @@ externalDocs:
               },
               {
                 "connection": {
-                  "createdAt": "2017-03-08T15:54:59.782570",
-                  "deviceUUID": "6292ca47-f69b-4399-8bdc-3011dc5142df",
                   "status": "created"
                 },
-                "createdAt": "2017-03-08T15:54:59.782570",
                 "description": "Device",
                 "displayName": "Dummy device",
                 "mac": "223344FF8F54",
                 "serialNumber": "TAFLB1003684",
                 "properties": {},
-                "updatedAt": "2017-03-08T15:54:59.782570",
                 "uuid": "6292ca47-f69b-4399-8bdc-3011dc5142df"
               }
             ],

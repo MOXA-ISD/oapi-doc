@@ -201,7 +201,7 @@ externalDocs:
       }
     TagCreate:
       {
-        "name": "moxa",
+        "tag": "moxa",
         "scenarioId": 1,
         "customerId": 1,
         "data": 

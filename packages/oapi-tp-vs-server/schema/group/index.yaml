@@ -196,7 +196,7 @@ definitions:
     items:
       type: string
       description: UUID of deivce
-      example: ['ded6dd9e-49d9-485b-bac1-da0ca0ae9d70']
+    example: ['2730e69e-8d5a-4642-a7cf-966365f991fd']
   Group:
     type: object
     required:

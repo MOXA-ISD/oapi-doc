@@ -221,18 +221,8 @@ definitions:
         description: Device model name. 
       manualRegister:
         type: object
-        description: This
-        properties:
-          url:
-            type: string
-            description: Tenant portal url.
-          email:
-            type: string
-            description: Tenant portal login email.
-          password:
-            type: string
-            description: Tenant portal login password. 
-         
+        description: This field please reference RegisterTPServer, RegisterAzureIoTHub or RegisterAWSIoTCore part
+
   RegisterRes:
     type: object
     properties:
@@ -302,9 +292,6 @@ definitions:
       tag:
         type: string
         description: Device tag.  
-      url:
-        type: string
-        description: Tenant url.   
   BatchEnrollReq:
     type: array
     items:
@@ -342,6 +329,36 @@ definitions:
         items:
           type: string
         description: Device UUID list.    
+
+  RegisterTPServer:
+    type: object
+    description: This register data is used to connect to thingspro server
+    properties:
+      url:
+        type: string
+        description: Tenant portal url.
+      email:
+        type: string
+        description: Tenant portal login email.
+      password:
+        type: string
+        description: Tenant portal login password.
+
+  RegisterAzureIoTHub:
+    type: object
+    description: This register data is used to connect to Azure
+    properties:
+      credential:
+        type: string
+        description: credential used to connect to Azure.
+
+  RegisterAWSIoTCore:
+    type: object
+    description: This register data is used to connect to AWS
+    properties:
+      credential:
+        type: string
+        description: credential used to connect to AWS.
 
 externalDocs:
   url: 'http://#'
@@ -436,15 +453,15 @@ externalDocs:
         "tag": "abc",
         "deviceIdList": ["ed31872d-b57e-4c94-a989-c2782c0d3fe7"]
       }  
-    DataAzureIoTHub:
+    RegisterAzureIoTHub:
       {
         "credential": "xxxxx"
       }
-    DataAWSIoTCore:
+    RegisterAWSIoTCore:
       {
         "credential": "xxxxx"
       }
-    DataTPServer:
+    RegisterTPServer:
       {
         "url": "http://www.moxa.com",
         "email": "owen@moxa.com",

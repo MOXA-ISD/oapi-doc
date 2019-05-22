@@ -20,9 +20,9 @@ paths:
       tags:
         - tag
       parameters:
-        - name: name
+        - name: tag
           in: query
-          description: Filter the tag list by name
+          description: Filter the tag list by tag name
           required: false
           type: string
         - name: status
@@ -37,11 +37,11 @@ paths:
           type: string    
         - name: order
           in: query
-          description: The tag list order by some keyword. default is order by 'tag'
+          description: The tag list order by some keyword. default is order by tag name
           required: false
           type: string
           enum:
-          - name
+          - tag
           - customer
           - status
         - name: sort
@@ -78,7 +78,6 @@ paths:
       parameters:
         - name: body
           in: body
-          description: ''
           required: true
           schema:
             $ref: '#/definitions/TagCreate'
@@ -101,7 +100,6 @@ paths:
         type: string
       - name: body
         in: body
-        description: ''
         required: true
         schema:
           $ref: '#/definitions/TagUpdate'
@@ -120,7 +118,7 @@ definitions:
       id:
         type: integer
         description: Tag id.
-      name:
+      tag:
         type: string
         description: Tag name.
       scenarioId:
@@ -145,12 +143,12 @@ definitions:
   TagCreate:
     type: object
     required:
-    - name
+    - tag
     - scenarioId
     - customerId
     - data
     properties:
-      name:
+      tag:
         type: string
         description: Tag name.
       scenarioId:
@@ -191,7 +189,7 @@ externalDocs:
     Tag:
       {
         "id": 1,
-        "name": "moxa",
+        "tag": "moxa",
         "scenarioId": 1,
         "customerId": 1,
         "data": 
@@ -213,7 +211,7 @@ externalDocs:
       }
     TagUpdate:
       {
-        "name": "moxa",
+        "tag": "moxa",
         "scenarioId": 1,
         "customerId": 1,
         "data": 
@@ -228,7 +226,7 @@ externalDocs:
         "data": [
           {
             "id": 1,
-            "name": "moxa",
+            "tag": "moxa",
             "scenarioId": 1,
             "customerId": 1,
             "data": 

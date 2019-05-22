@@ -20,14 +20,14 @@ paths:
       tags:
         - customer
       parameters:
-        - name: name
+        - name: displayName
           in: query
-          description: Filter the customer list by customer
+          description: Filter the customer list by customer display name
           required: false
           type: string 
         - name: order
           in: query
-          description: The customer list order by some keyword. default is order by 'tag'
+          description: The customer list order by some keyword. default is order by 'customer name'
           required: false
           type: string
           enum:
@@ -106,25 +106,80 @@ definitions:
       id:
         type: integer
         description: Customer id.
-      name:
+      displayName:
         type: string
         description: Customer name.
+      firstName:
+        type: string
+        description: First name of customer.
+      lastName:
+        type: string
+        description: Last name of customer.
+      email:
+        type: string
+        description: Customer email.
+      phone:
+        type: string
+        description: Phone of customer.
+      country:
+        type: string
+        description: Country of customer.
+      channel:
+        type: string
+        description: Channel distributor of customer.
+
   CustomerCreate:
     type: object
     required:
-    - name
+    - displayName
+    - email
     properties:
-      name:
+      displayName:
         type: string
         description: Customer name.
+      firstName:
+        type: string
+        description: First name of customer.
+      lastName:
+        type: string
+        description: Last name of customer.
+      email:
+        type: string
+        description: Customer email.
+      phone:
+        type: string
+        description: Phone of customer.
+      country:
+        type: string
+        description: Country of customer.
+      channel:
+        type: string
+        description: Channel distributor of customer.
+
   CustomerUpdate:
     type: object
-    required:
-    - name
     properties:
-      name:
+      displayName:
         type: string
         description: Customer name.
+      firstName:
+        type: string
+        description: First name of customer.
+      lastName:
+        type: string
+        description: Last name of customer.
+      email:
+        type: string
+        description: Customer email.
+      phone:
+        type: string
+        description: Phone of customer.
+      country:
+        type: string
+        description: Country of customer.
+      channel:
+        type: string
+        description: Channel distributor of customer.
 
 externalDocs:
   url: 'http://#'
@@ -132,15 +187,33 @@ externalDocs:
     Customer:
       {
         "id": 1,
-        "name": "moxa"
+        "displayName": "moxa",
+        "email": "moxa@moxa.com",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "phone": "1234567890",                      
+        "country": "Taiwan",
+        "channel": "moxa"
       }
     CustomerCreate:
       {
-        "name": "moxa"
+        "displayName": "moxa",
+        "email": "moxa@moxa.com",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "phone": "1234567890",                      
+        "country": "Taiwan",
+        "channel": "moxa"
       }
     CustomerUpdate:
       {
-        "name": "moxa"
+        "displayName": "moxa",
+        "email": "moxa@moxa.com",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "phone": "1234567890",                      
+        "country": "Taiwan",
+        "channel": "moxa"
       }
     CustomerList:
       {
@@ -148,7 +221,13 @@ externalDocs:
         "data": [
           {
             "id": 1,
-            "name": "moxa"
+            "displayName": "moxa",
+            "email": "moxa@moxa.com",
+            "firstName": "firstName",
+            "lastName": "lastName",
+            "phone": "1234567890",                      
+            "country": "Taiwan",
+            "channel": "moxa"
           }
         ],
         "limit": 100,

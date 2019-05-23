@@ -179,9 +179,6 @@ definitions:
       mac:
         type: string
         description: MAC address of device.
-      iccId:
-        type: string
-        description: Cellular ICCID
       serialNumber:
         type: string
         description: Serial number of device.
@@ -283,73 +280,72 @@ externalDocs:
   url: 'http://#'
   x-mocks:
     Device:
-      uuid: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
+      connection:
+        status: offline
       description: Temperature monitoring
       displayName: 'Gym tempture sensor #1'
       mac: 223344FFFF11
-      iccId: 898600MFSSYYGXXXXXXP
+      properties:
+        aliasName: ThingsPro-changed
+        defaultRoute": eth0
+        gps:
+          lat: 0
+          lng: 0
+        iccId: 898600MFSSYYGXXXXXXP
+        modelName: UC-8112-LX-CG
+        softwareVersion: 'version 2.3.2 Build 18102617'
       serialNumber: MOXA00000001
+      uuid: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
     DeviceCreateRes:
-      uuid: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
+      connection:
+        status: created
       description: Temperature monitoring
       displayName: 'Gym tempture sensor #1'
       mac: 223344FFFF11
-      iccId: 898600MFSSYYGXXXXXXP
-      serialNumber: MOXA00000001
       psk: PBKDF2$sha256$901$xl/Ws1LGqr/WV5QB$XtAQ7g12TTs5F0PWHT3yXCRLBuKU4qOb
+      serialNumber: MOXA00000001
+      uuid: ded6dd9e-49d9-485b-bac1-da0ca0ae9d70
     DeviceList:
       count: 3
       data:
         - connection:
-            createdAt: '2017-03-22T08:15:01.359380'
-            deviceUUID: 2ad0fbb8-6f53-46ea-a10a-00b7b75145d3
             status: offline
-          createdAt: '2017-03-21T03:01:10.175584'
-          description: Device
           displayName: ThingsPro-changed
-          mac: 223344FF8F51
-          iccId: 898600MFSSYYGXXXXXXP
-          serialNumber: MOXA00000001
+          mac: 223344FF8F51    
           properties:
             aliasName: ThingsPro-changed
-            createdAt: '2017-03-22T06:41:33.195046'
-            deviceUUID: 2ad0fbb8-6f53-46ea-a10a-00b7b75145d3
+            defaultRoute": eth0
             gps:
               lat: 0
               lng: 0
-          updatedAt: '2017-03-22T06:19:58.475876'
+            iccId: 898600MFSSYYGXXXXXXP
+            modelName: UC-8112-LX-CG
+            softwareVersion: 'version 2.3.2 Build 18102617'
+          serialNumber: MOXA00000001
           uuid: 2ad0fbb8-6f53-46ea-a10a-00b7b75145d3
         - connection:
-            createdAt: '2017-03-10T01:55:41.097736'
-            deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
             status: offline
-          createdAt: '2017-01-16T10:36:46.390569'
-          description: Device
           displayName: ThingsPro
-          mac: 223344FF8F11
-          iccId: 898600MFSSYYGXXXXXXA
-          serialNumber: MOXA00000002
+          mac: 223344FF8F11   
           properties:
             aliasName: ThingsPro
-            createdAt: '2017-03-09T05:38:58.925514'
-            deviceUUID: 2730e69e-8d5a-4642-a7cf-966365f991fd
+            defaultRoute: wlan0
             gps:
               lat: 0
               lng: 0
-          updatedAt: '2017-03-20T06:32:35.814447'
+            iccId: 898600MFSSYYGXXXXXXA
+            modelName: val
+            softwareVersion: 'version 2.3.2 Build 18102617'
+            wifi:
+              status: connected
+          serialNumber: MOXA00000002
           uuid: 2730e69e-8d5a-4642-a7cf-966365f991fd
         - connection:
-            createdAt: '2017-03-08T15:54:59.782570'
-            deviceUUID: 6292ca47-f69b-4399-8bdc-3011dc5142df
             status: created
-          createdAt: '2017-03-08T15:54:59.782570'
-          description: Device
           displayName: Dummy device
           mac: 223344FF8F54
-          iccId: 898600MFSSYYGXXXXXXB
-          serialNumber: MOXA00000003
           properties: {}
-          updatedAt: '2017-03-08T15:54:59.782570'
+          serialNumber: MOXA00000003
           uuid: 6292ca47-f69b-4399-8bdc-3011dc5142df
       limit: 20
       offset: 0

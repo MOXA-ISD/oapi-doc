@@ -39,18 +39,14 @@ paths:
           schema:
             $ref: '#/definitions/GroupTask'
           example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/GroupTask'
-              }
-            }
+            $ref: '#/externalDocs/x-mocks/GroupTask'
 
 definitions:
   GroupTask:
     type: array
     description: Array of DeviceTask objects belong to this group.
     items:
-      $ref: '#/definitions/DeviceTaskCreate'
+      $ref: '#/definitions/Group'
   GroupTaskCreate:
     allOf:
     - type: object
@@ -62,7 +58,7 @@ definitions:
     - $ref: '#/definitions/DeviceTaskCreate'
     example:
       $ref: '#/externalDocs/x-mocks/GroupTaskCreate'
-
+ 
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -79,18 +75,23 @@ externalDocs:
         "devices": [
           {
             "connection": {
-              "createdAt": "2016-12-22T10:07:56",
-              "deviceUUID": "17dbee9c-696c-4598-b1d9-547e740d94fa",
               "status": "created"
             },
-            "createdAt": "2016-12-22T10:07:56",
             "description": "Device",
             "displayName": "MOXA HQ Sensor 4",
             "mac": "223344FF8F12",
             "serialNumber": "TAFLB1003683",
-            "properties": {},
-            "psk": "efe8d947a9a97792e67de8d9137b9a398a40367f30fecb8cdfde9685677dd134",
-            "updatedAt": "2016-12-22T10:07:56",
+            "properties": {
+              "aliasName": "UC-8112-LX-VVS-2.3.2",
+              "defaultRoute": "eth0",
+              "gps": {
+                "lat": 25,
+                "lng": 121
+              },
+              "iccId": "n/a",
+              "modelName": "UC-8112-LX-CG",
+              "softwareVersion": "version 2.3.2 Build 18102617"
+            },
             "uuid": "17dbee9c-696c-4598-b1d9-547e740d94fa"
           }
         ],

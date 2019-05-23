@@ -30,7 +30,7 @@ tags:
 - $ref: "./deviceJobRelay/index.yaml#/tags"
 - $ref: "./deviceTask/index.yaml#/tags"
 - $ref: "./group/index.yaml#/tags"
-- $ref: "./groupTask/index.yaml#/tags"
+#- $ref: "./groupTask/index.yaml#/tags"
 - $ref: "./notification/index.yaml#/tags"
 
 paths:
@@ -38,7 +38,7 @@ paths:
 - $ref: "./deviceJobRelay/index.yaml#/paths"
 - $ref: "./deviceTask/index.yaml#/paths"
 - $ref: "./group/index.yaml#/paths"
-- $ref: "./groupTask/index.yaml#/paths"
+#- $ref: "./groupTask/index.yaml#/paths"
 - $ref: "./notification/index.yaml#/paths"
 
 definitions:
@@ -46,5 +46,5 @@ definitions:
 - $ref: "./deviceJobRelay/index.yaml#/definitions"
 - $ref: "./deviceTask/index.yaml#/definitions"
 - $ref: "./group/index.yaml#/definitions"
-- $ref: "./groupTask/index.yaml#/definitions"
+#- $ref: "./groupTask/index.yaml#/definitions"
 - $ref: "./notification/index.yaml#/definitions"

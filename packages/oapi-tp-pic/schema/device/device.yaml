@@ -263,6 +263,16 @@ definitions:
           authType:
             type: string
             description: Auth type, x509 is default  
+      registerCA:
+        type: object
+        description: Device register certificate
+        properties:
+          registerPK:
+            type: string
+            description: Private key.
+          registerCert:
+            type: string
+            description: Certificate.
       newEnrollCA:
         type: object
         description: PIC will generate new certificate, if the old certificate expired

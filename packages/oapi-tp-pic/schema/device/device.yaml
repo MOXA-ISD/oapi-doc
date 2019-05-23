@@ -263,14 +263,14 @@ definitions:
           authType:
             type: string
             description: Auth type, x509 is default  
-      newCert:
+      newEnrollCA:
         type: object
         description: PIC will generate new certificate, if the old certificate expired
         properties:
-          privateKey:
+          enrollPK:
             type: string
             description: Private key.
-          certificate:
+          enrollCert:
             type: string
             description: Certificate.
   EnrollReq:
@@ -305,10 +305,10 @@ definitions:
       mac:
         type: string
         description: Device mac.
-      privateKey:
+      enrollPK:
         type: string
         description: Private key.
-      certificate:
+      enrollCert:
         type: string
         description: Certificate.
   BatchEnrollRes:
@@ -421,10 +421,15 @@ externalDocs:
             "hostname": "http://www.moxa.com",
             "authType": "x509"
           },
-        "newCert": 
+        "registerCA": 
           {
-            "privateKey": "moxa",
-            "certificate": "moxa"
+            "registerPK": "moxa",
+            "registerCert": "moxa"
+          }
+        "newEnrollCA": 
+          {
+            "enrollPK": "moxa",
+            "enrollCert": "moxa"
           }
       }  
     EnrollReq:
@@ -437,15 +442,15 @@ externalDocs:
     EnrollRes:
       {
         "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "privateKey": "moxa",
-        "certificate": "moxa"
+        "enrollPK": "moxa",
+        "enrollCert": "moxa"
       }
     BatchEnrollRes:
       [
         {
           "mac": "001122334455",
-          "privateKey": "moxa",
-          "certificate": "moxa"
+          "enrollPK": "moxa",
+          "enrollCert": "moxa"
         }
       ]
     DevicesTagUpdate:

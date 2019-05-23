@@ -164,9 +164,6 @@ definitions:
     type: object
     description: User can update tag, scenarioId, customerId, data, status separtely
     properties:
-      tag:
-        type: string
-        description: Tag name.
       scenarioId:
         type: integer
         description: Scenario id.
@@ -211,7 +208,6 @@ externalDocs:
       }
     TagUpdate:
       {
-        "tag": "moxa",
         "scenarioId": 1,
         "customerId": 1,
         "data": 

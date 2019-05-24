@@ -136,6 +136,7 @@ definitions:
           - active
           - inactive
           - failure
+          - initial
         description: Auto provision status.
       updatedAt:
         type: string
@@ -178,6 +179,8 @@ definitions:
         enum:
           - active
           - inactive
+          - failure
+          - initial
         description: Auto provision status.
 
 externalDocs:

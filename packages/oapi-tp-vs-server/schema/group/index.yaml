@@ -43,10 +43,11 @@ paths:
         200:
           description: An array of groups
           schema:
-            $ref: '#/definitions/GroupList'
-          example:
-            $ref: '#/externalDocs/x-mocks/GroupList'
-
+            type: array
+            items:
+              $ref: '#/definitions/GroupList'
+            example:
+              $ref: '#/externalDocs/x-mocks/GroupList'
     post:
       description: Same as v2.3<br />Create a new group.
       tags:
@@ -65,8 +66,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Group'
-          example:
-            $ref: '#/externalDocs/x-mocks/Group'
+            example:
+              $ref: '#/externalDocs/x-mocks/Group'
 
     delete:
       description: Same as v2.3<br />Delete groups.
@@ -102,8 +103,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          example:
-            $ref: '#/externalDocs/x-mocks/Group'
+            example:
+              $ref: '#/externalDocs/x-mocks/Group'
     put:
       description: Same as v2.3<br />Update Group with given ID
       tags:
@@ -122,8 +123,8 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          example:
-            $ref: '#/externalDocs/x-mocks/Group'
+            example:
+              $ref: '#/externalDocs/x-mocks/Group'
 
     delete:
       description: Same as v2.3<br />Delete Group with given ID
@@ -149,9 +150,12 @@ paths:
         200:
           description: An array of the device uuid
           schema:
-            $ref: '#/definitions/DeviceUUIDs'
-          example:
-            $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+            type: object
+            items:
+              $ref: '#/definitions/DeviceUUIDs'
+            example:
+              $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+              
     post:
       description: Same as v2.3<br />Add devices to group
       tags:
@@ -167,9 +171,11 @@ paths:
         200:
           description: An array of the device uuid in this group
           schema:
-            $ref: '#/definitions/DeviceUUIDs'
-          example:
-            $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+            type: object
+            items:
+              $ref: '#/definitions/DeviceUUIDs'
+            example:
+              $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
 
     delete:
       description: Same as v2.3<br />Remove devices from group
@@ -186,9 +192,11 @@ paths:
         200:
           description: An array of the device uuid in this group
           schema:
-            $ref: '#/definitions/DeviceUUIDs'
-          example:
-            $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
+            type: object
+            items:
+              $ref: '#/definitions/DeviceUUIDs'
+            example:
+              $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
 
 definitions:
   DeviceUUIDs:
@@ -237,7 +245,7 @@ definitions:
         type: array
         description: Array of GroupTask objects belong to this group.
         items:
-          $ref: '#/definitions/GroupTask'
+          $ref: '#/definitions/TaskObj'
       taskStatus:
         type: object
         description: Task status
@@ -281,7 +289,7 @@ definitions:
       data:
         type: array
         items:
-        - $ref: '#/definitions/Group'
+          $ref: '#/definitions/Group'
     example:
       $ref: '#/externalDocs/x-mocks/GroupList'
   GroupIDs:
@@ -290,6 +298,47 @@ definitions:
       type: number
       description: ID of Group
       example: 1
+  TaskObj:
+    type: object
+    properties:
+      applyPolicy:
+        type: string
+        description: Apply policy of group.
+      deviceUUID:
+        type: string
+        description: Device uuid.
+      groupTaskUUID:
+        type: string
+        description: Group task uuid.
+      meta:
+        type: object
+        description: Metadata of group.
+      retryTimes:
+        type: number
+        description: Retry times.
+      revoked:
+        type: boolean
+        description: Task is revoked or not.
+      scheduledDateTime:
+        type: string
+        description: Schedule time.
+      state:
+        type: string
+        description: Task status.
+      success:
+        type: string
+        description: Task result,.  
+      uuid:
+        type: string
+        description: Task uuid.  
+      createdAt:
+        type: string
+        format: date-time
+        description: created time.
+      updatedAt:
+        type: string
+        format: date-time
+        description: updated time.
 
 externalDocs:
   url: 'http://#'

@@ -35,8 +35,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Notification'
-          example: 
-            $ref: '#/externalDocs/x-mocks/NotificationList'
+            example: 
+              $ref: '#/externalDocs/x-mocks/NotificationList'
     post:
       tags:
         - notification

@@ -2,7 +2,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.5.0-vs1.0.0
+  version: 2.5.0-vs1.0.2
   title: ThingsPro Cloud Server RESTful API Reference
   description: |
     Welcome to the ThingsPro Cloud Server RESTful API reference. This is a live document of how you can use ThingsPro Cloud Server APIs.

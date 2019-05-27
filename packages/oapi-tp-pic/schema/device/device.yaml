@@ -261,9 +261,6 @@ definitions:
           scenarioId:
             type: integer
             description: 1 is Azure IoT Hub, 2 is AWS IoT Core
-          cloudProvider:
-            type: string
-            description: aws or azure   
           hostname:
             type: string
             description: IOT connection hostname.  
@@ -404,7 +401,6 @@ externalDocs:
         "data": 
           {
             "scenarioId": 1,
-            "cloudProvider": "aws", 
             "hostname": "http://www.moxa.com",
             "authType": "x509"
           },

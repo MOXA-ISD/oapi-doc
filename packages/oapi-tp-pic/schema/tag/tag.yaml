@@ -121,9 +121,9 @@ definitions:
       tag:
         type: string
         description: Tag name.
-      scenarioId:
-        type: integer
-        description: Scenario id.
+      scenario:
+        type: string
+        description: Scenario type.
       customerId:
         type: integer
         description: Customer id.
@@ -145,16 +145,19 @@ definitions:
     type: object
     required:
     - tag
-    - scenarioId
+    - scenario
     - customerId
     - data
     properties:
       tag:
         type: string
         description: Tag name.
-      scenarioId:
-        type: integer
-        description: Scenario id.
+      scenario:
+        type: string
+        enum:
+          - azure_iot_hub
+          - aws_iot_core
+        description: Scenario type.
       customerId:
         type: integer
         description: Customer id.
@@ -163,11 +166,14 @@ definitions:
         description: Tag data.
   TagUpdate:
     type: object
-    description: User can update tag, scenarioId, customerId, data, status separtely
+    description: User can update tag, scenario, customerId, data, status separtely
     properties:
-      scenarioId:
-        type: integer
-        description: Scenario id.
+      scenario:
+        type: string
+        enum:
+          - azure_iot_hub
+          - aws_iot_core
+        description: Scenario type.
       customerId:
         type: integer
         description: Customer id.
@@ -190,7 +196,7 @@ externalDocs:
       {
         "id": 1,
         "tag": "moxa",
-        "scenarioId": 1,
+        "scenario": "aws_iot_core",
         "customerId": 1,
         "data": 
         {
@@ -202,7 +208,7 @@ externalDocs:
     TagCreate:
       {
         "tag": "moxa",
-        "scenarioId": 1,
+        "scenario": "aws_iot_core",
         "customerId": 1,
         "data": 
         {
@@ -211,7 +217,7 @@ externalDocs:
       }
     TagUpdate:
       {
-        "scenarioId": 1,
+        "scenario": "aws_iot_core",
         "customerId": 1,
         "data": 
         {
@@ -226,7 +232,7 @@ externalDocs:
           {
             "id": 1,
             "tag": "moxa",
-            "scenarioId": 1,
+            "scenario": "aws_iot_core",
             "customerId": 1,
             "data": 
             {

@@ -189,6 +189,7 @@ definitions:
         enum:
         - registered
         - enrolled
+        - invalidCA
         description: status.  
       enrolledAt:
         type: string
@@ -251,6 +252,7 @@ definitions:
               104: Device is not enrolled
               105: Certificate expired
               106: Device sn or mac is not matched with certificate
+              107: Register certificate error
           reason:
             type: string
             description: If http status code is not 200, user sholud reference this reason to identify failure reason.
@@ -258,9 +260,12 @@ definitions:
         type: object
         description: IOT connection data.   
         properties:
-          scenarioId:
-            type: integer
-            description: 1 is Azure IoT Hub, 2 is AWS IoT Core
+          scenario:
+            type: string
+            enum:
+              - azure_iot_hub
+              - aws_iot_core
+            description: Cloud provider type
           hostname:
             type: string
             description: IOT connection hostname.  
@@ -400,7 +405,7 @@ externalDocs:
         },
         "data": 
           {
-            "scenarioId": 1,
+            "scenario": "aws_iot_core",
             "hostname": "http://www.moxa.com",
             "authType": "x509"
           },

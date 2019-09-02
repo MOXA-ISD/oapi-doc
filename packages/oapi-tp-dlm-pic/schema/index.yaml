@@ -1,11 +1,10 @@
 swagger: '2.0'
 
 info:
-  version: 1.1.2
-  title: ThingsPro PIC service RESTful API reference
+  version: 0.0.1
+  title: DLM Partner Portal RESTful API reference
   description: |
-    Welcome to the ThingsPro PIC service RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
-    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
+    Welcome to the DLM Partner Portal RESTful API reference.
 
 host: localhost
 basePath: '/api/v1'
@@ -16,6 +15,13 @@ schemes:
 
 produces:
   - application/json
+
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: bearer
+    in: header
+    description: DLM RESTful API token, The token will create when user login.
 
 tags:
   - $ref: './customer/index.yaml#/tags'  

@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 0.0.0
-  title: ThingsPro Tenant Portal RESTful API reference
+  title: DLM Company Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
   - http
@@ -65,9 +65,6 @@ definitions:
       description:
         type: string
         description: Description of permission.
-      type:
-        type: integer
-        description: Type of permission. 1=Tenant Administration, 2=Device Operation
 
 externalDocs:
   url: 'http://#'
@@ -76,8 +73,7 @@ externalDocs:
       {
         "id": 1,
         "name": "User & Role management",
-        "description": "User & Role management",
-        "type": 1
+        "description": "User & Role management"
       }
     PermissionList:
       {
@@ -85,32 +81,27 @@ externalDocs:
           {
             "id": 1,
             "name": "User & Role management",
-            "description": "User & Role management",
-            "type": 1
+            "description": "User & Role management"
           },
           {
             "id": 2,
             "name": "Device register",
-            "description": "Device register",
-            "type": 1
+            "description": "Device register"
           },
           {
             "id": 3,
             "name": "Device grouping",
-            "description": "Device grouping",
-            "type": 1
+            "description": "Device grouping"
           },
           {
             "id": 4,
             "name": "View device information",
-            "description": "View device information",
-            "type": 2
+            "description": "View device information"
           },
           {
             "id": 5,
             "name": "Full manage device",
-            "description": "Full manage device",
-            "type": 2
+            "description": "Full manage device"
           }
         ]
       }

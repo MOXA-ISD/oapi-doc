@@ -1,7 +1,7 @@
 {
-  "name": "@tp-x/pic-oapi-doc",
-  "version": "1.0.0",
-  "description": "ThingsPro PIC serivce OAPI documentation",
+  "name": "@tp-x/dlm-admin-oapi-doc",
+  "version": "1.1.0",
+  "description": "DLM Admin Portal OAPI documentation",
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Owen YC Kao <owenyc_kao@moxa.com>",
   "license": "MIT",

@@ -1,11 +1,10 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.3
-  title: ThingsPro Partner Portal RESTful API reference
+  version: 0.0.1
+  title: DLM Company Portal RESTful API reference
   description: |
-    Welcome to the ThingsPro Partner Portal RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
-    The ThingsPro Gateway API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
+    Welcome to the DLM Company Portal RESTful API reference.
 
 host: localhost
 basePath: '/api/v1'
@@ -29,15 +28,18 @@ tags:
   - $ref: './cert/index.yaml#/tags'
   - $ref: './tenant/index.yaml#/tags'
   - $ref: './offer/index.yaml#/tags'
+  - $ref: './permission/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
   - $ref: './cert/index.yaml#/paths'
   - $ref: './tenant/index.yaml#/paths'
   - $ref: './offer/index.yaml#/paths'
+  - $ref: './permission/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
   - $ref: './cert/index.yaml#/definitions'
   - $ref: './tenant/index.yaml#/definitions'
   - $ref: './offer/index.yaml#/definitions'
+  - $ref: './permission/index.yaml#/definitions'

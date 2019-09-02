@@ -1,7 +1,7 @@
 {
-  "name": "@tp-x/partner-portal-oapi-doc",
-  "version": "1.1.0",
-  "description": "ThingsPro Partner Portal OAPI documentation",
+  "name": "@tp-x/dlm-pic-oapi-doc",
+  "version": "1.0.0",
+  "description": "DLM PIC serivce OAPI documentation",
   "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
   "author": "Owen YC Kao <owenyc_kao@moxa.com>",
   "license": "MIT",

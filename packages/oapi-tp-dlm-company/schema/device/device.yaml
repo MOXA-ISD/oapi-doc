@@ -27,16 +27,22 @@ paths:
           description: Filter the device list by modelName
           required: false
           type: string
-        - name: deviceType
-          in: query
-          description: Filter the device list by deviceType
-          required: false
-          type: string
         - name: mac
           in: query
           description: Filter the device list by mac
           required: false
           type: string
+        - name: status
+          in: query
+          description: Filter the device list by status
+          required: false
+          type: string
+          enum:
+          - unregistered
+          - registered
+          - online
+          - offline
+          - retired
         - name: order
           in: query
           description: Sort the device list by specific condition, default is order by 'lastUpdatedAt'
@@ -45,9 +51,8 @@ paths:
           enum:
           - deviceName
           - modelName
-          - deviceType
           - mac
-          - connectionStatus
+          - status
         - name: sort
           in: query
           description: Sorting the filter device list, default is desc
@@ -74,8 +79,7 @@ paths:
           enum:
           - deviceName
           - modelName
-          - deviceType
-          - connectionStatus        
+          - status        
       description: Get all devices field data
       responses:
         200:
@@ -88,87 +92,7 @@ paths:
               $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
         - device
-    post:
-      description: Create a new device.
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceReq'
-      responses:
-        201:
-          description: Create device successfully
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Device'
-          examples: { 'application/json': { $ref: '#/externalDocs/x-mocks/Device' } }
-      tags:
-        - device
 
-
-  /devices/poc:
-    get:
-      parameters:
-        - name: deviceName
-          in: query
-          description: Filter the device list by deviceName
-          required: false
-          type: string
-        - name: modelName
-          in: query
-          description: Filter the device list by modelName
-          required: false
-          type: string
-        - name: order
-          in: query
-          description: Ordering the filter device list, default is desc
-          required: false
-          type: string
-          enum:
-          - desc
-          - asc
-        - name: sort
-          in: query
-          description: Sort the device list by specific ordering, default is sort by 'lastUpdatedAt'
-          required: false
-          type: string
-          enum:
-          - deviceName
-          - modelName
-        - name: limit
-          in: query
-          description: max return devices count (default is 100 and max is 1000)
-          required: false
-          type: integer
-        - name: offset
-          in: query
-          description: offset
-          required: false
-          type: integer
-        - name: distinct
-          in: query
-          description: Get distict value of speific field, this query parameter will return string array only
-          required: false
-          type: string
-          enum:
-          - deviceName
-          - modelName
-      description: Get all poc devices field data
-      responses:
-        200:
-          description: An array of poc devices
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/DevicePoc'
-            example: 
-              $ref: '#/externalDocs/x-mocks/DevicePocList'
-      tags:
-        - device
- 
   /devices/{deviceId}:
     parameters:
       - name: deviceId
@@ -190,43 +114,12 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/Device'
     delete:
-      description: Delete device with given ID
+      description: Retire device with given ID
       tags:
         - device
       responses:
         204:
           description: success
-
-  /devices/{deviceId}/telemetry:
-    parameters:
-      - name: deviceId
-        in: path
-        description: device unique identifier
-        required: true
-        type: string
-      - name: startTime
-        in: query
-        description: query start time(UNIX epoch time, like 1538671238 in the unit of second)
-        required: false
-        type: string
-      - name: endTime
-        in: query
-        description: query end time(UNIX epoch time, like 1538671238 in the unit of second)
-        required: false
-        type: string  
-    get:
-      description: Return telemetry data with given ID device of query time, the max time interval is one hour and max limit is 500, if the startTime-endTime interval over one hour, servce will use endTime cut one hour as startTime
-      tags:
-        - device
-      responses:
-        200:
-          description: An Object of the reported properties
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Telemetry'
-            example: 
-              $ref: '#/externalDocs/x-mocks/TelemetryList'
 
   /devices/{deviceId}/reportedProperties:
     parameters:
@@ -366,9 +259,9 @@ definitions:
         - offline
         - registered
         description: Connection status of device.
-      connectionAt:
+      connectedAt:
         type: string
-        description: Device connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        description: Device last connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
   DevicePoc:
     type: object
@@ -469,27 +362,7 @@ definitions:
         description: Is job repeatable.
       repeatedPattern:
         type: string
-        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
-  
-  Telemetry:
-    type: object
-    required:
-      - deviceId
-      - dataSource
-      - messageTimeStamp
-    properties:
-      deviceId:
-        type: string
-        description: Device unique id.
-      dataSource:
-        type: string
-        description: Data source of telemetry.
-      messageTimeStamp:
-        type: string
-        description: Message timestamp of telemetry.
-      cpuUsage:
-        type: object
-        description: Model name of device.      
+        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".       
 
   DirectMethodReq:
     type: object
@@ -529,27 +402,6 @@ definitions:
         type: string
         description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
 
-  DeviceReq:
-    type: object
-    required:
-      - deviceId
-      - modelName
-      - mac
-      - serialNumber      
-    properties:
-      deviceId:
-        type: string
-        description: Device unique id.
-      modelName:
-        type: string
-        description: Model name of device.
-      mac:
-        type: string
-        description: MAC of device.
-      serialNumber:
-        type: string
-        description: Seriar number of device.
-
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -557,14 +409,11 @@ externalDocs:
       {
         "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+        "mac": "00-0C-29-70-D2-EC",
+        "sn": "",
         "deviceName": "moxa",
         "modelName": "UC-8112-LX-CG",
-        "deviceType": "IIoT Gateway",
-        "mac": "00-0C-29-70-D2-EC",
-        "serialNumber": "",
-        "allowConnection": true,
-        "imageURL": "http://123.456.net/xxx/xxx.jpg",
-        "logoURL": "http://123.456.net/xxx/xxx.jpg",
+        "status": "online",
         "reportedProperties": {    
           "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
           "reportedProperties": [      
@@ -616,25 +465,8 @@ externalDocs:
             }          
           ]
         },
-        "groupList": [
-          {
-            "id": 2,
-            "name": "A123",
-            "description": "A123"
-          },
-          {
-            "id": 4,
-            "name": "MOXA-ISS",
-            "description": "MOXA-ISS"
-          }
-        ],
-        "connectionStatus": "online",
-        "connectionAt": "2019-02-26T14:10:33:000Z"
-      }
-    DeviceReq:
-      {
-
-      }  
+        "connectedAt": "2019-02-26T14:10:33:000Z"
+      } 
     DeviceList:
       {
         "count": 5,
@@ -645,14 +477,11 @@ externalDocs:
             {
               "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "deviceName": "moxa1",
-              "modelName": "UC-8112-LX-CG",
-              "deviceType": "IIoT Gateway",
               "mac": "00-0C-29-70-D2-EC",
-              "serialNumber": "",
-              "allowConnection": true,
-              "imageURL": "http://123.456.net/xxx/xxx.jpg",
-              "logoURL": "http://123.456.net/xxx/xxx.jpg",
+              "sn": "",
+              "deviceName": "moxa",
+              "modelName": "UC-8112-LX-CG",
+              "status": "online",
               "reportedProperties": {    
                 "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
                 "reportedProperties": [      
@@ -704,97 +533,7 @@ externalDocs:
                   }          
                 ]
               },
-              "groupList": [
-                {
-                  "id": 2,
-                  "name": "A123",
-                  "description": "A123"
-                },
-                {
-                  "id": 4,
-                  "name": "MOXA-ISS",
-                  "description": "MOXA-ISS"
-                }
-              ],
-              "connectionStatus": "online",
-              "connectionAt": "2019-02-26T14:10:33:000Z"
-            },
-            {
-              "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-              "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "deviceName": "moxa2",
-              "modelName": "UC-8112-LX-CG",
-              "deviceType": "IIoT Gateway",
-              "mac": "00-0C-29-70-D2-EC",
-              "serialNumber": "",
-              "allowConnection": true,
-              "imageURL": "http://123.456.net/xxx/xxx.jpg",
-              "logoURL": "http://123.456.net/xxx/xxx.jpg",
-              "reportedProperties": {    
-                "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-                "reportedProperties": [      
-                  {
-                    "id": 1,
-                    "type": "general",
-                    "name": "deviceName",
-                    "description": "Device Name",
-                    "value": "Demo Device 01"
-                  },
-                  {
-                    "id": 2,
-                    "type": "general",
-                    "name": "firmwareVersion",
-                    "description": "Firmware Version",
-                    "value": "1.8.1"
-                  }
-                ]    
-              },
-              "desiredProperties": { 
-                "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-                "desiredProperties": [        
-                  {
-                    "id": 1,
-                    "type": "general",
-                    "name": "deviceName",
-                    "description": "Device Name",
-                    "value": "Demo Device 01"
-                  },
-                  {
-                    "id": 4,
-                    "type": "network",
-                    "name": "eth0",
-                    "description": "Ethernet 0",
-                    "value": [
-                      {
-                        "id": 1,
-                        "name": "ipAddress",
-                        "description": "IP Address",
-                        "value": "192.168.3.21"
-                      },
-                      {
-                        "id": 2,
-                        "name": "mask",
-                        "description": "Subnet Mask",
-                        "value": "255.255.255.0"
-                      }
-                    ]
-                  }          
-                ]
-              },
-              "groupList": [
-                {
-                  "id": 2,
-                  "name": "A123",
-                  "description": "A123"
-                },
-                {
-                  "id": 4,
-                  "name": "MOXA-ISS",
-                  "description": "MOXA-ISS"
-                }
-              ],
-              "connectionStatus": "online",
-              "connectionAt": "2019-02-26T14:10:33:000Z"
+              "connectedAt": "2019-02-26T14:10:33:000Z"
             }
           ]
       }
@@ -1036,69 +775,5 @@ externalDocs:
           }
         ]
       }
-    TelemetryList:
-      [
-        {
-          "deviceId": "7dc73055-2ad9-4fdc-96d6-c9d18582ce01",
-          "dataSource": "systemTag",
-          "messageTimeStamp": "2018-10-01T08:25:35.4222994+00:00",
-          "cpuUsage": {
-              "unit": "%",
-              "values": [
-                  {
-                      "value": 9,
-                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
-                  },
-                  {
-                      "value": 16,
-                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
-                  },
-                  {
-                      "value": 2,
-                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
-                  }
-              ]
-          },
-          "memoryUsage": {
-              "unit": "%",
-              "values": [
-                  {
-                      "value": 39,
-                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
-                  },
-                  {
-                      "value": 39,
-                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
-                  },
-                  {
-                      "value": 49,
-                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
-                  }
-              ]
-          },
-          "timestamp": 1538471993
-        },
-        {
-          "deviceId": "7dc73055-2ad9-4fdc-96d6-c9d18582ce01",
-          "dataSource": "systemTag",
-          "messageTimeStamp": "2018-10-01T08:25:35.4222994+00:00",
-          "cpuUsage": {
-              "unit": "%",
-              "values": [
-                  {
-                      "value": 9,
-                      "updateTimestamp": "2018-10-01T08:25:31.422Z"
-                  },
-                  {
-                      "value": 16,
-                      "updateTimestamp": "2018-10-01T08:25:33.422Z"
-                  },
-                  {
-                      "value": 2,
-                      "updateTimestamp": "2018-10-01T08:25:35.422Z"
-                  }
-              ]
-          },
-          "timestamp": 1538471994
-        }
-      ]  
+    
+      

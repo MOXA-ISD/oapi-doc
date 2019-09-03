@@ -5,13 +5,16 @@ tags:
 - $ref: "./login.yaml#/tags"
 - $ref: "./role.yaml#/tags"
 - $ref: "./user.yaml#/tags"
+- $ref: "./permission.yaml#/tags"
 
 paths:
 - $ref: "./login.yaml#/paths"
 - $ref: "./role.yaml#/paths"
 - $ref: "./user.yaml#/paths"
+- $ref: "./permission.yaml#/paths"
 
 definitions:
 - $ref: "./login.yaml#/definitions"
 - $ref: "./role.yaml#/definitions"
 - $ref: "./user.yaml#/definitions"
+- $ref: "./permission.yaml#/definitions"

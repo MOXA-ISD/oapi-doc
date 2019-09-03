@@ -25,21 +25,15 @@ securityDefinitions:
 
 tags:
   - $ref: './user/index.yaml#/tags'
-  - $ref: './cert/index.yaml#/tags'
-  - $ref: './tenant/index.yaml#/tags'
-  - $ref: './offer/index.yaml#/tags'
-  - $ref: './permission/index.yaml#/tags'
+  - $ref: './project/index.yaml#/tags'
+  - $ref: './device/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
-  - $ref: './cert/index.yaml#/paths'
-  - $ref: './tenant/index.yaml#/paths'
-  - $ref: './offer/index.yaml#/paths'
-  - $ref: './permission/index.yaml#/paths'
+  - $ref: './project/index.yaml#/paths'
+  - $ref: './device/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
-  - $ref: './cert/index.yaml#/definitions'
-  - $ref: './tenant/index.yaml#/definitions'
-  - $ref: './offer/index.yaml#/definitions'
-  - $ref: './permission/index.yaml#/definitions'
+  - $ref: './project/index.yaml#/definitions'
+  - $ref: './device/index.yaml#/definitions'

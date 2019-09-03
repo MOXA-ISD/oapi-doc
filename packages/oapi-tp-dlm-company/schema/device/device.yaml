@@ -327,7 +327,7 @@ definitions:
   Device:
     type: object
     properties:
-      tenantId:
+      projectId:
         type: string
         description: Unique identifier representing a specific tenant.
       deviceId:
@@ -555,7 +555,7 @@ externalDocs:
   x-mocks:
     Device:
       {
-        "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "deviceName": "moxa",
         "modelName": "UC-8112-LX-CG",
@@ -643,7 +643,7 @@ externalDocs:
         "data":
           [
             {
-              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa1",
               "modelName": "UC-8112-LX-CG",
@@ -720,7 +720,7 @@ externalDocs:
               "connectionAt": "2019-02-26T14:10:33:000Z"
             },
             {
-              "tenantId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+              "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "deviceName": "moxa2",
               "modelName": "UC-8112-LX-CG",

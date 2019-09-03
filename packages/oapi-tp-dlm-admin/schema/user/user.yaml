@@ -380,16 +380,16 @@ definitions:
       phone:
         type: string
         description: Phone of user.
-      enabled:
+      enable:
         type: boolean
         description: Enable Status of user.
       data:
         type: object
         description: Metadata of user.
-      loginAt:
+      loginedAt:
         type: string
         description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      passwordExpireAt:
+      passwordExpiredAt:
         type: string
         description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
   Avatar:
@@ -416,7 +416,7 @@ definitions:
       data:
         type: object
         description: Metadata of invitation.
-      expireAt:
+      expiredAt:
         type: string
         description: Expire date of invitation.
       createdAt:
@@ -541,8 +541,8 @@ externalDocs:
         "enabled": true,
         "firstName": "Rick",
         "lastName": "Peng",
-        "loginAt": "",
-        "passwordExpireAt": "2019-01-22T07:51:26.214Z",
+        "loginedAt": "",
+        "passwordExpiredAt": "2019-01-22T07:51:26.214Z",
         "phone": "02-89191230",
         "updatedAt": "2019-03-08T08:44:13.425Z",
         "updater": "",
@@ -603,8 +603,8 @@ externalDocs:
             "enabled": true,
             "firstName": "Rick",
             "lastName": "Peng",
-            "loginAt": "",
-            "passwordExpireAt": "2019-01-22T07:51:26.214Z",
+            "loginedAt": "",
+            "passwordExpiredAt": "2019-01-22T07:51:26.214Z",
             "phone": "02-89191230",
             "updatedAt": "2019-03-08T08:44:13.425Z",
             "updater": "",
@@ -623,7 +623,7 @@ externalDocs:
         "email": "22222@moxa.com",
         "status": "Inviting",
         "data": {},
-        "expireAt": "2019-02-24T08:41:29.773480Z",
+        "expiredAt": "2019-02-24T08:41:29.773480Z",
         "createdAt": "2019-02-17T08:41:29.773480Z",
         "updatedAt": "2019-02-17T08:41:29.773480Z"
       }
@@ -634,7 +634,7 @@ externalDocs:
             "createdAt": "2019-03-14T10:04:53.034540Z",
             "data": {},
             "email": "201903141802@moxa.com",
-            "expireAt": "2019-03-21T10:04:53.034540Z",
+            "expiredAt": "2019-03-21T10:04:53.034540Z",
             "inviteId": "9a9812d8-86c9-4a71-aaf9-7103e67c2148",
             "inviter": "Cain Chen",
             "status": "inviting",
@@ -644,7 +644,7 @@ externalDocs:
             "createdAt": "2019-03-14T10:04:53.034540Z",
             "data": {},
             "email": "201903141803@moxa.com",
-            "expireAt": "2019-03-21T10:04:53.034540Z",
+            "expiredAt": "2019-03-21T10:04:53.034540Z",
             "inviteId": "d7109838-690d-487d-8f9f-98ad70c2de72",
             "inviter": "Cain Chen",
             "status": "inviting",

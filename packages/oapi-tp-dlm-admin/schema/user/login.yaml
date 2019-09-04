@@ -61,76 +61,6 @@ definitions:
         type: string
         description: Granted authentication token.
 
-  Role:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: Unique identifier representing a specific user.
-      name:
-        type: string
-        description: Name of role.
-      description:
-        type: string
-        description: Description of role.
-      admin:
-        type: boolean
-        description: Admin role.
-
-  User:
-    type: object
-    properties:
-      partnerId:
-        type: string
-        description: Unique identifier representing a specific partner.
-      userId:
-        type: string
-        description: Unique identifier representing a specific user.
-      displayName:
-        type: string
-        description: Username of user.
-      firstName:
-        type: string
-        description: First name of user.
-      lastName:
-        type: string
-        description: Last name of user.
-      avatar:
-        type: string
-        description: Avatar of user.
-      email:
-        type: string
-        description: Email of user.
-      company:
-        type: string
-        description: Company of user.
-      department:
-        type: string
-        description: Department of user.
-      employeeId:
-        type: string
-        description: Employee Id of user.
-      phone:
-        type: string
-        description: Phone of user.
-      status:
-        type: string
-        description: Enable Status of user.
-      data:
-        type: object
-        description: Metadata of user.
-      loginedAt:
-        type: string
-        description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      passwordExpiredAt:
-        type: string
-        description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      role:
-        type: array
-        description: List of role which contains the user.
-        items:
-          '$ref': '#/definitions/Role'
-
 externalDocs:
   url: 'https://#'
   x-mocks:
@@ -138,24 +68,15 @@ externalDocs:
       {
         user:
           {
-            "avatar": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d-20190418113136220103.jpg",
-            "company": "moxa",
-            "createdAt": "2019-01-22T08:02:49.089379Z",
-            "creator": "Cain Chen",
-            "data": {},
-            "department": "",
-            "displayName": "Cain Chen",
-            "email": "cainhc.chen@moxa.com",
-            "employeeId": "20180003",
-            "enabled": true,
-            "firstName": "Cain",
-            "lastName": "Chen",
-            "loginedAt": "2019-04-18T07:40:39.074805Z",
-            "passwordExpiredAt": "2019-04-17T08:56:28.014865Z",
-            "phone": "02-89191230#7262",
-            "updatedAt": "2019-04-18T03:31:35.501798Z",
-            "updater": "",
-            "userId": "7dc93587-5444-48bf-a196-da811c39959d"
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+            "username": "Owen",
+            "createdAt": "2019-03-08T08:44:13.425Z",
+            "email": "rick.peng@moxa.com",
+            "status": "enable",
+            "createdAt": "2019-03-08T08:44:13.425Z",
+            "updatedAt": "2019-03-08T08:44:13.425Z",
+            "loginedAt": "",
+            "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
           },
         token: "USER_TOKEN"
       }

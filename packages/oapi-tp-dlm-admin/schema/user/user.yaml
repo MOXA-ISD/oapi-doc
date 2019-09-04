@@ -21,9 +21,9 @@ paths:
       tags:
         - user
       parameters:
-        - name: name
+        - name: username
           in: query
-          description: Filter the user list by user name
+          description: Filter the user list by user username
           required: false
           type: string
         - name: email
@@ -31,11 +31,14 @@ paths:
           description: Filter the user list by email
           required: false
           type: string
-        - name: enabled
+        - name: status
           in: query
           description: Filter the user list by enabled
           required: false
-          type: boolean
+          type: string
+          enum:
+          - enable
+          - disable
         - name: order
           in: query
           description: The user list order by some keyword.
@@ -120,103 +123,6 @@ paths:
       responses:
         204:
           description: success
-
-  /users/{userId}/enable:
-    parameters:
-      - name: userId
-        in: path
-        description: User unique identifier
-        required: true
-        type: string
-    put:
-      description: Enable all users
-      tags:
-        - user
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/User'
-            example:
-              $ref: '#/externalDocs/x-mocks/User'
-      responses:
-        200:
-          description: success
-
-  /users/{userId}/disable:
-    parameters:
-      - name: userId
-        in: path
-        description: User unique identifier
-        required: true
-        type: string
-    put:
-      description: Disable all users ( suspend )
-      tags:
-        - user
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/User'
-            example:
-              $ref: '#/externalDocs/x-mocks/User'
-      responses:
-        200:
-          description: success
-
-  /users/{userId}/revoke:
-    parameters:
-      - name: userId
-        in: path
-        description: User unique identifier
-        required: true
-        type: string
-    put:
-      description: Revoke user invitation
-      tags:
-        - user
-      responses:
-        200:
-          description: An Object of the invitee
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Invitee'
-            example:
-              $ref: '#/externalDocs/x-mocks/Invitee'
-
-  /users/avatar:
-    put:
-      description: Upload an image file for logged in user
-      tags:
-        - user
-      consumes:
-        - multipart/form-data
-      parameters:
-        - name: image
-          in: formData
-          description: use form-data to upload a image. key = image, value = {image file}
-          required: true
-          type: file
-      responses:
-        200:
-          description: Upload an image file
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Avatar'
-            example:
-              $ref: '#/externalDocs/x-mocks/Avatar'
-
   /users/changePassword:
     put:
       description: Change user password
@@ -238,7 +144,6 @@ paths:
               $ref: '#/definitions/User'
             example:
               $ref: '#/externalDocs/x-mocks/User'
-
   /users/forgetPassword:
     post:
       description: Send an email to user for reset password
@@ -254,7 +159,6 @@ paths:
       responses:
         200:
           description: success
-
   /users/exist/{email}:
     parameters:
       - name: email
@@ -275,7 +179,6 @@ paths:
               $ref: '#/definitions/UserExist'
             example:
               $ref: '#/externalDocs/x-mocks/UserExist'
-
   /users/invite:
     post:
       description: Invite users to join this tenant
@@ -299,7 +202,6 @@ paths:
               $ref: '#/definitions/Invitee'
             example:
               $ref: '#/externalDocs/x-mocks/InviteeList'
-
   /users/invite/{inviteId}:
     parameters:
       - name: inviteId
@@ -342,62 +244,58 @@ paths:
               $ref: '#/definitions/User'
             example:
               $ref: '#/externalDocs/x-mocks/User'
-
+  /users/{userId}/revoke:
+    parameters:
+      - name: userId
+        in: path
+        description: User unique identifier
+        required: true
+        type: string
+    put:
+      description: Revoke user invitation
+      tags:
+        - user
+      responses:
+        200:
+          description: An Object of the invitee
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Invitee'
+            example:
+              $ref: '#/externalDocs/x-mocks/Invitee'
 definitions:
   User:
     type: object
     properties:
-      tenantId:
-        type: string
-        description: Unique identifier representing a specific tenant.
       userId:
         type: string
         description: Unique identifier representing a specific user.
-      displayName:
+      username:
         type: string
         description: Username of user.
-      firstName:
-        type: string
-        description: First name of user.
-      lastName:
-        type: string
-        description: Last name of user.
-      avatar:
-        type: string
-        description: Avatar of user.
       email:
         type: string
         description: Email of user.
-      company:
+      status:
         type: string
-        description: Company of user.
-      department:
+        enum:
+          - enable
+          - disable
+        description: Status of user.
+      createdAt:
         type: string
-        description: Department of user.
-      employeeId:
+        description: User created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      updatedAt:
         type: string
-        description: Employee Id of user.
-      phone:
-        type: string
-        description: Phone of user.
-      enable:
-        type: boolean
-        description: Enable Status of user.
-      data:
-        type: object
-        description: Metadata of user.
+        description: User last updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
       loginedAt:
         type: string
         description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       passwordExpiredAt:
         type: string
         description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-  Avatar:
-    type: object
-    properties:
-      exist:
-        type: string
-        description: Return an absolute path in azure storage
+
   Invitee:
     type: object
     properties:
@@ -456,47 +354,26 @@ definitions:
   UserUpdate:
     type: object
     properties:
-      displayName:
+      username:
         type: string
         description: Display name of user.
         maxLength: 30
-      firstName:
+      email:
         type: string
-        description: First name of user.
-        maxLength: 255
-      lastName:
-        type: string
-        description: Last name of user.
-        maxLength: 255
-      avatar:
-        type: string
-        description: Avatar of user.
-        maxLength: 2083
-      company:
-        type: string
-        description: Company of user.
-        maxLength: 50
-      department:
-        type: string
-        description: Department of user.
-        maxLength: 50
-      employeeId:
-        type: string
-        description: Employee id of user.
-        maxLength: 8
-      phone:
-        type: string
-        description: Phone of user.
-        maxLength: 50
-      data:
-        type: object
-        description: metadata of user.
+        description: Email of user.
+        maxLength: 254
       oldPassword:
         type: string
         description: Old password of user login.
       newPassword:
         type: string
         description: New password of user login.
+      status:
+        type: string
+        enum:
+          - enable
+          - disable
+        description: Status of user.
 
   UserInvite:
     type: object
@@ -529,24 +406,15 @@ externalDocs:
   x-mocks:
     User:
       {
-        "avatar": "",
-        "company": "moxa",
+        "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+        "username": "Owen",
         "createdAt": "2019-03-08T08:44:13.425Z",
-        "creator": "Cain Chen",
-        "data": {},
-        "department": "iss",
-        "displayName": "Rick Peng",
         "email": "rick.peng@moxa.com",
-        "employeeId": "20040003",
-        "enabled": true,
-        "firstName": "Rick",
-        "lastName": "Peng",
-        "loginedAt": "",
-        "passwordExpiredAt": "2019-01-22T07:51:26.214Z",
-        "phone": "02-89191230",
+        "status": "enable",
+        "createdAt": "2019-03-08T08:44:13.425Z",
         "updatedAt": "2019-03-08T08:44:13.425Z",
-        "updater": "",
-        "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+        "loginedAt": "",
+        "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
       }
     UserExist:
       { "exist": true }
@@ -565,15 +433,9 @@ externalDocs:
       }
     UserUpdate:
       {
-        "avatar": "https://www.moxa.com/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg",
-        "company": "moxa",
-        "department": "iss",
-        "displayName": "Cain Chen",
+        "username": "Cain Chen",
         "email": "cainhc.chen@moxa.com",
-        "employeeId": "20180003",
-        "firstName": "Cain",
-        "lastName": "Chen",
-        "phone": "02-89191230#7262",
+        "status": "disable",
         "oldPassword":"123456",
         "newPassword":"moxamoxa"
       }
@@ -591,38 +453,26 @@ externalDocs:
         "count": 8,
         "data": [
           {
-            "avatar": "",
-            "company": "moxa",
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+            "username": "Owen",
             "createdAt": "2019-03-08T08:44:13.425Z",
-            "creator": "Cain Chen",
-            "data": {},
-            "department": "iss",
-            "displayName": "Rick Peng",
             "email": "rick.peng@moxa.com",
-            "employeeId": "20040003",
-            "enabled": true,
-            "firstName": "Rick",
-            "lastName": "Peng",
-            "loginedAt": "",
-            "passwordExpiredAt": "2019-01-22T07:51:26.214Z",
-            "phone": "02-89191230",
+            "status": "enable",
+            "createdAt": "2019-03-08T08:44:13.425Z",
             "updatedAt": "2019-03-08T08:44:13.425Z",
-            "updater": "",
-            "userId": "a1be69eb-258e-4c66-b07b-583474e57305"
+            "loginedAt": "",
+            "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
           }
         ],
         "limit": 1,
         "offset": 0
       }
-    Avatar:
-      { "path": "https://thingspro9dev4system.blob.core.windows.net/images/avatar/user/7dc93587-5444-48bf-a196-da811c39959d.jpg" }
     Invitee:
       {
         "inviteId": "762e7efb-8b49-4855-89a3-30f3adabf580",
         "inviter": "Cain Chen",
         "email": "22222@moxa.com",
         "status": "Inviting",
-        "data": {},
         "expiredAt": "2019-02-24T08:41:29.773480Z",
         "createdAt": "2019-02-17T08:41:29.773480Z",
         "updatedAt": "2019-02-17T08:41:29.773480Z"
@@ -632,7 +482,6 @@ externalDocs:
         "data": [
           {
             "createdAt": "2019-03-14T10:04:53.034540Z",
-            "data": {},
             "email": "201903141802@moxa.com",
             "expiredAt": "2019-03-21T10:04:53.034540Z",
             "inviteId": "9a9812d8-86c9-4a71-aaf9-7103e67c2148",
@@ -642,7 +491,6 @@ externalDocs:
           },
           {
             "createdAt": "2019-03-14T10:04:53.034540Z",
-            "data": {},
             "email": "201903141803@moxa.com",
             "expiredAt": "2019-03-21T10:04:53.034540Z",
             "inviteId": "d7109838-690d-487d-8f9f-98ad70c2de72",
@@ -656,6 +504,6 @@ externalDocs:
       {
         "inviteId": "f7e78dbe-d04e-4ad9-a2a0-39dbf29e1ed5",
         "email": "201903181112@moxa.com",
-        "displayName": "Test 201903181112",
+        "username": "Test 201903181112",
         "password": "moxamoxa"
       }

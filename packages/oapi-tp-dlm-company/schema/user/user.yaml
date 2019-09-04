@@ -21,9 +21,9 @@ paths:
       tags:
         - user
       parameters:
-        - name: name
+        - name: username
           in: query
-          description: Filter the user list by user name
+          description: Filter the user list by user username
           required: false
           type: string
         - name: email
@@ -45,7 +45,7 @@ paths:
           required: false
           type: string
           enum:
-          - name
+          - username
           - email
           - status
         - name: sort
@@ -329,28 +329,6 @@ definitions:
       value:
         type: integer
         description: Permission value.
-  UserCreate:
-    type: object
-    required:
-    - email
-    - password
-    - roleId
-    properties:
-      username:
-        type: string
-        description: Username of user.
-        maxLength: 30
-      email:
-        type: string
-        description: Email of user.
-        maxLength: 254
-      password:
-        type: string
-        description: Password of user.
-        maxLength: 100
-      roleId:
-        type: integer
-        description: Role id.
   UserUpdate:
     type: object
     properties:
@@ -480,13 +458,6 @@ externalDocs:
         "updatedAt": "2019-03-08T08:44:13.425Z",
         "loginedAt": "",  
         "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
-      }
-    UserCreate:
-      {
-        "email":"ediejy.lin@moxa.com",
-        "username":"Edie Lin",
-        "password":"moxamoxa",
-        "roleId": 4
       }
     UserUpdate:
       {

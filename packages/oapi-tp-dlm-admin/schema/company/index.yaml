@@ -1,0 +1,11 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./company.yaml#/tags"
+
+paths:
+- $ref: "./company.yaml#/paths"
+
+definitions:
+- $ref: "./company.yaml#/definitions"

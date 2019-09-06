@@ -2,10 +2,10 @@
 swagger: '2.0'
 
 tags:
-- $ref: "./tenant.yaml#/tags"
+- $ref: "./project.yaml#/tags"
 
 paths:
-- $ref: "./tenant.yaml#/paths"
+- $ref: "./project.yaml#/paths"
 
 definitions:
-- $ref: "./tenant.yaml#/definitions"
+- $ref: "./project.yaml#/definitions"

@@ -20,7 +20,7 @@ paths:
       tags:
         - project
       parameters:
-        - name: projectName
+        - name: name
           in: query
           description: Filter the project list by project name
           required: false
@@ -31,9 +31,8 @@ paths:
           required: false
           type: string  
           enum:
-          - waiting
-          - approved
-          - declined
+          - enable
+          - disable
           - removed
         - name: order
           in: query
@@ -41,7 +40,7 @@ paths:
           required: false
           type: string
           enum:
-          - projectName
+          - name
           - status
         - name: sort
           in: query
@@ -160,15 +159,14 @@ definitions:
       projectId:
         type: string
         description: Unique identifier representing a specific project.
-      projectName:
+      name:
         type: string
         description: Project name of project.
       status:
         type: string
         enum:
-          - waiting
-          - approved
-          - declined
+          - enable
+          - disable
           - removed
         description: Status of project.
       activatedAt:
@@ -183,20 +181,20 @@ definitions:
   ProjectCreate:
     type: object
     properties:
-      projectName:
+      name:
         type: string
         description: Project name of project.
   ProjectUpdate:
     type: object
     properties:
-      projectName:
+      name:
         type: string
         description: Project name of project.
       status:
         type: string
         enum:
-          - approved
-          - declined
+          - enable
+          - disable
           - removed
         description: Status of project.
 
@@ -206,8 +204,8 @@ externalDocs:
     Project:
       {
         "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-        "projectName": "MOXA",
-        "status": "approved",
+        "name": "MOXA",
+        "status": "enable",
         "activatedAt": "",
         "createdAt": "2019-03-08T07:18:27:565Z",
         "updatedAt": "2019-03-08T07:18:27:565Z"
@@ -218,8 +216,8 @@ externalDocs:
         "data": [
           {
             "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-            "projectName": "MOXA",
-            "status": "approved",
+            "name": "MOXA",
+            "status": "enable",
             "activatedAt": "",
             "createdAt": "2019-03-08T07:18:27:565Z",
             "updatedAt": "2019-03-08T07:18:27:565Z"
@@ -230,12 +228,12 @@ externalDocs:
       }
     ProjectCreate:
       {
-        "projectName": "MOXA"
+        "name": "MOXA"
       }
     ProjectUpdate:
       {
-        "projectName": "MOXA",
-        "status": "approved"
+        "name": "MOXA",
+        "status": "enable"
       }
     ProjectUserList:
       {

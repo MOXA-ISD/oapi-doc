@@ -24,16 +24,10 @@ securityDefinitions:
     description: DLM RESTful API token, The token will create when user login.
 
 tags:
-  - $ref: './customer/index.yaml#/tags'  
   - $ref: './device/index.yaml#/tags'
-  - $ref: './tag/index.yaml#/tags'
 
 paths:
-  - $ref: './customer/index.yaml#/paths'
   - $ref: './device/index.yaml#/paths'
-  - $ref: './tag/index.yaml#/paths'
 
 definitions:
-  - $ref: './customer/index.yaml#/definitions'
   - $ref: './device/index.yaml#/definitions'
-  - $ref: './tag/index.yaml#/definitions'

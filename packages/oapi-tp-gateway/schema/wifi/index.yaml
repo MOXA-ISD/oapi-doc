@@ -94,54 +94,7 @@ paths:
         '200':
           description: An WiFi interface settings.
           schema:
-            type: object
-            items:
-              '$ref': '#/definitions/WiFiIface'
-            example:
-              id: 1
-              name: wlan0
-              product: WPEQ-353ACNI
-              capabilities:
-                - client
-                - ap
-              mode: client
-              enable: true
-              status: true
-              client:
-                enableDhcp: true
-                networks:
-                  - ssid: test-none
-                    security: none
-                  - ssid: test-wpa
-                    security: wpa
-                    priority: 5
-                  - ssid: test-eap
-                    security: eap
-                    username: moxa
-                    priority: 10
-                  - ssid: test-wep
-                    security: wep
-                    priority: 1
-                signal: 100
-                ip: 111.70.146.125
-                netmask: 255.255.255.252
-                gateway: 111.70.146.126
-                dns:
-                  - 168.95.1.1
-                  - 168.95.192.1
-                usage:
-                  txkbyte: 40023
-                  rxkbyte: 3493
-                checkalive:
-                  enable: true
-                  targetHost: 8.8.8.8
-                  intervalSec: 60
-              ap:
-                mode: bg
-                ssid: moxa-test
-                channel: 11
-                security:
-                  mode: none
+            '$ref': '#/definitions/WiFiIface'
       tags:
         - wifi
       security:
@@ -160,54 +113,7 @@ paths:
         '200':
           description: OK
           schema:
-            type: object
-            item:
-              '$ref': '#/definitions/WiFiIface'
-            example:
-              id: 1
-              name: wlan0
-              product: WPEQ-353ACNI
-              capabilities:
-                - client
-                - ap
-              mode: client
-              enable: true
-              status: true
-              client:
-                enableDhcp: true
-                networks:
-                  - ssid: test-none
-                    security: none
-                  - ssid: test-wpa
-                    security: wpa
-                    priority: 5
-                  - ssid: test-eap
-                    security: eap
-                    username: moxa
-                    priority: 10
-                  - ssid: test-wep
-                    security: wep
-                    priority: 1
-                signal: 100
-                ip: 111.70.146.125
-                netmask: 255.255.255.252
-                gateway: 111.70.146.126
-                dns:
-                  - 168.95.1.1
-                  - 168.95.192.1
-                usage:
-                  txkbyte: 40023
-                  rxkbyte: 3493
-                checkalive:
-                  enable: true
-                  targetHost: 8.8.8.8
-                  intervalSec: 60
-              ap:
-                mode: bg
-                ssid: moxa-test
-                channel: 11
-                security:
-                  mode: none
+            '$ref': '#/definitions/WiFiIface'
       tags:
         - wifi
       security:
@@ -232,10 +138,6 @@ paths:
           description: OK
           schema:
             '$ref': '#/definitions/WiFiIfaceBlacklist'
-            example:
-              id: 1
-              mac: 01:23:45:67:89:0a
-              description: test1
       tags:
         - wifi
       security:
@@ -249,10 +151,6 @@ paths:
             type: array
             items:
               '$ref': '#/definitions/WiFiIfaceBlacklist'
-            example:
-              - id: 1
-                mac: 01:23:45:67:89:0a
-                description: test1
       tags:
         - wifi
       security:
@@ -276,10 +174,6 @@ paths:
             type: array
             items:
               '$ref': '#/definitions/WiFiIfaceBlacklist'
-            example:
-              - id: 1
-                mac: 01:23:45:67:89:0a
-                description: test1
       tags:
         - wifi
       security:
@@ -321,10 +215,6 @@ paths:
           description: 'A MAC item in a blacklist of an indicated WiFi AP interface.'
           schema:
             '$ref': '#/definitions/WiFiIfaceBlacklist'
-            example:
-              id: 1
-              mac: 01:23:45:67:89:0a
-              description: test1
       tags:
         - wifi
       security:
@@ -344,10 +234,6 @@ paths:
           description: OK
           schema:
             '$ref': '#/definitions/WiFiIfaceBlacklist'
-            example:
-              id: 1
-              mac: 01:23:45:67:89:0a
-              description: test1
       tags:
         - wifi
       security:
@@ -369,6 +255,41 @@ paths:
       security:
         - mx-api-token: []
   '/network/wifi/{id}/scan-networks':
+    parameters:
+      - name: id
+        in: path
+        description: A WiFi interface ID
+        type: integer
+        required: true
+    get:
+      description: 'Get a list of WiFi stations arounded.'
+      responses:
+        '200':
+          description: 'A list of WiFi stations.'
+          schema:
+            type: array
+            items:
+              '$ref': '#/definitions/WiFiAP'
+            example:
+              - ssid: test
+                bssid: 01:23:45:67:89:0a
+                signal: -43
+                frequency: 2462
+                security: wpa2
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+    post:
+      description: 'Scan WiFi stations arounded.'
+      responses:
+        '200':
+          description: 'success'
+      tags:
+        - wifi
+      security:
+        - mx-api-token: []
+  '/network/wifi/{id}/list-networks':
     parameters:
       - name: id
         in: path
@@ -656,6 +577,10 @@ definitions:
       description:
         type: string
         description: Description of the MAC address.
+    example:
+      id: 1
+      mac: 01:23:45:67:89:0a
+      description: test1
   WiFiAP:
     title: WiFi AP Information
     required:

@@ -9,6 +9,4 @@ env:
   - PACKAGE=gateway
   - PACKAGE=server
   - PACKAGE=edge
-  - PACKAGE=tenant-portal
-  - PACKAGE=admin-portal
 script: yarn lint $PACKAGE

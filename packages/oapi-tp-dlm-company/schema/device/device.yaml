@@ -38,7 +38,7 @@ paths:
           required: false
           type: string
           enum:
-          - unregistered
+          - enrolled
           - registered
           - online
           - offline
@@ -222,7 +222,7 @@ definitions:
     properties:
       projectId:
         type: string
-        description: Unique identifier representing a specific tenant.
+        description: Unique identifier representing a specific project.
       deviceId:
         type: string
         description: Unique identifier representing a specific device.
@@ -231,34 +231,24 @@ definitions:
         description: Model name of device.
       deviceType:
         type: string
+        enum:
+        - gateway
         description: Type of device.
       mac:
         type: string
         description: Mac address of device.
-      serialNumber:
+      sn:
         type: string
         description: Serial number of device.
-      imageUrl:
-        type: string
-        description: Image URL of device.  
-      logoUrl:
-        type: string
-        description: Logo URL of device.  
-      allowConnection:
-        type: boolean
-        description: The device can connect to service or not.
-      groupList:
-        type: array
-        description: Array of group list object.
-        items:
-          type: object
-      connectionStatus:
+      status:
         type: string
         enum:
         - online
         - offline
         - registered
-        description: Connection status of device.
+        - enrolled
+        - retired
+        description: status of device.    
       connectedAt:
         type: string
         description: Device last connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
@@ -285,6 +275,9 @@ definitions:
         - offline
         - unknown
         description: Connection status of device.
+      reportedProperties:
+        type: object
+        description: Reported properties of device.
       lastupdatedat:
         type: string
         description: Device last updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
@@ -410,9 +403,11 @@ externalDocs:
         "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "mac": "00-0C-29-70-D2-EC",
-        "sn": "",
+        "sn": "123456",
         "deviceName": "moxa",
         "modelName": "UC-8112-LX-CG",
+        "deviceName": "gateway",
+        "allowConnection": True,
         "status": "online",
         "reportedProperties": {    
           "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
@@ -433,38 +428,6 @@ externalDocs:
             }
           ]    
         },
-        "desiredProperties": { 
-          "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-          "desiredProperties": [        
-            {
-              "id": 1,
-              "type": "general",
-              "name": "deviceName",
-              "description": "Device Name",
-              "value": "Demo Device 01"
-            },
-            {
-              "id": 4,
-              "type": "network",
-              "name": "eth0",
-              "description": "Ethernet 0",
-              "value": [
-                {
-                  "id": 1,
-                  "name": "ipAddress",
-                  "description": "IP Address",
-                  "value": "192.168.3.21"
-                },
-                {
-                  "id": 2,
-                  "name": "mask",
-                  "description": "Subnet Mask",
-                  "value": "255.255.255.0"
-                }
-              ]
-            }          
-          ]
-        },
         "connectedAt": "2019-02-26T14:10:33:000Z"
       } 
     DeviceList:
@@ -478,9 +441,11 @@ externalDocs:
               "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "mac": "00-0C-29-70-D2-EC",
-              "sn": "",
+              "sn": "123456",
               "deviceName": "moxa",
               "modelName": "UC-8112-LX-CG",
+              "deviceName": "gateway",
+              "allowConnection": True,
               "status": "online",
               "reportedProperties": {    
                 "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
@@ -501,73 +466,9 @@ externalDocs:
                   }
                 ]    
               },
-              "desiredProperties": { 
-                "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-                "desiredProperties": [        
-                  {
-                    "id": 1,
-                    "type": "general",
-                    "name": "deviceName",
-                    "description": "Device Name",
-                    "value": "Demo Device 01"
-                  },
-                  {
-                    "id": 4,
-                    "type": "network",
-                    "name": "eth0",
-                    "description": "Ethernet 0",
-                    "value": [
-                      {
-                        "id": 1,
-                        "name": "ipAddress",
-                        "description": "IP Address",
-                        "value": "192.168.3.21"
-                      },
-                      {
-                        "id": 2,
-                        "name": "mask",
-                        "description": "Subnet Mask",
-                        "value": "255.255.255.0"
-                      }
-                    ]
-                  }          
-                ]
-              },
               "connectedAt": "2019-02-26T14:10:33:000Z"
             }
           ]
-      }
-    DevicePocList:
-      {
-        "count": 3,
-        "offset": 0,
-        "limit": 100,
-        "data": [
-          {
-            "deviceId": "a960aa2b-67ab-4bd3-a85e-a006aeb7fa0b",
-            "deviceName": "UC-8112-LX",
-            "mac": "81-CF-1C-14-3E-4C",
-            "modelName": "UC-8112-LX",
-            "connectionStatus": "online",
-            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"
-          },
-          {
-            "deviceId": "91cc56a9-1159-4913-b5f2-ac482cd68ee6",
-            "deviceName": "UC-8112-LX",
-            "mac": "67-88-DE-3C-F1-54",
-            "modelName": "UC-8112-LX",
-            "connectionStatus": "online",
-            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
-          },
-          {
-            "deviceId": "47c03400-3e45-466d-abd4-4e01199cd67a",
-            "deviceName": "UC-8112-LX",
-            "mac": "DF-FE-F1-9E-FF-76",
-            "modelName": "UC-8112-LX",
-            "connectionStatus": "online",
-            "lastUpdatedAt": "2018-08-12T20:17:46.384Z"            
-          }
-        ]
       }
     ReportedProperties:
       {    

@@ -1,0 +1,119 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Company Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: project
+    description: Handles model profiles data
+
+paths:
+  /modelProfiles/{modelProfileId}/modelProfile:
+    parameters:
+      - name: modelProfileId
+        in: path
+        description: modelProfile unique identifier
+        required: true
+        type: string
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - project
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: Array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
+              $ref: '#/externalDocs/x-mocks/ModelProfileList'
+    post:
+      description: Return updated modelProfile data with given ID
+      tags:
+        - project
+      parameters:
+        - name: body
+          in: body
+          description: Information of modelProfile
+          required: true
+          schema:
+            $ref: '#/definitions/ModelProfile'
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+    put:
+      description: Return updated modelProfile data with given ID
+      tags:
+        - project
+      parameters:
+        - name: body
+          in: body
+          description: Information of modelProfile
+          required: true
+          schema:
+            $ref: '#/definitions/ModelProfile'
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+
+definitions:
+  ModelProfile:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Unique identifier representing a specific model name.
+      profile:
+        type: object
+        description: Model Profile.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    ModelProfile:
+      {
+        "modelName": "UC-8112",
+        "profile": {
+          "system_tag" : "",
+          "system_properties" : "",
+          "direct_method" : "",  
+          "device_image" : ""
+        }
+      }
+    ModelProfileList:
+      {
+        "count": 1,
+        "data": [
+          {
+            "modelName": "UC-8112",
+            "profile": {
+              "system_tag" : "",
+              "system_properties" : "",
+              "direct_method" : "",  
+              "device_image" : ""
+            }
+          }
+        ]
+      }
+    
+
+    

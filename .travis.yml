@@ -8,5 +8,4 @@ cache:
 env:
   - PACKAGE=gateway
   - PACKAGE=server
-  - PACKAGE=edge
 script: yarn lint $PACKAGE

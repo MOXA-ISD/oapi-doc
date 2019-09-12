@@ -42,7 +42,7 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/ModbusReadRsp'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/ModbusReadEquTagRspExample'
@@ -68,7 +68,7 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/ModbusWriteRsp'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/ModbusWriteEquTagRspExample'

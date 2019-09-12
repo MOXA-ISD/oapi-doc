@@ -7,7 +7,7 @@ info:
     Welcome to the ThingsPro Edge RESTful API reference. This is a live document of how you can use ThingsPro Edge APIs.
     The ThingsPro Edge API is organized around the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) methodology, and it uses resource-oriented URLs, and common HTTP response codes to indicate API errors.
 
-basePath: '/api/v1'
+basePath: /api/v1
 servers:
   - url: https://127.0.0.1/api/v1
   - url: http://core-appman:8082/api/v1

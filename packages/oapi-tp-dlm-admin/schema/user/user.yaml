@@ -283,6 +283,11 @@ definitions:
           - enable
           - disable
         description: Status of user.
+      role:
+        type: array
+        description: List of role which contains the user.
+        items:
+          '$ref': '#/definitions/Role'
       createdAt:
         type: string
         description: User created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
@@ -374,7 +379,9 @@ definitions:
           - enable
           - disable
         description: Status of user.
-
+      roleId:
+        type: integer
+        description: Role id.
   UserInvite:
     type: object
     properties:
@@ -382,6 +389,9 @@ definitions:
         type: string
         description: Email of user.
         maxLength: 254
+      roleId:
+        type: integer
+        description: Role id.  
 
   UserRegister:
     type: object
@@ -411,6 +421,21 @@ externalDocs:
         "createdAt": "2019-03-08T08:44:13.425Z",
         "email": "rick.peng@moxa.com",
         "status": "enable",
+        "role": {
+            "roleId": 2,
+            "name": "Administrator",
+            "admin": true,
+            "permissions": [
+              {
+                "id": 1,
+                "value": 0
+              },
+              {
+                "id": 2,
+                "value": 0
+              }
+            ]
+        },
         "createdAt": "2019-03-08T08:44:13.425Z",
         "updatedAt": "2019-03-08T08:44:13.425Z",
         "loginedAt": "",
@@ -442,10 +467,12 @@ externalDocs:
     UserInvite:
       [
         {
-          "email":"13579@moxa.com"
+          "email":"13579@moxa.com",
+          "roleId": 3
         },
         {
-          "email":"24680@moxa.com"
+          "email":"24680@moxa.com",
+          "roleId": 3
         }
       ]
     UserList:
@@ -455,6 +482,21 @@ externalDocs:
           {
             "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
             "username": "Owen",
+             "role": {
+                "roleId": 2,
+                "name": "user",
+                "admin": false,
+                "permissions": [
+                  {
+                    "id": 1,
+                    "value": 0
+                  },
+                  {
+                    "id": 2,
+                    "value": 0
+                  }
+                ]
+            },
             "createdAt": "2019-03-08T08:44:13.425Z",
             "email": "rick.peng@moxa.com",
             "status": "enable",

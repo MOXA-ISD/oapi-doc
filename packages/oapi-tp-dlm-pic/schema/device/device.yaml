@@ -91,7 +91,7 @@ definitions:
       mac:
         type: string
         description: Device mac.
-      sn:
+      serialNumber:
         type: string
         description: Device serial number.
       projectId:
@@ -123,14 +123,14 @@ definitions:
     type: object
     required:
     - mac
-    - sn
+    - serialNumber
     - modelName
     description: Device connection data payload
     properties:
       mac:
         type: string
         description: Device mac.
-      sn:
+      serialNumber:
         type: string
         description: Device serial number.
       projectId:
@@ -194,13 +194,13 @@ definitions:
     type: object
     required:
     - mac
-    - sn
+    - serialNumber
     - modelName
     properties:
       mac:
         type: string
         description: Device mac.
-      sn:
+      serialNumber:
         type: string
         description: Device serial number.
       modelName:
@@ -239,7 +239,7 @@ externalDocs:
     RegisterReq:
       {
         "mac": "001122334455",
-        "sn": "12345678",
+        "serialNumber": "12345678",
         "modelName": "UC-8112",
         "projectId": "1234"
       }
@@ -269,7 +269,7 @@ externalDocs:
     EnrollReq:
       {
         "mac": "001122334455",
-        "sn": "12345678",
+        "serialNumber": "12345678",
         "modelName": "UC-8112",
         "projectId": "1234"
       }

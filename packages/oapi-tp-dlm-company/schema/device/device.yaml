@@ -237,7 +237,7 @@ definitions:
       mac:
         type: string
         description: Mac address of device.
-      sn:
+      serialNumber:
         type: string
         description: Serial number of device.
       status:
@@ -403,7 +403,7 @@ externalDocs:
         "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "mac": "00-0C-29-70-D2-EC",
-        "sn": "123456",
+        "serialNumber": "123456",
         "deviceName": "moxa",
         "modelName": "UC-8112-LX-CG",
         "deviceName": "gateway",
@@ -441,7 +441,7 @@ externalDocs:
               "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "mac": "00-0C-29-70-D2-EC",
-              "sn": "123456",
+              "serialNumber": "123456",
               "deviceName": "moxa",
               "modelName": "UC-8112-LX-CG",
               "deviceName": "gateway",

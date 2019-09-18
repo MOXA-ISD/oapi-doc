@@ -130,6 +130,34 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/Project'
 
+  /projects/{projectId}/enroll:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+    post:
+      description: Return enroll certificate and key
+      tags:
+        - project
+      parameters:
+        - name: body
+          in: body
+          description: Information of device
+          required: true
+          schema:
+            $ref: '#/definitions/EnrollReq'
+      responses:
+        200:
+          description: Response enroll certificate and key
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/EnrollRes'
+            example: 
+              $ref: '#/externalDocs/x-mocks/EnrollRes'
+
   /projects/{projectId}/users:
     parameters:
       - name: projectId
@@ -196,6 +224,35 @@ definitions:
           - disable
           - removed
         description: Status of project.
+  EnrollReq:
+    type: object
+    required:
+    - mac
+    - serialNumber
+    - modelName
+    description: Device connection data payload
+    properties:
+      mac:
+        type: string
+        description: Device mac.
+      serialNumber:
+        type: string
+        description: Device serial number.  
+      modelName:
+        type: string
+        description: Device model name. 
+  EnrollRes:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: Device id.
+      enrollPK:
+        type: string
+        description: Private key.
+      enrollCert:
+        type: string
+        description: Certificate.
 
 externalDocs:
   url: 'http://#'
@@ -233,6 +290,12 @@ externalDocs:
       {
         "name": "MOXA",
         "status": "enable"
+      }
+    EnrollRes:
+      {
+        "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "enrollPK": "moxa",
+        "enrollCert": "moxa"
       }
     ProjectUserList:
       {

@@ -16,11 +16,6 @@ tags:
 paths:
   /register:
     post:
-      parameters:
-      - name: body
-        in: body
-        schema:
-          $ref: '#/definitions/RegisterReq'
       description: Register device on PIC service and return IOT connection data
       tags:
         - device
@@ -119,26 +114,6 @@ definitions:
       connecteddAt:
         type: string
         description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-  RegisterReq:
-    type: object
-    required:
-    - mac
-    - serialNumber
-    - modelName
-    description: Device connection data payload
-    properties:
-      mac:
-        type: string
-        description: Device mac.
-      serialNumber:
-        type: string
-        description: Device serial number.
-      projectId:
-        type: string
-        description: project id.   
-      modelName:
-        type: string
-        description: Device model name. 
 
   RegisterRes:
     type: object
@@ -236,13 +211,6 @@ definitions:
 externalDocs:
   url: 'http://#'
   x-mocks:
-    RegisterReq:
-      {
-        "mac": "001122334455",
-        "serialNumber": "12345678",
-        "modelName": "UC-8112",
-        "projectId": "1234"
-      }
     RegisterRes:
       {
         "error": {

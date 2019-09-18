@@ -216,6 +216,20 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/DirectMethodList'
 
+  /models:
+    get:
+      description: Return all supports model list
+      tags:
+        - device
+      responses:
+        200:
+          description: An array of all supports model list
+          schema:
+            type: array
+            items:
+              type: string
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelList'
 definitions:
   Device:
     type: object
@@ -676,5 +690,9 @@ externalDocs:
           }
         ]
       }
+    ModelList:
+      [
+        "UC-8112-LX",
+        "UC-8112A-ME-T-LX"
+      ]
     
-      

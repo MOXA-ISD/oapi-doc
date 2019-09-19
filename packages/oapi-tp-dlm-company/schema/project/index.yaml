@@ -3,13 +3,13 @@ swagger: '2.0'
 
 tags:
 - $ref: "./project.yaml#/tags"
-- $ref: "./modelProfile.yaml#/tags"
+- $ref: "./projectModelProfile.yaml#/tags"
 
 paths:
 - $ref: "./project.yaml#/paths"
-- $ref: "./modelProfile.yaml#/paths"
+- $ref: "./projectModelProfile.yaml#/paths"
 
 definitions:
 - $ref: "./project.yaml#/definitions"
-- $ref: "./modelProfile.yaml#/definitions"
+- $ref: "./projectModelProfile.yaml#/definitions"
 

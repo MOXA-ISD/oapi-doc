@@ -14,11 +14,11 @@ tags:
     description: Handles model profiles data
 
 paths:
-  /modelProfiles/{modelProfileId}/modelProfile:
+  /projects/{projectId}/modelProfiles:
     parameters:
-      - name: modelProfileId
+      - name: projectId
         in: path
-        description: modelProfile unique identifier
+        description: project unique identifier
         required: true
         type: string
     get:
@@ -27,9 +27,9 @@ paths:
         - project
       responses:
         200:
-          description: An Object of the modelProfile
+          description: An object of the modelProfile
           schema:
-            type: Array
+            type: array
             items:
               $ref: '#/definitions/ModelProfile'
             example:
@@ -54,17 +54,52 @@ paths:
               $ref: '#/definitions/ModelProfile'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfile'
-    put:
-      description: Return updated modelProfile data with given ID
+  /projects/{projectId}/modelProfiles/{modelName}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelName
+        in: path
+        description: model name
+        required: true
+        type: string
+    get:
+      description: Return modelProfile data with given ID
       tags:
         - project
-      parameters:
-        - name: body
-          in: body
-          description: Information of modelProfile
-          required: true
+      responses:
+        200:
+          description: An object of the modelProfile
           schema:
-            $ref: '#/definitions/ModelProfile'
+            type: array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+    put:
+      description: Return updated modelProfile data with given ID
+      parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelName
+        in: path
+        description: model name
+        required: true
+        type: string
+      - name: body
+        in: body
+        description: Information of modelProfile
+        required: true
+        schema:
+          $ref: '#/definitions/ModelProfile'
+      tags:
+        - project
       responses:
         200:
           description: An Object of the modelProfile

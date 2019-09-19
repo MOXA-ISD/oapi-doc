@@ -130,6 +130,34 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/Project'
 
+  /projects/{projectId}/batchenroll:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+    post:
+      description: Return enroll certificate and key in payload
+      tags:
+        - project
+      parameters:
+        - name: body
+          in: body
+          description: Information of device
+          required: true
+          schema:
+            $ref: '#/definitions/BatchEnrollReq'
+      responses:
+        200:
+          description: Response batch enroll certificate and key in payload
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/BatchEnrollRes'
+            example: 
+              $ref: '#/externalDocs/x-mocks/BatchEnrollRes'
+
   /projects/{projectId}/enroll:
     parameters:
       - name: projectId
@@ -137,6 +165,13 @@ paths:
         description: project unique identifier
         required: true
         type: string
+      - name: mode
+          in: query
+          description: Return enroll PK and cert in text mode, don't response hyperlink
+          required: false
+          type: string  
+          enum:
+          - text
     post:
       description: Return enroll certificate and key
       tags:
@@ -224,6 +259,10 @@ definitions:
           - disable
           - removed
         description: Status of project.
+  BatchEnrollReq:
+    type: array
+    items:
+      '$ref': '#/definitions/EnrollReq'
   EnrollReq:
     type: object
     required:
@@ -243,6 +282,7 @@ definitions:
         description: Device model name. 
   EnrollRes:
     type: object
+    description: Return enroll PK and cert, the default mode is hyperlink mode, server will response(enrollPKLink + enrollCertLink), if mode=text in query string, server will response (enrollPK + enrollCert)
     properties:
       deviceId:
         type: string
@@ -251,6 +291,12 @@ definitions:
         type: string
         description: Private key.
       enrollCert:
+        type: string
+        description: Certificate.
+      enrollPKLink:
+        type: string
+        description: Private key.
+      enrollCertLink:
         type: string
         description: Certificate.
 
@@ -291,12 +337,39 @@ externalDocs:
         "name": "MOXA",
         "status": "enable"
       }
+    EnrollReq:
+      {
+        "mac": "001122334455",
+        "serialNumber": "12345678",
+        "modelName": "UC-8112"
+      }
+    BatchEnrollReq:
+      {
+        "deviceList": [
+          {
+            "mac": "001122334455",
+            "serialNumber": "12345678",
+            "modelName": "UC-8112"
+          }
+        ]
+      }  
     EnrollRes:
       {
         "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "enrollPK": "moxa",
-        "enrollCert": "moxa"
+        "enrollCert": "moxa",
+        "enrollPKLink": "http://www.moxa.com/download=12345",
+        "enrollCertLink": "http://www.moxa.com/download=abcde"
       }
+    BatchEnrollRes:
+      [
+        {
+          "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "mac": "001122334455",
+          "enrollPK": "moxa",
+          "enrollCert": "moxa"
+        }
+      ]
     ProjectUserList:
       {
         "count": 28,

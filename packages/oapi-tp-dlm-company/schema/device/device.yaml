@@ -267,35 +267,6 @@ definitions:
         type: string
         description: Device last connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
-  DevicePoc:
-    type: object
-    properties:
-      deviceId:
-        type: string
-        description: Unique identifier representing a specific device.
-      deviceName:
-        type: string
-        description: Device name.
-      modelName:
-        type: string
-        description: Model name of device.
-      mac:
-        type: string
-        description: MAC address of device.
-      connectionStatus:
-        type: string
-        enum:
-        - online
-        - offline
-        - unknown
-        description: Connection status of device.
-      reportedProperties:
-        type: object
-        description: Reported properties of device.
-      lastupdatedat:
-        type: string
-        description: Device last updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
-
   DesiredProperties:
     type: object
     properties:

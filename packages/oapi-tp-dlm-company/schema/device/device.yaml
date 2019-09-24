@@ -17,9 +17,9 @@ paths:
   /devices:
     get:
       parameters:
-        - name: deviceName
+        - name: hostName
           in: query
-          description: Filter the device list by deviceName
+          description: Filter the device list by hostName
           required: false
           type: string
         - name: modelName
@@ -49,10 +49,12 @@ paths:
           required: false
           type: string
           enum:
-          - deviceName
+          - hostName
           - modelName
           - mac
           - status
+          - version
+          - repoName
         - name: sort
           in: query
           description: Sorting the filter device list, default is desc
@@ -77,7 +79,7 @@ paths:
           required: false
           type: string
           enum:
-          - deviceName
+          - tag
           - modelName
           - status        
       description: Get all devices field data
@@ -254,6 +256,14 @@ definitions:
       serialNumber:
         type: string
         description: Serial number of device.
+      version:
+        type: string
+        description: Firmware version of device.
+      tags:
+        type: array
+        description: Tag list of device.
+        items:
+          type: string
       status:
         type: string
         enum:
@@ -263,9 +273,15 @@ definitions:
         - enrolled
         - retired
         description: status of device.    
+      repoName:
+        type: string
+        description: Dependency config repo name.
+      configUpdatedAt:
+        type: string
+        description: Device last config updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       connectedAt:
         type: string
-        description: Device last connection time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
   DesiredProperties:
     type: object
@@ -389,30 +405,14 @@ externalDocs:
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
         "mac": "00-0C-29-70-D2-EC",
         "serialNumber": "123456",
-        "deviceName": "moxa",
+        "hostName": "moxa",
         "modelName": "UC-8112-LX-CG",
-        "deviceName": "gateway",
+        "deviceType": "gateway",
+        "repoName": "test",
         "allowConnection": True,
         "status": "online",
-        "reportedProperties": {    
-          "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-          "reportedProperties": [      
-            {
-              "id": 1,
-              "type": "general",
-              "name": "deviceName",
-              "description": "Device Name",
-              "value": "Demo Device 01"
-            },
-            {
-              "id": 2,
-              "type": "general",
-              "name": "firmwareVersion",
-              "description": "Firmware Version",
-              "value": "1.8.1"
-            }
-          ]    
-        },
+        "tags": ["moxa"],
+        "configUpdatedAt": "2019-02-26T14:10:33:000Z",
         "connectedAt": "2019-02-26T14:10:33:000Z"
       } 
     DeviceList:
@@ -427,183 +427,17 @@ externalDocs:
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
               "mac": "00-0C-29-70-D2-EC",
               "serialNumber": "123456",
-              "deviceName": "moxa",
+              "hostName": "moxa",
               "modelName": "UC-8112-LX-CG",
-              "deviceName": "gateway",
+              "deviceType": "gateway",
+              "repoName": "test",
               "allowConnection": True,
               "status": "online",
-              "reportedProperties": {    
-                "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-                "reportedProperties": [      
-                  {
-                    "id": 1,
-                    "type": "general",
-                    "name": "deviceName",
-                    "description": "Device Name",
-                    "value": "Demo Device 01"
-                  },
-                  {
-                    "id": 2,
-                    "type": "general",
-                    "name": "firmwareVersion",
-                    "description": "Firmware Version",
-                    "value": "1.8.1"
-                  }
-                ]    
-              },
+              "tags": ["moxa"],
+              "configUpdatedAt": "2019-02-26T14:10:33:000Z",
               "connectedAt": "2019-02-26T14:10:33:000Z"
             }
           ]
-      }
-    ReportedProperties:
-      {    
-        "reportedLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-        "reportedProperties": [      
-          {
-            "id": 1,
-            "type": "general",
-            "name": "deviceName",
-            "description": "Device Name",
-            "value": "Demo Device 01"
-          },
-          {
-            "id": 2,
-            "type": "general",
-            "name": "firmwareVersion",
-            "description": "Firmware Version",
-            "value": "1.8.1"
-          },      
-          {
-            "id": 3,
-            "type": "general",
-            "name": "configVersion",
-            "description": "Config Version",
-            "value": "3.1.2"
-          },
-          {
-            "id": 4,
-            "type": "general",
-            "name": "memoryTotalSize",
-            "description": "Memory Total Size",
-            "value": "128",
-            "unit": "GB"
-          },
-          {
-            "id": 5,
-            "type": "network",
-            "name": "eth0",
-            "description": "Ethernet 0",
-            "value": [
-              {
-                "id": 1,
-                "name": "ipAddress",
-                "description": "IP Address",
-                "value": "192.168.3.21"
-              },
-              {
-                "id": 2,
-                "name": "mask",
-                "description": "Subnet Mask",
-                "value": "255.255.255.0"
-              },
-              {
-                "id": 3,
-                "name": "gateway",
-                "description": "Default Gateway",
-                "value": "192.168.3.254"
-              },
-              {
-                "id": 4,
-                "name": "dhcp",
-                "description": "DHCP",
-                "value": true
-              },
-              {
-                "id": 5,
-                "name": "primaryDns",
-                "description": "Primary DNS",
-                "value": "192.168.3.254"
-              },
-              {
-                "id": 6,
-                "name": "secondaryDns",
-                "description": "Secondary DNS",
-                "vaule": "10.29.11.121"
-              }
-            ]
-          }
-        ]    
-      }
-    DesiredProperties:
-      { 
-        "desiredLastUpdatedAt": "2018-08-12T20:17:46.384Z",
-        "desiredProperties": [        
-          {
-            "id": 1,
-            "type": "general",
-            "name": "deviceName",
-            "description": "Device Name",
-            "value": "Demo Device 01"
-          },
-          {
-            "id": 2,
-            "type": "general",
-            "name": "firmwareVersion",
-            "description": "Firmware Version",
-            "value": "1.8.1"
-          },      
-          {
-            "id": 3,
-            "type": "general",
-            "name": "configVersion",
-            "description": "Config Version",
-            "value": "3.1.2"
-          },
-          {
-            "id": 4,
-            "type": "network",
-            "name": "eth0",
-            "description": "Ethernet 0",
-            "value": [
-              {
-                "id": 1,
-                "name": "ipAddress",
-                "description": "IP Address",
-                "value": "192.168.3.21"
-              },
-              {
-                "id": 2,
-                "name": "mask",
-                "description": "Subnet Mask",
-                "value": "255.255.255.0"
-              },
-              {
-                "id": 3,
-                "name": "gateway",
-                "description": "Default Gateway",
-                "value": "192.168.3.254"
-              },
-              {
-                "id": 4,
-                "name": "dhcp",
-                "description": "DHCP",
-                "value": true
-              },
-              {
-                "id": 5,
-                "name": "primaryDns",
-                "description": "Primary DNS",
-                "value": "192.168.3.254"
-              },
-              {
-                "id": 6,
-                "name": "secondaryDns",
-                "description": "Secondary DNS",
-                "vaule": "10.29.11.121"
-              }
-            ]
-          }          
-        ]
       }
     DirectMethodList:
       {    
@@ -640,7 +474,7 @@ externalDocs:
           "desiredProperties": [
             {
                 "type": "general",
-                "name": "deviceName",
+                "name": "hostName",
                 "value": "Test-123"
             }
           ]
@@ -666,4 +500,386 @@ externalDocs:
         "UC-8112-LX",
         "UC-8112A-ME-T-LX"
       ]
+    ReportedProperties:
+      {
+        "reported": {
+          "applications": {
+            "list": [
+              {
+                "description": "MOXA Modbus TCP Client (Master)",
+                "desiredState": "ready",
+                "displayName": "Modbus TCP Client (Master)",
+                "hardwares": [],
+                "health": "good",
+                "icon": "/app-icons/modbusmaster-tcp.png",
+                "license": {
+                  "installedAt": "2016-11-03T17:56:58Z",
+                  "name": "modbusmaster-tcp",
+                  "type": "free",
+                  "validDays": 0
+                },
+                "name": "modbusmaster-tcp",
+                "state": "ready",
+                "version": "3.12.14-229"
+              },
+              {
+                "description": "MOXA cloud service",
+                "desiredState": "ready",
+                "displayName": "Cloud Gateway",
+                "hardwares": null,
+                "health": "good",
+                "icon": "",
+                "license": {
+                  "installedAt": "2019-09-03T13:00:46+08:00",
+                  "name": "cloud-gateway",
+                  "type": "free",
+                  "validDays": 0
+                },
+                "name": "cloud-gateway",
+                "state": "ready",
+                "version": "0.0.1-82"
+              },
+              {
+                "description": "MOXA hardware service",
+                "desiredState": "ready",
+                "displayName": "Device",
+                "hardwares": [],
+                "health": "good",
+                "icon": "/app-icons/device.png",
+                "license": {
+                  "installedAt": "2016-11-03T17:59:13Z",
+                  "name": "device",
+                  "type": "free",
+                  "validDays": 0
+                },
+                "name": "device",
+                "state": "ready",
+                "version": "0.1.0-789-uc-8112a-me"
+              },
+              {
+                "description": "ThingsPro Tag Framework Core\n",
+                "desiredState": "ready",
+                "displayName": "Tag Service",
+                "hardwares": [],
+                "health": "good",
+                "icon": "",
+                "license": {
+                  "installedAt": "2016-11-03T17:52:20Z",
+                  "name": "tagservice",
+                  "type": "free",
+                  "validDays": 0
+                },
+                "name": "tagservice",
+                "state": "ready",
+                "version": "1.2.4-437"
+              },
+              {
+                "description": "ThingsPro frontend web application\n",
+                "desiredState": "ready",
+                "displayName": "ThingsPro Edge Web",
+                "hardwares": [],
+                "health": "good",
+                "icon": "",
+                "license": {
+                  "installedAt": "2016-11-03T17:56:39Z",
+                  "name": "edge-web",
+                  "type": "free",
+                  "validDays": 0
+                },
+                "name": "edge-web",
+                "state": "ready",
+                "version": "0.13.0-1800"
+              }
+            ]
+          },
+          "lastUpdateTime": "2019-09-20T21:04:25+08:00",
+          "gps": [
+            {
+              "enable": true,
+              "id": 1,
+              "interface": "/dev/ttyUSB1",
+              "location": {
+                "lat": 0,
+                "lng": 0
+              },
+              "mode": "manual",
+              "type": "gps"
+            }
+          ],
+          "iptables": {
+            "firewall": [
+              {
+                "action": "drop",
+                "default": true,
+                "destIp": "",
+                "destPort": "",
+                "direction": "inbound",
+                "enable": true,
+                "id": 1,
+                "interface": "",
+                "protocol": "",
+                "srcIp": "",
+                "srcPort": ""
+              },
+              {
+                "action": "accept",
+                "default": false,
+                "destIp": "",
+                "destPort": "80",
+                "direction": "inbound",
+                "enable": true,
+                "id": 10000,
+                "interface": "",
+                "protocol": "tcp",
+                "srcIp": "",
+                "srcPort": ""
+              },
+              {
+                "action": "accept",
+                "default": false,
+                "destIp": "",
+                "destPort": "8443",
+                "direction": "inbound",
+                "enable": true,
+                "id": 10001,
+                "interface": "",
+                "protocol": "tcp",
+                "srcIp": "",
+                "srcPort": ""
+              },
+              {
+                "action": "accept",
+                "default": false,
+                "destIp": "172.31.8.0/22",
+                "destPort": "",
+                "direction": "inbound",
+                "enable": true,
+                "id": 10002,
+                "interface": "",
+                "protocol": "tcp",
+                "srcIp": "",
+                "srcPort": ""
+              },
+              {
+                "action": "accept",
+                "default": false,
+                "destIp": "",
+                "destPort": "22",
+                "direction": "inbound",
+                "enable": true,
+                "id": 10010,
+                "interface": "",
+                "protocol": "tcp",
+                "srcIp": "",
+                "srcPort": ""
+              }
+            ],
+            "type": "iptables"
+          },
+          "ethernets": [
+            {
+              "broadcast": "192.168.4.255",
+              "displayName": "LAN2",
+              "dns": [],
+              "enable": true,
+              "enableDhcp": false,
+              "gateway": "192.168.4.254",
+              "id": 2,
+              "ip": "192.168.4.127",
+              "mac": "00:90:e8:69:1e:1e",
+              "name": "eth1",
+              "netmask": "255.255.255.0",
+              "status": "disconnected",
+              "subnet": "192.168.4.0",
+              "type": "ethernets",
+              "wan": false
+            }
+          ],
+          "route": {
+            "priorityList": [
+              "Cellular1",
+              "LAN1"
+            ],
+            "type": "route"
+          },
+          "wan": {
+            "displayName": "LAN1",
+            "dns": [
+              "10.128.8.8",
+              "10.128.8.5"
+            ],
+            "gateway": "10.144.51.254",
+            "ip": "10.144.48.184",
+            "name": "eth0",
+            "netmask": "255.255.252.0",
+            "type": "wan"
+          },
+          "time": {
+            "ntp": {
+              "enable": false,
+              "interval": 7200,
+              "server": "pool.ntp.org"
+            },
+            "timezone": "Asia/Macau",
+            "type": "time"
+          },
+          "general": {
+            "cpu": "ARMv7 Processor rev 2 (v7l)",
+            "deviceName": "44",
+            "deviceType": "gateway",
+            "firmwareVersion": "3.1",
+            "hostName": "Moxa",
+            "lastBootTime": "2016-11-04T01:18:29+08:00",
+            "lastRebootTime": "",
+            "memorySize": 523882496,
+            "modelName": "UC-8112-LX",
+            "rebootId": "",
+            "type": "general"
+          },
+          "serials": [
+            {
+              "device": "/dev/ttyM0",
+              "displayName": "P1",
+              "id": 1,
+              "mode": "rs232",
+              "type": "serials"
+            },
+            {
+              "device": "/dev/ttyM1",
+              "displayName": "P2",
+              "id": 2,
+              "mode": "rs232",
+              "type": "serials"
+            }
+          ],
+          "reported": {
+            "lastConfigureResult": "fail"
+          },
+          "lastConfigureResult": "success"
+        }
+      }
+    DesiredProperties:
+      {
+        "general": {
+            "deviceName": "MyThingsProEdge",
+            "hostName": "Moxa"
+        },
+        "time": {
+            "ntp": {
+                "enable": false,
+                "interval": 60,
+                "server": "tock.stdtime.gov.tw"
+            },
+            "timezone": "Asia/Taipei"
+        },
+        "route": {
+            "priorityList": [
+                "Cellular1", "LAN1","LAN2"
+            ]
+        },
+        "iptables": {
+            "firewall": [
+                {
+                    "action": "drop",
+                    "default": true,
+                    "destIp": "",
+                    "destPort": "",
+                    "direction": "inbound",
+                    "enable": true,
+                    "id": 1,
+                    "interface": "",
+                    "protocol": "",
+                    "srcIp": "",
+                    "srcPort": ""
+                },
+                {
+                    "action": "accept",
+                    "default": false,
+                    "destIp": "",
+                    "destPort": "80",
+                    "direction": "inbound",
+                    "enable": true,
+                    "id": 10000,
+                    "interface": "",
+                    "protocol": "tcp",
+                    "srcIp": "",
+                    "srcPort": ""
+                },
+                {
+                    "action": "accept",
+                    "default": false,
+                    "destIp": "",
+                    "destPort": "8443",
+                    "direction": "inbound",
+                    "enable": true,
+                    "id": 10001,
+                    "interface": "",
+                    "protocol": "tcp",
+                    "srcIp": "",
+                    "srcPort": ""
+                },
+                {
+                    "action": "accept",
+                    "default": false,
+                    "destIp": "172.31.8.0/22",
+                    "destPort": "",
+                    "direction": "inbound",
+                    "enable": true,
+                    "id": 10002,
+                    "interface": "",
+                    "protocol": "tcp",
+                    "srcIp": "",
+                    "srcPort": ""
+                },
+                {
+                    "action": "accept",
+                    "default": false,
+                    "destIp": "",
+                    "destPort": "22",
+                    "direction": "inbound",
+                    "enable": true,
+                    "id": 10010,
+                    "interface": "",
+                    "protocol": "tcp",
+                    "srcIp": "",
+                    "srcPort": ""
+                }
+            ]
+        },
+        "ethernets": [
+            {
+                "enable": true,
+                "enableDhcp": true,
+                "wan": true
+            },
+            {
+                "dns": [
+                    "8.8.8.8"
+                ],
+                "enable": true,
+                "enableDhcp": false,
+                "ip": "192.168.4.127",
+                "netmask": "255.255.255.0",
+                "wan": false
+            }
+        ],
+        "gps": [
+            {
+                "enable": true,
+                "location": {
+                    "lat": 0,
+                    "lng": 0
+                },
+                "mode": "manual"
+            }
+        ],
+        "serials": [
+            {
+                "mode": "rs232"
+            },
+            {
+                "mode": "rs232"
+            }
+        ]
+      }
     

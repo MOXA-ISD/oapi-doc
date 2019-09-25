@@ -85,7 +85,7 @@ paths:
           description: Information of modelProfile
           required: true
           schema:
-            $ref: '#/definitions/ModelProfile'
+            $ref: '#/definitions/ModelProfileCreate'
       responses:
         200:
           description: An Object of the modelProfile
@@ -138,7 +138,7 @@ paths:
         description: Information of modelProfile
         required: true
         schema:
-          $ref: '#/definitions/ModelProfile'
+          $ref: '#/definitions/ModelProfileCreate'
       tags:
         - project
       responses:
@@ -186,6 +186,41 @@ definitions:
       createdAt:
         type: string
         description: Config repo created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      profile:
+        type: object
+        description: Model Profile.
+
+  ModelProfileCreate:
+    type: object
+    required:
+      - modelName
+      - profileName
+      - status
+      - isDefault
+      - profile
+    properties:
+      modelName:
+        type: string
+        description: Unique identifier representing a specific model name.
+      profileName:
+        type: string
+        description: Unique profile name.  
+      description:
+        type: string
+        description: Description of profile.
+      tag:
+        type: string
+        description: label field, user can tag version or repo alias name.  
+      status:
+        type: string
+        enum:
+        - draft
+        - ready
+        - archive
+        description: Status of profile.    
+      isDefault:
+        type: boolean
+        description: Is this profie as a defualt profile apply to device.
       profile:
         type: object
         description: Model Profile.

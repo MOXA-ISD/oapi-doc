@@ -54,7 +54,7 @@ paths:
           - mac
           - status
           - version
-          - repoName
+          - profileName
         - name: sort
           in: query
           description: Sorting the filter device list, default is desc
@@ -245,11 +245,6 @@ definitions:
       modelName:
         type: string
         description: Model name of device.
-      deviceType:
-        type: string
-        enum:
-        - gateway
-        description: Type of device.
       mac:
         type: string
         description: Mac address of device.
@@ -273,15 +268,18 @@ definitions:
         - enrolled
         - retired
         description: status of device.    
-      repoName:
+      profileName:
         type: string
-        description: Dependency config repo name.
+        description: Dependency profile name.
       configUpdatedAt:
         type: string
         description: Device last config updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       connectedAt:
         type: string
         description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      disconnectedAt:
+        type: string
+        description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
   DesiredProperties:
     type: object
@@ -407,13 +405,12 @@ externalDocs:
         "serialNumber": "123456",
         "hostName": "moxa",
         "modelName": "UC-8112-LX-CG",
-        "deviceType": "gateway",
-        "repoName": "test",
-        "allowConnection": True,
+        "profileName": "test",
         "status": "online",
         "tags": ["moxa"],
         "configUpdatedAt": "2019-02-26T14:10:33:000Z",
-        "connectedAt": "2019-02-26T14:10:33:000Z"
+        "connectedAt": "2019-02-26T14:10:33:000Z",
+        "disconnectedAt": "2019-02-26T14:10:33:000Z"
       } 
     DeviceList:
       {
@@ -429,13 +426,12 @@ externalDocs:
               "serialNumber": "123456",
               "hostName": "moxa",
               "modelName": "UC-8112-LX-CG",
-              "deviceType": "gateway",
-              "repoName": "test",
-              "allowConnection": True,
+              "profileName": "test",
               "status": "online",
               "tags": ["moxa"],
               "configUpdatedAt": "2019-02-26T14:10:33:000Z",
-              "connectedAt": "2019-02-26T14:10:33:000Z"
+              "connectedAt": "2019-02-26T14:10:33:000Z",
+              "disconnectedAt": "2019-02-26T14:10:33:000Z"
             }
           ]
       }

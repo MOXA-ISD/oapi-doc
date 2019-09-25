@@ -164,9 +164,9 @@ definitions:
       description:
         type: string
         description: Description of profile.
-      repoName:
+      profileName:
         type: string
-        description: Config repo name.
+        description: Profile name.
       createdBy:
         type: string
         description: User who create config repo.
@@ -198,7 +198,7 @@ externalDocs:
         "id": 1,
         "modelName": "UC-8112",
         "description": "default profile",
-        "repoName": "test",
+        "profileName": "test",
         "createdBy": "owen",
         "tag": "1.0.0",
         "status": "ready",
@@ -219,7 +219,7 @@ externalDocs:
             "id": 1,
             "modelName": "UC-8112",
             "description": "default profile",
-            "repoName": "test",
+            "profileName": "test",
             "createdBy": "owen",
             "tag": "1.0.0",
             "status": "ready",

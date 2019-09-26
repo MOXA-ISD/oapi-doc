@@ -14,8 +14,13 @@ tags:
     description: Handles model profiles data
 
 paths:
-  /modelProfiles:
+  /projects/{projectId}/modelProfiles:
     parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
       - name: modelName
         in: query
         description: Filter the model profile list by modelName
@@ -90,7 +95,7 @@ paths:
               $ref: '#/definitions/ModelProfile'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfile'
-  /modelProfiles/{modelPrfileId}:
+  /projects/{projectId}/modelProfiles/{modelPrfileId}:
     parameters:
       - name: projectId
         in: path
@@ -150,12 +155,9 @@ definitions:
   ModelProfile:
     type: object
     properties:
-      projectId:
-        type: string
-        description: Project unique identifier.  
-      profileId:
+      id:
         type: integer
-        description: Project unique identifier..
+        description: Unique identifier representing a specific model profile.
       modelName:
         type: string
         description: Unique identifier representing a specific model name.
@@ -191,14 +193,12 @@ definitions:
   ModelProfileCreate:
     type: object
     required:
-      - projectId
       - modelName
       - profileName
+      - status
+      - isDefault
       - profile
     properties:
-      projectId:
-        type: string
-        description: Project unique identifier.  
       modelName:
         type: string
         description: Unique identifier representing a specific model name.
@@ -230,7 +230,6 @@ externalDocs:
   x-mocks:
     ModelProfile:
       {
-        "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "profileId": 1,
         "modelName": "UC-8112",
         "description": "default profile",
@@ -252,7 +251,6 @@ externalDocs:
         "count": 1,
         "data": [
           {
-            "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
             "profileId": 1,
             "modelName": "UC-8112",
             "description": "default profile",
@@ -273,13 +271,14 @@ externalDocs:
       }
     ModelProfileCreate:
       {
-        "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "modelName": "UC-8112",
         "description": "default profile",
         "profileName": "test",
+        "createdBy": "owen",
         "tag": "1.0.0",
         "status": "ready",
         "isDefault": true,
+        "createdAt": "2019-02-26T14:10:33:000Z",
         "profile": {
           "system_tag" : "",
           "system_properties" : "",

@@ -227,9 +227,12 @@ paths:
         200:
           description: An array of all supports model list
           schema:
-            type: array
-            items:
-              type: string
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: string
             example: 
               $ref: '#/externalDocs/x-mocks/ModelList'
 definitions:
@@ -492,10 +495,12 @@ externalDocs:
         ]
       }
     ModelList:
-      [
-        "UC-8112-LX",
-        "UC-8112A-ME-T-LX"
-      ]
+      {
+        "data" : [
+          "UC-8112-LX",
+          "UC-8112A-ME-T-LX"
+        ]
+      }
     ReportedProperties:
       {
         "reported": {

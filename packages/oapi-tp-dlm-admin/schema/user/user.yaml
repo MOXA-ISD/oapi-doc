@@ -167,7 +167,7 @@ paths:
         required: true
         type: string
     get:
-      description: Determining if the email exists in this tenant
+      description: Determining if the email exists in this company
       tags:
         - user
       responses:
@@ -181,7 +181,7 @@ paths:
               $ref: '#/externalDocs/x-mocks/UserExist'
   /users/invite:
     post:
-      description: Invite users to join this tenant
+      description: Invite users to join this company
       tags:
         - user
       parameters:
@@ -334,7 +334,7 @@ definitions:
     properties:
       exist:
         type: boolean
-        description: Determining if the email exists in this tenant.
+        description: Determining if the email exists in this company.
 
   UserChangePassword:
     type: object

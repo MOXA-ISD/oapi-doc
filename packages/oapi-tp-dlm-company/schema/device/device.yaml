@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 0.0.0
-  title: ThingsPro Tenant Portal RESTful API reference
+  title: ThingsPro Company Portal RESTful API reference
 basePath: '/api/v1'
 schemes:
   - http
@@ -11,7 +11,7 @@ produces:
   - application/json
 tags:
   - name: device
-    description: Handles tenants data
+    description: Handles device data
 
 paths:
   /devices:
@@ -51,7 +51,6 @@ paths:
           enum:
           - hostName
           - modelName
-          - mac
           - status
           - version
           - profileName
@@ -271,6 +270,9 @@ definitions:
         - enrolled
         - retired
         description: status of device.    
+      profileId:
+        type: integer
+        description: Dependency Profile id, this field could be empty, if there is no dependency Profile.
       profileName:
         type: string
         description: Dependency profile name.
@@ -408,6 +410,7 @@ externalDocs:
         "serialNumber": "123456",
         "hostName": "moxa",
         "modelName": "UC-8112-LX-CG",
+        "profileId": 1,
         "profileName": "test",
         "status": "online",
         "tags": ["moxa"],
@@ -429,6 +432,7 @@ externalDocs:
               "serialNumber": "123456",
               "hostName": "moxa",
               "modelName": "UC-8112-LX-CG",
+              "profileId": 1,
               "profileName": "test",
               "status": "online",
               "tags": ["moxa"],

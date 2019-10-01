@@ -166,12 +166,12 @@ paths:
         required: true
         type: string
       - name: mode
-          in: query
-          description: Return enroll PK and cert in text mode, don't response hyperlink
-          required: false
-          type: string  
-          enum:
-          - text
+        in: query
+        description: Return enroll PK and cert in text mode, don't response hyperlink
+        required: false
+        type: string  
+        enum:
+        - text
     post:
       description: Return enroll certificate and key
       tags:
@@ -212,7 +212,7 @@ paths:
             items:
               $ref: '#/definitions/User'
             example:
-              $ref: '#/externalDocs/x-mocks/UserList'
+              $ref: '#/externalDocs/x-mocks/ProjectUserList'
 
 definitions:
   Project:
@@ -299,7 +299,23 @@ definitions:
       enrollCertLink:
         type: string
         description: Certificate.
-
+  BatchEnrollRes:
+    type: array
+    description: Return batch enroll PK and cert
+    items:
+      properties:
+        deviceId:
+          type: string
+          description: Device id.
+        mac:
+          type: string
+          description: Device mac.
+        enrollPK:
+          type: string
+          description: Private key.
+        enrollCert:
+          type: string
+          description: Certificate.
 externalDocs:
   url: 'http://#'
   x-mocks:

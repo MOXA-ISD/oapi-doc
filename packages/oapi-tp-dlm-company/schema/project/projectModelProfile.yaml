@@ -150,6 +150,35 @@ paths:
               $ref: '#/definitions/ModelProfile'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfile'
+    patch:
+      description: update is defualt field
+      parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelPrfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        type: string
+      - name: isDefault
+        in: query
+        description: set model profile is default field
+        required: false
+        type: boolean
+      tags:
+        - project
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
 
 definitions:
   ModelProfile:

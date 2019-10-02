@@ -1,0 +1,33 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: DLM Partner Portal RESTful API reference
+  description: |
+    Welcome to the DLM Partner Portal RESTful API reference.
+
+host: localhost
+basePath: '/api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: bearer
+    in: header
+    description: DLM RESTful API token, The token will create when user login.
+
+tags:
+  - $ref: './device/index.yaml#/tags'
+
+paths:
+  - $ref: './device/index.yaml#/paths'
+
+definitions:
+  - $ref: './device/index.yaml#/definitions'

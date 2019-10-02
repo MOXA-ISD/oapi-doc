@@ -1,0 +1,90 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Company Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: device
+    description: Handles model profiles data
+
+paths:
+  /modelProfiles:
+    get:
+      description: Return all model profiles data 
+      tags:
+        - device
+      responses:
+        200:
+          description: An array of the modelProfile
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
+              $ref: '#/externalDocs/x-mocks/ModelProfileList'
+  /modelProfiles/{modelName}:
+    parameters:
+      - name: modelName
+        in: path
+        required: true
+        description: get specific model profile, the supported models, you should get /api/v1/models first
+        type: string
+    get:
+      description: Return profile data with given model name
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the profile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'  
+
+definitions:
+  ModelProfile:
+    type: object
+    properties:
+      modelName:
+        type: string
+        description: Unique identifier representing a specific model name.
+      profile:
+        type: object
+        description: Model Profile.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    ModelProfile:
+      {
+        "modelName": "UC-8112",
+        "profile": {
+          "system_tag" : "",
+          "system_properties" : "",
+          "direct_method" : "",  
+          "device_image" : ""
+        }
+      }
+    ModelProfileList:
+       [
+          {
+            "modelName": "UC-8112",
+            "profile": {
+              "system_tag" : "",
+              "system_properties" : "",
+              "direct_method" : "",  
+              "device_image" : ""
+            }
+          }
+        ]
+    
+
+    

@@ -1,0 +1,24 @@
+{
+  "name": "@tp-x/dlm-pic-oapi-doc",
+  "version": "1.0.0",
+  "description": "DLM PIC serivce OAPI documentation",
+  "repository": "git@github.com:MOXA-ISD/oapi-doc.git",
+  "author": "Owen YC Kao <owenyc_kao@moxa.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "npm run build:swagger && npm run lint:gateway",
+    "lint:gateway": "swagger-cli validate ./dist/swagger.json",
+    "prebuild": "rimraf dist && npm run build:swagger",
+    "build": "npx spectacle-docs dist/swagger.json",
+    "build:swagger": "mockserver -I ./schema -O ./dist",
+    "start": "npx spectacle-docs -s dist/swagger.json"
+  },
+  "devDependencies": {
+    "@thingspro/oapi-server": "^1.2.1",
+    "rimraf": "^2.6.3",
+    "swagger-cli": "^2.2.1"
+  }
+}

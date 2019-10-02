@@ -1,0 +1,345 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Company Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: project
+    description: Handles model profiles data
+
+paths:
+  /projects/{projectId}/modelProfiles:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelName
+        in: query
+        description: Filter the model profile list by modelName
+        required: false
+        type: string
+      - name: order
+        in: query
+        description: Sort the device list by specific condition, default is order by 'lastUpdatedAt'
+        required: false
+        type: string
+        enum:
+        - modelName
+        - tag
+        - createdAt
+      - name: sort
+        in: query
+        description: Sorting the filter device list, default is desc
+        required: false
+        type: string
+        enum:
+        - desc
+        - asc
+      - name: limit
+        in: query
+        description: max return devices count (default is 100 and max is 1000)
+        required: false
+        type: integer
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        type: integer
+      - name: distinct
+        in: query
+        description: Get distict value of speific field, this query parameter will return string array only
+        required: false
+        type: string
+        enum:
+        - profileName
+        - tag
+        - modelName
+        - createdBy        
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - project
+      responses:
+        200:
+          description: An object of the modelProfile
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
+              $ref: '#/externalDocs/x-mocks/ModelProfileList'
+    post:
+      description: Return updated modelProfile data with given ID
+      tags:
+        - project
+      parameters:
+        - name: body
+          in: body
+          description: Information of modelProfile
+          required: true
+          schema:
+            $ref: '#/definitions/ModelProfileCreate'
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+  /projects/{projectId}/modelProfiles/{modelPrfileName}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelPrfileName
+        in: path
+        description: Model prfile name representing a specific model profile
+        required: true
+        type: string
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - project
+      responses:
+        200:
+          description: An object of the modelProfile
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+  /projects/{projectId}/modelProfiles/{modelPrfileId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelPrfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        type: string
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - project
+      responses:
+        200:
+          description: An object of the modelProfile
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+    put:
+      description: Return updated modelProfile data with given ID
+      parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelPrfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        type: string
+      - name: body
+        in: body
+        description: Information of modelProfile
+        required: true
+        schema:
+          $ref: '#/definitions/ModelProfileCreate'
+      tags:
+        - project
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+    patch:
+      description: update is defualt field
+      parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelPrfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        type: string
+      - name: isDefault
+        in: query
+        description: set model profile is default field
+        required: false
+        type: boolean
+      tags:
+        - project
+      responses:
+        200:
+          description: An Object of the modelProfile
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+
+definitions:
+  ModelProfile:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific model profile.
+      modelName:
+        type: string
+        description: Unique identifier representing a specific model name.
+      description:
+        type: string
+        description: Description of profile.
+      profileName:
+        type: string
+        description: Profile name.
+      createdBy:
+        type: string
+        description: User who create config repo.
+      tag:
+        type: string
+        description: label field, user can tag version or repo alias name.  
+      status:
+        type: string
+        enum:
+        - draft
+        - ready
+        - archive
+        description: Status of profile.    
+      isDefault:
+        type: boolean
+        description: Is this profie as a defualt profile apply to device.
+      createdAt:
+        type: string
+        description: Config repo created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+      profile:
+        type: object
+        description: Model Profile.
+
+  ModelProfileCreate:
+    type: object
+    required:
+      - modelName
+      - profileName
+      - status
+      - isDefault
+      - profile
+    properties:
+      modelName:
+        type: string
+        description: Unique identifier representing a specific model name.
+      profileName:
+        type: string
+        description: Unique profile name.  
+      description:
+        type: string
+        description: Description of profile.
+      tag:
+        type: string
+        description: label field, user can tag version or repo alias name.  
+      status:
+        type: string
+        enum:
+        - draft
+        - ready
+        - archive
+        description: Status of profile.    
+      isDefault:
+        type: boolean
+        description: Is this profie as a defualt profile apply to device.
+      profile:
+        type: object
+        description: Model Profile.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    ModelProfile:
+      {
+        "profileId": 1,
+        "modelName": "UC-8112",
+        "description": "default profile",
+        "profileName": "test",
+        "createdBy": "owen",
+        "tag": "1.0.0",
+        "status": "ready",
+        "isDefault": true,
+        "createdAt": "2019-02-26T14:10:33:000Z",
+        "profile": {
+          "system_tag" : "",
+          "system_properties" : "",
+          "direct_method" : "",  
+          "device_image" : ""
+        }
+      }
+    ModelProfileList:
+      {
+        "count": 1,
+        "data": [
+          {
+            "profileId": 1,
+            "modelName": "UC-8112",
+            "description": "default profile",
+            "profileName": "test",
+            "createdBy": "owen",
+            "tag": "1.0.0",
+            "status": "ready",
+            "isDefault": true,
+            "createdAt": "2019-02-26T14:10:33:000Z",
+            "profile": {
+              "system_tag" : "",
+              "system_properties" : "",
+              "direct_method" : "",  
+              "device_image" : ""
+            }
+          }
+        ]
+      }
+    ModelProfileCreate:
+      {
+        "modelName": "UC-8112",
+        "description": "default profile",
+        "profileName": "test",
+        "createdBy": "owen",
+        "tag": "1.0.0",
+        "status": "ready",
+        "isDefault": true,
+        "createdAt": "2019-02-26T14:10:33:000Z",
+        "profile": {
+          "system_tag" : "",
+          "system_properties" : "",
+          "direct_method" : "",  
+          "device_image" : ""
+        }
+      }
+
+    

@@ -1,0 +1,108 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Company Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: permission
+    description: Handles permission field data
+
+paths:
+  /permissions:
+    get:
+      description: Get all permission field data
+      tags:
+        - permission
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Permission'
+            example: 
+              $ref: '#/externalDocs/x-mocks/PermissionList'
+
+  /permissions/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Permission ID
+        required: true
+        type: integer
+    get:
+      description: Get permission field data by id
+      tags:
+        - permission
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Permission'
+            example:
+              $ref: '#/externalDocs/x-mocks/Permission'
+
+definitions:
+  Permission:
+    title: Permission
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      name:
+        type: string
+        description: Name of permission.
+      description:
+        type: string
+        description: Description of permission.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Permission:
+      {
+        "id": 1,
+        "name": "User & Role management",
+        "description": "User & Role management"
+      }
+    PermissionList:
+      {
+        "data": [
+          {
+            "id": 1,
+            "name": "User & Role management",
+            "description": "User & Role management"
+          },
+          {
+            "id": 2,
+            "name": "Device register",
+            "description": "Device register"
+          },
+          {
+            "id": 3,
+            "name": "Device grouping",
+            "description": "Device grouping"
+          },
+          {
+            "id": 4,
+            "name": "View device information",
+            "description": "View device information"
+          },
+          {
+            "id": 5,
+            "name": "Full manage device",
+            "description": "Full manage device"
+          }
+        ]
+      }
+      

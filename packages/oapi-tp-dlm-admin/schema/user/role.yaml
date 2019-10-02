@@ -1,0 +1,285 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Admin Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: role
+    description: Handles role field data
+
+paths:
+  /roles:
+    get:
+      description: Get all roles data
+      tags:
+        - role
+      responses:
+        200:
+          description: An array of role
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Role'
+            example: 
+              $ref: '#/externalDocs/x-mocks/RoleList'
+    post:
+      description: Create a new role.
+      tags:
+        - role
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/RoleCreate'
+            example:
+              $ref: '#/externalDocs/x-mocks/RoleCreate'  
+
+      responses:
+        201:
+          description: Create role successfully
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Role'
+            example: 
+              $ref: '#/externalDocs/x-mocks/Role'
+
+  /roles/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Role unique identifier
+        required: true
+        type: string
+    get:
+      description: Return role data with given ID
+      tags:
+        - role
+      responses:
+        200:
+          description: An Object of the role
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Role'
+            example: 
+              $ref: '#/externalDocs/x-mocks/Role'
+    put:
+      description: Return updated user data with given ID
+      tags:
+        - role
+      parameters:
+        - name: body
+          in: body
+          description: Information of role
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/RoleUpdate'
+            example:
+              $ref: '#/externalDocs/x-mocks/RoleUpdate'  
+      responses:
+        200:
+          description: An Object of the role
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Role'
+            example: 
+              $ref: '#/externalDocs/x-mocks/Role'
+    delete:
+      description: Delete role with given ID
+      tags:
+        - role
+      responses:
+        204:
+          description: success
+
+definitions:
+  Role:
+    type: object
+    properties:
+      roleId:
+        type: integer
+        description: Role ID.
+      name:
+        type: string
+        description: Name of role.
+      description:
+        type: string
+        description: Description of role.
+      admin:
+        type: boolean
+        description: Admin role.
+      permissions:
+        type: array
+        items:
+          type: object
+          items:
+            - $ref: '#/definitions/Permission'
+  RoleCreate:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: Name of role.
+        maxLength: 30
+      description:
+        type: string
+        description: Description of role.
+        maxLength: 200
+      admin:
+        type: boolean
+        description: Admin role.
+      permissions:
+        type: array
+        items:
+          type: object
+          items:
+            - $ref: '#/definitions/PermissionReq'
+  RoleUpdate:
+    type: object
+    required:
+      - name
+      - description
+      - permissions
+    properties:
+      name:
+        type: string
+        description: Name of role.
+        maxLength: 30
+      description:
+        type: string
+        description: Description of role.
+        maxLength: 200
+      admin:
+        type: boolean
+        description: Admin role.
+      permissions:
+        type: array
+        items:
+          type: object
+          items:
+            - $ref: '#/definitions/PermissionReq'
+  PermissionReq:
+    title: Permission
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      value:
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+        description: Type of permission. 0=disable, 1=can view, 2=can edit, 4=can view and edit, default is 0
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Role:
+      {     
+        "roleId": 2,
+        "name": "Device manager",
+        "description": "Full permission on managing devices.",
+        "admin": false,
+        "permissions": [
+          {
+            "id": 1,
+            "value": 0
+          },
+          {
+            "id": 2,
+            "value": 0
+          }
+        ]
+      }
+    RoleCreate:
+      {
+        "name": "Device Register",
+        "description": "Device Register",
+        "admin": false,
+        "permissions": [
+          {
+            "id": 1,
+            "value": 0
+          },
+          {
+            "id": 2,
+            "value": 1
+          }
+        ]
+      }
+    RoleUpdate:
+      {
+        "name": "Device Register",
+        "description": "Device Register",
+        "admin": true,
+        "permissions": [
+          {
+            "id": 1,
+            "value": 0
+          },
+          {
+            "id": 2,
+            "value": 1
+          }
+        ]
+      }  
+    RoleList: 
+      {
+        "data": [
+          {
+            "roleId": 1,
+            "name": "Administrator",
+            "description": "Administrator",
+            "admin": true,
+            "permissions": [
+              {
+                "id": 1,
+                "value": 1
+              },
+              {
+                "id": 2,
+                "value": 1
+              }
+            ]
+          },
+          {
+            "roleId": 2,
+            "name": "Device Register",
+            "description": "Device Register",
+            "admin": false,
+            "permissions": [
+              {
+                "id": 1,
+                "value": 0
+              },
+              {
+                "id": 2,
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    

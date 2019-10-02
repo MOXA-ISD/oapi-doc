@@ -1,0 +1,83 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: ThingsPro Admin Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+tags:
+  - name: login
+
+paths:
+  /login:
+    post:
+      description: user login
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                example: 'thingspro@moxa.com'
+              password:
+                type: string
+                example: '12345678'
+      responses:
+        200:
+          description: Return user and token data
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/LoginRes'
+            example:
+              $ref: '#/externalDocs/x-mocks/LoginRes'
+      tags:
+        - user
+
+  /logout:
+    post:
+      description: user logout
+      responses:
+        200:
+          description: user logout
+      tags:
+        - user
+
+definitions:
+  LoginRes:
+    type: object
+    properties:
+      user:
+        type: object
+        items:
+          - $ref: '#/definitions/User'
+      token:
+        type: string
+        description: Granted authentication token.
+
+externalDocs:
+  url: 'https://#'
+  x-mocks:
+    LoginRes:
+      {
+        user:
+          {
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+            "username": "Owen",
+            "email": "rick.peng@moxa.com",
+            "status": "enable",
+            "createdAt": "2019-03-08T08:44:13.425Z",
+            "updatedAt": "2019-03-08T08:44:13.425Z",
+            "loginedAt": "",
+            "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
+          },
+        token: "USER_TOKEN"
+      }

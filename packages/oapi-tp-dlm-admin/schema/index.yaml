@@ -1,0 +1,38 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.1
+  title: DLM Admin Portal RESTful API reference
+  description: |
+    Welcome to the DLM Admin Portal RESTful API reference.
+host: localhost
+basePath: '/api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+securityDefinitions:
+  mx-api-token:
+    type: apiKey
+    name: bearer
+    in: header
+    description: DLM RESTful API token, The token will create when user login.
+
+tags:
+  - $ref: './project/index.yaml#/tags'
+  - $ref: './user/index.yaml#/tags'
+  - $ref: './company/index.yaml#/tags'
+
+paths:
+  - $ref: './project/index.yaml#/paths'
+  - $ref: './user/index.yaml#/paths'
+  - $ref: './company/index.yaml#/paths'
+
+definitions:
+  - $ref: './project/index.yaml#/definitions'
+  - $ref: './user/index.yaml#/definitions'
+  - $ref: './company/index.yaml#/definitions'

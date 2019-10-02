@@ -59,6 +59,7 @@ paths:
         required: false
         type: string
         enum:
+        - profileName
         - tag
         - modelName
         - createdBy        
@@ -94,6 +95,31 @@ paths:
             items:
               $ref: '#/definitions/ModelProfile'
             example: 
+              $ref: '#/externalDocs/x-mocks/ModelProfile'
+  /projects/{projectId}/modelProfiles/{modelPrfileName}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelPrfileName
+        in: path
+        description: Model prfile name representing a specific model profile
+        required: true
+        type: string
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - project
+      responses:
+        200:
+          description: An object of the modelProfile
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelProfile'
+            example:
               $ref: '#/externalDocs/x-mocks/ModelProfile'
   /projects/{projectId}/modelProfiles/{modelPrfileId}:
     parameters:

@@ -151,7 +151,7 @@ paths:
             items:
               $ref: '#/definitions/User'
             example:
-              $ref: '#/externalDocs/x-mocks/UserList'
+              $ref: '#/externalDocs/x-mocks/CompanyUserList'
 
 definitions:
   Company:

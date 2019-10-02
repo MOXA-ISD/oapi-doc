@@ -294,7 +294,7 @@ definitions:
         type: string
         description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
 
-DeviceDetail:
+  DeviceDetail:
     type: object
     properties:
       projectId:

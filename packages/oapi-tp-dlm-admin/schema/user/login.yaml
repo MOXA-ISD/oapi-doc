@@ -34,7 +34,9 @@ paths:
         200:
           description: Return user and token data
           schema:
-            $ref: '#/definitions/LoginRes'
+            type: object
+            items:
+              $ref: '#/definitions/LoginRes'
             example:
               $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
@@ -70,7 +72,6 @@ externalDocs:
           {
             "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
             "username": "Owen",
-            "createdAt": "2019-03-08T08:44:13.425Z",
             "email": "rick.peng@moxa.com",
             "status": "enable",
             "createdAt": "2019-03-08T08:44:13.425Z",

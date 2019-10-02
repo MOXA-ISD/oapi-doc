@@ -6,8 +6,8 @@ tags:
 - $ref: "./modelProfile.yaml#/tags"
 
 paths:
-- $ref: "./device.yaml#/tags"
-- $ref: "./modelProfile.yaml#/tags"
+- $ref: "./device.yaml#/paths"
+- $ref: "./modelProfile.yaml#/paths"
 
 definitions:
 - $ref: "./device.yaml#/definitions"

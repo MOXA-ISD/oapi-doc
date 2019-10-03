@@ -10,7 +10,7 @@ schemes:
 produces:
   - application/json
 tags:
-  - name: project
+  - name: profile
     description: Handles model profiles data
 
 paths:
@@ -66,7 +66,7 @@ paths:
     get:
       description: Return modelProfile data with given ID
       tags:
-        - project
+        - profile
       responses:
         200:
           description: An object of the modelProfile
@@ -79,7 +79,7 @@ paths:
     post:
       description: Return updated modelProfile data with given ID
       tags:
-        - project
+        - profile
       parameters:
         - name: body
           in: body
@@ -111,7 +111,7 @@ paths:
     get:
       description: Return modelProfile data with given ID
       tags:
-        - project
+        - profile
       responses:
         200:
           description: An object of the modelProfile
@@ -136,7 +136,7 @@ paths:
     get:
       description: Return modelProfile data with given ID
       tags:
-        - project
+        - profile
       responses:
         200:
           description: An object of the modelProfile
@@ -166,7 +166,7 @@ paths:
         schema:
           $ref: '#/definitions/ModelProfileCreate'
       tags:
-        - project
+        - profile
       responses:
         200:
           description: An Object of the modelProfile
@@ -195,7 +195,7 @@ paths:
         required: false
         type: boolean
       tags:
-        - project
+        - profile
       responses:
         200:
           description: An Object of the modelProfile

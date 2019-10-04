@@ -71,7 +71,26 @@ paths:
       responses:
         204:
           description: success
-  
+  /batchEnroll:
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchEnrollReq'
+    post:
+      description: Enroll a group of devices to PIC service
+      tags:
+        - device
+      responses:
+        200:
+          description: Enroll device sucess
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/BatchEnrollRes'
+            example:
+              $ref: '#/externalDocs/x-mocks/BatchEnrollRes'
 definitions:
   EnrollReq:
     type: object
@@ -106,12 +125,14 @@ definitions:
       enrollCert:
         type: string
         description: Certificate.
-      projectId:
-        type: string
-        description: project unique identifier
-      projectName:
-        type: string
-        description: project name
+  BatchEnrollReq:
+    type: array
+    items:
+      '$ref': '#/definitions/EnrollReq'
+  BatchEnrollRes:
+    type: array
+    items:
+      '$ref': '#/definitions/EnrollReq'
   RegisterReq:
     type: object
     required:
@@ -132,19 +153,72 @@ definitions:
     type: object
     description: Return enroll PK and cert, the default mode is hyperlink mode, server will response(enrollPKLink + enrollCertLink), if mode=text in query string, server will response (enrollPK + enrollCert)
     properties:
+      projectId:
+        type: string
+        description: project unique identifier
+      projectName:
+        type: string
+        description: project name
       deviceId:
         type: string
         description: Device id.
       registerCA:
         type: object
-        description: Register cert and private key.
-      data:
-        type: object
-        description: information for connect to cloud
+        description: Device register certificate
+        properties:
+          registerPK:
+            type: string
+            description: Private key.
+          registerCert:
+            type: string
+            description: Certificate.
       newEnrollCA:
         type: object
         description: Enroll cert and private key, Only send when old cert will expire nearby
-      
+        properties:
+          enrollPK:
+            type: string
+            description: Private key.
+          enrollCert:
+            type: string
+            description: Certificate.
+      data:
+        type: object
+        description: information for connect to cloud
+        properties:
+          scenario:
+            type: string
+            enum:
+              - aws_iot_core
+            description: Cloud provider type
+          hostname:
+            type: string
+            description: IOT connection hostname.  
+          authType:
+            type: string
+            description: Auth type, x509 is default  
+      error:
+        type: object
+        description: If http status code is not 200, user sholud reference this reason to identify failure reason.
+        properties:
+          code:
+            type: integer
+            description: |
+              If http status code is not 200, user should reference this value to identify failure reason. 
+              100: Bad request
+              101: Caonnt find project
+              102: Project status is not active
+              103: Deivce is already registered
+              104: Device is not enrolled
+              105: Certificate expired
+              106: Device serial number or mac is not matched with certificate
+              107: Register certificate error
+              108: Not support model name
+              109: Invlalid certificate
+          message:
+            type: string
+            description: If http status code is not 200, user sholud reference this reason to identify failure reason.
+            
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -158,8 +232,7 @@ externalDocs:
     EnrollRes:
       {
         "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "projectName": "test",
+
         "enrollPK": "moxa",
         "enrollCert": "moxa"
       }
@@ -171,10 +244,8 @@ externalDocs:
       }
     RegisterRes:
       {
-        "error": {
-          "code": 100,
-          "message": "Register failure reason"
-        },
+        "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "projectName": "test",
         "data": 
           {
             "scenario": "aws_iot_core",
@@ -186,11 +257,35 @@ externalDocs:
             "registerPK": "moxa",
             "registerCert": "moxa"
           },
+        "error": {
+          "code": 100,
+          "message": "Register failure reason"
+        },
         "newEnrollCA": 
           {
             "enrollPK": "moxa",
             "enrollCert": "moxa"
           }
       }  
-
+    BatchEnrollReq:
+      {
+        "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+        "deviceList": [
+          {
+            "mac": "001122334455",
+            "serialNumber": "12345678",
+            "modelName": "UC-8112A-ME-T-LX"
+          }
+        ]
+      }
+    BatchEnrollRes:
+      [
+        {
+          "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "mac": "001122334455",
+          "enrollPK": "moxa",
+          "enrollCert": "moxa"
+        }
+      ]
+      
     

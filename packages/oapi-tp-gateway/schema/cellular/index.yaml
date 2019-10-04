@@ -1,8 +1,8 @@
 swagger: "2.0"
 
 info:
-  version: 2.1.0
-  title: ThingsPro Gateway RESTful API reference
+  version: 4.1.0
+  title: ThingsPro Gateway Cellular RESTful API reference
 basePath: /api/v1
 schemes:
 - http
@@ -45,11 +45,18 @@ paths:
                   carriers:
                   - ATT
                   - SPRINT
-                mode: umts
+                mode: lte
                 signal:
+                  rat: lte
                   csq: 14
                   rssi: -76
+                  rxqual: 1
+                  rscp: -80
                   ecio: -8.5
+                  rsrp: -107.3
+                  rsrq: -12.0
+                  indicator: RSRP
+                  level: 4
                 operatorName: Chunghwa Telecom
                 lac: "11114"
                 tac: ""
@@ -118,71 +125,78 @@ paths:
           description: An Cellular interface settings.
           schema:
             $ref: '#/definitions/CellularAll'
-            example:
-              id: 1
-              name: wwan1
-              capabilities:
-                sim:
-                - 1
-                - 2
-                carriers:
-                - ATT
-                - SPRINT
-              mode: umts
-              signal:
-                csq: 14
-                rssi: -76
-                ecio: -8.5
-              operatorName: Chunghwa Telecom
-              lac: "11114"
-              tac: ""
-              nid: ""
-              cellId: "1249"
-              bid: ""
-              iccId: ""
-              imsi: "466977502877452"
-              imei: "356853050370859"
-              esn: 802202F0
-              pinRetryRemain: 3
-              status: connected
-              mac: 00:00:00:00:00:00
-              ip: 111.70.146.125
-              netmask: 255.255.255.252
-              gateway: 111.70.146.126
-              dns:
-              - 168.95.1.1
-              - 168.95.192.1
-              usage:
-                txkbyte: 40023
-                rxkbyte: 3493
-              currentProfileId: 1
+          examples:
+            id: 1
+            name: wwan1
+            capabilities:
+              sim:
+              - 1
+              - 2
+              carriers:
+              - ATT
+              - SPRINT
+            mode: umts
+            signal:
+              rat: lte
+              csq: 14
+              rssi: -76
+              rxqual: 1
+              rscp: -80
+              ecio: -8.5
+              rsrp: -107.3
+              rsrq: -12.0
+              indicator: RSRP
+              level: 4
+            operatorName: Chunghwa Telecom
+            lac: "11114"
+            tac: ""
+            nid: ""
+            cellId: "1249"
+            bid: ""
+            iccId: ""
+            imsi: "466977502877452"
+            imei: "356853050370859"
+            esn: 802202F0
+            pinRetryRemain: 3
+            status: connected
+            mac: 00:00:00:00:00:00
+            ip: 111.70.146.125
+            netmask: 255.255.255.252
+            gateway: 111.70.146.126
+            dns:
+            - 168.95.1.1
+            - 168.95.192.1
+            usage:
+              txkbyte: 40023
+              rxkbyte: 3493
+            currentProfileId: 1
+            enable: true
+            keepalive:
               enable: true
+              targetHost: 8.8.8.8
+              intervalSec: 60
+              reboot:
+                enable: false
+                cycles: 1
+            profileId: 1
+            profileTimeout: 300
+            profiles:
+            - id: 1
+              pinCode: "0000"
+              pdpContext:
+                static: true
+                id: 1
+                apn: internet
+                type: ipv4v6
+                auth:
+                  protocol: none
+                  username: ""
+                  password: ""
               keepalive:
-                enable: true
-                targetHost: 8.8.8.8
-                intervalSec: 60
-                reboot:
-                  enable: false
-                  cycles: 1
-              profileId: 1
-              profileTimeout: 300
-              profiles:
-              - id: 1
-                pinCode: "0000"
-                pdpContext:
-                  static: true
-                  id: 1
-                  apn: internet
-                  type: ipv4v6
-                  auth:
-                    protocol: none
-                    username: ""
-                    password: ""
-                keepalive:
-                  enable: false
-                init:
-                - sim:1
-                - carrier:ATT
+                enable: false
+              init:
+              - sim:1
+              - carrier:ATT
       tags:
         - cellular
       security:
@@ -206,49 +220,49 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CellularSettings'
-            example:
-              id: 1
+          examples:
+            id: 1
+            enable: true
+            keepalive:
               enable: true
+              targetHost: 8.8.8.8
+              intervalSec: 60
+              reboot:
+                enable: false
+                cycles: 1
+            profileId: 1
+            profileTimeout: 300
+            profiles:
+            - id: 1
+              pinCode: "0000"
+              pdpContext:
+                static: true
+                id: 1
+                apn: internet
+                type: ipv4v6
+                auth:
+                  protocol: none
+                  username: ""
+                  password: ""
               keepalive:
-                enable: true
-                targetHost: 8.8.8.8
-                intervalSec: 60
-                reboot:
-                  enable: false
-                  cycles: 1
-              profileId: 1
-              profileTimeout: 300
-              profiles:
-              - id: 1
-                pinCode: "0000"
-                pdpContext:
-                  static: true
-                  id: 1
-                  apn: internet
-                  type: ipv4v6
-                  auth:
-                    protocol: none
-                    username: ""
-                    password: ""
-                keepalive:
-                  enable: false
-                init:
-                - sim:1
-                - carrier:ATT
-              - id: 2
-                pdpContext:
-                  id: 3
-                  static: false
-                  apn: ""
-                  type: ipv4
-                  auth:
-                    protocol: none
-                    username: ""
-                    password: ""
-                keepalive:
-                  targetHost: 1.2.3.4
-                init:
-                - carrier:VZW
+                enable: false
+              init:
+              - sim:1
+              - carrier:ATT
+            - id: 2
+              pdpContext:
+                id: 3
+                static: false
+                apn: ""
+                type: ipv4
+                auth:
+                  protocol: none
+                  username: ""
+                  password: ""
+              keepalive:
+                targetHost: 1.2.3.4
+              init:
+              - carrier:VZW
       tags:
         - cellular
       security:
@@ -267,13 +281,13 @@ paths:
           description: carrier information of indicated Cellular interface.
           schema:
             $ref: '#/definitions/CellularCarrierInfo'
-            example:
-              switchable: true
-              current: ATT
-              preferred: ATT
-              available:
-              - ATT
-              - VZW
+          examples:
+            switchable: true
+            current: ATT
+            preferred: ATT
+            available:
+            - ATT
+            - VZW
       tags:
         - cellular
       security:
@@ -296,8 +310,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CellularCarrierEntry'
-            example:
-              carrier: VZW
+          examples:
+            carrier: VZW
       tags:
         - cellular
       security:
@@ -316,23 +330,23 @@ paths:
           description: firmware information of indicated Cellular interface.
           schema:
             $ref: '#/definitions/CellularFirmwareInfo'
-            example:
-              switchable: true
-              current:
-                fwver: 05.05.58.01
-                config: ATT_005.029_001
-                carrier: ATT
-              preferred:
-                fwver: 05.05.58.01
-                config: ATT_005.029_001
-                carrier: ATT
-              available:
-              - fwver: 05.05.58.01
-                config: ATT_005.029_001
-                carrier: ATT
-              - fwver: 05.05.58.02
-                config: VZW_005.029_002
-                carrier: VZW
+          examples:
+            switchable: true
+            current:
+              fwver: 05.05.58.01
+              config: ATT_005.029_001
+              carrier: ATT
+            preferred:
+              fwver: 05.05.58.01
+              config: ATT_005.029_001
+              carrier: ATT
+            available:
+            - fwver: 05.05.58.01
+              config: ATT_005.029_001
+              carrier: ATT
+            - fwver: 05.05.58.02
+              config: VZW_005.029_002
+              carrier: VZW
       tags:
         - cellular
       security:
@@ -355,10 +369,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CellularFirmwareEntry'
-            example:
-              fwver: 05.05.58.01
-              config: ATT_005.029_001
-              carrier: ATT
+          examples:
+            fwver: 05.05.58.01
+            config: ATT_005.029_001
+            carrier: ATT
       tags:
         - cellular
       security:
@@ -381,9 +395,16 @@ definitions:
         - SPRINT
       mode: umts
       signal:
+        rat: lte
         csq: 14
         rssi: -76
+        rxqual: 1
+        rscp: -80
         ecio: -8.5
+        rsrp: -107.3
+        rsrq: -12.0
+        indicator: RSRP
+        level: 4
       operatorName: Chunghwa Telecom
       lac: "11114"
       tac: ""
@@ -867,10 +888,17 @@ definitions:
       carrier: ATT
   CellularStatus_signal:
     required:
+    - rat
     - csq
-    - ecio
     - rssi
+    - level
+    - indicator
     properties:
+      rat:
+        type: string
+        description: |
+          Given cellular connection mode. Could be one of `umts`, `lte`, `m1`,
+          `nb1`, `none`.
       csq:
         type: integer
         description: |
@@ -879,13 +907,49 @@ definitions:
       rssi:
         type: integer
         description: |
-          Cellular RF signal strength, in `dbm`. Value `0` indicates no
-          SIM card found.
+          Cellular RF signal strength, in `dBm`. Value `-999` indicates no
+          signal.
+      rxqual:
+        type: integer
+        description: |
+          RxQual is used in GSM and is a part of the Network Measurement Reports
+          (NMR). This is an integer value which can be between 0 and 7 and
+          reflects the quality of voice. 0 is the best quality, 7 is the worst.
+      rscp:
+        type: integer
+        description: |
+          In the UMTS cellular communication system, received signal code power
+          (RSCP, in `dBm`) denotes the power measured by a receiver on a
+          particular physical communication channel.
       ecio:
         type: integer
         description: |
           The ratio of the received energy per chip (= code bit) and the
           interference level, given in `dBm`.
+      rsrp:
+        type: integer
+        description: |
+          Reference Signal Received Power is an RSSI type of measurement. It is
+          the power of the LTE Reference Signals spread over the full bandwidth
+          and narrowband, given in `dBm`.
+      rsrq:
+        type: integer
+        description: |
+          Reference Signal Received Quality, Quality considering also RSSI and
+          the number of used Resource Blocks (N) RSRQ = (N * RSRP) / RSSI
+          measured over the same bandwidth. RSRQ is a C/I type of measurement
+          and it indicates the quality of the received reference signal, given
+          in `dB`.
+      indicator:
+        type: string
+        description: |
+          The indicator is either `RSSI` for 2G/3G or `RSRP` for 4G and `none`
+          if no signal.
+      level:
+        type: integer
+        description: |
+          Signal levels defined in 6 degrees 0 ~ 5. The mapping is `no signal`,
+          `very poor`, `poor`, `fair`, `good`, and `excellent`.
     description: Cellular RF signal strength, include RSSI and EcIo.
   CellularProfile_pdpContext_auth:
     required:

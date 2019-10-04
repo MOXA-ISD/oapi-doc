@@ -18,7 +18,7 @@ paths:
     post:
       description: Return enroll certificate and key
       tags:
-        - project
+        - device
       parameters:
         - name: body
           in: body
@@ -35,12 +35,19 @@ paths:
               $ref: '#/definitions/EnrollRes'
             example: 
               $ref: '#/externalDocs/x-mocks/EnrollRes'
+    delete:
+      description: Unenroll device
+      tags:
+        - device
+      responses:
+        204:
+          description: success
 
   /register:
     post:
       description: Return register certificate and key
       tags:
-        - project
+        - device
       parameters:
         - name: body
           in: body
@@ -57,7 +64,13 @@ paths:
               $ref: '#/definitions/RegisterRes'
             example: 
               $ref: '#/externalDocs/x-mocks/RegisterRes'
-
+    delete:
+      description: Unregister device
+      tags:
+        - device
+      responses:
+        204:
+          description: success
   
 definitions:
   EnrollReq:
@@ -130,7 +143,7 @@ definitions:
         description: information for connect to cloud
       newEnrollCA:
         type: object
-        description: Enroll cert and private key, Only send when old cert will expire nearby, .
+        description: Enroll cert and private key, Only send when old cert will expire nearby
       
 externalDocs:
   url: 'http://#'
@@ -160,7 +173,7 @@ externalDocs:
       {
         "error": {
           "code": 100,
-          "reason": "Register failure reason"
+          "message": "Register failure reason"
         },
         "data": 
           {

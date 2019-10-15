@@ -10,7 +10,7 @@ schemes:
 produces:
   - application/json
 tags:
-  - name: device
+  - name: modelProfile
     description: Handles model profiles data
 
 paths:
@@ -18,7 +18,7 @@ paths:
     get:
       description: Return all model profiles data 
       tags:
-        - device
+        - modelProfile
       responses:
         200:
           description: An array of the modelProfile
@@ -38,7 +38,7 @@ paths:
     get:
       description: Return profile data with given model name
       tags:
-        - device
+        - modelProfile
       responses:
         200:
           description: An Object of the profile

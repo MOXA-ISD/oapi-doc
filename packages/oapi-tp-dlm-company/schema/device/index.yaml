@@ -3,12 +3,9 @@ swagger: '2.0'
 
 tags:
 - $ref: "./device.yaml#/tags"
-- $ref: "./modelProfile.yaml#/tags"
 
 paths:
 - $ref: "./device.yaml#/paths"
-- $ref: "./modelProfile.yaml#/paths"
 
 definitions:
 - $ref: "./device.yaml#/definitions"
-- $ref: "./modelProfile.yaml#/definitions"

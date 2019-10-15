@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.1
+  version: 0.0.2
   title: DLM Partner Portal RESTful API reference
   description: |
     Welcome to the DLM Partner Portal RESTful API reference.
@@ -15,13 +15,6 @@ schemes:
 
 produces:
   - application/json
-
-securityDefinitions:
-  mx-api-token:
-    type: apiKey
-    name: bearer
-    in: header
-    description: DLM RESTful API token, The token will create when user login.
 
 tags:
   - $ref: './device/index.yaml#/tags'

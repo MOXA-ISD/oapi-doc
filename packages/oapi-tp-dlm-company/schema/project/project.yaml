@@ -225,6 +225,23 @@ definitions:
           - disable
           - removed
         description: Status of project.
+  EnrollCreate:
+    type: object
+    required:
+    - mac
+    - serialNumber
+    - modelName
+    description: Device connection data payload
+    properties:
+      mac:
+        type: string
+        description: Device mac.
+      serialNumber:
+        type: string
+        description: Device serial number.  
+      modelName:
+        type: string
+        description: Device model name.
   EnrollRes:
     type: object
     description: Return enroll PK and cert, the default mode is hyperlink mode, server will response(enrollPKLink + enrollCertLink), if mode=text in query string, server will response (enrollPK + enrollCert)
@@ -244,23 +261,6 @@ definitions:
       enrollCertLink:
         type: string
         description: Certificate.
-  BatchEnrollRes:
-    type: array
-    description: Return batch enroll PK and cert
-    items:
-      properties:
-        deviceId:
-          type: string
-          description: Device id.
-        mac:
-          type: string
-          description: Device mac.
-        enrollPK:
-          type: string
-          description: Private key.
-        enrollCert:
-          type: string
-          description: Certificate.
 externalDocs:
   url: 'http://#'
   x-mocks:

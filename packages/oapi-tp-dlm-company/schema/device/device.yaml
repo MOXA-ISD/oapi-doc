@@ -14,9 +14,14 @@ tags:
     description: Handles device data
 
 paths:
-  /devices:
+  /projescts/{projectId}/devices:
     get:
       parameters:
+        - name: projectId
+          in: path
+          description: project unique identifier
+          required: true
+          type: string
         - name: hostName
           in: query
           description: Filter the device list by hostName

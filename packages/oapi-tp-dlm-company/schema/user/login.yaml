@@ -34,11 +34,13 @@ paths:
         200:
           description: Return user and token data
           schema:
-            $ref: '#/definitions/LoginRes'
+            type: object
+            items:
+              $ref: '#/definitions/LoginRes'
             example:
               $ref: '#/externalDocs/x-mocks/LoginRes'
       tags:
-        - user
+        - login
 
   /logout:
     post:
@@ -47,7 +49,7 @@ paths:
         200:
           description: user logout
       tags:
-        - user
+        - login
 
 definitions:
   LoginRes:

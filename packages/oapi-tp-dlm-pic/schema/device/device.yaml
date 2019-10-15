@@ -25,7 +25,7 @@ paths:
           description: Information of device
           required: true
           schema:
-            $ref: '#/definitions/EnrollReq'
+            $ref: '#/definitions/EnrollCreate'
       responses:
         200:
           description: Response enroll certificate and key
@@ -92,7 +92,7 @@ paths:
             example:
               $ref: '#/externalDocs/x-mocks/BatchEnrollRes'
 definitions:
-  EnrollReq:
+  EnrollCreate:
     type: object
     required:
     - mac
@@ -222,7 +222,7 @@ definitions:
 externalDocs:
   url: 'http://#'
   x-mocks:
-    EnrollReq:
+    EnrollCreate:
       {
         "mac": "001122334455",
         "serialNumber": "12345678",

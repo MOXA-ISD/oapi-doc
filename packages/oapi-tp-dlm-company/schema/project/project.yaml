@@ -130,34 +130,6 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/Project'
 
-  /projects/{projectId}/batchenroll:
-    parameters:
-      - name: projectId
-        in: path
-        description: project unique identifier
-        required: true
-        type: string
-    post:
-      description: Return enroll certificate and key in payload
-      tags:
-        - project
-      parameters:
-        - name: body
-          in: body
-          description: Information of device
-          required: true
-          schema:
-            $ref: '#/definitions/BatchEnrollReq'
-      responses:
-        200:
-          description: Response batch enroll certificate and key in payload
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/BatchEnrollRes'
-            example: 
-              $ref: '#/externalDocs/x-mocks/BatchEnrollRes'
-
   /projects/{projectId}/enroll:
     parameters:
       - name: projectId
@@ -182,7 +154,7 @@ paths:
           description: Information of device
           required: true
           schema:
-            $ref: '#/definitions/EnrollReq'
+            $ref: '#/definitions/EnrollCreate'
       responses:
         200:
           description: Response enroll certificate and key
@@ -231,15 +203,9 @@ definitions:
           - disable
           - removed
         description: Status of project.
-      activatedAt:
-        type: string
-        description: project activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       createdAt:
         type: string
-        description: project created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updatedAt:
-        type: string
-        description: project updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
+        description: project created time,ISO data format, like '2018-08-12T20:17:46.384Z'. 
   ProjectCreate:
     type: object
     properties:
@@ -259,27 +225,6 @@ definitions:
           - disable
           - removed
         description: Status of project.
-  BatchEnrollReq:
-    type: array
-    items:
-      '$ref': '#/definitions/EnrollReq'
-  EnrollReq:
-    type: object
-    required:
-    - mac
-    - serialNumber
-    - modelName
-    description: Device connection data payload
-    properties:
-      mac:
-        type: string
-        description: Device mac.
-      serialNumber:
-        type: string
-        description: Device serial number.  
-      modelName:
-        type: string
-        description: Device model name. 
   EnrollRes:
     type: object
     description: Return enroll PK and cert, the default mode is hyperlink mode, server will response(enrollPKLink + enrollCertLink), if mode=text in query string, server will response (enrollPK + enrollCert)
@@ -324,9 +269,7 @@ externalDocs:
         "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "name": "MOXA",
         "status": "enable",
-        "activatedAt": "",
-        "createdAt": "2019-03-08T07:18:27:565Z",
-        "updatedAt": "2019-03-08T07:18:27:565Z"
+        "createdAt": "2019-03-08T07:18:27:565Z"
       }
     ProjectList:
       {
@@ -336,9 +279,7 @@ externalDocs:
             "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
             "name": "MOXA",
             "status": "enable",
-            "activatedAt": "",
-            "createdAt": "2019-03-08T07:18:27:565Z",
-            "updatedAt": "2019-03-08T07:18:27:565Z"
+            "createdAt": "2019-03-08T07:18:27:565Z"
           }
         ],
         "limit": 1,
@@ -353,22 +294,12 @@ externalDocs:
         "name": "MOXA",
         "status": "enable"
       }
-    EnrollReq:
+    EnrollCreate:
       {
         "mac": "001122334455",
         "serialNumber": "12345678",
         "modelName": "UC-8112"
       }
-    BatchEnrollReq:
-      {
-        "deviceList": [
-          {
-            "mac": "001122334455",
-            "serialNumber": "12345678",
-            "modelName": "UC-8112"
-          }
-        ]
-      }  
     EnrollRes:
       {
         "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",

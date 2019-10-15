@@ -150,7 +150,7 @@ definitions:
         items:
           type: object
           items:
-            - $ref: '#/definitions/PermissionReq'
+            - $ref: '#/definitions/PermissionCreate'
   RoleUpdate:
     type: object
     required:
@@ -174,8 +174,8 @@ definitions:
         items:
           type: object
           items:
-            - $ref: '#/definitions/PermissionReq'
-  PermissionReq:
+            - $ref: '#/definitions/PermissionCreate'
+  PermissionCreate:
     title: Permission
     type: object
     required:

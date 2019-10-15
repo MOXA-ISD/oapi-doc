@@ -1,0 +1,12 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./package.yaml#/tags"
+
+paths:
+- $ref: "./package.yaml#/paths"
+
+definitions:
+- $ref: "./package.yaml#/definitions"
+

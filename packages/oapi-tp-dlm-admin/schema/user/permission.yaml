@@ -24,32 +24,14 @@ paths:
         200:
           description: success
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Permission'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Permission'
             example: 
               $ref: '#/externalDocs/x-mocks/PermissionList'
-
-  /permissions/{id}:
-    parameters:
-      - name: id
-        in: path
-        description: Permission ID
-        required: true
-        type: integer
-    get:
-      description: Get permission field data by id
-      tags:
-        - permission
-      responses:
-        200:
-          description: success
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Permission'
-            example:
-              $ref: '#/externalDocs/x-mocks/Permission'
 
 definitions:
   Permission:

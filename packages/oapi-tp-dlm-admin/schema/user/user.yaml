@@ -70,10 +70,19 @@ paths:
         200:
           description: An array of users
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
-            example:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
+            example: 
               $ref: '#/externalDocs/x-mocks/UserList'
 
   /users/{userId}:
@@ -93,9 +102,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/UserRes'
             example:
-              $ref: '#/externalDocs/x-mocks/User'
+              $ref: '#/externalDocs/x-mocks/UserRes'
     put:
       description: Return updated user data with given ID
       tags:
@@ -113,9 +122,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/UserRes'
             example:
-              $ref: '#/externalDocs/x-mocks/User'
+              $ref: '#/externalDocs/x-mocks/UserRes'
     delete:
       description: Delete User with given ID
       tags:
@@ -141,9 +150,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/UserRes'
             example:
-              $ref: '#/externalDocs/x-mocks/User'
+              $ref: '#/externalDocs/x-mocks/UserRes'
   /users/forgetPassword:
     post:
       description: Send an email to user for reset password
@@ -300,8 +309,14 @@ definitions:
       passwordExpiredAt:
         type: string
         description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
-  Invitee:
+  UserRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/User'
+  Invitee:  
     type: object
     properties:
       inviteId:
@@ -332,9 +347,12 @@ definitions:
   UserExist:
     type: object
     properties:
-      exist:
-        type: boolean
-        description: Determining if the email exists in this company.
+      data:
+        type: object
+        properties:
+          exist:
+            type: boolean
+            description: Determining if the email exists in this portal.
 
   UserChangePassword:
     type: object
@@ -439,6 +457,34 @@ externalDocs:
         "updatedAt": "2019-03-08T08:44:13.425Z",
         "loginedAt": "",
         "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
+      }
+    UserRes:
+      {
+        "data": {
+          "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+          "username": "Owen",
+          "email": "rick.peng@moxa.com",
+          "status": "enable",
+          "role": {
+              "roleId": 2,
+              "name": "Administrator",
+              "admin": true,
+              "permissions": [
+                {
+                  "id": 1,
+                  "value": 0
+                },
+                {
+                  "id": 2,
+                  "value": 0
+                }
+              ]
+          },
+          "createdAt": "2019-03-08T08:44:13.425Z",
+          "updatedAt": "2019-03-08T08:44:13.425Z",
+          "loginedAt": "",
+          "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
+        }
       }
     UserExist:
       { "exist": true }

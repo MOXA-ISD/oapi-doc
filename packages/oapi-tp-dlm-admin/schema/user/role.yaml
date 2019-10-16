@@ -24,9 +24,12 @@ paths:
         200:
           description: An array of role
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Role'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Role'
             example: 
               $ref: '#/externalDocs/x-mocks/RoleList'
     post:
@@ -51,9 +54,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Role'
+              $ref: '#/definitions/RoleRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/Role'
+              $ref: '#/externalDocs/x-mocks/RoleRes'
 
   /roles/{id}:
     parameters:
@@ -72,9 +75,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Role'
+              $ref: '#/definitions/RoleRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/Role'
+              $ref: '#/externalDocs/x-mocks/RoleRes'
     put:
       description: Return updated user data with given ID
       tags:
@@ -96,9 +99,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Role'
+              $ref: '#/definitions/RoleRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/Role'
+              $ref: '#/externalDocs/x-mocks/RoleRes'
     delete:
       description: Delete role with given ID
       tags:
@@ -129,6 +132,13 @@ definitions:
           type: object
           items:
             - $ref: '#/definitions/Permission'
+  RoleRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          - $ref: '#/definitions/Role'
   RoleCreate:
     type: object
     required:
@@ -212,6 +222,25 @@ externalDocs:
             "value": 0
           }
         ]
+      }
+    RoleRes:
+      {
+        "data": {     
+          "roleId": 2,
+          "name": "Device manager",
+          "description": "Full permission on managing devices.",
+          "admin": false,
+          "permissions": [
+            {
+              "id": 1,
+              "value": 0
+            },
+            {
+              "id": 2,
+              "value": 0
+            }
+          ]
+        }
       }
     RoleCreate:
       {

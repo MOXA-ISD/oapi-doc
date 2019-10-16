@@ -70,9 +70,18 @@ paths:
         200:
           description: An array of users
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
             example: 
               $ref: '#/externalDocs/x-mocks/UserList'
 
@@ -93,9 +102,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/UserRes'
             example:
-              $ref: '#/externalDocs/x-mocks/User'
+              $ref: '#/externalDocs/x-mocks/UserRes'
     put:
       description: Return updated user data with given ID
       tags:
@@ -113,9 +122,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/UserRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/User'
+              $ref: '#/externalDocs/x-mocks/UserRes'
     delete:
       description: Delete User with given ID
       tags:
@@ -141,9 +150,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/UserRes'
             example:
-              $ref: '#/externalDocs/x-mocks/User'
+              $ref: '#/externalDocs/x-mocks/UserRes'
   /users/forgetPassword:
     post:
       description: Send an email to user for reset password
@@ -318,8 +327,15 @@ definitions:
       permissions:
         type: array
         items:
-          '$ref': '#/definitions/Permission'
+          $ref: '#/definitions/Permission'
         description: permission list.
+  UserRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/User'
   Permission:
     type: object
     properties:
@@ -358,9 +374,12 @@ definitions:
   UserExist:
     type: object
     properties:
-      exist:
-        type: boolean
-        description: Determining if the email exists in this company.
+      data:
+        type: object
+        properties:
+          exist:
+            type: boolean
+            description: Determining if the email exists in this company.
   UserChangePassword:
     type: object
     properties:
@@ -459,6 +478,35 @@ externalDocs:
         "loginedAt": "",  
         "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
       }
+    UserRes:
+      {
+        "data": {
+          "companyId": "07473967-3c29-4914-b275-d0511c42554e",
+          "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+          "status": "enable",
+          "role": {
+              "roleId": 2,
+              "name": "Administrator",
+              "admin": true,
+              "permissions": [
+                {
+                  "id": 1,
+                  "value": 0
+                },
+                {
+                  "id": 2,
+                  "value": 0
+                }
+              ]
+          },
+          "username": "owen",
+          "email": "owen@moxa.com",
+          "createdAt": "2019-03-08T08:44:13.425Z",
+          "updatedAt": "2019-03-08T08:44:13.425Z",
+          "loginedAt": "",  
+          "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
+        }
+      }
     UserUpdate:
       {
         "username": "Cain Chen",
@@ -470,7 +518,9 @@ externalDocs:
       }
     UserExist:
       { 
-        "exist": true 
+        "data": {
+          "exist": true 
+        }
       }
     UserChangePassword:
       {

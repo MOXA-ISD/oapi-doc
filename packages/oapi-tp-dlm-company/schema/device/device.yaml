@@ -99,9 +99,18 @@ paths:
         200:
           description: An array of devices
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Device'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Device'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
             example: 
               $ref: '#/externalDocs/x-mocks/DeviceList'
       tags:
@@ -298,65 +307,74 @@ definitions:
       disconnectedAt:
         type: string
         description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-
+  DeviceRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/Device'
   DeviceDetail:
     type: object
     properties:
-      projectId:
-        type: string
-        description: Unique identifier representing a specific project.
-      deviceId:
-        type: string
-        description: Unique identifier representing a specific device.
-      modelName:
-        type: string
-        description: Model name of device.
-      mac:
-        type: string
-        description: Mac address of device.
-      serialNumber:
-        type: string
-        description: Serial number of device.
-      version:
-        type: string
-        description: Firmware version of device.
-      tags:
-        type: array
-        description: Tag list of device.
-        items:
-          type: string
-      status:
-        type: string
-        enum:
-        - online
-        - offline
-        - registered
-        - enrolled
-        - retired
-        description: status of device.    
-      profileId:
-        type: integer
-        description: Dependency Profile id, this field could be empty, if there is no dependency Profile.
-      profileName:
-        type: string
-        description: Dependency profile name.
-      configUpdatedAt:
-        type: string
-        description: Device last config updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      connectedAt:
-        type: string
-        description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      disconnectedAt:
-        type: string
-        description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
-      reportedProperties:
+      data:
         type: object
         properties:
-          directMethodList:
+          projectId:
+            type: string
+            description: Unique identifier representing a specific project.
+          deviceId:
+            type: string
+            description: Unique identifier representing a specific device.
+          modelName:
+            type: string
+            description: Model name of device.
+          mac:
+            type: string
+            description: Mac address of device.
+          serialNumber:
+            type: string
+            description: Serial number of device.
+          version:
+            type: string
+            description: Firmware version of device.
+          tags:
             type: array
+            description: Tag list of device.
             items:
-              type: object
-            description: Device direct method list.
+              type: string
+          status:
+            type: string
+            enum:
+            - online
+            - offline
+            - registered
+            - enrolled
+            - retired
+            description: status of device.    
+          profileId:
+            type: integer
+            description: Dependency Profile id, this field could be empty, if there is no dependency Profile.
+          profileName:
+            type: string
+            description: Dependency profile name.
+          configUpdatedAt:
+            type: string
+            description: Device last config updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+          connectedAt:
+            type: string
+            description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+          disconnectedAt:
+            type: string
+            description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+          reportedProperties:
+            type: object
+            properties:
+              directMethodList:
+                type: array
+                items:
+                  type: object
+                description: Device direct method list.
 
   DesiredProperties:
     type: object
@@ -478,7 +496,7 @@ externalDocs:
       {
         "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        "mac": "00-0C-29-70-D2-EC",
+        "mac": "000C2970D2EC",
         "serialNumber": "123456",
         "hostName": "moxa",
         "modelName": "UC-8112-LX-CG",
@@ -490,6 +508,24 @@ externalDocs:
         "connectedAt": "2019-02-26T14:10:33:000Z",
         "disconnectedAt": "2019-02-26T14:10:33:000Z"
       } 
+    DeviceRes:
+      {
+        "data": {
+          "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "mac": "000C2970D2EC",
+          "serialNumber": "123456",
+          "hostName": "moxa",
+          "modelName": "UC-8112-LX-CG",
+          "profileId": 1,
+          "profileName": "test",
+          "status": "online",
+          "tags": ["moxa"],
+          "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+          "connectedAt": "2019-02-26T14:10:33:000Z",
+          "disconnectedAt": "2019-02-26T14:10:33:000Z"
+        }
+      } 
     DeviceList:
       {
         "count": 5,
@@ -500,7 +536,7 @@ externalDocs:
             {
               "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
               "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-              "mac": "00-0C-29-70-D2-EC",
+              "mac": "000C2970D2EC",
               "serialNumber": "123456",
               "hostName": "moxa",
               "modelName": "UC-8112-LX-CG",
@@ -579,28 +615,30 @@ externalDocs:
       }
     DeviceDetail:
       {
-        "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        "mac": "00-0C-29-70-D2-EC",
-        "serialNumber": "123456",
-        "hostName": "moxa",
-        "modelName": "UC-8112-LX-CG",
-        "profileId": 1,
-        "profileName": "test",
-        "status": "online",
-        "tags": ["moxa"],
-        "configUpdatedAt": "2019-02-26T14:10:33:000Z",
-        "connectedAt": "2019-02-26T14:10:33:000Z",
-        "disconnectedAt": "2019-02-26T14:10:33:000Z",
-        "reportedProperties": {
-          "reported": {}
+        "data": {
+          "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "mac": "000C2970D2EC",
+          "serialNumber": "123456",
+          "hostName": "moxa",
+          "modelName": "UC-8112-LX-CG",
+          "profileId": 1,
+          "profileName": "test",
+          "status": "online",
+          "tags": ["moxa"],
+          "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+          "connectedAt": "2019-02-26T14:10:33:000Z",
+          "disconnectedAt": "2019-02-26T14:10:33:000Z",
+          "reportedProperties": {
+            "reported": {}
+          }
         }
       }   
     DeviceModeMap:
       {
         "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
         "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
-        "mac": "00-0C-29-70-D2-EC",
+        "mac": "000C2970D2EC",
         "serialNumber": "123456",
         "hostName": "moxa",
         "modelName": "UC-8112-LX-CG",

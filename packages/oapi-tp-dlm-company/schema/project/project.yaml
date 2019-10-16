@@ -64,10 +64,19 @@ paths:
         200:
           description: An array of projects
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Project'
-            example:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Project'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
+            example: 
               $ref: '#/externalDocs/x-mocks/ProjectList'
     post:
       description: Create a new project.
@@ -85,9 +94,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Project'
+              $ref: '#/definitions/ProjectRes'
             example:
-              $ref: '#/externalDocs/x-mocks/Project'
+              $ref: '#/externalDocs/x-mocks/ProjectRes'
 
   /projects/{projectId}:
     parameters:
@@ -106,9 +115,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Project'
+              $ref: '#/definitions/ProjectRes'
             example:
-              $ref: '#/externalDocs/x-mocks/Project'
+              $ref: '#/externalDocs/x-mocks/ProjectRes'
     put:
       description: Return updated project data with given ID
       tags:
@@ -126,9 +135,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Project'
+              $ref: '#/definitions/ProjectRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/Project'
+              $ref: '#/externalDocs/x-mocks/ProjectRes'
 
   /projects/{projectId}/enroll:
     parameters:
@@ -206,6 +215,13 @@ definitions:
       createdAt:
         type: string
         description: project created time,ISO data format, like '2018-08-12T20:17:46.384Z'. 
+  ProjectRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/Project'
   ProjectCreate:
     type: object
     properties:
@@ -271,6 +287,15 @@ externalDocs:
         "status": "enable",
         "createdAt": "2019-03-08T07:18:27:565Z"
       }
+    ProjectRes:
+      {
+        "data": {
+          "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+          "name": "MOXA",
+          "status": "enable",
+          "createdAt": "2019-03-08T07:18:27:565Z"
+        }
+      }  
     ProjectList:
       {
         "count": 13,
@@ -302,11 +327,13 @@ externalDocs:
       }
     EnrollRes:
       {
-        "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
-        "enrollPK": "moxa",
-        "enrollCert": "moxa",
-        "enrollPKLink": "http://www.moxa.com/download=12345",
-        "enrollCertLink": "http://www.moxa.com/download=abcde"
+        "data": {
+          "deviceId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "enrollPK": "moxa",
+          "enrollCert": "moxa",
+          "enrollPKLink": "http://www.moxa.com/download=12345",
+          "enrollCertLink": "http://www.moxa.com/download=abcde"
+        }
       }
     BatchEnrollRes:
       [

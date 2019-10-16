@@ -55,20 +55,24 @@ definitions:
   LoginRes:
     type: object
     properties:
-      user:
+      data:
         type: object
-        items:
-          - $ref: '#/definitions/User'
-      token:
-        type: string
-        description: Granted authentication token.
+        properties:
+          user:
+            type: object
+            items:
+              - $ref: '#/definitions/User'
+          token:
+            type: string
+            description: Granted authentication token.
 
 externalDocs:
   url: 'https://#'
   x-mocks:
     LoginRes:
       {
-        user:
+        "data": {
+          "user":
           {
             "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
             "username": "Owen",
@@ -79,5 +83,6 @@ externalDocs:
             "loginedAt": "",
             "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
           },
-        token: "USER_TOKEN"
+          "token": "USER_TOKEN"
+        }
       }

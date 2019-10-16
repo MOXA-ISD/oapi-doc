@@ -71,10 +71,19 @@ paths:
         200:
           description: An object of the modelProfile
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ModelProfile'
-            example:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/ModelProfile'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
+            example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileList'
     post:
       description: Return updated modelProfile data with given ID
@@ -93,9 +102,10 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/ModelProfile'
+              $ref: '#/definitions/ModelProfileRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/ModelProfile'
+              $ref: '#/externalDocs/x-mocks/ModelProfileRes'
+
   /projects/{projectId}/modelProfiles/{modelPrfileName}:
     parameters:
       - name: projectId
@@ -118,9 +128,10 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ModelProfile'
+              $ref: '#/definitions/ModelProfileRes'
             example:
-              $ref: '#/externalDocs/x-mocks/ModelProfile'
+              $ref: '#/externalDocs/x-mocks/ModelProfileRes'
+
   /projects/{projectId}/modelProfiles/{modelPrfileId}:
     parameters:
       - name: projectId
@@ -143,9 +154,9 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ModelProfile'
+              $ref: '#/definitions/ModelProfileRes'
             example:
-              $ref: '#/externalDocs/x-mocks/ModelProfile'
+              $ref: '#/externalDocs/x-mocks/ModelProfileRes'
     put:
       description: Return updated modelProfile data with given ID
       parameters:
@@ -173,9 +184,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/ModelProfile'
+              $ref: '#/definitions/ModelProfileRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/ModelProfile'
+              $ref: '#/externalDocs/x-mocks/ModelProfileRes'
     patch:
       description: update is defualt field
       parameters:
@@ -202,9 +213,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/ModelProfile'
+              $ref: '#/definitions/ModelProfileRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/ModelProfile'
+              $ref: '#/externalDocs/x-mocks/ModelProfileRes'
 
 definitions:
   ModelProfile:
@@ -244,7 +255,13 @@ definitions:
       profile:
         type: object
         description: Model Profile.
-
+  ModelProfileRes:
+    type: object
+      properties:
+        data:
+          type: object
+          items:
+            $ref: '#/definitions/ModelProfile'
   ModelProfileCreate:
     type: object
     required:
@@ -299,6 +316,26 @@ externalDocs:
           "system_properties" : "",
           "direct_method" : "",  
           "device_image" : ""
+        }
+      }
+    ModelProfileRes:
+      {
+        "data": {
+          "profileId": 1,
+          "modelName": "UC-8112",
+          "description": "default profile",
+          "profileName": "test",
+          "createdBy": "owen",
+          "tag": "1.0.0",
+          "status": "ready",
+          "isDefault": true,
+          "createdAt": "2019-02-26T14:10:33:000Z",
+          "profile": {
+            "system_tag" : "",
+            "system_properties" : "",
+            "direct_method" : "",  
+            "device_image" : ""
+          }
         }
       }
     ModelProfileList:

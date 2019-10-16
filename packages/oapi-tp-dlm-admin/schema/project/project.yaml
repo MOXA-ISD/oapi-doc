@@ -64,10 +64,19 @@ paths:
         200:
           description: An array of projects
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Project'
-            example:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Project'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
+            example: 
               $ref: '#/externalDocs/x-mocks/ProjectList'
     post:
       description: Create a new project.
@@ -86,9 +95,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Project'
+              $ref: '#/definitions/ProjectRes'
             example:
-              $ref: '#/externalDocs/x-mocks/Project'
+              $ref: '#/externalDocs/x-mocks/ProjectRes'
 
   /projects/{projectId}:
     parameters:
@@ -107,9 +116,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Project'
+              $ref: '#/definitions/ProjectRes'
             example:
-              $ref: '#/externalDocs/x-mocks/Project'
+              $ref: '#/externalDocs/x-mocks/ProjectRes'
     put:
       description: Return updated project data with given ID
       tags:
@@ -127,9 +136,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Project'
+              $ref: '#/definitions/ProjectRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/Project'
+              $ref: '#/externalDocs/x-mocks/ProjectRes'
 
   /projects/{projectId}/users:
     parameters:
@@ -169,15 +178,16 @@ definitions:
           - disable
           - removed
         description: Status of project.
-      activatedAt:
-        type: string
-        description: project activate time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       createdAt:
         type: string
         description: project created time,ISO data format, like '2018-08-12T20:17:46.384Z'.
-      updatedAt:
-        type: string
-        description: project updated time,ISO data format, like '2018-08-12T20:17:46.384Z'.  
+  ProjectRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/Project'
   ProjectCreate:
     type: object
     properties:
@@ -206,10 +216,17 @@ externalDocs:
         "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
         "name": "MOXA",
         "status": "enable",
-        "activatedAt": "",
-        "createdAt": "2019-03-08T07:18:27:565Z",
-        "updatedAt": "2019-03-08T07:18:27:565Z"
+        "createdAt": "2019-03-08T07:18:27:565Z"
       }
+    ProjectRes:
+      {
+        "data": {
+          "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+          "name": "MOXA",
+          "status": "enable",
+          "createdAt": "2019-03-08T07:18:27:565Z"
+        }
+      }  
     ProjectList:
       {
         "count": 13,
@@ -218,9 +235,7 @@ externalDocs:
             "projectId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
             "name": "MOXA",
             "status": "enable",
-            "activatedAt": "",
-            "createdAt": "2019-03-08T07:18:27:565Z",
-            "updatedAt": "2019-03-08T07:18:27:565Z"
+            "createdAt": "2019-03-08T07:18:27:565Z"
           }
         ],
         "limit": 1,

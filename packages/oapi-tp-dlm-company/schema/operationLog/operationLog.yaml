@@ -1,0 +1,99 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Company Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: operationLog
+    description: Handles operation logs
+
+paths:
+  /operationLogs:
+    get:
+      description: Return all operation logs
+      tags:
+        - operationLog
+      responses:
+        200:
+          description: An array of the operationLog
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/operationLog'
+            example:
+              $ref: '#/externalDocs/x-mocks/operationLogList'
+
+definitions:
+  operationLog:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific operation log.
+      deviceId:
+        type: string
+        description: device id.
+      userId:
+        type: string
+        description: user id.
+      level:
+        type: string
+        description: log level - emerg / alert / crit / error / warning / notice / info / debug.
+      operation:
+        type: string
+        description: log action
+      result:
+        type: string
+        description: operation result
+      failReason:
+        type: string
+        description: fail reason
+      memo:
+        type: string
+        description: log memo
+      createdAt:
+        type: string
+        description: operation log created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    operationLog:
+      {
+        "data": {
+          "id": 2011,
+          "deviceId": "abc0bd1a-c221-43eb-920d-30f980720ae9",
+          "userId": null,
+          "level": "info",
+          "operation": "offline",
+          "result": "success",
+          "failReason": "",
+          "memo": {},
+          "createdAt": "2019-10-16T05:37:55.811Z"
+        }
+      }
+    operationLogList:
+      {
+        "count": 1,
+        "data": [
+            {
+              "id": 2011,
+              "deviceId": "abc0bd1a-c221-43eb-920d-30f980720ae9",
+              "userId": null,
+              "level": "info",
+              "operation": "offline",
+              "result": "success",
+              "failReason": "",
+              "memo": {},
+              "createdAt": "2019-10-16T05:37:55.811Z"
+            }
+        ],
+        "limit": 100,
+        "offset": 0
+      }

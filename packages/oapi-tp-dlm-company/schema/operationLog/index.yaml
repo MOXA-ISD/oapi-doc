@@ -1,0 +1,11 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./operationLog.yaml#/tags"
+
+paths:
+- $ref: "./operationLog.yaml#/paths"
+
+definitions:
+- $ref: "./operationLog.yaml#/definitions"

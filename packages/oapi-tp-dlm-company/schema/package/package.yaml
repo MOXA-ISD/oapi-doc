@@ -52,11 +52,20 @@ paths:
         200:
           description: An array of packages
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/package'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Package'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
             example:
-              $ref: '#/externalDocs/x-mocks/packageList'
+              $ref: '#/externalDocs/x-mocks/PackageList'
 
   /packages/{id}:
     parameters:
@@ -75,12 +84,12 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/package'
+              $ref: '#/definitions/PackageResult'
             example:
-              $ref: '#/externalDocs/x-mocks/package'
+              $ref: '#/externalDocs/x-mocks/PackageResult'
 
 definitions:
-  package:
+  Package:
     type: object
     properties:
       id:
@@ -126,12 +135,37 @@ definitions:
         description: package created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
       updatedAt:
         type: string
-        description: package updated time, ISO data format, like '2018-08-12T20:17:46.384Z'. 
+        description: package updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+  PackageResult:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/Package'
 
 externalDocs:
   url: 'http://#'
   x-mocks:
-    package:
+    Package:
+      {
+        "id": 3,
+        "packageId": 2,
+        "packageName": "app-aws",
+        "displayName": "AWS Client",
+        "description": "MOXA AWS client",
+        "publisher": "Moxa",
+        "cpuArch": "armhf",
+        "downloadUrl": "https://dlm-storage-dev.s3-us-west-2.amazonaws.com/package/edge-app-aws/app-aws_0.12.0-35_armhf.mpkg",
+        "iconUrl": "https://dlm-storage-dev.s3-us-west-2.amazonaws.com/package/edge-app-aws/app-aws_0.12.0-35_armhf.png",
+        "enable": true,
+        "models": [],
+        "size": 67832320,
+        "version": "0.12.0-35",
+        "createdAt": "2019-10-14T03:56:22.015745Z",
+        "updatedAt": ""
+      }
+    PackageResult:
       {
         "data": {
           "id": 3,
@@ -151,7 +185,7 @@ externalDocs:
           "updatedAt": ""
         }
       }
-    packageList:
+    PackageList:
       {
         "count": 1,
         "data": [

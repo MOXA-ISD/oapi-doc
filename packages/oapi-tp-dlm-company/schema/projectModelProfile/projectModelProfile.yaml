@@ -109,7 +109,6 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
 
-  
   /projects/{projectId}/modelProfiles/{modelPrfileId}:
     parameters:
       - name: projectId

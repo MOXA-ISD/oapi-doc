@@ -93,11 +93,8 @@ paths:
           description: Create project successfully
           schema:
             type: object
-            properties:
-              data:
-                type: object
-                items:
-                  $ref: '#/definitions/ProjectRes'
+            items:
+              $ref: '#/definitions/ProjectRes'
             example:
               $ref: '#/externalDocs/x-mocks/ProjectRes'
 
@@ -117,11 +114,8 @@ paths:
           description: An Object of the project
           schema:
             type: object
-            properties:
-              data:
-                type: object
-                items:
-                  $ref: '#/definitions/ProjectRes'
+            items:
+              $ref: '#/definitions/ProjectRes'
             example:
               $ref: '#/externalDocs/x-mocks/ProjectRes'
     put:
@@ -140,11 +134,8 @@ paths:
           description: An Object of the project
           schema:
             type: object
-            properties:
-              data:
-                type: object
-                items:
-                  $ref: '#/definitions/ProjectRes'
+            items:
+              $ref: '#/definitions/ProjectRes'
             example: 
               $ref: '#/externalDocs/x-mocks/ProjectRes'
 

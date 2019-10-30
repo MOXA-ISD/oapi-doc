@@ -143,11 +143,8 @@ paths:
           description: An Object of the device
           schema:
             type: object
-            properties:
-              data:
-                type: object
-                items:
-                  $ref: '#/definitions/DeviceDetail'
+            items:
+              $ref: '#/definitions/DeviceDetail'
             example: 
               $ref: '#/externalDocs/x-mocks/DeviceDetail'
     delete:

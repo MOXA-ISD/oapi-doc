@@ -93,8 +93,11 @@ paths:
           description: Create project successfully
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ProjectRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ProjectRes'
             example:
               $ref: '#/externalDocs/x-mocks/ProjectRes'
 
@@ -114,8 +117,11 @@ paths:
           description: An Object of the project
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ProjectRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ProjectRes'
             example:
               $ref: '#/externalDocs/x-mocks/ProjectRes'
     put:
@@ -134,8 +140,11 @@ paths:
           description: An Object of the project
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ProjectRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ProjectRes'
             example: 
               $ref: '#/externalDocs/x-mocks/ProjectRes'
 
@@ -169,8 +178,11 @@ paths:
           description: Response enroll certificate and key
           schema:
             type: object
-            items:
-              $ref: '#/definitions/EnrollRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/EnrollRes'
             example: 
               $ref: '#/externalDocs/x-mocks/EnrollRes'
 

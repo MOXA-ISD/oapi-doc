@@ -101,37 +101,15 @@ paths:
           description: An Object of the modelProfile
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ModelProfileRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ModelProfileRes'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
 
-  /projects/{projectId}/modelProfiles/{modelPrfileName}:
-    parameters:
-      - name: projectId
-        in: path
-        description: project unique identifier
-        required: true
-        type: string
-      - name: modelPrfileName
-        in: path
-        description: Model prfile name representing a specific model profile
-        required: true
-        type: string
-    get:
-      description: Return modelProfile data with given ID
-      tags:
-        - profile
-      responses:
-        200:
-          description: An object of the modelProfile
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ModelProfileRes'
-            example:
-              $ref: '#/externalDocs/x-mocks/ModelProfileRes'
-
+  
   /projects/{projectId}/modelProfiles/{modelPrfileId}:
     parameters:
       - name: projectId
@@ -152,9 +130,12 @@ paths:
         200:
           description: An object of the modelProfile
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ModelProfileRes'
+            type: object
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ModelProfileRes'
             example:
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
     put:
@@ -183,8 +164,11 @@ paths:
           description: An Object of the modelProfile
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ModelProfileRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ModelProfileRes'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
     patch:
@@ -212,8 +196,11 @@ paths:
           description: An Object of the modelProfile
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ModelProfileRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ModelProfileRes'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
 
@@ -257,11 +244,11 @@ definitions:
         description: Model Profile.
   ModelProfileRes:
     type: object
-      properties:
-        data:
-          type: object
-          items:
-            $ref: '#/definitions/ModelProfile'
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/ModelProfile'
   ModelProfileCreate:
     type: object
     required:

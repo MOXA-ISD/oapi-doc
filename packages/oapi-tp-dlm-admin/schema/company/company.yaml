@@ -20,7 +20,7 @@ paths:
       tags:
         - company
       parameters:
-        - name: companyName
+        - name: name
           in: query
           description: Filter the company list by company name
           required: false
@@ -41,7 +41,7 @@ paths:
           required: false
           type: string
           enum:
-          - companyName
+          - name
           - status
         - name: sort
           in: query
@@ -160,7 +160,7 @@ definitions:
       companyId:
         type: string
         description: Unique identifier representing a specific company.
-      companyName:
+      name:
         type: string
         description: Company name of company.
       status:
@@ -180,13 +180,13 @@ definitions:
   CompanyCreate:
     type: object
     properties:
-      companyName:
+      name:
         type: string
         description: Company name of company.
   CompanyUpdate:
     type: object
     properties:
-      companyName:
+      name:
         type: string
         description: Company name of company.
       status:
@@ -203,7 +203,7 @@ externalDocs:
     Company:
       {
         "companyId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-        "companyName": "MOXA",
+        "name": "MOXA",
         "status": "approved",
         "createdAt": "2019-03-08T07:18:27:565Z",
         "updatedAt": "2019-03-08T07:18:27:565Z"
@@ -214,7 +214,7 @@ externalDocs:
         "data": [
           {
             "companyId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-            "companyName": "MOXA",
+            "name": "MOXA",
             "status": "approved",
             "createdAt": "2019-03-08T07:18:27:565Z",
             "updatedAt": "2019-03-08T07:18:27:565Z"
@@ -225,11 +225,11 @@ externalDocs:
       }
     CompanyCreate:
       {
-        "companyName": "MOXA"
+        "name": "MOXA"
       }
     CompanyUpdate:
       {
-        "companyName": "MOXA",
+        "name": "MOXA",
         "status": "approved"
       }
     CompanyUserList:

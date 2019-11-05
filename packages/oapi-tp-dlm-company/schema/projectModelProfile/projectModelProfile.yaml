@@ -121,6 +121,11 @@ paths:
         description: quired profileName
         required: true
         type: string
+      - name: exclude
+        in: query
+        description: Exclude profile name
+        required: false
+        type: string
     get:
       description: Determining if the profileName exists in this project
       tags:

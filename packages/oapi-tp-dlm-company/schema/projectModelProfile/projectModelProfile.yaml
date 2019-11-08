@@ -21,9 +21,19 @@ paths:
         description: project unique identifier
         required: true
         type: string
+      - name: keyword
+        in: query
+        description: Search keyword by wildcard - support profile name
+        required: false
+        type: string
       - name: modelName
         in: query
         description: Filter the model profile list by modelName
+        required: false
+        type: string
+      - name: createdBy
+        in: query
+        description: Filter the model profile list by creator
         required: false
         type: string
       - name: order
@@ -62,7 +72,6 @@ paths:
         type: string
         enum:
         - modelName
-        - profileName
         - createdBy        
     get:
       description: Return modelProfile data with given ID
@@ -120,11 +129,6 @@ paths:
         in: path
         description: quired profileName
         required: true
-        type: string
-      - name: exclude
-        in: query
-        description: Exclude profile name
-        required: false
         type: string
     get:
       description: Determining if the profileName exists in this project
@@ -188,20 +192,20 @@ paths:
       - name: profile
         in: formData
         type: file
-        description: Upload profile with fieldname
+        description: Upload json file with profile data
         required: true
-      - name: profileName
+      - name: status
         in: formData
         type: string
         enum:
         - draft
         - ready
-        description: Profile Name
-        required: true 
-      - name: status
-        in: formData
-        type: boolean
         description: Profile status
+        required: true 
+      - name: profileName
+        in: formData
+        type: string
+        description: Profile Name
         required: true 
       tags:
         - profile
@@ -262,7 +266,7 @@ paths:
         description: Unique identifier representing a specific model profile
         required: true
         type: string
-    get:
+    post:
       description: Download profile
       tags:
         - profile
@@ -322,27 +326,24 @@ definitions:
   ModelProfileCreate:
     type: object
     required:
-      - sourceType
-      - modelName
-      - profileName
+      - duplicate
+      - newProfileName
     properties:
-      sourceType:
+      duplicate:
+        type: object
+        description: The profile should duplicate from what kind of type, use must append profileName or modelName.  
+        properties:
+          modelName:
+            type: string
+            description: Unique identifier representing a specific model name.
+          profileName:
+            type: string
+            description: Unique profile name.  
+      newProfileName:
         type: string
-        enum:
-        - modelName
-        - profileName
-        description: The profile should copy from what kind of type, default is profileName.  
-      modelName:
-        type: string
-        description: Unique identifier representing a specific model name.
-      profileName:
-        type: string
-        description: Unique profile name.  
+        description: Unique new profile name.  
   ModelProfilePatch:
     type: object
-    required:
-      - status
-      - isDefault
     properties:
       status:
         type: string
@@ -353,6 +354,9 @@ definitions:
       isDefault:
         type: boolean
         description: Profile is default or not.  
+      profileName:
+        type: string
+        description: Unique profile name.  
   ProfileNameExist:
     type: object
     properties:
@@ -407,13 +411,18 @@ externalDocs:
       }
     ModelProfileCreate:
       {
-        "sourceType": "profileName",
-        "modelName": "UC-8112",
-        "profileName": "test"
+        "duplicate": {
+          "sourceType": "profileName"
+          "profileName": "name",
+          "modelName": "UC-8112"
+        },
+        "newProfileName": "test"
       }
-    ModelProfileUpdate:
+    ModelProfilePatch:
       {
          "isDefault": true,
+         "status": "ready",
+         "profileName": "newName"
       }
     ProfileNameExist:
       { 

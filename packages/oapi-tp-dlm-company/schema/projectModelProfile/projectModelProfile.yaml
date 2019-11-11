@@ -21,6 +21,12 @@ paths:
         description: project unique identifier
         required: true
         type: string
+        
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - profile
+      parameters:
       - name: keyword
         in: query
         description: Search keyword by wildcard - support profile name
@@ -72,11 +78,7 @@ paths:
         type: string
         enum:
         - modelName
-        - createdBy        
-    get:
-      description: Return modelProfile data with given ID
-      tags:
-        - profile
+        - createdBy      
       responses:
         200:
           description: An object of the modelProfile
@@ -102,7 +104,7 @@ paths:
       parameters:
         - name: body
           in: body
-          description: Information of modelProfile
+          description: Information of profile
           required: true
           schema:
             $ref: '#/definitions/ModelProfileCreate'
@@ -133,7 +135,7 @@ paths:
     get:
       description: Determining if the profileName exists in this project
       tags:
-        - user
+        - profile
       responses:
         200:
           description: Determining if the profileName exists
@@ -146,14 +148,14 @@ paths:
                   $ref: '#/definitions/ProfileNameExist'
             example: 
               $ref: '#/externalDocs/x-mocks/ProfileNameExist'
-  /projects/{projectId}/modelProfiles/{modelPrfileId}:
+  /projects/{projectId}/modelProfiles/{modelProfileId}:
     parameters:
       - name: projectId
         in: path
         description: project unique identifier
         required: true
         type: string
-      - name: modelPrfileId
+      - name: modelProfileId
         in: path
         description: Unique identifier representing a specific model profile
         required: true
@@ -179,16 +181,6 @@ paths:
       consumes:
         - multipart/form-data
       parameters:
-      - name: projectId
-        in: path
-        description: project unique identifier
-        required: true
-        type: string
-      - name: modelPrfileId
-        in: path
-        description: Unique identifier representing a specific model profile
-        required: true
-        type: string
       - name: profile
         in: formData
         type: file
@@ -224,16 +216,6 @@ paths:
     patch:
       description: update is defualt field
       parameters:
-      - name: projectId
-        in: path
-        description: project unique identifier
-        required: true
-        type: string
-      - name: modelPrfileId
-        in: path
-        description: Unique identifier representing a specific model profile
-        required: true
-        type: string
       - name: body
         in: body
         description: Information of modelProfile
@@ -254,14 +236,14 @@ paths:
                   $ref: '#/definitions/ModelProfileRes'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
-  /projects/{projectId}/modelProfiles/{modelPrfileId}/download:
+  /projects/{projectId}/modelProfiles/{modelProfileId}/download:
     parameters:
       - name: projectId
         in: path
         description: project unique identifier
         required: true
         type: string
-      - name: modelPrfileId
+      - name: modelProfileId
         in: path
         description: Unique identifier representing a specific model profile
         required: true
@@ -331,7 +313,7 @@ definitions:
     properties:
       duplicate:
         type: object
-        description: The profile should duplicate from what kind of type, use must append profileName or modelName.  
+        description: The profile should duplicate from modelName or profileName, use must append profileName or modelName on below this field.  
         properties:
           modelName:
             type: string

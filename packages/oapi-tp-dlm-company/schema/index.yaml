@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 0.0.3
+  version: 0.0.4
   title: DLM Company Portal RESTful API reference
   description: |
     Welcome to the DLM Company Portal RESTful API reference.

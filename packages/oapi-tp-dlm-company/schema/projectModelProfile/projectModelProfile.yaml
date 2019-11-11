@@ -282,6 +282,9 @@ definitions:
       createdBy:
         type: string
         description: User who create config repo.
+      userId:
+        type: string
+        description: Unique identifier user id.
       status:
         type: string
         enum:
@@ -321,6 +324,9 @@ definitions:
           profileName:
             type: string
             description: Unique profile name.  
+          deviceId:
+            type: string
+            description: Unique identifier device id.
       newProfileName:
         type: string
         description: Unique new profile name.  
@@ -357,6 +363,7 @@ externalDocs:
         "modelName": "UC-8112",
         "profileName": "test",
         "createdBy": "owen",
+        "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
         "status": "ready",
         "isDefault": true,
         "createdAt": "2019-02-26T14:10:33:000Z",
@@ -369,6 +376,7 @@ externalDocs:
           "modelName": "UC-8112",
           "profileName": "test",
           "createdBy": "owen",
+          "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
           "status": "ready",
           "isDefault": true,
           "createdAt": "2019-02-26T14:10:33:000Z",
@@ -384,6 +392,7 @@ externalDocs:
             "modelName": "UC-8112",
             "profileName": "test",
             "createdBy": "owen",
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
             "status": "ready",
             "isDefault": true,
             "createdAt": "2019-02-26T14:10:33:000Z",
@@ -394,9 +403,9 @@ externalDocs:
     ModelProfileCreate:
       {
         "duplicate": {
-          "sourceType": "profileName",
           "profileName": "name",
-          "modelName": "UC-8112"
+          "modelName": "UC-8112",
+          "deviceId": "a1be69eb-258e-4c66-b07b-583474e57305"
         },
         "newProfileName": "test"
       }

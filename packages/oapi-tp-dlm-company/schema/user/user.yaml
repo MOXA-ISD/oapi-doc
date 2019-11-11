@@ -129,8 +129,8 @@ paths:
                 type: object
                 items:
                   $ref: '#/definitions/UserRes'
-          example: 
-            $ref: '#/externalDocs/x-mocks/UserRes'
+            example: 
+              $ref: '#/externalDocs/x-mocks/UserRes'
     delete:
       description: Delete User with given ID
       tags:

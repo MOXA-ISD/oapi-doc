@@ -412,7 +412,7 @@ externalDocs:
     ModelProfileCreate:
       {
         "duplicate": {
-          "sourceType": "profileName"
+          "sourceType": "profileName",
           "profileName": "name",
           "modelName": "UC-8112"
         },

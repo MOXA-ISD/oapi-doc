@@ -20,7 +20,7 @@ paths:
       tags:
         - company
       parameters:
-        - name: companyName
+        - name: name
           in: query
           description: Filter the company list by company name
           required: false
@@ -41,7 +41,7 @@ paths:
           required: false
           type: string
           enum:
-          - companyName
+          - name
           - status
         - name: sort
           in: query
@@ -65,9 +65,18 @@ paths:
         200:
           description: An array of companys
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Company'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Company'
+              count:
+                type: integer
+              offset:
+                type: integer
+              limit:
+                type: integer
             example:
               $ref: '#/externalDocs/x-mocks/CompanyList'
     post:
@@ -87,9 +96,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Company'
+              $ref: '#/definitions/CompanyRes'
             example:
-              $ref: '#/externalDocs/x-mocks/Company'
+              $ref: '#/externalDocs/x-mocks/CompanyRes'
 
   /companys/{companyId}:
     parameters:
@@ -108,9 +117,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Company'
+              $ref: '#/definitions/CompanyRes'
             example:
-              $ref: '#/externalDocs/x-mocks/Company'
+              $ref: '#/externalDocs/x-mocks/CompanyRes'
     put:
       description: Return updated company data with given ID
       tags:
@@ -128,9 +137,9 @@ paths:
           schema:
             type: object
             items:
-              $ref: '#/definitions/Company'
+              $ref: '#/definitions/CompanyRes'
             example: 
-              $ref: '#/externalDocs/x-mocks/Company'
+              $ref: '#/externalDocs/x-mocks/CompanyRes'
 
   /companys/{companyId}/users:
     parameters:
@@ -147,9 +156,12 @@ paths:
         200:
           description: An array of company users
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
             example:
               $ref: '#/externalDocs/x-mocks/CompanyUserList'
 
@@ -160,7 +172,7 @@ definitions:
       companyId:
         type: string
         description: Unique identifier representing a specific company.
-      companyName:
+      name:
         type: string
         description: Company name of company.
       status:
@@ -180,13 +192,13 @@ definitions:
   CompanyCreate:
     type: object
     properties:
-      companyName:
+      name:
         type: string
         description: Company name of company.
   CompanyUpdate:
     type: object
     properties:
-      companyName:
+      name:
         type: string
         description: Company name of company.
       status:
@@ -196,14 +208,20 @@ definitions:
           - declined
           - removed
         description: Status of company.
-
+  CompanyRes:
+    type: object
+    properties:
+      data:
+        type: object
+        items:
+          $ref: '#/definitions/Company'
 externalDocs:
   url: 'http://#'
   x-mocks:
     Company:
       {
         "companyId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-        "companyName": "MOXA",
+        "name": "MOXA",
         "status": "approved",
         "createdAt": "2019-03-08T07:18:27:565Z",
         "updatedAt": "2019-03-08T07:18:27:565Z"
@@ -214,7 +232,7 @@ externalDocs:
         "data": [
           {
             "companyId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
-            "companyName": "MOXA",
+            "name": "MOXA",
             "status": "approved",
             "createdAt": "2019-03-08T07:18:27:565Z",
             "updatedAt": "2019-03-08T07:18:27:565Z"
@@ -225,12 +243,22 @@ externalDocs:
       }
     CompanyCreate:
       {
-        "companyName": "MOXA"
+        "name": "MOXA"
       }
     CompanyUpdate:
       {
-        "companyName": "MOXA",
+        "name": "MOXA",
         "status": "approved"
+      }
+    CompanyRes:
+      {
+        "data": {
+          "companyId": "ed31872d-b57e-4c94-a989-c2782c0d3fe7",
+          "name": "MOXA",
+          "status": "approved",
+          "createdAt": "2019-03-08T07:18:27:565Z",
+          "updatedAt": "2019-03-08T07:18:27:565Z"
+        }
       }
     CompanyUserList:
       {

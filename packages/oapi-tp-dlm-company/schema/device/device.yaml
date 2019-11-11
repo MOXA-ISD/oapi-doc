@@ -60,7 +60,7 @@ paths:
           - retired
         - name: order
           in: query
-          description: Sort the device list by specific condition, default is order by 'lastUpdatedAt'
+          description: Sort the device list by specific condition, default is order by 'updatedAt'
           required: false
           type: string
           enum:
@@ -70,6 +70,7 @@ paths:
           - status
           - version
           - profileName
+          - updatedAt
         - name: mode
           in: query
           description: Default is simple, if the query mode is map, service will response gps information in properteis field

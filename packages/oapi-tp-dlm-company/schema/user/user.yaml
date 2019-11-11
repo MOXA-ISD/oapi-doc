@@ -101,8 +101,11 @@ paths:
           description: An Object of the user
           schema:
             type: object
-            items:
-              $ref: '#/definitions/UserRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/UserRes'
             example:
               $ref: '#/externalDocs/x-mocks/UserRes'
     put:
@@ -121,10 +124,13 @@ paths:
           description: An Object of the user
           schema:
             type: object
-            items:
-              $ref: '#/definitions/UserRes'
-            example: 
-              $ref: '#/externalDocs/x-mocks/UserRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/UserRes'
+          example: 
+            $ref: '#/externalDocs/x-mocks/UserRes'
     delete:
       description: Delete User with given ID
       tags:
@@ -149,8 +155,11 @@ paths:
           description: An Object of the user
           schema:
             type: object
-            items:
-              $ref: '#/definitions/UserRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/UserRes'
             example:
               $ref: '#/externalDocs/x-mocks/UserRes'
   /users/forgetPassword:
@@ -184,8 +193,11 @@ paths:
           description: Determining if the email exists
           schema:
             type: object
-            items:
-              $ref: '#/definitions/UserExist'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/UserExist'
             example: 
               $ref: '#/externalDocs/x-mocks/UserExist'
   /users/invite:
@@ -205,9 +217,12 @@ paths:
         201:
           description: Invite users successfully
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Invitee'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Invitee'
             example: 
               $ref: '#/externalDocs/x-mocks/InviteeList'
 
@@ -227,8 +242,11 @@ paths:
           description: An Object of the invitee
           schema:
             type: object
-            items:
-              $ref: '#/definitions/Invitee'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/Invitee'
             example: 
               $ref: '#/externalDocs/x-mocks/Invitee'
   /users/register:
@@ -248,8 +266,11 @@ paths:
           description: An Object of the user
           schema:
             type: object
-            items:
-              $ref: '#/definitions/User'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/User'
             example:
               $ref: '#/externalDocs/x-mocks/User'
   /users/{userId}/revoke:
@@ -268,8 +289,11 @@ paths:
           description: An Object of the invitee
           schema:
             type: object
-            items:
-              $ref: '#/definitions/Invitee'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/Invitee'
             example:
               $ref: '#/externalDocs/x-mocks/Invitee'
 definitions:

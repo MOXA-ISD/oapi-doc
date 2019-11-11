@@ -53,8 +53,11 @@ paths:
           description: Create role successfully
           schema:
             type: object
-            items:
-              $ref: '#/definitions/RoleRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/RoleRes'
             example: 
               $ref: '#/externalDocs/x-mocks/RoleRes'
 
@@ -74,8 +77,11 @@ paths:
           description: An Object of the role
           schema:
             type: object
-            items:
-              $ref: '#/definitions/RoleRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/RoleRes'
             example: 
               $ref: '#/externalDocs/x-mocks/RoleRes'
     put:
@@ -98,8 +104,11 @@ paths:
           description: An Object of the role
           schema:
             type: object
-            items:
-              $ref: '#/definitions/RoleRes'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/RoleRes'
             example: 
               $ref: '#/externalDocs/x-mocks/RoleRes'
     delete:

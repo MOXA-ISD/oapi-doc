@@ -23,9 +23,12 @@ paths:
         200:
           description: An array of the modelProfile
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ModelProfile'
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/ModelProfile'
             example:
               $ref: '#/externalDocs/x-mocks/ModelProfileList'
   /modelProfiles/{modelName}:
@@ -44,8 +47,11 @@ paths:
           description: An Object of the profile
           schema:
             type: object
-            items:
-              $ref: '#/definitions/ModelProfile'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/ModelProfile'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfile'  
 
@@ -65,16 +71,19 @@ externalDocs:
   x-mocks:
     ModelProfile:
       {
-        "modelName": "UC-8112",
-        "profile": {
-          "system_tag" : "",
-          "system_properties" : "",
-          "direct_method" : "",  
-          "device_image" : ""
+        "data": {
+          "modelName": "UC-8112",
+          "profile": {
+            "system_tag" : "",
+            "system_properties" : "",
+            "direct_method" : "",  
+            "device_image" : ""
+          }
         }
       }
     ModelProfileList:
-       [
+       {
+         "data": [
           {
             "modelName": "UC-8112",
             "profile": {
@@ -85,6 +94,9 @@ externalDocs:
             }
           }
         ]
+       }
+
+       
     
 
     

@@ -297,6 +297,9 @@ definitions:
       profileName:
         type: string
         description: Profile name.
+      profileDisplayName:
+        type: string
+        description: Profile display name.
       createdBy:
         type: string
         description: User who create config repo.
@@ -374,6 +377,7 @@ externalDocs:
         "profileId": 1,
         "modelName": "UC-8112",
         "profileName": "test",
+        "profileDisplayName": "test",
         "createdBy": "owen",
         "status": "ready",
         "isDefault": true,
@@ -386,6 +390,7 @@ externalDocs:
           "profileId": 1,
           "modelName": "UC-8112",
           "profileName": "test",
+          "profileDisplayName": "test",
           "createdBy": "owen",
           "status": "ready",
           "isDefault": true,
@@ -401,6 +406,7 @@ externalDocs:
             "profileId": 1,
             "modelName": "UC-8112",
             "profileName": "test",
+            "profileDisplayName": "test",
             "createdBy": "owen",
             "status": "ready",
             "isDefault": true,

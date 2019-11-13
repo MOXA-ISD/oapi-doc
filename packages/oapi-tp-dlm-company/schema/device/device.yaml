@@ -661,18 +661,16 @@ externalDocs:
         "configUpdatedAt": "2019-02-26T14:10:33:000Z",
         "connectedAt": "2019-02-26T14:10:33:000Z",
         "disconnectedAt": "2019-02-26T14:10:33:000Z",
-        "properties": {
-          "gps": [
-            {
-                "enable": true,
-                "location": {
-                    "lat": 0,
-                    "lng": 0
-                },
-                "mode": "manual"
-            }
-          ]
-        }
+        "gps": [
+          {
+              "enable": true,
+              "location": {
+                  "lat": 0,
+                  "lng": 0
+              },
+              "mode": "manual"
+          }
+        ]
       }   
     ReportedProperties:
       {

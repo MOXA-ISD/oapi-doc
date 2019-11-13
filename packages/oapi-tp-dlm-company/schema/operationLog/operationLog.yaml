@@ -21,7 +21,7 @@ paths:
         - operationLog
       parameters:
         - name: projectId
-          in: path
+          in: query
           description: project unique identifier
           required: true
           type: string
@@ -118,7 +118,7 @@ paths:
     post:
       description: Create a new operation log.
       tags:
-        - project
+        - operationLog
       parameters:
         - name: body
           in: body

@@ -304,6 +304,11 @@ definitions:
         - enrolled
         - retired
         description: status of device.    
+      configStatus:
+        type: string
+        enum:
+        - normal
+        - modified
       profileId:
         type: integer
         description: Dependency Profile id, this field could be empty, if there is no dependency Profile.
@@ -556,6 +561,7 @@ externalDocs:
               "profileName": "test",
               "status": "online",
               "tags": ["moxa"],
+              "configStatus": "normal",
               "configUpdatedAt": "2019-02-26T14:10:33:000Z",
               "connectedAt": "2019-02-26T14:10:33:000Z",
               "disconnectedAt": "2019-02-26T14:10:33:000Z"

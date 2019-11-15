@@ -172,8 +172,11 @@ paths:
           description: An Object of the reported properties
           schema:
             type: object
-            items:
-              $ref: '#/definitions/Config'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/Config'
             example: 
               $ref: '#/externalDocs/x-mocks/Config'
     post:
@@ -223,8 +226,11 @@ paths:
           description: An Object of the direct methods
           schema:
             type: object
-            items:
-              $ref: '#/definitions/JobList'
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/JobList'
             example: 
               $ref: '#/externalDocs/x-mocks/JobList'
 

@@ -179,7 +179,7 @@ paths:
                   $ref: '#/definitions/Config'
             example: 
               $ref: '#/externalDocs/x-mocks/Config'
-    post:
+    patch:
       description: Update device properties
       parameters:
         - name: body

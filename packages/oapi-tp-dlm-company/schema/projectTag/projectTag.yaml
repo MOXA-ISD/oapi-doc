@@ -36,7 +36,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
-              count:
+              maxCount:
                 type: integer
             example: 
               $ref: '#/externalDocs/x-mocks/TagList'
@@ -127,7 +127,31 @@ paths:
       responses:
         204:
           description: delete tag success
-
+  /projects/{projectId}/tags/exist:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: tagName
+        in: query
+        description: tested query tagName
+        required: true
+        type: string
+    get:
+      description: Determining if the tagName exists in this project or not
+      tags:
+        - tag
+      responses:
+        200:
+          description: Determining if the profileName exists or not
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/TagNameExist'  
+            example: 
+              $ref: '#/externalDocs/x-mocks/TagNameExist'
 definitions:
   Tag:
     type: object
@@ -181,7 +205,16 @@ definitions:
         type: array
         description: tag id list.
         items:
-          type: string
+          type: integer
+  TagNameExist:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          exist:
+            type: boolean
+            description: Determining if the tagName exists in this project.
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -201,7 +234,7 @@ externalDocs:
       }
     TagList:
       {
-        "count": 1,
+        "maxCount": 5,
         "data": [
           {
             "tagId": 1,
@@ -228,5 +261,11 @@ externalDocs:
         "tagIdList": [
           1, 2
         ]
+      }
+    TagNameExist:
+      { 
+        "data": {
+          "exist": true 
+        }
       }
     

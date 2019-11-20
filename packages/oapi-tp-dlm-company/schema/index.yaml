@@ -31,6 +31,7 @@ tags:
   - $ref: './device/index.yaml#/tags'
   - $ref: './projectModelProfile/index.yaml#/tags'
   - $ref: './modelProfile/index.yaml#/tags'
+  - $ref: './projectTag/index.yaml#/tags'
 
 paths:
   - $ref: './user/index.yaml#/paths'
@@ -40,6 +41,7 @@ paths:
   - $ref: './device/index.yaml#/paths'
   - $ref: './projectModelProfile/index.yaml#/paths'
   - $ref: './modelProfile/index.yaml#/paths'
+  - $ref: './projectTag/index.yaml#/paths'
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
@@ -49,3 +51,4 @@ definitions:
   - $ref: './device/index.yaml#/definitions'
   - $ref: './projectModelProfile/index.yaml#/definitions'
   - $ref: './modelProfile/index.yaml#/definitions'
+  - $ref: './projectTag/index.yaml#/definitions'  

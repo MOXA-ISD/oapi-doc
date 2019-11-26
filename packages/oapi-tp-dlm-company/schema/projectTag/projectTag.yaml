@@ -1,0 +1,271 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.0
+  title: DLM Company Portal RESTful API reference
+basePath: '/api/v1'
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+tags:
+  - name: tag
+    description: Handles tags data
+
+paths:
+  /projects/{projectId}/tags:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+        
+    get:
+      description: Return tag data of project
+      tags:
+        - tag  
+      responses:
+        200:
+          description: Return tag data of project
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+              maxCount:
+                type: integer
+            example: 
+              $ref: '#/externalDocs/x-mocks/TagList'
+    post:
+      description: Create tag
+      tags:
+        - tag
+      parameters:
+        - name: body
+          in: body
+          description: Information of tag
+          required: true
+          schema:
+            $ref: '#/definitions/TagCreate'
+      responses:
+        200:
+          description: An Object of the tag
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/Tag'
+            example: 
+              $ref: '#/externalDocs/x-mocks/TagRes'
+  /projects/{projectId}/tagsAttach:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+    post:
+      description: Attach tags on devices
+      tags:
+        - tag
+      parameters:
+        - name: body
+          in: body
+          description: Information of tag
+          required: true
+          schema:
+            $ref: '#/definitions/TagsAttach'
+      responses:
+        200:
+          description: An Object of the tag
+
+  /projects/{projectId}/tags/{tagId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: tagId
+        in: path
+        description: Unique identifier representing a specific tag
+        required: true
+        type: string
+    put:
+      description: update is defualt field
+      parameters:
+      - name: body
+        in: body
+        description: Information of tag
+        required: true
+        schema:
+          $ref: '#/definitions/TagPut'
+      tags:
+        - tag
+      responses:
+        200:
+          description: An Object of the tag
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                items:
+                  $ref: '#/definitions/Tag'
+            example: 
+              $ref: '#/externalDocs/x-mocks/TagRes'
+    delete:
+      description: delete a tag
+      tags:
+        - tag
+      responses:
+        204:
+          description: delete tag success
+  /projects/{projectId}/tags/exist:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: tagName
+        in: query
+        description: tested query tagName
+        required: true
+        type: string
+    get:
+      description: Determining if the tagName exists in this project or not
+      tags:
+        - tag
+      responses:
+        200:
+          description: Determining if the profileName exists or not
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/TagNameExist'  
+            example: 
+              $ref: '#/externalDocs/x-mocks/TagNameExist'
+definitions:
+  Tag:
+    type: object
+    properties:
+      tagId:
+        type: integer
+        description: Unique identifier representing a specific tag.
+      tagName:
+        type: string
+        description: Unique identifier representing a specific tag name.
+      colour:
+        type: string
+        description: tag colour.
+      
+  TagCreate:
+    type: object
+    required:
+      - tagName
+      - colour
+    properties:
+      tagName:
+        type: string
+        description: Unique identifier representing a specific tag name.
+      colour:
+        type: string
+        description: tag colour.
+  TagPut:
+    type: object
+    required:
+      - tagName
+      - colour
+    properties:
+      tagName:
+        type: string
+        description: Unique identifier representing a specific tag name.
+      colour:
+        type: string
+        description: tag colour.
+  TagsAttach:
+    type: object
+    required:
+      - deviceIdList
+      - tagIdList
+    properties:
+      deviceIdList:
+        type: array
+        description: device id list.
+        items:
+          type: string
+      tagIdList:
+        type: array
+        description: tag id list.
+        items:
+          type: integer
+  TagNameExist:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          exist:
+            type: boolean
+            description: Determining if the tagName exists in this project.
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    Tag:
+      {
+        "tagId": 1,
+        "tagName": "moxa",
+        "colour": "#FFFFFF"
+      }
+    TagRes:
+      {
+        "data": {
+          "tagId": 1,
+          "tagName": "moxa",
+          "colour": "#FFFFFF"
+        }
+      }
+    TagList:
+      {
+        "maxCount": 5,
+        "data": [
+          {
+            "tagId": 1,
+            "tagName": "moxa",
+            "colour": "#FFFFFF"
+          }
+        ]
+      }
+    TagCreate:
+      {
+        "tagName": "moxa",
+        "colour": "#111111"
+      }
+    TagPut:
+      {
+        "tagName": "moxa",
+        "colour": "#111111"
+      }
+    TagsAttach:
+      {
+        "deviceIdList": [
+          "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
+        ],
+        "tagIdList": [
+          1, 2
+        ]
+      }
+    TagNameExist:
+      { 
+        "data": {
+          "exist": true 
+        }
+      }
+    

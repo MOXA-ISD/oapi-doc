@@ -38,7 +38,7 @@ paths:
           description: Group Task object
           schema:
             $ref: '#/definitions/GroupTask'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/GroupTask'

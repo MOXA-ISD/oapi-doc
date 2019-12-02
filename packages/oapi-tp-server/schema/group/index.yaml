@@ -44,7 +44,7 @@ paths:
           description: An array of groups
           schema:
             $ref: '#/definitions/GroupList'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/GroupList'
@@ -69,7 +69,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Group'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Group'
@@ -110,7 +110,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Group'
@@ -134,7 +134,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Group'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/Group'
@@ -166,7 +166,7 @@ paths:
           description: An array of the device uuid
           schema:
             $ref: '#/definitions/DeviceUUIDs'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
@@ -188,7 +188,7 @@ paths:
           description: An array of the device uuid in this group
           schema:
             $ref: '#/definitions/DeviceUUIDs'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/DeviceUUIDs'
@@ -211,7 +211,7 @@ paths:
           description: An array of the device uuid in this group
           schema:
             $ref: '#/definitions/DeviceUUIDs'
-          example:
+          examples:
             {
               "application/json": {
                 $ref: '#/externalDocs/x-mocks/DeviceUUIDs'

@@ -41,13 +41,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/ModbusReadRsp'
-          example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/ModbusReadEquTagRspExample'
+            type: object
+            items:
+              $ref: '#/definitions/ModbusReadRsp'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/ModbusReadEquTagRspExample'
+                }
               }
-            }
       tags:
       - access
       security:
@@ -67,13 +69,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/ModbusWriteRsp'
-          example:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/ModbusWriteEquTagRspExample'
+            type: object
+            items:
+              $ref: '#/definitions/ModbusWriteRsp'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/ModbusWriteEquTagRspExample'
+                }
               }
-            }
       tags:
       - access
       security:
@@ -126,7 +130,7 @@ definitions:
         type: string
 
 externalDocs:
-  url: '#'
+  url: 'http://#'
   x-mocks:
     ModbusReadEquTagRspExample:
       {

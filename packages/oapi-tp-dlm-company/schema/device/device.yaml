@@ -42,6 +42,11 @@ paths:
           description: Filter the device list by serial number
           required: false
           type: string
+        - name: tag
+          in: query
+          description: Filter the device list by tag
+          required: false
+          type: string
         - name: keyword
           in: query
           description: Search keyword by wildcard - support host name, serial number

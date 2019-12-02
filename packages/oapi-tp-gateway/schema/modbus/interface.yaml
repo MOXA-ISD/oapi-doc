@@ -31,12 +31,12 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Interface'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/Interfaces'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/Interfaces'
+                }
               }
-            }
       tags:
       - interface
       security:
@@ -54,13 +54,15 @@ paths:
         200:
           description: sucess
           schema:
-            $ref: '#/definitions/Interface'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/TCPInterface'
+            type: object
+            items:
+              $ref: '#/definitions/Interface'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/TCPInterface'
+                }
               }
-            }
       tags:
       - interface
       security:
@@ -79,13 +81,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/Interface'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/RTUInterface'
+            type: object
+            items:
+              $ref: '#/definitions/Interface'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/RTUInterface'
+                }
               }
-            }
       tags:
       - interface
       security:
@@ -103,13 +107,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/Interface'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/RTUInterface'
+            type: object
+            items:
+              $ref: '#/definitions/Interface'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/RTUInterface'
+                }
               }
-            }
       tags:
       - interface
       security:
@@ -135,12 +141,12 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ModbusListEquipment'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/ModbusEquipments'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/ModbusEquipments'
+                }
               }
-            }
       tags:
       - interface
       security:
@@ -226,7 +232,6 @@ definitions:
     description: Modbus RTU interface config
     type: object
     required:
-    - dev
     - baudRate
     - parity
     - stopBits
@@ -478,7 +483,7 @@ definitions:
             type: number
 
 externalDocs:
-  url: '#'
+  url: 'http://#'
   x-mocks:
     RTUInterface:
       {

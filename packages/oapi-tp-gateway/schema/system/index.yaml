@@ -34,7 +34,9 @@ paths:
         '200':
           description: success
           schema:
-            '$ref': '#/definitions/SystemStatus'
+            type: object
+            items:
+              '$ref': '#/definitions/SystemStatus'
             example:
               hostname: Moxa
               version: 1.1.0-1
@@ -75,7 +77,9 @@ paths:
         '200':
           description: success
           schema:
-            '$ref': '#/definitions/SystemStatus'
+            type: object
+            items:
+              '$ref': '#/definitions/SystemStatus'
             example:
               hostname: Moxa
               version: 1.1.0-1
@@ -121,13 +125,17 @@ paths:
           in: body
           required: true
           schema:
-            '$ref': '#/definitions/UrlInfo'
+            type: object
+            items:
+              '$ref': '#/definitions/UrlInfo'
       description: Uplaod system logs to remote server
       responses:
         '200':
           description: sucess
           schema:
-            '$ref': '#/definitions/UrlInfo'
+            type: object
+            items:
+              '$ref': '#/definitions/UrlInfo'
             example:
               url: https://www.google.com
       tags:
@@ -141,7 +149,9 @@ paths:
         '200':
           description: success
           schema:
-            '$ref': '#/definitions/NetworkInterfaces'
+            type: object
+            items:        
+              '$ref': '#/definitions/NetworkInterfaces'
             example:
               - tunl0
               - eth0
@@ -173,7 +183,9 @@ paths:
         '200':
           description: success
           schema:
-            '$ref': '#/definitions/SystemProperties'
+            type: object
+            items:
+              '$ref': '#/definitions/SystemProperties'
             example:
               gps:
                 lat: 121.123
@@ -215,6 +227,7 @@ paths:
         '200':
           description: success
           schema:
+            type: object
             allOf:
               - '$ref': '#/definitions/SystemProperties/properties/aliasName'
               - '$ref': '#/definitions/SystemProperties/properties/gps'
@@ -252,7 +265,9 @@ paths:
         '200':
           description: success
           schema:
-            '$ref': '#/definitions/Equipments'
+            type: object
+            items:
+              '$ref': '#/definitions/Equipments'
             example:
               - equipmentName: SYSTEM
                 equipmentTags:

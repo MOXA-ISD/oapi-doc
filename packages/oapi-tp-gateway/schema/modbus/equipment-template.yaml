@@ -32,12 +32,12 @@ paths:
             type: array
             items:
               $ref: '#/definitions/EquipmentTemplate'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
+                }
               }
-            }
       tags:
       - equipment-template
       security:
@@ -55,13 +55,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/EquipmentTemplate'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+            type: object
+            items:
+              $ref: '#/definitions/EquipmentTemplate'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+                }
               }
-            }
       tags:
       - equipment-template
       security:
@@ -77,12 +79,12 @@ paths:
             items:
               description: Target equipment template IDs
               type: integer
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/EquipmentTemplates'
+                }
               }
-            }
       tags:
       - equipment-template
       security:
@@ -101,13 +103,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/EquipmentTemplate'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+            type: object
+            items:          
+              $ref: '#/definitions/EquipmentTemplate'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+                }
               }
-            }
       tags:
       - equipment-template
       security:
@@ -125,13 +129,15 @@ paths:
         200:
           description: success
           schema:
-            $ref: '#/definitions/EquipmentTemplate'
-          examples:
-            {
-              "application/json": {
-                $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+            type: object
+            items:          
+              $ref: '#/definitions/EquipmentTemplate'
+            example:
+              {
+                "application/json": {
+                  $ref: '#/externalDocs/x-mocks/EquipmentTemplate'
+                }
               }
-            }
       tags:
       - equipment-template
       security:
@@ -296,7 +302,7 @@ definitions:
         type: integer
 
 externalDocs:
-  url: '#'
+  url: 'http://#'
   x-mocks:
     EquipmentTemplate:
       {

@@ -2132,7 +2132,9 @@ paths:
         '200':
           description: success
           schema:
-            "$ref": "#/definitions/EquipmentTemplate"
+            type: object
+            items:
+              "$ref": "#/definitions/EquipmentTemplate"
             example:
               id: 9
               name: ioLogik-E1260
@@ -4317,7 +4319,9 @@ paths:
         '200':
           description: success
           schema:
-            "$ref": "#/definitions/EquipmentTemplate"
+            type: object
+            items:
+              "$ref": "#/definitions/EquipmentTemplate"
             example:
               id: 9
               name: ioLogik-E1260
@@ -4404,7 +4408,9 @@ paths:
         '200':
           description: success
           schema:
-            "$ref": "#/definitions/EquipmentTemplate"
+            type: object
+            items:  
+              "$ref": "#/definitions/EquipmentTemplate"
             example:
               id: 9
               name: ioLogik-E1260
@@ -4544,7 +4550,9 @@ paths:
         '200':
           description: sucess
           schema:
-            "$ref": "#/definitions/Interface"
+            type: object
+            items:
+              "$ref": "#/definitions/Interface"
             example:
               id: 1
               name: Modbus_Gateway_1
@@ -4571,7 +4579,9 @@ paths:
         '200':
           description: success
           schema:
-            "$ref": "#/definitions/Interface"
+            type: object
+            items:
+              "$ref": "#/definitions/Interface"
             example:
               id: 1
               name: Modbus_Gateway_1
@@ -4603,7 +4613,9 @@ paths:
         '200':
           description: success
           schema:
-            "$ref": "#/definitions/Interface"
+            type: object
+            items:
+              "$ref": "#/definitions/Interface"
             example:
               id: 1
               name: Modbus_Gateway_1

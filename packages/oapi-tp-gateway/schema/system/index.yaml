@@ -195,6 +195,26 @@ paths:
         - status
       security:
         - mx-api-token: []
+  '/system/customProperties':
+    put:
+      description: User custom defined properties
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            '$ref': '#/definitions/CustomPropertiesUpdate'
+      responses:
+        '200':
+          description: success
+          schema:
+            '$ref': '#/definitions/CustomPropertiesUpdate'
+            example:
+              myKey: myValue
+      tags:
+        - status
+      security:
+        - mx-api-token: []
   '/system/properties/{key}':
     parameters:
       - name: key
@@ -422,6 +442,11 @@ definitions:
         lat: 121.123
         lng: 22.456
       aliasName: my iot gateway
+  CustomPropertiesUpdate:
+    description: Request payload for updating custom property
+    type: object
+    example:
+      myKey: myValue
   SystemPropertiesUpdate:
     description: Request payload for updating system property
     type: object

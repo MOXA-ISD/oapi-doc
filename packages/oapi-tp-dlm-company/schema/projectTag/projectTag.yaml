@@ -193,19 +193,22 @@ definitions:
   TagsAttach:
     type: object
     required:
-      - deviceIdList
-      - tagIdList
+      - devices
     properties:
-      deviceIdList:
+      devices:
         type: array
-        description: device id list.
+        description: device list.
         items:
-          type: string
-      tagIdList:
-        type: array
-        description: tag id list.
-        items:
-          type: integer
+          type: object
+          properties:
+            deviceId:
+              type: string
+              description: device id.
+            tagIdList:
+              type: array
+              description: tag id list.
+              items:
+                type: integer
   TagNameExist:
     type: object
     properties:
@@ -255,11 +258,19 @@ externalDocs:
       }
     TagsAttach:
       {
-        "deviceIdList": [
-          "ed31872d-b57e-4c94-a989-c2782c0d3fe7"
-        ],
-        "tagIdList": [
-          1, 2
+        "devices": [
+          {
+            "deviceId": "00e07993-6844-433e-ba9b-dca7b09aaa9a",
+            "tagIdList": [4]
+          },
+          {
+            "deviceId": "7c83072e-de72-45d7-8d69-065ec19cf845",
+            "tagIdList": [1, 4]
+          },
+          {
+            "deviceId": "539f035f-052f-48a0-bc38-65c608fd767e",
+            "tagIdList": [1]
+          }
         ]
       }
     TagNameExist:

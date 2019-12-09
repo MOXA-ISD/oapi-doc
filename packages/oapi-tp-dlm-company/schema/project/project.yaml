@@ -177,6 +177,24 @@ paths:
             example: 
               $ref: '#/externalDocs/x-mocks/EnrollRes'
 
+  /projects/{projectId}/jobs:
+    post:
+      description: Send job command(reboot, app upgrade) to one or multiple devices
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/JobReq'
+            example: 
+              $ref: '#/externalDocs/x-mocks/JobReq'  
+      responses:
+        200:
+          description: Job command in the working queue
+      tags:
+        - project 
   /projects/{projectId}/users:
     parameters:
       - name: projectId
@@ -280,6 +298,27 @@ definitions:
       enrollCertLink:
         type: string
         description: Certificate.
+  JobReq:
+    type: object
+    required:
+      - deviceIdList
+      - method
+      - content
+    properties:
+      deviceIdList:
+        type: array
+        description: List of deviceId.
+        items:
+          type: string
+      method:
+        type: string
+        enum:
+          - reboot
+        description: Method, only support reboot now.       
+      content:
+        type: object
+        description: For reboot, please refer to RebootNow and RebootSchedule
+          
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -347,6 +386,14 @@ externalDocs:
           "enrollCert": "moxa"
         }
       ]
+    JobReq:
+      {
+        "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
+        "methodName": "reboot",
+        "content": {
+          "now": true
+        }
+      }
     ProjectUserList:
       {
         "count": 28,

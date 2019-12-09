@@ -236,6 +236,38 @@ paths:
                   $ref: '#/definitions/ModelProfile'
             example: 
               $ref: '#/externalDocs/x-mocks/ModelProfileRes'
+
+  /projects/{projectId}/modelProfiles/{modelProfileId}/apply:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        type: string
+      - name: modelProfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        type: string
+    post:
+      description: Apply configs to one or multiple devices
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/ConfigReq'
+            example: 
+              $ref: '#/externalDocs/x-mocks/ConfigReq'  
+      responses:
+        200:
+          description: Config request is in the working queue
+      tags:
+        - profile
+
+
   /projects/{projectId}/modelProfiles/{modelProfileId}/download:
     parameters:
       - name: projectId
@@ -350,6 +382,14 @@ definitions:
           exist:
             type: boolean
             description: Determining if the profileName exists in this project.
+  ConfigReq:
+    type: object
+    properties:
+      deviceIdList:
+        type: array
+        items:
+          type: string
+
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -426,3 +466,7 @@ externalDocs:
           "profileLink": "http://www.moxa.com/download=12345"
         }
       }
+    ConfigReq:
+      {
+        "deviceIdList": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"]
+      }  

@@ -161,7 +161,7 @@ paths:
         204:
           description: success
 
-  /devices/{deviceId}/config:
+  /devices/{deviceId}/configs:
     parameters:
       - name: deviceId
         in: path
@@ -183,61 +183,26 @@ paths:
                 items:
                   $ref: '#/definitions/Config'
             example: 
-              $ref: '#/externalDocs/x-mocks/Config'
-    patch:
-      description: Update device properties
-      parameters:
-        - name: body
-          in: body
-          description: ''
-          required: true
-          schema:
-            $ref: '#/definitions/ConfigReq'
-      responses:
-        200:
-          description: Direct command sends
-      tags:
-        - device      
+              $ref: '#/externalDocs/x-mocks/Config'  
 
   /devices/jobs:
     post:
-      description: Send direct command to multiple device
+      description: Send job command(reboot, app upgrade) to one or multiple devices
       parameters:
         - name: body
           in: body
-          description: ''
           required: true
           schema:
-            $ref: '#/definitions/JobReq'
+            type: object
+            items:
+              $ref: '#/definitions/JobReq'
+            example: 
+              $ref: '#/externalDocs/x-mocks/JobReq'  
       responses:
         200:
-          description: Direct command sends
+          description: Job command in the working queue
       tags:
         - device      
-
-  /devices/{deviceId}/jobs:
-    parameters:
-      - name: deviceId
-        in: path
-        description: device unique identifier
-        required: true
-        type: string
-    get:
-      description: Return direct methods data with given ID device
-      tags:
-        - device
-      responses:
-        200:
-          description: An Object of the direct methods
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                items:
-                  $ref: '#/definitions/JobList'
-            example: 
-              $ref: '#/externalDocs/x-mocks/JobList'
 
   /models:
     get:
@@ -384,57 +349,27 @@ definitions:
   Config:
     type: object
     
-
-  ConfigReq:
-    type: object
-    
-  JobList:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          type: object
-        description: Device support job list.
-
   JobReq:
     type: object
     required:
-      - deviceId
-      - methodName
+      - deviceIdList
+      - method
+      - content
     properties:
-      deviceId:
+      deviceIdList:
         type: array
         description: List of deviceId.
         items:
           type: string
-      methodName:
+      method:
         type: string
-        description: Method name.       
-      userInput:
-        type: array
-        description: Method optoinal parameters. 
-        items:
-          properties:
-            parameter:
-              type: string
-              description: Parameter name of parameter.
-            value:
-              type: string
-              description: Vaule of parameter.
-      isScheduleJob:
-        type: boolean
-        description: Is job schedule.
-      scheduleAt:
-        type: string
-        description: If job is scheduleable, scheduleAt should be ISO format time, like 2017-02-19T15:46:02.2935009Z".    
-      isRepeatableJob:
-        type: boolean
-        description: Is job repeatable.
-      repeatedPattern:
-        type: string
-        description: If job is repeatable, repeatedPattern should be append and format is crontab, like "59 23 31 12 5 * ".   
-
+        enum:
+          - reboot
+        description: Method, only support reboot now.       
+      content:
+        type: object
+        description: For reboot, please refer to RebootNow and RebootSchedule
+          
 externalDocs:
   url: 'http://#'
   x-mocks:
@@ -497,44 +432,13 @@ externalDocs:
             }
           ]
       }
-    JobList:
-      {    
-        "data": [
-          {
-            "methodName": "reboot",
-            "displayName": "Reboot",
-            "description": "Reboot IoT Device immediately",
-            "userInput": []
-          },
-          {
-            "methodName": "rebootAt",
-            "displayName": "Reboot At",
-            "description": "Reboot IoT Device at a specific date time",
-            "userInput": [
-              {
-                "parameter": "executeAt",
-                "value": "",
-                "dataType": "datetime",
-                "description": "UTC time with ISO 8601 format"
-              }
-            ]
-          }
-        ]      
-      }
     JobReq:
       {
         "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
         "methodName": "reboot",
-        "isScheduleJob": false,
-        "isRepeatableJob": false,
-        "repeatedPattern": "",
-        "scheduleAt": "",
-        "userInput": [
-          {
-            "parameter": "rebootId",
-            "value": "1"
-          }
-        ]
+        "content": {
+          
+        }
       }
     ModelList:
       {
@@ -590,24 +494,21 @@ externalDocs:
           }
         ]
       }
-    ConfigReq:
+    RebootNow: 
       {
-        "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
-        "config": {
-          "general": {
-            "deviceName": "MyThingsProEdge",
-            "hostName": "Moxa"
-          },
-          "time": {
-              "ntp": {
-                  "enable": false,
-                  "interval": 60,
-                  "server": "tock.stdtime.gov.tw"
-              },
-              "timezone": "Asia/Taipei"
-          }
-        }
-      }  
+        "now": true
+      }
+    RebootSchedule: 
+      {
+        "at": {
+          "day": "1",
+          "dayOfWeek": "*",
+          "hour": "12",
+          "minute": "0",
+          "month": "1"
+        },
+        "enableScheduler": true
+      }
     Config:
       {
         "general": {

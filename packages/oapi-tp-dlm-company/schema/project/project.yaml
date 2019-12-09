@@ -310,11 +310,11 @@ definitions:
         description: List of deviceId.
         items:
           type: string
-      method:
+      action:
         type: string
         enum:
           - reboot
-        description: Method, only support reboot now.       
+        description: action, only support reboot now.       
       content:
         type: object
         description: For reboot, please refer to RebootNow and RebootSchedule
@@ -389,7 +389,7 @@ externalDocs:
     JobReq:
       {
         "deviceId": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"],
-        "methodName": "reboot",
+        "action": "reboot",
         "content": {
           "now": true
         }

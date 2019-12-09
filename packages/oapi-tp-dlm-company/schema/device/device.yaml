@@ -323,6 +323,9 @@ definitions:
           disconnectedAt:
             type: string
             description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+          willRebootAt:
+            type: object
+            description: If device sets schedule reboot, this field will be schedule detail content.
           reportedProperties:
             type: object
             description: Device reportedProperties. 
@@ -416,6 +419,16 @@ externalDocs:
           "configUpdatedAt": "2019-02-26T14:10:33:000Z",
           "connectedAt": "2019-02-26T14:10:33:000Z",
           "disconnectedAt": "2019-02-26T14:10:33:000Z",
+          "willRebootAt": {
+            "at": {
+              "day": "1",
+              "dayOfWeek": "*",
+              "hour": "12",
+              "minute": "0",
+              "month": "1"
+              },
+              "enableScheduler": true,
+          },
           "reportedProperties": {
             "reported": {}
           }
@@ -436,6 +449,7 @@ externalDocs:
         "configUpdatedAt": "2019-02-26T14:10:33:000Z",
         "connectedAt": "2019-02-26T14:10:33:000Z",
         "disconnectedAt": "2019-02-26T14:10:33:000Z",
+        "willRebootAt": {},
         "gps": [
           {
               "enable": true,

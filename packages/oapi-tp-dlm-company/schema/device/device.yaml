@@ -353,7 +353,7 @@ definitions:
     type: object
     required:
       - deviceIdList
-      - methodName
+      - method
       - content
     properties:
       deviceIdList:
@@ -361,14 +361,14 @@ definitions:
         description: List of deviceId.
         items:
           type: string
-      methodName:
+      method:
         type: string
         enum:
           - reboot
-        description: Method name.       
+        description: Method, only support reboot now.       
       content:
         type: object
-        description: 
+        description: For reboot, please refer to RebootNow and RebootSchedule
           
 externalDocs:
   url: 'http://#'

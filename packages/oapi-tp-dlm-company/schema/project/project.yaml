@@ -313,11 +313,12 @@ definitions:
       action:
         type: string
         enum:
-          - reboot
-        description: action, only support reboot now.       
+          - rebootAt
+          - rebootNow
+        description: action, only support rebootAt, rebootNow.       
       content:
         type: object
-        description: For reboot, please refer to RebootNow and RebootSchedule
+        description: For reboot, please refer to RebootNow and RebootAt
           
 externalDocs:
   url: 'http://#'
@@ -393,6 +394,21 @@ externalDocs:
         "content": {
           "now": true
         }
+      }
+    RebootNow: 
+      {
+        "now": true
+      }
+    RebootAt: 
+      {
+        "at": {
+          "day": "1",
+          "dayOfWeek": "*",
+          "hour": "12",
+          "minute": "0",
+          "month": "1"
+        },
+        "enableScheduler": true
       }
     ProjectUserList:
       {

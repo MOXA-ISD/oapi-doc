@@ -461,21 +461,6 @@ externalDocs:
           }
         ]
       }
-    RebootNow: 
-      {
-        "now": true
-      }
-    RebootSchedule: 
-      {
-        "at": {
-          "day": "1",
-          "dayOfWeek": "*",
-          "hour": "12",
-          "minute": "0",
-          "month": "1"
-        },
-        "enableScheduler": true
-      }
     Config:
       {
         "general": {

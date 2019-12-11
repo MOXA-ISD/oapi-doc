@@ -52,7 +52,7 @@ paths:
     get:
       description: Return all model profiles data 
       tags:
-        - modelProfile
+        - general
       responses:
         200:
           description: An array of the modelProfile
@@ -79,7 +79,7 @@ paths:
     get:
       description: Return profile data with given model name
       tags:
-        - modelProfile
+        - general
       responses:
         200:
           description: An Object of the profile

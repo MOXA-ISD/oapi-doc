@@ -431,7 +431,7 @@ paths:
         200:
           description: Job command in the working queue
       tags:
-        - project 
+        - deviceOperation 
   
     
     

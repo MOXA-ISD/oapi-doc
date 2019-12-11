@@ -596,7 +596,7 @@ paths:
     get:
       description: Return all supports model list
       tags:
-        - device
+        - general
       responses:
         200:
           description: An array of all supports model list

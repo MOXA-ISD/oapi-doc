@@ -286,7 +286,8 @@ paths:
                   limit:
                     type: integer
               examples: 
-                $ref: '#/components/examples/ModelProfileList'
+                ModelProfileList:
+                  $ref: '#/components/examples/ModelProfileList'
     post:
       description: Create profile, the default status is draft
       tags:
@@ -310,7 +311,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/ModelProfile'
               examples: 
-                $ref: '#/components/examples/ModelProfileRes'
+                ModelProfileRes:
+                  $ref: '#/components/examples/ModelProfileRes'
   /projects/{projectId}/modelProfiles/exist:
     parameters:
       - name: projectId
@@ -342,7 +344,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/ProfileNameExist'
               examples: 
-                $ref: '#/components/examples/ProfileNameExist'
+                ProfileNameExist:
+                  $ref: '#/components/examples/ProfileNameExist'
   /projects/{projectId}/modelProfiles/{modelProfileId}:
     parameters:
       - name: projectId
@@ -374,30 +377,33 @@ paths:
                     items:
                       $ref: '#/components/examples/ModelProfile'
               examples:
-                $ref: '#/components/examples/ModelProfileRes'
+                ModelProfileRes:
+                  $ref: '#/components/examples/ModelProfileRes'
     put:
       description: Return updated modelProfile data with given ID
-      consumes:
-        - multipart/form-data
-      parameters:
-      - name: profile
-        in: formData
-        type: file
-        description: Upload json file with profile data
-        required: true
-      - name: status
-        in: formData
-        type: string
-        enum:
-        - draft
-        - ready
-        description: Profile status
-        required: true 
-      - name: profileName
-        in: formData
-        type: string
-        description: Profile Name
-        required: true 
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - profile
+                - status
+                - profileName
+              properties:
+                profile:
+                  type: string
+                  format: binary
+                  description: Upload json file with profile data
+                status:
+                  type: string
+                  enum:
+                  - draft
+                  - ready
+                  description: Profile status
+                profileName:
+                  type: string
+                  description: Profile Name
       tags:
         - profile
       responses:
@@ -413,7 +419,8 @@ paths:
                     items:
                       $ref: '#/components/examples/ModelProfile'
               examples: 
-                $ref: '#/components/examples/ModelProfileRes'
+                ModelProfileRes:
+                  $ref: '#/components/examples/ModelProfileRes'
     patch:
       description: update is defualt field
       requestBody:
@@ -437,7 +444,8 @@ paths:
                     items:
                       $ref: '#/components/examples/ModelProfile'
               examples: 
-                $ref: '#/components/examples/ModelProfileRes'
+                ModelProfileRes:
+                  $ref: '#/components/examples/ModelProfileRes'
 
   /projects/{projectId}/modelProfiles/{modelProfileId}/apply:
     parameters:
@@ -464,13 +472,13 @@ paths:
               items:
                 $ref: '#/components/schemas/ConfigReq'
             examples: 
-              $ref: '#/components/examples/ConfigReq'  
+              ConfigReq:
+                $ref: '#/components/examples/ConfigReq'  
       responses:
         200:
           description: Config request is in the working queue
       tags:
-        - profile
-
+        - deviceOperation
 
   /projects/{projectId}/modelProfiles/{modelProfileId}/download:
     parameters:
@@ -505,6 +513,5 @@ paths:
                         type: string
                         description: Download link.
               examples:
-                $ref: '#/components/examples/ProfileDownload'
-  
-
+                ProfileDownload:
+                  $ref: '#/components/examples/ProfileDownload'

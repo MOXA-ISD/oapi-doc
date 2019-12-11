@@ -23,7 +23,7 @@ components:
     TagCreate:
       type: object
       required:
-        - tagName
+        - deviceTagName
         - colour
       properties:
         tagName:
@@ -35,7 +35,7 @@ components:
     TagPut:
       type: object
       required:
-        - tagName
+        - deviceTagName
         - colour
       properties:
         tagName:
@@ -160,7 +160,7 @@ paths:
     get:
       description: Return tag data of project
       tags:
-        - tag  
+        - deviceTag  
       responses:
         200:
           description: Return tag data of project
@@ -181,7 +181,7 @@ paths:
     post:
       description: Create tag
       tags:
-        - tag
+        - deviceTag
       requestBody:
         required: true
         content:
@@ -214,7 +214,7 @@ paths:
     post:
       description: Attach tags on devices
       tags:
-        - tag
+        - deviceTag
       requestBody:
         required: true
         content:
@@ -248,7 +248,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TagPut'
       tags:
-        - tag
+        - deviceTag
       responses:
         200:
           description: An Object of the tag
@@ -267,7 +267,7 @@ paths:
     delete:
       description: delete a tag
       tags:
-        - tag
+        - deviceTag
       responses:
         204:
           description: delete tag success
@@ -288,7 +288,7 @@ paths:
     get:
       description: Determining if the tagName exists in this project or not
       tags:
-        - tag
+        - deviceTag
       responses:
         200:
           description: Determining if the profileName exists or not

@@ -7,6 +7,71 @@ info:
 
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Unique identifier representing a specific company.
+        userId:
+          type: string
+          description: Unique identifier representing a specific user.
+        status:
+          type: string
+          enum:
+            - enable
+            - disable
+          description: Status of user.
+        role:
+          type: array
+          description: List of role which contains the user.
+          items:
+            '$ref': '#/components/schemas/Role'
+        username:
+          type: string
+          description: Username of user.
+        email:
+          type: string
+          description: Email of user.
+        createdAt:
+          type: string
+          description: User created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        updatedAt:
+          type: string
+          description: User last updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.         
+        loginedAt:
+          type: string
+          description: User last login time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        passwordExpiredAt:
+          type: string
+          description: Last change password time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+    Role:
+      type: object
+      properties:
+        roleId:
+          type: integer
+          description: Role id.
+        name:
+          type: string
+          description: Name of role.
+          maxLength: 30  
+        admin:
+          type: boolean
+          description: Admin role or not.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+          description: permission list.
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Permission id.
+        value:
+          type: integer
+          description: Permission value.
     LoginRes:
       type: object
       properties:
@@ -21,6 +86,35 @@ components:
               type: string
               description: Granted authentication token.
   examples:
+    User:
+      summary: cellular information
+      value:
+        {
+          "companyId": "07473967-3c29-4914-b275-d0511c42554e",
+          "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+          "status": "enable",
+          "role": {
+              "roleId": 2,
+              "name": "Administrator",
+              "admin": true,
+              "permissions": [
+                {
+                  "id": 1,
+                  "value": 0
+                },
+                {
+                  "id": 2,
+                  "value": 0
+                }
+              ]
+          },
+          "username": "owen",
+          "email": "owen@moxa.com",
+          "createdAt": "2019-03-08T08:44:13.425Z",
+          "updatedAt": "2019-03-08T08:44:13.425Z",
+          "loginedAt": "",  
+          "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
+        }
     LoginRes:
       summary: cellular information
       value:

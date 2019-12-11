@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  version: '0.0.0'
+  title: 'Device RESTful API reference'
+  description: |
+    Release Date: 2019/10/22
+
+components:
+  schemas:
+    LoginRes:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            user:
+              type: object
+              items:
+                $ref: '#/components/schemas/User'
+            token:
+              type: string
+              description: Granted authentication token.
+  examples:
+    LoginRes:
+      summary: cellular information
+      value:
+        {
+          "data": {
+              "user": {
+                "companyId": "07473967-3c29-4914-b275-d0511c42554e",
+                "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+                "status": "enable",
+                "role": {
+                    "roleId": 2,
+                    "name": "Administrator",
+                    "admin": true,
+                    "permissions": [
+                      {
+                        "id": 1,
+                        "value": 0
+                      },
+                      {
+                        "id": 2,
+                        "value": 0
+                      }
+                    ]
+                },
+                "username": "owen",
+                "email": "owen@moxa.com",
+                "createdAt": "2019-03-08T08:44:13.425Z",
+                "updatedAt": "2019-03-08T08:44:13.425Z",
+                "loginedAt": "",  
+                "passwordExpiredAt": "2019-01-22T07:51:26.214Z"
+              },
+            "token": "USER_TOKEN"
+          }
+        }
+    
+paths:
+  /login:
+    post:
+      description: user login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: 'email@moxa.com'
+                password:
+                  type: string
+                  example: '12345678'
+      responses:
+        200:
+          description: Return user and token data
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/LoginRes'
+              examples:
+                LoginRes:
+                  $ref: '#/components/examples/LoginRes'
+      tags:
+        - login
+
+  /logout:
+    post:
+      description: user logout
+      responses:
+        200:
+          description: user logout
+      tags:
+        - login

@@ -1,0 +1,510 @@
+openapi: 3.0.0
+info:
+  version: '0.0.0'
+  title: 'Device RESTful API reference'
+  description: |
+    Release Date: 2019/10/22
+
+components:
+  schemas:
+    ModelProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier representing a specific model profile.
+        modelName:
+          type: string
+          description: Unique identifier representing a specific model name.
+        profileName:
+          type: string
+          description: Profile name.
+        profileDisplayName:
+          type: string
+          description: Profile display name.
+        createdBy:
+          type: string
+          description: User who create config repo.
+        userId:
+          type: string
+          description: Unique identifier user id.
+        status:
+          type: string
+          enum:
+          - draft
+          - ready
+          - archive
+          description: Status of profile.    
+        isDefault:
+          type: boolean
+          description: Is this profie as a defualt profile apply to device.
+        createdAt:
+          type: string
+          description: Config repo created time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        profile:
+          type: object
+          description: Model Profile.
+    ModelProfileCreate:
+      type: object
+      required:
+        - duplicate
+        - newProfileName
+      properties:
+        duplicate:
+          type: object
+          description: The profile should duplicate from modelName or profileName, use must append profileName or modelName on below this field.  
+          properties:
+            modelName:
+              type: string
+              description: Unique identifier representing a specific model name.
+            profileName:
+              type: string
+              description: Unique profile name.  
+            deviceId:
+              type: string
+              description: Unique identifier device id.
+        newProfileName:
+          type: string
+          description: Unique new profile name.  
+    ModelProfilePatch:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - draft
+          - ready
+          description: Status of profile.    
+        isDefault:
+          type: boolean
+          description: Profile is default or not.  
+        profileName:
+          type: string
+          description: Unique profile name.  
+    ProfileNameExist:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            exist:
+              type: boolean
+              description: Determining if the profileName exists in this project.
+    ConfigReq:
+      type: object
+      properties:
+        deviceIdList:
+          type: array
+          items:
+            type: string
+  examples:
+    ModelProfile:
+      summary: cellular information
+      value:
+        {
+          "profileId": 1,
+          "modelName": "UC-8112",
+          "profileName": "test",
+          "profileDisplayName": "test",
+          "createdBy": "owen",
+          "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+          "status": "ready",
+          "isDefault": true,
+          "createdAt": "2019-02-26T14:10:33:000Z",
+          "updatedAt": "2019-02-26T14:10:33:000Z"
+        }
+    ModelProfileRes:
+      summary: cellular information
+      value:
+        {
+          "data": {
+            "profileId": 1,
+            "modelName": "UC-8112",
+            "profileName": "test",
+            "profileDisplayName": "test",
+            "createdBy": "owen",
+            "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+            "status": "ready",
+            "isDefault": true,
+            "createdAt": "2019-02-26T14:10:33:000Z",
+            "updatedAt": "2019-02-26T14:10:33:000Z"
+          }
+        }
+    ModelProfileList:
+      summary: cellular information
+      value:
+        {
+          "count": 1,
+          "data": [
+            {
+              "profileId": 1,
+              "modelName": "UC-8112",
+              "profileName": "test",
+              "profileDisplayName": "test",
+              "createdBy": "owen",
+              "userId": "a1be69eb-258e-4c66-b07b-583474e57305",
+              "status": "ready",
+              "isDefault": true,
+              "createdAt": "2019-02-26T14:10:33:000Z",
+              "updatedAt": "2019-02-26T14:10:33:000Z"
+            }
+          ]
+        }
+    ModelProfileCreate:
+      summary: cellular information
+      value:
+        {
+          "duplicate": {
+            "profileName": "name",
+            "modelName": "UC-8112",
+            "deviceId": "a1be69eb-258e-4c66-b07b-583474e57305"
+          },
+          "newProfileName": "test"
+        }
+    ModelProfilePatch:
+      summary: cellular information
+      value:
+        {
+          "isDefault": true,
+          "status": "ready",
+          "profileName": "newName"
+        }
+    ProfileNameExist:
+      summary: cellular information
+      value:
+        { 
+          "data": {
+            "exist": true 
+          }
+        }
+    ProfileDownload:
+      summary: cellular information
+      value:
+        {
+          "data": {
+            "profileLink": "http://www.moxa.com/download=12345"
+          }
+        }
+    ConfigReq:
+      summary: cellular information
+      value:
+        {
+          "deviceIdList": ["346d9463-a60a-4d6a-b419-f59f11e07ff5"]
+        }  
+  
+paths:
+  /projects/{projectId}/modelProfiles:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+        
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - profile
+      parameters:
+      - name: keyword
+        in: query
+        description: Search keyword by wildcard - support profile name
+        required: false
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Filter the model profile list by modelName
+        required: false
+        schema:
+          type: string
+      - name: createdBy
+        in: query
+        description: Filter the model profile list by creator
+        required: false
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Sort the device list by specific condition, default is order by 'updatedAt'
+        required: false
+        schema:
+          type: string
+          enum:
+          - modelName
+          - profileName
+          - status
+          - updatedAt
+          - createdBy
+      - name: sort
+        in: query
+        description: Sorting the filter device list, default is desc
+        required: false
+        schema:
+          type: string
+          enum:
+          - desc
+          - asc
+      - name: limit
+        in: query
+        description: max return devices count (default is 100 and max is 1000)
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+      - name: distinct
+        in: query
+        description: Get distict value of speific field, this query parameter will return string array only
+        required: false
+        schema:
+          type: string
+          enum:
+          - modelName
+          - createdBy      
+      responses:
+        200:
+          description: An object of the modelProfile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ModelProfile'
+                  count:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+              examples: 
+                $ref: '#/components/examples/ModelProfileList'
+    post:
+      description: Create profile, the default status is draft
+      tags:
+        - profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelProfileCreate'
+      responses:
+        200:
+          description: An Object of the modelProfile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/ModelProfile'
+              examples: 
+                $ref: '#/components/examples/ModelProfileRes'
+  /projects/{projectId}/modelProfiles/exist:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+      - name: profileName
+        in: query
+        description: tested query profileName
+        required: true
+        schema:
+          type: string
+    get:
+      description: Determining if the profileName exists in this project or not
+      tags:
+        - profile
+      responses:
+        200:
+          description: Determining if the profileName exists or not
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/ProfileNameExist'
+              examples: 
+                $ref: '#/components/examples/ProfileNameExist'
+  /projects/{projectId}/modelProfiles/{modelProfileId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+      - name: modelProfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        schema:
+          type: string
+    get:
+      description: Return modelProfile data with given ID
+      tags:
+        - profile
+      responses:
+        200:
+          description: An object of the modelProfile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/examples/ModelProfile'
+              examples:
+                $ref: '#/components/examples/ModelProfileRes'
+    put:
+      description: Return updated modelProfile data with given ID
+      consumes:
+        - multipart/form-data
+      parameters:
+      - name: profile
+        in: formData
+        type: file
+        description: Upload json file with profile data
+        required: true
+      - name: status
+        in: formData
+        type: string
+        enum:
+        - draft
+        - ready
+        description: Profile status
+        required: true 
+      - name: profileName
+        in: formData
+        type: string
+        description: Profile Name
+        required: true 
+      tags:
+        - profile
+      responses:
+        200:
+          description: An Object of the modelProfile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/examples/ModelProfile'
+              examples: 
+                $ref: '#/components/examples/ModelProfileRes'
+    patch:
+      description: update is defualt field
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelProfilePatch'
+      tags:
+        - profile
+      responses:
+        200:
+          description: An Object of the modelProfile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/examples/ModelProfile'
+              examples: 
+                $ref: '#/components/examples/ModelProfileRes'
+
+  /projects/{projectId}/modelProfiles/{modelProfileId}/apply:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+      - name: modelProfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        schema:
+          type: string
+    post:
+      description: Apply configs to one or multiple devices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: '#/components/schemas/ConfigReq'
+            examples: 
+              $ref: '#/components/examples/ConfigReq'  
+      responses:
+        200:
+          description: Config request is in the working queue
+      tags:
+        - profile
+
+
+  /projects/{projectId}/modelProfiles/{modelProfileId}/download:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+      - name: modelProfileId
+        in: path
+        description: Unique identifier representing a specific model profile
+        required: true
+        schema:
+          type: string
+    post:
+      description: Download profile
+      tags:
+        - profile
+      responses:
+        200:
+          description: A download link
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      profileLink:
+                        type: string
+                        description: Download link.
+              examples:
+                $ref: '#/components/examples/ProfileDownload'
+  
+

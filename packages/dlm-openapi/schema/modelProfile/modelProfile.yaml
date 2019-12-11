@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  version: '0.0.0'
+  title: 'Device RESTful API reference'
+  description: |
+    Release Date: 2019/10/22
+
+components:
+  schemas:
+    ModelProfile:
+      type: object
+      properties:
+        modelName:
+          type: string
+          description: Unique identifier representing a specific model name.
+        profile:
+          type: object
+          description: Model Profile.
+  examples:
+    ModelProfile:
+      summary: cellular information
+      value:
+        {
+          "data": {
+            "modelName": "UC-8112",
+            "profile": {
+              "system_tag" : "",
+              "system_properties" : "",
+              "direct_method" : "",  
+              "device_image" : ""
+            }
+          }
+        }
+    ModelProfileList:
+      summary: cellular information
+      value:
+       {
+         "data": [
+          {
+            "modelName": "UC-8112",
+            "profile": {
+              "system_tag" : "",
+              "system_properties" : "",
+              "direct_method" : "",  
+              "device_image" : ""
+            }
+          }
+        ]
+       }
+paths:
+  /modelProfiles:
+    get:
+      description: Return all model profiles data 
+      tags:
+        - modelProfile
+      responses:
+        200:
+          description: An array of the modelProfile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ModelProfile'
+              examples:
+                ModelProfileList:
+                  $ref: '#/components/examples/ModelProfileList'
+  /modelProfiles/{modelName}:
+    parameters:
+      - name: modelName
+        in: path
+        required: true
+        description: get specific model profile, the supported models, you should get /api/v1/models first
+        schema:
+          type: string
+    get:
+      description: Return profile data with given model name
+      tags:
+        - modelProfile
+      responses:
+        200:
+          description: An Object of the profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/ModelProfile'
+              examples: 
+                ModelProfile:
+                  $ref: '#/components/examples/ModelProfile'  

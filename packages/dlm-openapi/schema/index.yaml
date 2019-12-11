@@ -1,0 +1,54 @@
+swagger: '2.0'
+
+info:
+  version: 0.0.8
+  title: DLM Company Portal RESTful API reference
+  description: |
+    Welcome to the DLM Company Portal RESTful API reference.
+
+host: localhost
+basePath: '/api/v1'
+
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+securityDefinitions:
+  token:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Authenicate token, format should be 'Bearer XXXXXX' in your header
+
+tags:
+  - $ref: './user/index.yaml#/tags'
+  - $ref: './operationLog/index.yaml#/tags'
+  - $ref: './package/index.yaml#/tags'
+  - $ref: './project/index.yaml#/tags'
+  - $ref: './device/index.yaml#/tags'
+  - $ref: './projectModelProfile/index.yaml#/tags'
+  - $ref: './modelProfile/index.yaml#/tags'
+  - $ref: './projectTag/index.yaml#/tags'
+
+paths:
+  - $ref: './user/index.yaml#/paths'
+  - $ref: './operationLog/index.yaml#/paths'
+  - $ref: './package/index.yaml#/paths'
+  - $ref: './project/index.yaml#/paths'
+  - $ref: './device/index.yaml#/paths'
+  - $ref: './projectModelProfile/index.yaml#/paths'
+  - $ref: './modelProfile/index.yaml#/paths'
+  - $ref: './projectTag/index.yaml#/paths'
+
+definitions:
+  - $ref: './user/index.yaml#/definitions'
+  - $ref: './operationLog/index.yaml#/definitions'
+  - $ref: './package/index.yaml#/definitions'
+  - $ref: './project/index.yaml#/definitions'
+  - $ref: './device/index.yaml#/definitions'
+  - $ref: './projectModelProfile/index.yaml#/definitions'
+  - $ref: './modelProfile/index.yaml#/definitions'
+  - $ref: './projectTag/index.yaml#/definitions'  

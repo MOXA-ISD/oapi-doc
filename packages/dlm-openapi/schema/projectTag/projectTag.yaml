@@ -1,0 +1,305 @@
+openapi: 3.0.0
+info:
+  version: '0.0.0'
+  title: 'Device RESTful API reference'
+  description: |
+    Release Date: 2019/10/22
+
+components:
+  schemas:
+    Tag:
+      type: object
+      properties:
+        tagId:
+          type: integer
+          description: Unique identifier representing a specific tag.
+        tagName:
+          type: string
+          description: Unique identifier representing a specific tag name.
+        colour:
+          type: string
+          description: tag colour.
+        
+    TagCreate:
+      type: object
+      required:
+        - tagName
+        - colour
+      properties:
+        tagName:
+          type: string
+          description: Unique identifier representing a specific tag name.
+        colour:
+          type: string
+          description: tag colour.
+    TagPut:
+      type: object
+      required:
+        - tagName
+        - colour
+      properties:
+        tagName:
+          type: string
+          description: Unique identifier representing a specific tag name.
+        colour:
+          type: string
+          description: tag colour.
+    TagsAttach:
+      type: object
+      required:
+        - devices
+      properties:
+        devices:
+          type: array
+          description: device list.
+          items:
+            type: object
+            properties:
+              deviceId:
+                type: string
+                description: device id.
+              tagIdList:
+                type: array
+                description: tag id list.
+                items:
+                  type: integer
+    TagNameExist:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            exist:
+              type: boolean
+              description: Determining if the tagName exists in this project.
+
+  examples:
+    Tag:
+      summary: cellular information
+      value:
+        {
+          "tagId": 1,
+          "tagName": "moxa",
+          "colour": "#FFFFFF"
+        }
+    TagRes:
+      summary: cellular information
+      value:
+        {
+          "data": {
+            "tagId": 1,
+            "tagName": "moxa",
+            "colour": "#FFFFFF"
+          }
+        }
+    TagList:
+      summary: cellular information
+      value:
+        {
+          "maxCount": 5,
+          "data": [
+            {
+              "tagId": 1,
+              "tagName": "moxa",
+              "colour": "#FFFFFF"
+            }
+          ]
+        }
+    TagCreate:
+      summary: cellular information
+      value:
+        {
+          "tagName": "moxa",
+          "colour": "#111111"
+        }
+    TagPut:
+      summary: cellular information
+      value:
+        {
+          "tagName": "moxa",
+          "colour": "#111111"
+        }
+    TagsAttach:
+      summary: cellular information
+      value:
+        {
+          "devices": [
+            {
+              "deviceId": "00e07993-6844-433e-ba9b-dca7b09aaa9a",
+              "tagIdList": [4]
+            },
+            {
+              "deviceId": "7c83072e-de72-45d7-8d69-065ec19cf845",
+              "tagIdList": [1, 4]
+            },
+            {
+              "deviceId": "539f035f-052f-48a0-bc38-65c608fd767e",
+              "tagIdList": [1]
+            }
+          ]
+        }
+    TagNameExist:
+      summary: cellular information
+      value:
+        { 
+          "data": {
+            "exist": true 
+          }
+        }
+    
+paths:
+  /projects/{projectId}/tags:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+        
+    get:
+      description: Return tag data of project
+      tags:
+        - tag  
+      responses:
+        200:
+          description: Return tag data of project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+                  maxCount:
+                    type: integer
+              examples: 
+                TagList:
+                  $ref: '#/components/examples/TagList'
+    post:
+      description: Create tag
+      tags:
+        - tag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagCreate'
+      responses:
+        200:
+          description: An Object of the tag
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Tag'
+              examples: 
+                TagRes:
+                  $ref: '#/components/examples/TagRes'
+  /projects/{projectId}/tagsAttach:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+    post:
+      description: Attach tags on devices
+      tags:
+        - tag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagsAttach'
+      responses:
+        200:
+          description: An Object of the tag
+
+  /projects/{projectId}/tags/{tagId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+      - name: tagId
+        in: path
+        description: Unique identifier representing a specific tag
+        required: true
+        schema:
+          type: string
+    put:
+      description: update is defualt field
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagPut'
+      tags:
+        - tag
+      responses:
+        200:
+          description: An Object of the tag
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Tag'
+              examples: 
+                TagRes:
+                  $ref: '#/components/examples/TagRes'
+    delete:
+      description: delete a tag
+      tags:
+        - tag
+      responses:
+        204:
+          description: delete tag success
+  /projects/{projectId}/tags/exist:
+    parameters:
+      - name: projectId
+        in: path
+        description: project unique identifier
+        required: true
+        schema:
+          type: string
+      - name: tagName
+        in: query
+        description: tested query tagName
+        required: true
+        schema:
+          type: string
+    get:
+      description: Determining if the tagName exists in this project or not
+      tags:
+        - tag
+      responses:
+        200:
+          description: Determining if the profileName exists or not
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/TagNameExist'  
+              examples: 
+                TagNameExist:
+                  $ref: '#/components/examples/TagNameExist'
+
+    

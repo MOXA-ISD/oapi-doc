@@ -1,0 +1,614 @@
+openapi: 3.0.0
+info:
+  version: '0.0.0'
+  title: 'Device RESTful API reference'
+  description: |
+    Release Date: 2019/10/22
+
+components:
+  schemas:
+    Device:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Unique identifier representing a specific project.
+        deviceId:
+          type: string
+          description: Unique identifier representing a specific device.
+        modelName:
+          type: string
+          description: Model name of device.
+        mac:
+          type: string
+          description: Mac address of device.
+        serialNumber:
+          type: string
+          description: Serial number of device.
+        version:
+          type: string
+          description: Firmware version of device.
+        tags:
+          type: array
+          description: Tag list of device.
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - online
+          - offline
+          - registered
+          - enrolled
+          - retired
+          description: status of device.    
+        configStatus:
+          type: string
+          enum:
+          - normal
+          - modified
+        profileId:
+          type: integer
+          description: Dependency Profile id, this field could be empty, if there is no dependency Profile.
+        profileName:
+          type: string
+          description: Dependency profile name.
+        configUpdatedAt:
+          type: string
+          description: Device last config updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        connectedAt:
+          type: string
+          description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+        disconnectedAt:
+          type: string
+          description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+    DeviceRes:
+      type: object
+      properties:
+        data:
+          type: object
+          items:
+            $ref: '#/components/schemas/Device'
+    DeviceDetail:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            projectId:
+              type: string
+              description: Unique identifier representing a specific project.
+            deviceId:
+              type: string
+              description: Unique identifier representing a specific device.
+            modelName:
+              type: string
+              description: Model name of device.
+            mac:
+              type: string
+              description: Mac address of device.
+            serialNumber:
+              type: string
+              description: Serial number of device.
+            version:
+              type: string
+              description: Firmware version of device.
+            tags:
+              type: array
+              description: Tag list of device.
+              items:
+                type: string
+            status:
+              type: string
+              enum:
+              - online
+              - offline
+              - registered
+              - enrolled
+              - retired
+              description: status of device.    
+            configStatus:
+              type: string
+              enum:
+              - normal
+              - modified
+            profileId:
+              type: integer
+              description: Dependency Profile id, this field could be empty, if there is no dependency Profile.
+            profileName:
+              type: string
+              description: Dependency profile name.
+            configUpdatedAt:
+              type: string
+              description: Device last config updated time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+            connectedAt:
+              type: string
+              description: Device last connected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+            disconnectedAt:
+              type: string
+              description: Device last disconnected time, ISO data format, like '2018-08-12T20:17:46.384Z'.
+            willRebootAt:
+              type: object
+              description: If device sets schedule reboot, this field will be schedule detail content.
+            reportedProperties:
+              type: object
+              description: Device reportedProperties. 
+  examples:
+    Device:
+      summary: cellular information
+      value:
+        {
+          "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "mac": "000C2970D2EC",
+          "serialNumber": "123456",
+          "hostName": "moxa",
+          "modelName": "UC-8112-LX-CG",
+          "profileId": 1,
+          "profileName": "test",
+          "status": "online",
+          "tags": ["moxa"],
+          "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+          "connectedAt": "2019-02-26T14:10:33:000Z",
+          "disconnectedAt": "2019-02-26T14:10:33:000Z"
+        } 
+    DeviceRes:
+      summary: cellular information
+      value:
+        {
+          "data": {
+            "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "mac": "000C2970D2EC",
+            "serialNumber": "123456",
+            "hostName": "moxa",
+            "modelName": "UC-8112-LX-CG",
+            "profileId": 1,
+            "profileName": "test",
+            "status": "online",
+            "tags": ["moxa"],
+            "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+            "connectedAt": "2019-02-26T14:10:33:000Z",
+            "disconnectedAt": "2019-02-26T14:10:33:000Z"
+          }
+        } 
+    DeviceList:
+      summary: cellular information
+      value:
+        {
+          "count": 5,
+          "offset": 0,
+          "limit": 100,
+          "data":
+            [
+              {
+                "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+                "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+                "mac": "000C2970D2EC",
+                "serialNumber": "123456",
+                "hostName": "moxa",
+                "modelName": "UC-8112-LX-CG",
+                "profileId": 1,
+                "profileName": "test",
+                "status": "online",
+                "tags": ["moxa"],
+                "configStatus": "normal",
+                "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+                "connectedAt": "2019-02-26T14:10:33:000Z",
+                "disconnectedAt": "2019-02-26T14:10:33:000Z"
+              }
+            ]
+        }
+    ModelList:
+      summary: cellular information
+      value:
+        {
+          "data" : [
+            "UC-8112-LX",
+            "UC-8112A-ME-T-LX"
+          ]
+        }
+    DeviceDetail:
+      summary: cellular information
+      value:
+        {
+          "data": {
+            "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+            "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+            "mac": "000C2970D2EC",
+            "serialNumber": "123456",
+            "hostName": "moxa",
+            "modelName": "UC-8112-LX-CG",
+            "profileId": 1,
+            "profileName": "test",
+            "status": "online",
+            "tags": ["moxa"],
+            "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+            "connectedAt": "2019-02-26T14:10:33:000Z",
+            "disconnectedAt": "2019-02-26T14:10:33:000Z",
+            "willRebootAt": {
+              "at": {
+                "day": "1",
+                "dayOfWeek": "*",
+                "hour": "12",
+                "minute": "0",
+                "month": "1"
+                },
+                "enableScheduler": true,
+            },
+            "reportedProperties": {
+              "reported": {}
+            }
+          }
+        }   
+    DeviceModeMap:
+      summary: cellular information
+      value:
+        {
+          "projectId": "65af94c4-07e4-43d7-abad-3cb5f295550b",
+          "deviceId": "4b4f1ab2-18ac-483e-aedd-2aaeb2dabd59",
+          "mac": "000C2970D2EC",
+          "serialNumber": "123456",
+          "hostName": "moxa",
+          "modelName": "UC-8112-LX-CG",
+          "profileId": 1,
+          "profileName": "test",
+          "status": "online",
+          "tags": ["moxa"],
+          "configUpdatedAt": "2019-02-26T14:10:33:000Z",
+          "connectedAt": "2019-02-26T14:10:33:000Z",
+          "disconnectedAt": "2019-02-26T14:10:33:000Z",
+          "willRebootAt": {},
+          "gps": [
+            {
+                "enable": true,
+                "location": {
+                    "lat": 0,
+                    "lng": 0
+                },
+                "mode": "manual"
+            }
+          ]
+        }
+    Config:
+      summary: cellular information
+      value:
+        {
+          "general": {
+              "deviceName": "MyThingsProEdge",
+              "hostName": "Moxa"
+          },
+          "time": {
+              "ntp": {
+                  "enable": false,
+                  "interval": 60,
+                  "server": "tock.stdtime.gov.tw"
+              },
+              "timezone": "Asia/Taipei"
+          },
+          "route": {
+              "priorityList": [
+                  "Cellular1", "LAN1","LAN2"
+              ]
+          },
+          "iptables": {
+              "firewall": [
+                  {
+                      "action": "drop",
+                      "default": true,
+                      "destIp": "",
+                      "destPort": "",
+                      "direction": "inbound",
+                      "enable": true,
+                      "id": 1,
+                      "interface": "",
+                      "protocol": "",
+                      "srcIp": "",
+                      "srcPort": ""
+                  },
+                  {
+                      "action": "accept",
+                      "default": false,
+                      "destIp": "",
+                      "destPort": "80",
+                      "direction": "inbound",
+                      "enable": true,
+                      "id": 10000,
+                      "interface": "",
+                      "protocol": "tcp",
+                      "srcIp": "",
+                      "srcPort": ""
+                  },
+                  {
+                      "action": "accept",
+                      "default": false,
+                      "destIp": "",
+                      "destPort": "8443",
+                      "direction": "inbound",
+                      "enable": true,
+                      "id": 10001,
+                      "interface": "",
+                      "protocol": "tcp",
+                      "srcIp": "",
+                      "srcPort": ""
+                  },
+                  {
+                      "action": "accept",
+                      "default": false,
+                      "destIp": "172.31.8.0/22",
+                      "destPort": "",
+                      "direction": "inbound",
+                      "enable": true,
+                      "id": 10002,
+                      "interface": "",
+                      "protocol": "tcp",
+                      "srcIp": "",
+                      "srcPort": ""
+                  },
+                  {
+                      "action": "accept",
+                      "default": false,
+                      "destIp": "",
+                      "destPort": "22",
+                      "direction": "inbound",
+                      "enable": true,
+                      "id": 10010,
+                      "interface": "",
+                      "protocol": "tcp",
+                      "srcIp": "",
+                      "srcPort": ""
+                  }
+              ]
+          },
+          "ethernets": [
+              {
+                  "enable": true,
+                  "enableDhcp": true,
+                  "wan": true
+              },
+              {
+                  "dns": [
+                      "8.8.8.8"
+                  ],
+                  "enable": true,
+                  "enableDhcp": false,
+                  "ip": "192.168.4.127",
+                  "netmask": "255.255.255.0",
+                  "wan": false
+              }
+          ],
+          "gps": [
+              {
+                  "enable": true,
+                  "location": {
+                      "lat": 0,
+                      "lng": 0
+                  },
+                  "mode": "manual"
+              }
+          ],
+          "serials": [
+              {
+                  "mode": "rs232"
+              },
+              {
+                  "mode": "rs232"
+              }
+          ]
+        }
+paths:
+  /projescts/{projectId}/devices:
+    get:
+      description: Get all devices field data
+      tags:
+        - device
+      parameters:
+        - name: projectId
+          in: path
+          description: project unique identifier
+          required: true
+          schema:
+            type: string
+        - name: hostName
+          in: query
+          description: Filter the device list by hostName
+          required: false
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Filter the device list by modelName
+          required: false
+          schema:
+            type: string
+        - name: mac
+          in: query
+          description: Filter the device list by mac
+          required: false
+          schema:
+            type: string
+        - name: serialNumber
+          in: query
+          description: Filter the device list by serial number
+          required: false
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: Filter the device list by tag
+          required: false
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          description: Search keyword by wildcard - support host name, serial number
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter the device list by status
+          required: false
+          schema:
+            type: string
+            enum:
+            - enrolled
+            - registered
+            - online
+            - offline
+            - retired
+        - name: order
+          in: query
+          description: Sort the device list by specific condition, default is order by 'updatedAt'
+          required: false
+          schema:
+            type: string
+            enum:
+            - hostName
+            - modelName
+            - serialNumber
+            - status
+            - version
+            - profileName
+            - updatedAt
+        - name: mode
+          in: query
+          description: Default is simple, if the query mode is map, service will response gps information in properteis field
+          required: false
+          schema:
+            type: string
+            enum:
+            - simple
+            - map
+        - name: sort
+          in: query
+          description: Sorting the filter device list, default is desc
+          required: false
+          schema:
+            type: string
+            enum:
+            - desc
+            - asc
+        - name: limit
+          in: query
+          description: max return devices count (default is 100 and max is 1000)
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          schema:
+            type: integer
+        - name: distinct
+          in: query
+          description: Get distict value of speific field, this query parameter will return string array only
+          required: false
+          schema:
+            type: string
+            enum:
+            - tag
+            - modelName
+            - status        
+      
+      responses:
+        200:
+          description: An array of devices
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  count:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+              examples: 
+                DeviceList:
+                  $ref: '#/components/examples/DeviceList'
+
+  /devices/{deviceId}:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        schema:
+          type: string
+    get:
+      description: Return device data with given ID
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the device
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/DeviceDetail'
+              examples: 
+                DeviceDetail:
+                  $ref: '#/components/examples/DeviceDetail'
+    delete:
+      description: Retire device with given ID
+      tags:
+        - device
+      responses:
+        204:
+          description: success
+
+  /devices/{deviceId}/configs:
+    parameters:
+      - name: deviceId
+        in: path
+        description: device unique identifier
+        required: true
+        schema:
+          type: string
+    get:
+      description: Return reported properties data with given ID device
+      tags:
+        - device
+      responses:
+        200:
+          description: An Object of the reported properties
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+              examples: 
+                Config:
+                  $ref: '#/components/examples/Config'       
+
+  /models:
+    get:
+      description: Return all supports model list
+      tags:
+        - device
+      responses:
+        200:
+          description: An array of all supports model list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+              examples: 
+                ModelList:
+                  $ref: '#/components/examples/ModelList'

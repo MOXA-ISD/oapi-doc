@@ -1,0 +1,12 @@
+---
+swagger: '2.0'
+
+tags:
+- $ref: "./projectModelProfile.yaml#/tags"
+
+paths:
+- $ref: "./projectModelProfile.yaml#/paths"
+
+definitions:
+- $ref: "./projectModelProfile.yaml#/definitions"
+

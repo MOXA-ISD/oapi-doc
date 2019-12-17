@@ -2,10 +2,10 @@
 swagger: '2.0'
 
 tags:
-- $ref: "./operationLog.yaml#/tags"
+- $ref: "./eventLog.yaml#/tags"
 
 paths:
-- $ref: "./operationLog.yaml#/paths"
+- $ref: "./eventLog.yaml#/paths"
 
 definitions:
-- $ref: "./operationLog.yaml#/definitions"
+- $ref: "./eventLog.yaml#/definitions"

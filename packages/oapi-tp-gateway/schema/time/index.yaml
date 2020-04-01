@@ -94,15 +94,6 @@ paths:
         - time
       security:
         - mx-api-token: []
-    post:
-      description: Update timezone information from internet
-      responses:
-        '200':
-          description: success
-      tags:
-        - time
-      security:
-        - mx-api-token: []
 
 definitions:
   Time:

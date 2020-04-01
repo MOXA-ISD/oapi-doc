@@ -105,26 +105,6 @@ paths:
         - openvpn
       security:
         - mx-api-token: []
-  '/network/openvpn/sample':
-    post:
-      description: Upload OpenVPN sample configuration file to File server.
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            '$ref': '#/definitions/OpenVPNPostConfig'
-      responses:
-        '200':
-          description: Upload success.
-          schema:
-            '$ref': '#/definitions/OpenVPNConfigURL'
-            example:
-              url: http://192.168.31.113:18080/url
-      tags:
-        - openvpn
-      security:
-        - mx-api-token: []
 
 definitions:
   OpenVPN:

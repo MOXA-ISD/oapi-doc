@@ -208,62 +208,6 @@ paths:
         in: path
         type: integer
         required: true
-    get:
-      description: Get a Log Profile with assigned ID
-      responses:
-        '200':
-          description: success
-          schema:
-            '$ref': '#/definitions/LogProfile'
-            example:
-              id: 1
-              name: log-profile-1
-              enable: true
-              archiver:
-                destination: Internal
-                thresholdBytePerFile: 5242800
-                directorySizeLimitByte: 10240000
-                archivesToKeep: 24
-              uploader:
-                httpPost:
-                  url: http://host/post
-                  enableAuth: false
-                  authentication:
-                    username: uploader
-                    password: password
-                  headerList:
-                    - name: Content-Type
-                      value: application/json
-                    - name: User-Agent
-                      value: Mozilla/5.0
-                  bypassSsl: true
-                  cronExpr: 0 * * * *
-                  format: json
-                  compress: gzip
-                  enableCompress: true
-                  retryCount: 3
-                  retryPeriodSec: 3
-              equipmentList:
-                - equipmentName: My-ioLogik-E2242
-                  equipmentTags:
-                    - name: di0
-                      logOnChange: false
-                    - name: di1
-                      logOnChange: false
-                    - name: ai0
-                      logOnChange: false
-                - equipmentName: My-other-ioLogik-E2242
-                  equipmentTags:
-                    - name: di0
-                      logOnChange: false
-                    - name: di1
-                      logOnChange: false
-                    - name: ai0
-                      logOnChange: false
-      tags:
-        - logprofile
-      security:
-        - mx-api-token: []
     delete:
       description: Delete a Log Profile with assigned ID
       responses:

@@ -1,7 +1,7 @@
 swagger: '2.0'
 
 info:
-  version: 2.5.0
+  version: 2.6.0
   title: ThingsPro Gateway RESTful API reference
   description: |
     Welcome to the ThingsPro Gateway RESTful API reference. This is a live document of how you can use ThingsPro Gateway APIs.
@@ -35,7 +35,6 @@ tags:
   - $ref: './modbus/index.yaml#/tags'
   - $ref: './openvpn/index.yaml#/tags'
   - $ref: './program/index.yaml#/tags'
-  - $ref: './remotecontrol/index.yaml#/tags'
   - $ref: './iptable/index.yaml#/tags'
   - $ref: './serial/index.yaml#/tags'
   - $ref: './service/index.yaml#/tags'
@@ -43,7 +42,6 @@ tags:
   - $ref: './time/index.yaml#/tags'
   - $ref: './firmware/index.yaml#/tags'
   - $ref: './wifi/index.yaml#/tags'
-  - $ref: './security-settings/index.yaml#/tags'
 
 paths:
   - $ref: './cellular/index.yaml#/paths'
@@ -56,7 +54,6 @@ paths:
   - $ref: './modbus/index.yaml#/paths'
   - $ref: './openvpn/index.yaml#/paths'
   - $ref: './program/index.yaml#/paths'
-  - $ref: './remotecontrol/index.yaml#/paths'
   - $ref: './iptable/index.yaml#/paths'
   - $ref: './serial/index.yaml#/paths'
   - $ref: './service/index.yaml#/paths'
@@ -64,7 +61,6 @@ paths:
   - $ref: './time/index.yaml#/paths'
   - $ref: './firmware/index.yaml#/paths'
   - $ref: './wifi/index.yaml#/paths'
-  - $ref: './security-settings/index.yaml#/paths'
 
 definitions:
   - $ref: './cellular/index.yaml#/definitions'
@@ -77,7 +73,6 @@ definitions:
   - $ref: './modbus/index.yaml#/definitions'
   - $ref: './openvpn/index.yaml#/definitions'
   - $ref: './program/index.yaml#/definitions'
-  - $ref: './remotecontrol/index.yaml#/definitions'
   - $ref: './iptable/index.yaml#/definitions'
   - $ref: './serial/index.yaml#/definitions'
   - $ref: './service/index.yaml#/definitions'
@@ -85,4 +80,3 @@ definitions:
   - $ref: './time/index.yaml#/definitions'
   - $ref: './firmware/index.yaml#/definitions'
   - $ref: './wifi/index.yaml#/definitions'
-  - $ref: './security-settings/index.yaml#/definitions'

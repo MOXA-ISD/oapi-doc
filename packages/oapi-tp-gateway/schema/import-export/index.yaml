@@ -109,7 +109,6 @@ definitions:
             - dhcpd
             - serial
             - portforwarding
-            - remotecontrol
             - program
             - applications
             - system

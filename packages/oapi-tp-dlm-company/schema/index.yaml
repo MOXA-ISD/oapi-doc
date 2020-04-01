@@ -25,7 +25,7 @@ securityDefinitions:
 
 tags:
   - $ref: './user/index.yaml#/tags'
-  - $ref: './operationLog/index.yaml#/tags'
+  - $ref: './eventLog/index.yaml#/tags'
   - $ref: './package/index.yaml#/tags'
   - $ref: './project/index.yaml#/tags'
   - $ref: './device/index.yaml#/tags'
@@ -35,7 +35,7 @@ tags:
 
 paths:
   - $ref: './user/index.yaml#/paths'
-  - $ref: './operationLog/index.yaml#/paths'
+  - $ref: './eventLog/index.yaml#/paths'
   - $ref: './package/index.yaml#/paths'
   - $ref: './project/index.yaml#/paths'
   - $ref: './device/index.yaml#/paths'
@@ -45,7 +45,7 @@ paths:
 
 definitions:
   - $ref: './user/index.yaml#/definitions'
-  - $ref: './operationLog/index.yaml#/definitions'
+  - $ref: './eventLog/index.yaml#/definitions'
   - $ref: './package/index.yaml#/definitions'
   - $ref: './project/index.yaml#/definitions'
   - $ref: './device/index.yaml#/definitions'

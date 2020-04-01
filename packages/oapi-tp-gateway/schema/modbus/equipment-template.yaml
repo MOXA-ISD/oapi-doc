@@ -170,6 +170,10 @@ definitions:
         pattern: '[A-Za-z0-9_-]+'
         minLength: 3
         maxLength: 255
+      optimizeGrouping:
+        description: enable auto group tag polling optimization
+        type: boolean
+        default: true
       tagList:
         description: Tag list of equipment template
         type: array

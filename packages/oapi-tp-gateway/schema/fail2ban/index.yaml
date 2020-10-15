@@ -1,0 +1,185 @@
+swagger: '2.0'
+
+info:
+  title: fail2ban bundle
+  description: ThingsPro CG fail2ban bundle
+  version: '0.1.1'
+
+schemes:
+- http
+- https
+
+produces:
+- application/json
+
+tags:
+  - name: cellular
+    description: Handles the Cellular interfaces
+
+paths:
+  /system/curate:
+    get:
+      description: Get current fail2ban settings.
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/F2BSetting'
+
+    put:
+      description: Configure the fail2ban settings.
+      parameters:
+      - name: settings
+        in: body
+        description: 'Desired fail2ban settings'
+        required: true
+        schema:
+          $ref: '#/definitions/F2BSetting'
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: '#/definitions/F2BSetting'
+          examples:
+            {
+              "application/json":
+              {
+                "enable": true,
+                "maxRetry": 6,
+                "findTime": 1200,
+                "banTime": 72000
+              }
+            }
+        400:
+          description: fail
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        409:
+          description: fail
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+
+  /fail2ban/exportlog:
+    post:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UrlInfo'
+      description: Uplaod fail2ban logs to remote server
+      responses:
+        200:
+          description: sucess
+          schema:
+            $ref: '#/definitions/UrlInfo'
+          examples:
+            {
+              "application/json": {
+                "url": "https://www.google.com"
+              }
+            }
+
+  /fail2ban/unban:
+    post:
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/IPList'
+      description: set fail2ban banned IP to unban
+      responses:
+        200:
+          description: sucess
+          schema:
+            $ref: '#/definitions/IPList'
+
+  /fail2ban/banlist:
+    get:
+      description: Get fail2ban banned IP list
+      responses:
+        200:
+          description: sucess
+          schema:
+            $ref: '#/definitions/IPList'
+
+definitions:
+  F2BSetting:
+    title: F2BSetting
+    description: fail2ban settings.
+    properties:
+      enable:
+        type: boolean
+        description: Set fail2ban service status.
+      maxRetry:
+        type: integer
+        description: Number of matches (i.e. value of the counter) which triggers ban action on the IP.
+      findTime:
+        type: integer
+        description: The counter is set to zero if no match is found within "findtime" seconds.
+      banTime:
+        type: integer
+        description: Duration (in seconds) for IP to be banned for. Deactivates the anti-brute force for SSH feature if it is set to 0.
+        minimum: 0
+      unban:
+        type: boolean
+        description: Unban all the banned IP if true.
+    example:
+      {
+        "application/json":
+        {
+          "enable": true,
+          "maxRetry": 6,
+          "findTime": 1200,
+          "banTime": 7200,
+          "unban": false
+        }
+      }
+
+  ErrorMessage:
+    title: ErrorMessage
+    description: Error message.
+    properties:
+      message:
+        type: string
+        description: Error message
+
+  UrlInfo:
+    description: Url information
+    type: object
+    required:
+      - url
+    properties:
+      url:
+        description: Url address
+        type: string
+        minLength: 1
+        maxLength: 4096
+      headers:
+        description: Headers
+        type: object
+    example:
+      $ref: '#/externalDocs/x-mocks/UrlInfoExample'
+
+  IPList:
+    title: F2BSetting
+    description: fail2ban settings.
+    properties:
+      data:
+        type: array
+        description: fail2ban banned ip.
+    example:
+      {
+        "data": ["1.2.3.4"]
+      }
+externalDocs:
+  url: 'https://#'
+  x-mocks:
+    UrlInfoExample:
+      {
+        "url": "https://server/upload",
+        "headers": {
+          "accessToken": "MOXAMOXA-TEST-SYSTEM"
+        }
+      }

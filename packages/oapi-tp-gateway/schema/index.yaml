@@ -42,6 +42,7 @@ tags:
   - $ref: './time/index.yaml#/tags'
   - $ref: './firmware/index.yaml#/tags'
   - $ref: './wifi/index.yaml#/tags'
+  - $ref: './fail2ban/index.yaml#/tags'
 
 paths:
   - $ref: './cellular/index.yaml#/paths'
@@ -61,6 +62,7 @@ paths:
   - $ref: './time/index.yaml#/paths'
   - $ref: './firmware/index.yaml#/paths'
   - $ref: './wifi/index.yaml#/paths'
+  - $ref: './fail2ban/index.yaml#/paths'
 
 definitions:
   - $ref: './cellular/index.yaml#/definitions'
@@ -80,3 +82,4 @@ definitions:
   - $ref: './time/index.yaml#/definitions'
   - $ref: './firmware/index.yaml#/definitions'
   - $ref: './wifi/index.yaml#/definitions'
+  - $ref: './fail2ban/index.yaml#/definitions'
